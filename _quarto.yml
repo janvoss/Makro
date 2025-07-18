@@ -11,7 +11,15 @@ book:
 
   chapters:
     - index.qmd
+    - Einleitung.qmd
+    - VGR.qmd
+    - Geld.qmd
+    - Inflation.qmd
+    - Kurze-Frist.qmd
+    - Lange-Frist.qmd
+    - Makropolitik.qmd
     - Literatur.qmd
+    - Uebungsfragen.qmd
 
 bibliography: Makro.bib
 
