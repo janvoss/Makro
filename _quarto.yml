@@ -15,7 +15,8 @@ book:
     - VGR.qmd
     - Geld.qmd
     - Inflation.qmd
-    - Kurze-Frist.qmd
+    - Kurze-Frist.qmd # Hier jeweils Politik integrieren
+    - Mittlere-Frist.qmd # gibt es bei GP nicht
     - Lange-Frist.qmd
     - Makropolitik.qmd
     - Literatur.qmd
