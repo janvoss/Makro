@@ -1,3 +1,109 @@
 # Einleitung
 
+## Gegenstand und Relevanz der Makroökonomik
 
+***
+Es gibt kein individuell gelungenes Leben in einer makroökonomisch dysfunktionalen Gesellschaft.
+
+***
+
+
+```{python}
+#| fig-cap: "Wozu Makroökonomik? Nach @garin_intermediate_2021"
+
+import graphviz
+from IPython.display import display, SVG
+
+# Graph-Definition mit vertikaler Ausrichtung (Top-Bottom)
+dot = graphviz.Digraph(comment='Grundlagen der Makroökonomik', format='svg')
+dot.attr(rankdir='TB')
+
+# Globale Knoten- und Kanten-Styles für ein akademisches Layout
+dot.attr('node', fontname='Helvetica,Arial,sans-serif', fontsize='11', shape='box', style='filled,rounded')
+dot.attr('edge', fontname='Helvetica,Arial,sans-serif', fontsize='10', color='#4A5568', arrowhead='vee')
+
+# --- STYLE CONFIGURATION (Farbpaletten für die logischen Ebenen) ---
+color_def = {"fillcolor": "#EBF8FF", "color": "#3182CE", "fontcolor": "#2B6CB0"}    # Blau (Definition & Abgrenzung)
+color_sekt = {"fillcolor": "#EDF2F7", "color": "#718096", "fontcolor": "#2D3748"}   # Grau (Aggregierte Sektoren)
+color_fragen = {"fillcolor": "#FFF5F5", "color": "#E53E3E", "fontcolor": "#9B2C2C"} # Rot (Zentrale Fragestellungen)
+color_meth = {"fillcolor": "#E6FFFA", "color": "#319795", "fontcolor": "#234E52"}   # Teal (Methodik & Labor)
+color_ziele = {"fillcolor": "#F0FFF4", "color": "#38A169", "fontcolor": "#22543D"}  # Grün (Ziele & Politikberatung)
+
+# --- KNOTEN DEFINITIONEN ---
+
+# 1. Definition und Abgrenzung
+dot.node('Def', 'Makroökonomik\n• Wissenschaftliche Untersuchung aggregierter Größen\n• Analyse von gesamtwirtschaftlichen Zusammenhängen', **color_def)
+dot.node('Abgrenzung', 'Gegensatz zur Mikroökonomik\n• Keine Betrachtung individueller Akteure\n• Fokus auf das Verhalten großer Gruppen', **color_def)
+
+# 2. Aggregierte Sektoren (Nebeneinander angeordnet)
+with dot.subgraph() as s:
+    s.attr(rank='same')
+    s.node('Sektor1', 'Private Sektoren\n• Haushalte (Konsum, Ersparnis)\n• Unternehmen (Investitionen)', **color_sekt)
+    s.node('Sektor2', 'Öffentliche & Globale Sektoren\n• Der Staat\n• Übrige Welt (Exporte, Importe)', **color_sekt)
+
+# 3. Zentrale Fragestellungen
+dot.node('Variablen', 'Gesamtwirtschaftliche Kernvariablen\n• Bruttoinlandsprodukt (BIP)\n• Beschäftigungsniveau & Arbeitslosigkeit\n• Preisentwicklung (Inflation & Deflation)', **color_fragen)
+
+with dot.subgraph() as s:
+    s.attr(rank='same')
+    s.node('Frage1', 'Langfristige Perspektive\n• Wirtschaftswachstum über Jahrzehnte\n• Unterschiede im Lebensstandard\n• Ursachen von Armut', **color_fragen)
+    s.node('Frage2', 'Kurz- & Mittelfristige Perspektive\n• Konjunkturelle Schwankungen\n• Oszillation um den langfristigen Trend\n• Rolle des Finanzsystems', **color_fragen)
+
+# 4. Methodik
+dot.node('Methodik', 'Methodischer Ansatz & Werkzeuge\n• Reduktion von Komplexität auf Kernbeziehungen\n• Vereinfachte Modelle & mathematische Werkzeuge\n• Fiktives Labor (da reale Experimente unmöglich)', **color_meth)
+
+# 5. Übergeordnete Ziele
+dot.node('Ziele', 'Übergeordnete Ziele\n• Tiefgreifendes Verständnis von Wirtschaftssystemen\n• Quantitative Beurteilung des ökonomischen Wohlergehens', **color_ziele)
+
+with dot.subgraph() as s:
+    s.attr(rank='same')
+    s.node('Ziel1', 'Wirtschaftspolitik\n• Basis für Geld- und Fiskalpolitik\n• Vorhersage nach Schocks\n• Stabilisierende Maßnahmen', **color_ziele)
+    s.node('Ziel2', 'Gesellschaftlicher Nutzen\n• Bekämpfung von Massenarbeitslosigkeit\n• Sicherung stabiler Preise\n• Strategien zur Armutsbekämpfung', **color_ziele)
+
+
+# --- KANTEN DEFINITIONEN (Logischer Fluss von der Definition zum Ziel) ---
+
+dot.edge('Def', 'Abgrenzung')
+dot.edge('Abgrenzung', 'Sektor1')
+dot.edge('Abgrenzung', 'Sektor2')
+
+dot.edge('Sektor1', 'Variablen')
+dot.edge('Sektor2', 'Variablen')
+
+dot.edge('Variablen', 'Frage1')
+dot.edge('Variablen', 'Frage2')
+
+dot.edge('Frage1', 'Methodik')
+dot.edge('Frage2', 'Methodik')
+
+dot.edge('Methodik', 'Ziele')
+
+dot.edge('Ziele', 'Ziel1')
+dot.edge('Ziele', 'Ziel2')
+
+# Generiert und speichert die Datei 'grundlagen_makrooekonomik.svg' im aktuellen Verzeichnis
+# dot.render('grundlagen_makrooekonomik', cleanup=True)
+
+# Diagramm direkt im Jupyter Notebook anzeigen
+display(SVG(dot.pipe(format='svg')))
+```
+::: {.callout-important icon="false" collapse="true"}
+# Der Text zum Bild, nach @garin_intermediate_2021 {.unnumbered}
+
+Die Makroökonomik befasst sich mit der wissenschaftlichen Untersuchung aggregierter Größen und gesamtwirtschaftlicher Zusammenhänge innerhalb eines Wirtschaftsraums. Im Gegensatz zur Mikroökonomik, die die Kalküle individueller wirtschaftlicher Entscheidungsträger wie einzelner Haushalte und Unternehmen betrachtet, analysiert dieses Feld das Verhalten großer Gruppen, die zu Sektoren wie Haushalten, Unternehmen, dem Staat und der übrigen Welt zusammengefasst werden.
+
+Zu den zentralen Fragestellungen gehört die Erklärung der gesamtwirtschaftlichen Produktion, meist gemessen als Bruttoinlandsprodukt, sowie deren Entwicklung über die Zeit. In der Makroökonomik wird systematisch untersucht, wie der Konsum, die Ersparnis und die Investitionen bestimmt werden und welche Faktoren das Beschäftigungsniveau sowie die Preisentwicklung, also Inflation und Deflation, beeinflussen. 
+
+Ein wesentlicher Teil der Disziplin widmet sich dem langfristigen Wirtschaftswachstum über Zeiträume von mehreren Jahrzehnten und der Frage, warum es so massive Unterschiede im Lebensstandard und Einkommen zwischen verschiedenen Ländern gibt. (Dies ist nicht Gegenstand dieser Vorlesung.)
+
+Ebenso analysiert die Makroökonomik kurz- und mittelfristige konjunkturelle Schwankungen, womit das oszillierende Auf und Ab der wirtschaftlichen Aktivität um einen langfristigen Trend gemeint ist. 
+
+Weitere wichtige Themenkomplexe sind die Funktionsweise des Finanzsystems und dessen tiefgreifende Auswirkungen auf die Gesamtwirtschaft sowie die internationalen ökonomischen Verflechtungen durch Exporte, Importe und Wechselkurse.
+
+Die Makroökonomik dient dazu, die immense Vielfalt einzelwirtschaftlicher Transaktionen auf eine überschaubare Anzahl von Beziehungen zu reduzieren und komplexe wirtschaftliche Mechanismen durch vereinfachte Modelle und mathematische Werkzeuge verständlich zu machen. Da Experimente in der realen Welt oft moralisch oder praktisch unmöglich sind – man kann beispielsweise nicht einer Gruppe von Arbeitern willkürlich das Einkommen entziehen, um deren Konsumreaktion zu studieren –, bieten makroökonomische Modelle ein fiktives Labor für wissenschaftliche Untersuchungen. 
+
+Das übergeordnete Ziel besteht darin, ein tiefgreifendes Verständnis der Funktionsweise moderner Wirtschaftssysteme zu erlangen, um drängende gesellschaftliche Probleme wie Massenarbeitslosigkeit oder instabile Preise gezielt adressieren zu können. 
+
+Die gewonnenen Erkenntnisse dienen als notwendige Grundlage für fundierte politische Entscheidungen in der Geld- und Fiskalpolitik, um beispielsweise die Entwicklung wirtschaftlicher Variablen nach einem Schock vorherzusagen und geeignete stabilisierende Maßnahmen zu ergreifen. Zudem hilft die makroökonomische Forschung dabei, die fundamentalen Ursachen von Armut in der Welt zu identifizieren und politische Strategien zu entwickeln, um betroffene Länder aus der Not zu heben. Letztlich ermöglicht die systematische Erfassung von Daten im Rahmen der volkswirtschaftlichen Gesamtrechnung eine quantitative Beurteilung des ökonomischen Wohlergehens und der Lebensstandards im Zeitverlauf und im internationalen Vergleich.
+
+:::

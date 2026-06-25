@@ -1,0 +1,182 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="359pt" height="1017pt" viewBox="0.00 0.00 359.25 1016.50">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1012.5)">
+<polygon fill="white" stroke="none" points="-4,4 -4,-1012.5 355.25,-1012.5 355.25,4 -4,4"/>
+<!-- Vordenker -->
+<g id="node1" class="node">
+<title>Vordenker</title>
+<path fill="#edf2f7" stroke="#718096" d="M286.62,-1008.5C286.62,-1008.5 66.62,-1008.5 66.62,-1008.5 60.62,-1008.5 54.63,-1002.5 54.63,-996.5 54.63,-996.5 54.63,-972 54.63,-972 54.63,-966 60.63,-960 66.63,-960 66.63,-960 286.62,-960 286.62,-960 292.62,-960 298.62,-966 298.62,-972 298.62,-972 298.62,-996.5 298.62,-996.5 298.62,-1002.5 292.62,-1008.5 286.62,-1008.5"/>
+<text text-anchor="middle" x="176.62" y="-994.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2d3748">Frühe Vordenker</text>
+<text text-anchor="middle" x="176.62" y="-980.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2d3748">(Adam Smith, J.B. Say, Thomas Malthus)</text>
+<text text-anchor="middle" x="176.62" y="-967.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2d3748">• Wachstum &amp; Debatten zur Selbststabilisierung</text>
+</g>
+<!-- Krise -->
+<g id="node2" class="node">
+<title>Krise</title>
+<path fill="#fff5f5" stroke="#e53e3e" d="M290.38,-912C290.38,-912 62.87,-912 62.87,-912 56.88,-912 50.88,-906 50.88,-900 50.88,-900 50.88,-888 50.88,-888 50.88,-882 56.88,-876 62.88,-876 62.88,-876 290.38,-876 290.38,-876 296.38,-876 302.38,-882 302.38,-888 302.38,-888 302.38,-900 302.38,-900 302.38,-906 296.38,-912 290.38,-912"/>
+<text text-anchor="middle" x="176.62" y="-897.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">Weltwirtschaftskrise (1930er)</text>
+<text text-anchor="middle" x="176.62" y="-883.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Notwendigkeit der Analyse aggregierter Größen</text>
+</g>
+<!-- Vordenker&#45;&gt;Krise -->
+<g id="edge1" class="edge">
+<title>Vordenker-&gt;Krise</title>
+<path fill="none" stroke="#4a5568" d="M176.62,-959.6C176.62,-948.42 176.62,-934.98 176.62,-923.27"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="176.63,-913.49 181.13,-923.49 176.63,-917.27 176.63,-923.49 176.63,-923.49 176.63,-923.49 176.63,-917.27 172.13,-923.49 176.63,-913.49"/>
+<text text-anchor="middle" x="231.75" y="-932.5" font-family="Helvetica,Arial,sans-serif" font-size="10.00"> Schafft Handlungsbedarf</text>
+</g>
+<!-- Keynes -->
+<g id="node3" class="node">
+<title>Keynes</title>
+<path fill="#ebf8ff" stroke="#3182ce" d="M279.12,-839C279.12,-839 74.12,-839 74.12,-839 68.12,-839 62.13,-833 62.13,-827 62.13,-827 62.13,-802.5 62.13,-802.5 62.13,-796.5 68.13,-790.5 74.13,-790.5 74.13,-790.5 279.12,-790.5 279.12,-790.5 285.12,-790.5 291.12,-796.5 291.12,-802.5 291.12,-802.5 291.12,-827 291.12,-827 291.12,-833 285.12,-839 279.12,-839"/>
+<text text-anchor="middle" x="176.62" y="-824.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2b6cb0">John Maynard Keynes (1936)</text>
+<text text-anchor="middle" x="176.62" y="-811.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2b6cb0">„General Theory“</text>
+<text text-anchor="middle" x="176.62" y="-797.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2b6cb0">• Geburt der eigenständigen Makroökonomik</text>
+</g>
+<!-- Krise&#45;&gt;Keynes -->
+<g id="edge2" class="edge">
+<title>Krise-&gt;Keynes</title>
+<path fill="none" stroke="#4a5568" d="M176.62,-875.86C176.62,-868.29 176.62,-859.12 176.62,-850.24"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="176.63,-840.51 181.13,-850.51 176.63,-844.29 176.63,-850.51 176.63,-850.51 176.63,-850.51 176.63,-844.29 172.13,-850.51 176.63,-840.51"/>
+</g>
+<!-- Hicks -->
+<g id="node4" class="node">
+<title>Hicks</title>
+<path fill="#ebf8ff" stroke="#3182ce" d="M329,-742.5C329,-742.5 24.25,-742.5 24.25,-742.5 18.25,-742.5 12.25,-736.5 12.25,-730.5 12.25,-730.5 12.25,-692.5 12.25,-692.5 12.25,-686.5 18.25,-680.5 24.25,-680.5 24.25,-680.5 329,-680.5 329,-680.5 335,-680.5 341,-686.5 341,-692.5 341,-692.5 341,-730.5 341,-730.5 341,-736.5 335,-742.5 329,-742.5"/>
+<text text-anchor="middle" x="176.62" y="-728.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2b6cb0">Frühe Phase (1936–1968)</text>
+<text text-anchor="middle" x="176.62" y="-714.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2b6cb0">• John Hicks: Grafische Interpretation (IS-LM-Modell)</text>
+<text text-anchor="middle" x="176.62" y="-701.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2b6cb0">• Lawrence Klein: Komplexe ökonometrische Modelle</text>
+<text text-anchor="middle" x="176.62" y="-687.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2b6cb0">• Stabile Phillips-Kurve (Zusammenhang Inflation/Arbeitslosigkeit)</text>
+</g>
+<!-- Keynes&#45;&gt;Hicks -->
+<g id="edge3" class="edge">
+<title>Keynes-&gt;Hicks</title>
+<path fill="none" stroke="#4a5568" d="M176.62,-790.01C176.62,-779.18 176.62,-766.04 176.62,-753.68"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="176.63,-743.85 181.13,-753.85 176.63,-747.63 176.63,-753.85 176.63,-753.85 176.63,-753.85 176.63,-747.63 172.13,-753.85 176.63,-743.85"/>
+<text text-anchor="middle" x="214.5" y="-763" font-family="Helvetica,Arial,sans-serif" font-size="10.00"> Standardisierung</text>
+</g>
+<!-- Friedman -->
+<g id="node5" class="node">
+<title>Friedman</title>
+<path fill="#fff5f5" stroke="#e53e3e" d="M309.12,-632.5C309.12,-632.5 44.12,-632.5 44.12,-632.5 38.12,-632.5 32.12,-626.5 32.12,-620.5 32.12,-620.5 32.12,-596 32.12,-596 32.12,-590 38.12,-584 44.12,-584 44.12,-584 309.12,-584 309.12,-584 315.12,-584 321.12,-590 321.12,-596 321.12,-596 321.12,-620.5 321.12,-620.5 321.12,-626.5 315.12,-632.5 309.12,-632.5"/>
+<text text-anchor="middle" x="176.62" y="-618.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">Kritik an der Phillips-Kurve (1968)</text>
+<text text-anchor="middle" x="176.62" y="-604.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Milton Friedman &amp; Edmund Phelps</text>
+<text text-anchor="middle" x="176.62" y="-591.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Warnung vor Inflationsspirale bei dauerhaftem Trade-off</text>
+</g>
+<!-- Hicks&#45;&gt;Friedman -->
+<g id="edge4" class="edge">
+<title>Hicks-&gt;Friedman</title>
+<path fill="none" stroke="#4a5568" d="M176.62,-680.12C176.62,-668.76 176.62,-655.78 176.62,-644.05"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="176.63,-634.07 181.13,-644.07 176.63,-637.85 176.63,-644.07 176.63,-644.07 176.63,-644.07 176.63,-637.85 172.13,-644.07 176.63,-634.07"/>
+<text text-anchor="middle" x="239.62" y="-653" font-family="Helvetica,Arial,sans-serif" font-size="10.00"> Theoretischer Zweifel (1968)</text>
+</g>
+<!-- Stagflation -->
+<g id="node6" class="node">
+<title>Stagflation</title>
+<path fill="#fff5f5" stroke="#e53e3e" d="M339.12,-536C339.12,-536 14.12,-536 14.12,-536 8.12,-536 2.12,-530 2.12,-524 2.12,-524 2.12,-499.5 2.12,-499.5 2.12,-493.5 8.12,-487.5 14.12,-487.5 14.12,-487.5 339.12,-487.5 339.12,-487.5 345.12,-487.5 351.12,-493.5 351.12,-499.5 351.12,-499.5 351.12,-524 351.12,-524 351.12,-530 345.12,-536 339.12,-536"/>
+<text text-anchor="middle" x="176.62" y="-521.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">Stagflation der 1970er Jahre</text>
+<text text-anchor="middle" x="176.62" y="-508.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Praktischer &amp; theoretischer Kollaps des keynesianischen Konsenses</text>
+<text text-anchor="middle" x="176.62" y="-494.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Problem: Fehlende mikroökonomische Fundierung</text>
+</g>
+<!-- Friedman&#45;&gt;Stagflation -->
+<g id="edge5" class="edge">
+<title>Friedman-&gt;Stagflation</title>
+<path fill="none" stroke="#4a5568" d="M176.62,-583.89C176.62,-572.96 176.62,-559.7 176.62,-547.62"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="176.63,-537.72 181.13,-547.72 176.63,-541.5 176.63,-547.72 176.63,-547.72 176.63,-547.72 176.63,-541.5 172.13,-547.72 176.63,-537.72"/>
+<text text-anchor="middle" x="229.88" y="-556.5" font-family="Helvetica,Arial,sans-serif" font-size="10.00"> Empirische Bestätigung</text>
+</g>
+<!-- Lucas -->
+<g id="node7" class="node">
+<title>Lucas</title>
+<path fill="#fff5f5" stroke="#e53e3e" d="M324.12,-439.5C324.12,-439.5 29.12,-439.5 29.12,-439.5 23.12,-439.5 17.12,-433.5 17.12,-427.5 17.12,-427.5 17.12,-403 17.12,-403 17.12,-397 23.12,-391 29.12,-391 29.12,-391 324.12,-391 324.12,-391 330.12,-391 336.12,-397 336.12,-403 336.12,-403 336.12,-427.5 336.12,-427.5 336.12,-433.5 330.12,-439.5 324.12,-439.5"/>
+<text text-anchor="middle" x="176.62" y="-425.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">Lucas-Kritik (1976)</text>
+<text text-anchor="middle" x="176.62" y="-411.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Historische Korrelationen nicht invariant bei Politikänderungen</text>
+<text text-anchor="middle" x="176.62" y="-398.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Etablierung rationaler Erwartungen in der Forschung</text>
+</g>
+<!-- Stagflation&#45;&gt;Lucas -->
+<g id="edge6" class="edge">
+<title>Stagflation-&gt;Lucas</title>
+<path fill="none" stroke="#4a5568" d="M176.62,-487.39C176.62,-476.46 176.62,-463.2 176.62,-451.12"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="176.63,-441.22 181.13,-451.22 176.63,-445 176.63,-451.22 176.63,-451.22 176.63,-451.22 176.63,-445 172.13,-451.22 176.63,-441.22"/>
+<text text-anchor="middle" x="221.62" y="-460" font-family="Helvetica,Arial,sans-serif" font-size="10.00"> Methodischer Bruch</text>
+</g>
+<!-- RBC -->
+<g id="node8" class="node">
+<title>RBC</title>
+<path fill="#e6fffa" stroke="#319795" d="M289.62,-343C289.62,-343 63.62,-343 63.62,-343 57.62,-343 51.62,-337 51.62,-331 51.62,-331 51.62,-279.5 51.62,-279.5 51.62,-273.5 57.62,-267.5 63.62,-267.5 63.62,-267.5 289.62,-267.5 289.62,-267.5 295.62,-267.5 301.62,-273.5 301.62,-279.5 301.62,-279.5 301.62,-331 301.62,-331 301.62,-337 295.62,-343 289.62,-343"/>
+<text text-anchor="middle" x="176.62" y="-328.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#234e52">Beginn der modernen Makroökonomik (Ab 1982)</text>
+<text text-anchor="middle" x="176.62" y="-315.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#234e52">Real Business Cycle (RBC) Theorie</text>
+<text text-anchor="middle" x="176.62" y="-301.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#234e52">• Finn Kydland &amp; Edward Prescott</text>
+<text text-anchor="middle" x="176.62" y="-288.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#234e52">• Verknüpfung von Zyklus und Wachstum</text>
+<text text-anchor="middle" x="176.62" y="-274.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#234e52">• Totale Faktorproduktivität (TFP) als Ursache</text>
+</g>
+<!-- Lucas&#45;&gt;RBC -->
+<g id="edge7" class="edge">
+<title>Lucas-&gt;RBC</title>
+<path fill="none" stroke="#4a5568" d="M176.62,-390.55C176.62,-379.89 176.62,-366.9 176.62,-354.34"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="176.63,-344.7 181.13,-354.7 176.63,-348.48 176.63,-354.7 176.63,-354.7 176.63,-354.7 176.63,-348.48 172.13,-354.7 176.63,-344.7"/>
+<text text-anchor="middle" x="237" y="-363.5" font-family="Helvetica,Arial,sans-serif" font-size="10.00"> Paradigmenwechsel (1982)</text>
+</g>
+<!-- DSGE -->
+<g id="node9" class="node">
+<title>DSGE</title>
+<path fill="#f0fff4" stroke="#38a169" d="M324.88,-219.5C324.88,-219.5 28.38,-219.5 28.38,-219.5 22.38,-219.5 16.38,-213.5 16.38,-207.5 16.38,-207.5 16.38,-183 16.38,-183 16.38,-177 22.38,-171 28.38,-171 28.38,-171 324.88,-171 324.88,-171 330.88,-171 336.88,-177 336.88,-183 336.88,-183 336.88,-207.5 336.88,-207.5 336.88,-213.5 330.88,-219.5 324.88,-219.5"/>
+<text text-anchor="middle" x="176.62" y="-205.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">Heutiger Standard:</text>
+<text text-anchor="middle" x="176.62" y="-191.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">DSGE-Modelle</text>
+<text text-anchor="middle" x="176.62" y="-178.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">(Dynamische Stochastische Allgemeine Gleichgewichtsmodelle)</text>
+</g>
+<!-- RBC&#45;&gt;DSGE -->
+<g id="edge8" class="edge">
+<title>RBC-&gt;DSGE</title>
+<path fill="none" stroke="#4a5568" d="M176.62,-267.08C176.62,-255.37 176.62,-242.48 176.62,-230.94"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="176.63,-221.17 181.13,-231.17 176.63,-224.95 176.63,-231.17 176.63,-231.17 176.63,-231.17 176.63,-224.95 172.13,-231.17 176.63,-221.17"/>
+<text text-anchor="middle" x="217.88" y="-240" font-family="Helvetica,Arial,sans-serif" font-size="10.00"> Weiterentwicklung</text>
+</g>
+<!-- Neoklassisch -->
+<g id="node10" class="node">
+<title>Neoklassisch</title>
+<path fill="#f0fff4" stroke="#38a169" d="M149.75,-134C149.75,-134 47.5,-134 47.5,-134 41.5,-134 35.5,-128 35.5,-122 35.5,-122 35.5,-97.5 35.5,-97.5 35.5,-91.5 41.5,-85.5 47.5,-85.5 47.5,-85.5 149.75,-85.5 149.75,-85.5 155.75,-85.5 161.75,-91.5 161.75,-97.5 161.75,-97.5 161.75,-122 161.75,-122 161.75,-128 155.75,-134 149.75,-134"/>
+<text text-anchor="middle" x="98.62" y="-119.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">Neoklassische DSGE</text>
+<text text-anchor="middle" x="98.62" y="-106.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">• Effiziente Märkte</text>
+<text text-anchor="middle" x="98.62" y="-92.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">• Flexibles Preissystem</text>
+</g>
+<!-- DSGE&#45;&gt;Neoklassisch -->
+<g id="edge9" class="edge">
+<title>DSGE-&gt;Neoklassisch</title>
+<path fill="none" stroke="#4a5568" d="M154.48,-170.55C146.26,-161.74 136.8,-151.62 128.03,-142.23"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="121.39,-135.12 131.5,-139.35 123.97,-137.88 128.21,-142.42 128.21,-142.42 128.21,-142.42 123.97,-137.88 124.92,-145.49 121.39,-135.12"/>
+</g>
+<!-- Neukeynesianisch -->
+<g id="node11" class="node">
+<title>Neukeynesianisch</title>
+<path fill="#f0fff4" stroke="#38a169" d="M317.75,-134C317.75,-134 191.5,-134 191.5,-134 185.5,-134 179.5,-128 179.5,-122 179.5,-122 179.5,-97.5 179.5,-97.5 179.5,-91.5 185.5,-85.5 191.5,-85.5 191.5,-85.5 317.75,-85.5 317.75,-85.5 323.75,-85.5 329.75,-91.5 329.75,-97.5 329.75,-97.5 329.75,-122 329.75,-122 329.75,-128 323.75,-134 317.75,-134"/>
+<text text-anchor="middle" x="254.62" y="-119.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">Neukeynesianische DSGE</text>
+<text text-anchor="middle" x="254.62" y="-106.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">• Nominale Rigiditäten</text>
+<text text-anchor="middle" x="254.62" y="-92.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">• Preis- und Lohnstarrheiten</text>
+</g>
+<!-- DSGE&#45;&gt;Neukeynesianisch -->
+<g id="edge10" class="edge">
+<title>DSGE-&gt;Neukeynesianisch</title>
+<path fill="none" stroke="#4a5568" d="M198.77,-170.55C206.99,-161.74 216.45,-151.62 225.22,-142.23"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="231.86,-135.12 228.33,-145.49 229.28,-137.88 225.04,-142.42 225.04,-142.42 225.04,-142.42 229.28,-137.88 221.75,-139.35 231.86,-135.12"/>
+</g>
+<!-- Fazit -->
+<g id="node12" class="node">
+<title>Fazit</title>
+<path fill="#f0fff4" stroke="#38a169" d="M339.25,-48.5C339.25,-48.5 12,-48.5 12,-48.5 6,-48.5 0,-42.5 0,-36.5 0,-36.5 0,-12 0,-12 0,-6 6,0 12,0 12,0 339.25,0 339.25,0 345.25,0 351.25,-6 351.25,-12 351.25,-12 351.25,-36.5 351.25,-36.5 351.25,-42.5 345.25,-48.5 339.25,-48.5"/>
+<text text-anchor="middle" x="175.62" y="-34.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">Moderne Synthese:</text>
+<text text-anchor="middle" x="175.62" y="-20.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">„Mikroökonomik auf hoher Aggregationsstufe“</text>
+<text text-anchor="middle" x="175.62" y="-7.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">• Analysewerkzeuge: Präferenzen, Beschränkungen &amp; Gleichgewichte</text>
+</g>
+<!-- Neoklassisch&#45;&gt;Fazit -->
+<g id="edge11" class="edge">
+<title>Neoklassisch-&gt;Fazit</title>
+<path fill="none" stroke="#4a5568" d="M120.48,-85.05C128.6,-76.24 137.94,-66.12 146.59,-56.73"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="153.15,-49.62 149.68,-60.02 150.59,-52.4 146.37,-56.97 146.37,-56.97 146.37,-56.97 150.59,-52.4 143.06,-53.92 153.15,-49.62"/>
+</g>
+<!-- Neukeynesianisch&#45;&gt;Fazit -->
+<g id="edge12" class="edge">
+<title>Neukeynesianisch-&gt;Fazit</title>
+<path fill="none" stroke="#4a5568" d="M232.2,-85.05C223.87,-76.24 214.29,-66.12 205.41,-56.73"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="198.67,-49.61 208.81,-53.78 201.27,-52.36 205.54,-56.87 205.54,-56.87 205.54,-56.87 201.27,-52.36 202.28,-59.97 198.67,-49.61"/>
+</g>
+</g>
+</svg>

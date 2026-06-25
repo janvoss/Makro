@@ -4,7 +4,7 @@ project:
 
 book:
   title: "Makroökonomik -- Wohlstand und Stabilität"
-  subtitle: "Sommersemester 2026" 
+  subtitle: "Wintersemester 2026/27" 
   author: "Prof. Dr. Jan S. Voßwinkel"
   language:  _language.yml
   repo-url: https://github.com/janvoss/Makro.git
@@ -12,7 +12,9 @@ book:
   chapters:
     - index.qmd
     - Einleitung.qmd
+    - Geschichte.qmd
     - VGR.qmd
+    - Mikromakro.qmd
     - Geld.qmd
     - Inflation.qmd
     - Kurze-Frist.qmd # Hier jeweils Politik integrieren
