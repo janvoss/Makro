@@ -19,6 +19,8 @@ $\beta$: Subjektiver Diskontfaktor ($0 < \beta < 1$, wobei $\beta = \frac{1}{1+\
 
 Periode $t$:  $$ C_t + S_t = Y_t - T_t $$$Y_t - T_t$: Verfügbares Einkommen in $t$ (Einkommen minus Pauschalsteuern).
 
-$S_t$: Ersparnis (kann negativ sein = Kreditaufnahme).Periode $t+1$: $$ C_{t+1} = Y_{t+1} - T_{t+1} + (1+r_t)S_t $$$r_t$: Realzins.Konsum morgen entspricht dem morgigen Einkommen plus der verzinsten Ersparnis von heute.
+$S_t$: Ersparnis (kann negativ sein = Kreditaufnahme).
+
+Periode $t+1$: $$ C_{t+1} = Y_{t+1} - T_{t+1} + (1+r_t)S_t $$$r_t$: Realzins.Konsum morgen entspricht dem morgigen Einkommen plus der verzinsten Ersparnis von heute.
 
 Die Intertemporale Budgetrestriktion (IBC)(Entsteht durch Auflösen von Periode $t+1$ nach $S_t$ und Einsetzen in Periode $t$)$$ C_t + \frac{C_{t+1}}{1+r_t} = Y_t - T_t + \frac{Y_{t+1} - T_{t+1}}{1+r_t} $$
