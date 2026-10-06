@@ -15,17 +15,18 @@ book:
     - Geschichte.qmd
     - VGR.qmd
     - Mikromakro.qmd
-    - Geld.qmd
-    - Inflation.qmd
-    - Kurze-Frist.qmd # Hier jeweils Politik integrieren
     - Mittlere-Frist.qmd # gibt es bei GP nicht
-    - Lange-Frist.qmd
-    - Makropolitik.qmd
-    - Banken.qmd
+    - Geld.qmd
+#    - Inflation.qmd
+    - Kurze-Frist.qmd # Hier jeweils Politik integrieren
+    - Anwendungen.qmd
     - Literatur.qmd
     - Uebungsfragen.qmd
 
 bibliography: Makro.bib
+csl: dresden.csl #Ohne funktioniert es gut, mit nicht. 
+# Aber warum? Und was ist mit Herausgeberwerken (Hrsg vs. Ed?)
+lang: de
 
 format:
   html:

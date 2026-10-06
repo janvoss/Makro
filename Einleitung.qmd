@@ -1,11 +1,35 @@
-# Einleitung
+# Einleitung -- Gegenstand und Relevanz der Makroökonomik
 
-## Gegenstand und Relevanz der Makroökonomik
+::: {.callout-tip icon="false" collapse="true"}
+# Der Podcast zur Vorlesung: Was ist Makroökonomik {.unnumbered}
+
+<script class="podigee-podcast-player" src="https://player.podigee-cdn.net/podcast-player/javascripts/podigee-podcast-player.js" data-configuration="https://wirtschaftskunde.podigee.io/43-makro-am-mikro-01-was-ist-makrookonomie/embed?context=external"></script>
+
+
+:::
+
+
 
 ***
 Es gibt kein individuell gelungenes Leben in einer makroökonomisch dysfunktionalen Gesellschaft.
 
 ***
+
+::: {.callout-important icon="false" collapse="true"}
+# Die Relevanz makroökonomischer Stabilität
+
+Ein eigenständiges Leben nach eigenen Maßstäben und Plänen ist kein isoliertes privates Projekt. Es setzt zu einem bestimmten Grad eine funktionierende makroökonomische Umgebung voraus. Wenn das wirtschaftliche Gesamtsystem strukturell gestört ist, werden die materiellen, sozialen und psychologischen Grundlagen individueller Entfaltung systematisch untergraben.
+
+Die Mechanismen makroökonomischer Zerrüttung greifen tief in die Lebensrealität des Einzelnen ein. Konjunkturelle Krisen, Arbeitslosigkeit, Geldentwertung, schwindende Aussicht auf stabilen oder gar steigenden Wohlstand erscheren die Planbarkeit und Gestaltbarkeit des eigenen Lebens. 
+
+Die Fähigkeit zur langfristigen Lebensplanung geht verloren, der Horizont schrumpft auf das Durchhangeln in der Gegenwart. Gleichzeitig bedeutet das Risiko der Arbeitslosigkiet weit mehr als den Verlust eines monatlichen Einkommens: Sie beraubt Menschen ihrer Selbstwirksamkeit, ihrer gesellschaftlichen Würde und der Chance auf soziale Teilhabe. Wird zudem im Zuge von Krisen die öffentliche Infrastruktur –Gesundheitsversorgung, Verkehrsinfrastruktur, Raumgestaltung, Bildungswesen – nicht gepflegt und weiterentwickelt, verwandeln temporäre Krisen in langfristige Einschränkungen der Lebensqualität und der Entwicklung.
+
+Diese ökonomische Atemnot hinterlässt tiefe Spuren in der Psyche und der Moral einer Gesellschaft. Unter dem Dauerstress knapper Ressourcen verfällt das Wechselpiel aus Vertrauen und Reziprozität. An die Stelle von Solidarität tritt ein gefährliches Nullsummen-Denken, in dem der Vorteil des Nächsten reflexhaft als eigener Verlust begriffen wird. Ethik und moralisches Handeln drohen in einem von Existenzangst geprägten Umfeld zu verkümmern.
+
+Natürlich können  Menschen selbst in tiefsten Krisen Trost in stoischer Gelassenheit, familiärer Geborgenheit oder lokalen Hilfsnetzwerken finden. Solche privaten Inseln der Resilienz sind unbestreitbar wertvoll, doch sie bleiben fragil und stehen nicht jedem zur Verfügung. Die Annahme, die eigene Lebensplanung lasse sich vom makroökonomischen Kollaps entkoppeln, setzt erhebliche Pufferressourcen voraus.
+
+Erst wenn ein Wirtschaftssystem strukturell stabil ist und Verlässlichkeit schafft, entsteht der Freiraum, in dem man das Leben nach eigenen ethischen Grundsätzen gestalten kann.
+:::
 
 
 ```{python}
@@ -33,13 +57,13 @@ color_ziele = {"fillcolor": "#F0FFF4", "color": "#38A169", "fontcolor": "#22543D
 
 # 1. Definition und Abgrenzung
 dot.node('Def', 'Makroökonomik\n• Wissenschaftliche Untersuchung aggregierter Größen\n• Analyse von gesamtwirtschaftlichen Zusammenhängen', **color_def)
-dot.node('Abgrenzung', 'Gegensatz zur Mikroökonomik\n• Keine Betrachtung individueller Akteure\n• Fokus auf das Verhalten großer Gruppen', **color_def)
+dot.node('Abgrenzung', 'Unterschied zur Mikroökonomik\n• Keine Betrachtung individueller Akteure und Märkte\n• Fokus auf das Verhalten aggregierter Märkte\n (Gütermarkt, Arbeitsmarkt, Geldmarkt usw)', **color_def)
 
 # 2. Aggregierte Sektoren (Nebeneinander angeordnet)
 with dot.subgraph() as s:
     s.attr(rank='same')
-    s.node('Sektor1', 'Private Sektoren\n• Haushalte (Konsum, Ersparnis)\n• Unternehmen (Investitionen)', **color_sekt)
-    s.node('Sektor2', 'Öffentliche & Globale Sektoren\n• Der Staat\n• Übrige Welt (Exporte, Importe)', **color_sekt)
+    s.node('Sektor1', 'Private Sektoren\n• Haushalte (Konsum, Ersparnis)\n• Unternehmen (Produktion, Investitionen)', **color_sekt)
+    s.node('Sektor2', 'Öffentliche & Globale Sektoren\n• Der Staat (Fiskalpolitik, Geldpolitik)\n• Übrige Welt (Exporte, Importe)', **color_sekt)
 
 # 3. Zentrale Fragestellungen
 dot.node('Variablen', 'Gesamtwirtschaftliche Kernvariablen\n• Bruttoinlandsprodukt (BIP)\n• Beschäftigungsniveau & Arbeitslosigkeit\n• Preisentwicklung (Inflation & Deflation)', **color_fragen)
@@ -87,6 +111,8 @@ dot.edge('Ziele', 'Ziel2')
 # Diagramm direkt im Jupyter Notebook anzeigen
 display(SVG(dot.pipe(format='svg')))
 ```
+
+
 ::: {.callout-important icon="false" collapse="true"}
 # Der Text zum Bild, nach @garin_intermediate_2021 {.unnumbered}
 

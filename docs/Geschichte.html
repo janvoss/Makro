@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.31">
@@ -174,7 +174,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Einleitung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Einleitung</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Einleitung – Gegenstand und Relevanz der Makroökonomik</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -197,14 +197,14 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Geld.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Geld</span></span></a>
+  <a href="./Mittlere-Frist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Mittlere Frist</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Inflation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inflation</span></span></a>
+  <a href="./Geld.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Geld</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -215,26 +215,8 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Mittlere-Frist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Mittlere Frist</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Lange-Frist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Makroökonomik in der langen Frist</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Makropolitik.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Makroökonomische Wirtschaftspolitik</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Banken.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Banken und der Finanzsektor</span></span></a>
+  <a href="./Anwendungen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Anwendungen</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -279,97 +261,76 @@ div.csl-indent {
 </header>
 
 
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Der Podcast zur Vorlesung: Was ist Makroökonomik
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<script class="podigee-podcast-player" src="https://player.podigee-cdn.net/podcast-player/javascripts/podigee-podcast-player.js" data-configuration="https://wirtschaftskunde.podigee.io/43-makro-am-mikro-01-was-ist-makrookonomie/embed?context=external"></script>
-</div>
-</div>
-</div>
-<div id="c22e5a5e" class="cell" data-execution_count="1">
+<div id="0cfd48c2" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, SVG</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Graph-Definition mit vertikaler Ausrichtung (Top-Bottom)</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dot <span class="op">=</span> graphviz.Digraph(comment<span class="op">=</span><span class="st">'Geschichte der Makroökonomik'</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'svg'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Graph-Initialisierung mit Top-Down-Ausrichtung</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dot <span class="op">=</span> graphviz.Digraph(<span class="st">'Makroökonomik_Evolution'</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'png'</span>)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>dot.attr(rankdir<span class="op">=</span><span class="st">'TB'</span>)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Globale Knoten- und Kanten-Styles für ein akademisches, sauberes Layout</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'node'</span>, fontname<span class="op">=</span><span class="st">'Helvetica,Arial,sans-serif'</span>, fontsize<span class="op">=</span><span class="st">'11'</span>, shape<span class="op">=</span><span class="st">'box'</span>, style<span class="op">=</span><span class="st">'filled,rounded'</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'edge'</span>, fontname<span class="op">=</span><span class="st">'Helvetica,Arial,sans-serif'</span>, fontsize<span class="op">=</span><span class="st">'10'</span>, color<span class="op">=</span><span class="st">'#4A5568'</span>, arrowhead<span class="op">=</span><span class="st">'vee'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Globale Design-Einstellungen für ein sauberes, modernes Look-and-Feel</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'node'</span>, fontname<span class="op">=</span><span class="st">'Arial'</span>, fontsize<span class="op">=</span><span class="st">'11'</span>, shape<span class="op">=</span><span class="st">'box'</span>, style<span class="op">=</span><span class="st">'filled,rounded'</span>, penwidth<span class="op">=</span><span class="st">'1.5'</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'edge'</span>, fontname<span class="op">=</span><span class="st">'Arial'</span>, fontsize<span class="op">=</span><span class="st">'9'</span>, color<span class="op">=</span><span class="st">'#555555'</span>, penwidth<span class="op">=</span><span class="st">'1.2'</span>, arrowhead<span class="op">=</span><span class="st">'vee'</span>, arrowsize<span class="op">=</span><span class="st">'0.8'</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># --- STYLE CONFIGURATION (Farbpaletten für die Epochen) ---</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>color_pre <span class="op">=</span> {<span class="st">"fillcolor"</span>: <span class="st">"#EDF2F7"</span>, <span class="st">"color"</span>: <span class="st">"#718096"</span>, <span class="st">"fontcolor"</span>: <span class="st">"#2D3748"</span>} <span class="co"># Grau (Vorgeschichte)</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>color_keynes <span class="op">=</span> {<span class="st">"fillcolor"</span>: <span class="st">"#EBF8FF"</span>, <span class="st">"color"</span>: <span class="st">"#3182CE"</span>, <span class="st">"fontcolor"</span>: <span class="st">"#2B6CB0"</span>} <span class="co"># Blau (Keynesianismus)</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>color_crisis <span class="op">=</span> {<span class="st">"fillcolor"</span>: <span class="st">"#FFF5F5"</span>, <span class="st">"color"</span>: <span class="st">"#E53E3E"</span>, <span class="st">"fontcolor"</span>: <span class="st">"#9B2C2C"</span>} <span class="co"># Rot (Krise &amp; Kritik)</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>color_modern <span class="op">=</span> {<span class="st">"fillcolor"</span>: <span class="st">"#E6FFFA"</span>, <span class="st">"color"</span>: <span class="st">"#319795"</span>, <span class="st">"fontcolor"</span>: <span class="st">"#234E52"</span>} <span class="co"># Teal (Moderne/RBC)</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>color_heute <span class="op">=</span> {<span class="st">"fillcolor"</span>: <span class="st">"#F0FFF4"</span>, <span class="st">"color"</span>: <span class="st">"#38A169"</span>, <span class="st">"fontcolor"</span>: <span class="st">"#22543D"</span>}  <span class="co"># Grün (Synthese/Heute)</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># --- KNOTEN DEFINITIONEN ---</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Vorgeschichte</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'Vordenker'</span>, <span class="st">'Frühe Vordenker</span><span class="ch">\n</span><span class="st">(Adam Smith, J.B. Say, Thomas Malthus)</span><span class="ch">\n</span><span class="st">• Wachstum &amp; Debatten zur Selbststabilisierung'</span>, <span class="op">**</span>color_pre)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Die Geburtsstunde</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'Krise'</span>, <span class="st">'Weltwirtschaftskrise (1930er)</span><span class="ch">\n</span><span class="st">• Notwendigkeit der Analyse aggregierter Größen'</span>, <span class="op">**</span>color_crisis)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'Keynes'</span>, <span class="st">'John Maynard Keynes (1936)</span><span class="ch">\n</span><span class="st">„General Theory“</span><span class="ch">\n</span><span class="st">• Geburt der eigenständigen Makroökonomik'</span>, <span class="op">**</span>color_keynes)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Früher keynesianischer Konsens</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'Hicks'</span>, <span class="st">'Frühe Phase (1936–1968)</span><span class="ch">\n</span><span class="st">• John Hicks: Grafische Interpretation (IS-LM-Modell)</span><span class="ch">\n</span><span class="st">• Lawrence Klein: Komplexe ökonometrische Modelle</span><span class="ch">\n</span><span class="st">• Stabile Phillips-Kurve (Zusammenhang Inflation/Arbeitslosigkeit)'</span>, <span class="op">**</span>color_keynes)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Zusammenbruch und Kritik</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'Friedman'</span>, <span class="st">'Kritik an der Phillips-Kurve (1968)</span><span class="ch">\n</span><span class="st">• Milton Friedman &amp; Edmund Phelps</span><span class="ch">\n</span><span class="st">• Warnung vor Inflationsspirale bei dauerhaftem Trade-off'</span>, <span class="op">**</span>color_crisis)</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'Stagflation'</span>, <span class="st">'Stagflation der 1970er Jahre</span><span class="ch">\n</span><span class="st">• Praktischer &amp; theoretischer Kollaps des keynesianischen Konsenses</span><span class="ch">\n</span><span class="st">• Problem: Fehlende mikroökonomische Fundierung'</span>, <span class="op">**</span>color_crisis)</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'Lucas'</span>, <span class="st">'Lucas-Kritik (1976)</span><span class="ch">\n</span><span class="st">• Historische Korrelationen nicht invariant bei Politikänderungen</span><span class="ch">\n</span><span class="st">• Etablierung rationaler Erwartungen in der Forschung'</span>, <span class="op">**</span>color_crisis)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># --- KNOTEN-DEFINITIONEN (Nach Epochen farblich codiert) ---</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Vorläufer &amp; Krise (Grau)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'klassik'</span>, <span class="st">'Klassisches Paradigma</span><span class="ch">\n</span><span class="st">(Smith, Say, Malthus)</span><span class="ch">\n</span><span class="st">• Selbststabilisierung der Märkte</span><span class="ch">\n</span><span class="st">• Aggregierte Phänomene'</span>, fillcolor<span class="op">=</span><span class="st">'#f5f5f5'</span>, color<span class="op">=</span><span class="st">'#9e9e9e'</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'krise'</span>, <span class="st">'Weltwirtschaftskrise (1930er)</span><span class="ch">\n</span><span class="st">• Erhebliche Erklärungsdefizite</span><span class="ch">\n</span><span class="st">• Massenarbeitslosigkeit'</span>, fillcolor<span class="op">=</span><span class="st">'#ffebee'</span>, color<span class="op">=</span><span class="st">'#e53935'</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Keynesianischer Konsens (Blau)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'keynes'</span>, <span class="st">'Keynesianische Wende (1936)</span><span class="ch">\n</span><span class="st">J.M. Keynes: "General Theory"</span><span class="ch">\n</span><span class="st">• Nachfragemangel als Ursache</span><span class="ch">\n</span><span class="st">• Unterbeschäftigungsgleichgewicht</span><span class="ch">\n</span><span class="st">• Aktive Fiskal- &amp; Geldpolitik'</span>, fillcolor<span class="op">=</span><span class="st">'#e3f2fd'</span>, color<span class="op">=</span><span class="st">'#1e88e5'</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'islm'</span>, <span class="st">'IS-LM-Modell (1936–1968)</span><span class="ch">\n</span><span class="st">John Hicks</span><span class="ch">\n</span><span class="st">• Grafische Interpretation</span><span class="ch">\n</span><span class="st">• Standardwerkzeug der Politik'</span>, fillcolor<span class="op">=</span><span class="st">'#e3f2fd'</span>, color<span class="op">=</span><span class="st">'#1e88e5'</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'phillips'</span>, <span class="st">'Klassische Phillips-Kurve</span><span class="ch">\n</span><span class="st">• Inverser Zusammenhang von</span><span class="ch">\n</span><span class="st">  Inflation &amp; Arbeitslosigkeit</span><span class="ch">\n</span><span class="st">• Politischer Handlungsspielraum'</span>, fillcolor<span class="op">=</span><span class="st">'#e3f2fd'</span>, color<span class="op">=</span><span class="st">'#1e88e5'</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Monetaristische Gegenrevolution &amp; Lucas-Kritik (Orange)</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'friedman'</span>, <span class="st">'Kritik der Phillips-Kurve (1968)</span><span class="ch">\n</span><span class="st">Friedman &amp; Phelps</span><span class="ch">\n</span><span class="st">• Anpassung der Erwartungen</span><span class="ch">\n</span><span class="st">• Keine dauerhafte Senkung der</span><span class="ch">\n</span><span class="st">  Arbeitslosigkeit durch Inflation'</span>, fillcolor<span class="op">=</span><span class="st">'#fff3e0'</span>, color<span class="op">=</span><span class="st">'#fb8c00'</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'lucas'</span>, <span class="st">'Lucas-Kritik (1968–1981)</span><span class="ch">\n</span><span class="st">Robert Lucas</span><span class="ch">\n</span><span class="st">• Rationale Erwartungen der Akteure</span><span class="ch">\n</span><span class="st">• Forderung nach solider</span><span class="ch">\n</span><span class="st">  mikroökonomischer Fundierung'</span>, fillcolor<span class="op">=</span><span class="st">'#fff3e0'</span>, color<span class="op">=</span><span class="st">'#fb8c00'</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Moderne Makroökonomik ab 1982 (Lila/Zentralbank-Synthese)</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'rbc'</span>, <span class="st">'Real Business Cycle Theorie (1982)</span><span class="ch">\n</span><span class="st">Kydland &amp; Prescott</span><span class="ch">\n</span><span class="st">• Pareto-effiziente Reaktionen</span><span class="ch">\n</span><span class="st">• Reale Produktivitätsschocks</span><span class="ch">\n</span><span class="st">• Vollkommen flexible Preise'</span>, fillcolor<span class="op">=</span><span class="st">'#f3e5f5'</span>, color<span class="op">=</span><span class="st">'#8e24aa'</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'neukeynes'</span>, <span class="st">'Neukeynesianische Makroökonomik</span><span class="ch">\n</span><span class="st">• Neoklassische Grundstruktur</span><span class="ch">\n</span><span class="st">• Nominale Rigiditäten</span><span class="ch">\n</span><span class="st">  (Preis- &amp; Lohnstarrheiten)</span><span class="ch">\n</span><span class="st">• Wirksamkeit von Nachfrageschocks'</span>, fillcolor<span class="op">=</span><span class="st">'#f3e5f5'</span>, color<span class="op">=</span><span class="st">'#8e24aa'</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'dsge'</span>, <span class="st">'DSGE-Modelle (Heute)</span><span class="ch">\n</span><span class="st">• Dynamische stochastische</span><span class="ch">\n</span><span class="st">  allgemeine Gleichgewichtsmodelle</span><span class="ch">\n</span><span class="st">• Standard bei Zentralbanken'</span>, fillcolor<span class="op">=</span><span class="st">'#ede7f6'</span>, color<span class="op">=</span><span class="st">'#5e35b1'</span>, penwidth<span class="op">=</span><span class="st">'2.5'</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Langfristige Analyse / Wachstumstheorie (Grün)</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'solow'</span>, <span class="st">'Solow-Modell (1956)</span><span class="ch">\n</span><span class="st">• Kapitalakkumulation</span><span class="ch">\n</span><span class="st">• Exogener technischer Fortschritt'</span>, fillcolor<span class="op">=</span><span class="st">'#e8f5e9'</span>, color<span class="op">=</span><span class="st">'#43a047'</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'endogen'</span>, <span class="st">'Endogene Wachstumstheorie (1980er)</span><span class="ch">\n</span><span class="st">• Humankapitalbildung</span><span class="ch">\n</span><span class="st">• Innovationen innerhalb des Modells'</span>, fillcolor<span class="op">=</span><span class="st">'#e8f5e9'</span>, color<span class="op">=</span><span class="st">'#43a047'</span>)</span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Moderne Makroökonomik</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'RBC'</span>, <span class="st">'Beginn der modernen Makroökonomik (Ab 1982)</span><span class="ch">\n</span><span class="st">Real Business Cycle (RBC) Theorie</span><span class="ch">\n</span><span class="st">• Finn Kydland &amp; Edward Prescott</span><span class="ch">\n</span><span class="st">• Verknüpfung von Zyklus und Wachstum</span><span class="ch">\n</span><span class="st">• Totale Faktorproduktivität (TFP) als Ursache'</span>, <span class="op">**</span>color_modern)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Neue Herausforderungen des 21. Jahrhunderts (Cyan)</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'zukunft'</span>, <span class="st">'Ansätze des 21. Jahrhunderts</span><span class="ch">\n</span><span class="st">•  Ökologische Nachhaltigkeit</span><span class="ch">\n</span><span class="st">• Heterogene Akteure</span><span class="ch">\n</span><span class="st">• Routinebasierte Erwartungsbildung'</span>, fillcolor<span class="op">=</span><span class="st">'#e0f7fa'</span>, color<span class="op">=</span><span class="st">'#00acc1'</span>)</span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Heutiger Zustand</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'DSGE'</span>, <span class="st">'Heutiger Standard:</span><span class="ch">\n</span><span class="st">DSGE-Modelle</span><span class="ch">\n</span><span class="st">(Dynamische Stochastische Allgemeine Gleichgewichtsmodelle)'</span>, <span class="op">**</span>color_heute)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co"># --- VERBINDUNGEN (EDGES) ---</span></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Sub-Pfade für heutige Aufteilung (nebeneinander angeordnet unter DSGE)</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> dot.subgraph() <span class="im">as</span> s:</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    s.attr(rank<span class="op">=</span><span class="st">'same'</span>)</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'Neoklassisch'</span>, <span class="st">'Neoklassische DSGE</span><span class="ch">\n</span><span class="st">• Effiziente Märkte</span><span class="ch">\n</span><span class="st">• Flexibles Preissystem'</span>, <span class="op">**</span>color_heute)</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'Neukeynesianisch'</span>, <span class="st">'Neukeynesianische DSGE</span><span class="ch">\n</span><span class="st">• Nominale Rigiditäten</span><span class="ch">\n</span><span class="st">• Preis- und Lohnstarrheiten'</span>, <span class="op">**</span>color_heute)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Hauptstrang: Von der Klassik bis zur Lucas-Kritik</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'klassik'</span>, <span class="st">'krise'</span>, label<span class="op">=</span><span class="st">' offenbart Defizite'</span>)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'krise'</span>, <span class="st">'keynes'</span>, label<span class="op">=</span><span class="st">' führt zu'</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'keynes'</span>, <span class="st">'islm'</span>, label<span class="op">=</span><span class="st">' mathematisiert durch'</span>)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'keynes'</span>, <span class="st">'phillips'</span>, label<span class="op">=</span><span class="st">' ergänzt durch'</span>)</span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'Fazit'</span>, <span class="st">'Moderne Synthese:</span><span class="ch">\n</span><span class="st">„Mikroökonomik auf hoher Aggregationsstufe“</span><span class="ch">\n</span><span class="st">• Analysewerkzeuge: Präferenzen, Beschränkungen &amp; Gleichgewichte'</span>, <span class="op">**</span>color_heute)</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="co"># --- KANTEN DEFINITIONEN (Logischer, chronologischer Fluss) ---</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'Vordenker'</span>, <span class="st">'Krise'</span>, label<span class="op">=</span><span class="st">' Schafft Handlungsbedarf'</span>)</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'Krise'</span>, <span class="st">'Keynes'</span>)</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'Keynes'</span>, <span class="st">'Hicks'</span>, label<span class="op">=</span><span class="st">' Standardisierung'</span>)</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'Hicks'</span>, <span class="st">'Friedman'</span>, label<span class="op">=</span><span class="st">' Theoretischer Zweifel (1968)'</span>)</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'Friedman'</span>, <span class="st">'Stagflation'</span>, label<span class="op">=</span><span class="st">' Empirische Bestätigung'</span>)</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'Stagflation'</span>, <span class="st">'Lucas'</span>, label<span class="op">=</span><span class="st">' Methodischer Bruch'</span>)</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'Lucas'</span>, <span class="st">'RBC'</span>, label<span class="op">=</span><span class="st">' Paradigmenwechsel (1982)'</span>)</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'RBC'</span>, <span class="st">'DSGE'</span>, label<span class="op">=</span><span class="st">' Weiterentwicklung'</span>)</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'DSGE'</span>, <span class="st">'Neoklassisch'</span>)</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'DSGE'</span>, <span class="st">'Neukeynesianisch'</span>)</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'Neoklassisch'</span>, <span class="st">'Fazit'</span>)</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'Neukeynesianisch'</span>, <span class="st">'Fazit'</span>)</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="co"># NEU: Generiert und speichert die Datei 'geschichte_makrooekonomik.svg' im aktuellen Verzeichnis</span></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>dot.render(<span class="st">'geschichte_makrooekonomik'</span>, cleanup<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagramm weiterhin direkt im Jupyter Notebook anzeigen</span></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>display(SVG(dot.pipe(<span class="bu">format</span><span class="op">=</span><span class="st">'svg'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'phillips'</span>, <span class="st">'friedman'</span>, label<span class="op">=</span><span class="st">' theoretischer Druck'</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'islm'</span>, <span class="st">'friedman'</span>, label<span class="op">=</span><span class="st">' Krisen der 1960er'</span>)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'friedman'</span>, <span class="st">'lucas'</span>, label<span class="op">=</span><span class="st">' verschärft zu'</span>)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Die Aufspaltung ab 1982</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'lucas'</span>, <span class="st">'rbc'</span>, label<span class="op">=</span><span class="st">' Paradigma 1:</span><span class="ch">\n</span><span class="st"> Freie Märkte'</span>)</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'lucas'</span>, <span class="st">'neukeynes'</span>, label<span class="op">=</span><span class="st">' Paradigma 2:</span><span class="ch">\n</span><span class="st"> Marktversagen'</span>)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Die moderne Synthese und das 21. Jahrhundert</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'rbc'</span>, <span class="st">'dsge'</span>, label<span class="op">=</span><span class="st">' integriert in'</span>)</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'neukeynes'</span>, <span class="st">'dsge'</span>, label<span class="op">=</span><span class="st">' integriert in'</span>)</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'dsge'</span>, <span class="st">'zukunft'</span>, label<span class="op">=</span><span class="st">' erweitert um neue Krisen'</span>)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Der parallele Wachstums-Strang</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'klassik'</span>, <span class="st">'solow'</span>, label<span class="op">=</span><span class="st">' Langfristige</span><span class="ch">\n</span><span class="st"> Perspektive'</span>, style<span class="op">=</span><span class="st">'dashed'</span>)</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'solow'</span>, <span class="st">'endogen'</span>, label<span class="op">=</span><span class="st">' Weiterentwicklung'</span>)</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'endogen'</span>, <span class="st">'zukunft'</span>, label<span class="op">=</span><span class="st">' Einfluss auf</span><span class="ch">\n</span><span class="st"> Nachhaltigkeit'</span>, style<span class="op">=</span><span class="st">'dashed'</span>)</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Direktes Rendering im Jupyter Notebook</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>display(dot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -382,9 +343,9 @@ Der Podcast zur Vorlesung: Was ist Makroökonomik
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-garin_intermediate_2021" class="csl-entry" role="listitem">
-Garın, Julio, Robert Lester, Colby College, and Eric Sims. 2021. <em>Intermediate Macroeconomics</em>. <a href="https://juliogarin.com/files/textbook/GLS_Intermediate_Macro.pdf">https://juliogarin.com/files/textbook/GLS_Intermediate_Macro.pdf</a>.
+Garın, J., Lester, R., &amp; Sims, E. (2021). <em><a href="https://juliogarin.com/files/textbook/GLS_Intermediate_Macro.pdf">Intermediate Macroeconomics</a></em>.
 </div>
 </div>
 
@@ -790,8 +751,8 @@ Garın, Julio, Robert Lester, Colby College, and Eric Sims. 2021. <em>Intermedia
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Einleitung.html" class="pagination-link" aria-label="Einleitung">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Einleitung</span></span>
+      <a href="./Einleitung.html" class="pagination-link" aria-label="Einleitung -- Gegenstand und Relevanz der Makroökonomik">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Einleitung – Gegenstand und Relevanz der Makroökonomik</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

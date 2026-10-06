@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="441pt" height="716pt" viewBox="0.00 0.00 440.88 715.50">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 711.5)">
+<polygon fill="white" stroke="none" points="-4,4 -4,-711.5 436.88,-711.5 436.88,4 -4,4"/>
+<!-- Def -->
+<g id="node1" class="node">
+<title>Def</title>
+<path fill="#ebf8ff" stroke="#3182ce" d="M350.12,-707.5C350.12,-707.5 88.88,-707.5 88.88,-707.5 82.88,-707.5 76.88,-701.5 76.88,-695.5 76.88,-695.5 76.88,-671 76.88,-671 76.88,-665 82.88,-659 88.88,-659 88.88,-659 350.12,-659 350.12,-659 356.12,-659 362.12,-665 362.12,-671 362.12,-671 362.12,-695.5 362.12,-695.5 362.12,-701.5 356.12,-707.5 350.12,-707.5"/>
+<text text-anchor="middle" x="219.5" y="-693.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2b6cb0">Makroökonomik</text>
+<text text-anchor="middle" x="219.5" y="-679.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2b6cb0">• Wissenschaftliche Untersuchung aggregierter Größen</text>
+<text text-anchor="middle" x="219.5" y="-666.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2b6cb0">• Analyse von gesamtwirtschaftlichen Zusammenhängen</text>
+</g>
+<!-- Abgrenzung -->
+<g id="node2" class="node">
+<title>Abgrenzung</title>
+<path fill="#ebf8ff" stroke="#3182ce" d="M341.5,-623C341.5,-623 97.5,-623 97.5,-623 91.5,-623 85.5,-617 85.5,-611 85.5,-611 85.5,-573 85.5,-573 85.5,-567 91.5,-561 97.5,-561 97.5,-561 341.5,-561 341.5,-561 347.5,-561 353.5,-567 353.5,-573 353.5,-573 353.5,-611 353.5,-611 353.5,-617 347.5,-623 341.5,-623"/>
+<text text-anchor="middle" x="219.5" y="-608.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2b6cb0">Unterschied zur Mikroökonomik</text>
+<text text-anchor="middle" x="219.5" y="-595.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2b6cb0">• Keine Betrachtung individueller Akteure und Märkte</text>
+<text text-anchor="middle" x="219.5" y="-581.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2b6cb0">• Fokus auf das Verhalten aggregierter Märkte</text>
+<text text-anchor="middle" x="219.5" y="-568.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2b6cb0"> (Gütermarkt, Arbeitsmarkt, Geldmarkt usw)</text>
+</g>
+<!-- Def&#45;&gt;Abgrenzung -->
+<g id="edge1" class="edge">
+<title>Def-&gt;Abgrenzung</title>
+<path fill="none" stroke="#4a5568" d="M219.5,-658.8C219.5,-651.34 219.5,-642.86 219.5,-634.52"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="219.5,-624.57 224,-634.57 219.5,-628.35 219.5,-634.57 219.5,-634.57 219.5,-634.57 219.5,-628.35 215,-634.57 219.5,-624.57"/>
+</g>
+<!-- Sektor1 -->
+<g id="node3" class="node">
+<title>Sektor1</title>
+<path fill="#edf2f7" stroke="#718096" d="M205,-525C205,-525 12,-525 12,-525 6,-525 0,-519 0,-513 0,-513 0,-488.5 0,-488.5 0,-482.5 6,-476.5 12,-476.5 12,-476.5 205,-476.5 205,-476.5 211,-476.5 217,-482.5 217,-488.5 217,-488.5 217,-513 217,-513 217,-519 211,-525 205,-525"/>
+<text text-anchor="middle" x="108.5" y="-510.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2d3748">Private Sektoren</text>
+<text text-anchor="middle" x="108.5" y="-497.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2d3748">• Haushalte (Konsum, Ersparnis)</text>
+<text text-anchor="middle" x="108.5" y="-483.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2d3748">• Unternehmen (Produktion, Investitionen)</text>
+</g>
+<!-- Abgrenzung&#45;&gt;Sektor1 -->
+<g id="edge2" class="edge">
+<title>Abgrenzung-&gt;Sektor1</title>
+<path fill="none" stroke="#4a5568" d="M181.61,-560.53C170.2,-551.36 157.68,-541.29 146.28,-532.13"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="138.76,-526.08 149.37,-528.84 141.71,-528.45 146.55,-532.35 146.55,-532.35 146.55,-532.35 141.71,-528.45 143.73,-535.85 138.76,-526.08"/>
+</g>
+<!-- Sektor2 -->
+<g id="node4" class="node">
+<title>Sektor2</title>
+<path fill="#edf2f7" stroke="#718096" d="M413.5,-525C413.5,-525 247.5,-525 247.5,-525 241.5,-525 235.5,-519 235.5,-513 235.5,-513 235.5,-488.5 235.5,-488.5 235.5,-482.5 241.5,-476.5 247.5,-476.5 247.5,-476.5 413.5,-476.5 413.5,-476.5 419.5,-476.5 425.5,-482.5 425.5,-488.5 425.5,-488.5 425.5,-513 425.5,-513 425.5,-519 419.5,-525 413.5,-525"/>
+<text text-anchor="middle" x="330.5" y="-510.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2d3748">Öffentliche &amp; Globale Sektoren</text>
+<text text-anchor="middle" x="330.5" y="-497.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2d3748">• Der Staat (Fiskalpolitik, Geldpolitik)</text>
+<text text-anchor="middle" x="330.5" y="-483.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#2d3748">• Übrige Welt (Exporte, Importe)</text>
+</g>
+<!-- Abgrenzung&#45;&gt;Sektor2 -->
+<g id="edge3" class="edge">
+<title>Abgrenzung-&gt;Sektor2</title>
+<path fill="none" stroke="#4a5568" d="M257.39,-560.53C268.8,-551.36 281.32,-541.29 292.72,-532.13"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="300.24,-526.08 295.27,-535.85 297.29,-528.45 292.45,-532.35 292.45,-532.35 292.45,-532.35 297.29,-528.45 289.63,-528.84 300.24,-526.08"/>
+</g>
+<!-- Variablen -->
+<g id="node5" class="node">
+<title>Variablen</title>
+<path fill="#fff5f5" stroke="#e53e3e" d="M313.75,-440.5C313.75,-440.5 125.25,-440.5 125.25,-440.5 119.25,-440.5 113.25,-434.5 113.25,-428.5 113.25,-428.5 113.25,-390.5 113.25,-390.5 113.25,-384.5 119.25,-378.5 125.25,-378.5 125.25,-378.5 313.75,-378.5 313.75,-378.5 319.75,-378.5 325.75,-384.5 325.75,-390.5 325.75,-390.5 325.75,-428.5 325.75,-428.5 325.75,-434.5 319.75,-440.5 313.75,-440.5"/>
+<text text-anchor="middle" x="219.5" y="-426.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">Gesamtwirtschaftliche Kernvariablen</text>
+<text text-anchor="middle" x="219.5" y="-412.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Bruttoinlandsprodukt (BIP)</text>
+<text text-anchor="middle" x="219.5" y="-399.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Beschäftigungsniveau &amp; Arbeitslosigkeit</text>
+<text text-anchor="middle" x="219.5" y="-385.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Preisentwicklung (Inflation &amp; Deflation)</text>
+</g>
+<!-- Sektor1&#45;&gt;Variablen -->
+<g id="edge4" class="edge">
+<title>Sektor1-&gt;Variablen</title>
+<path fill="none" stroke="#4a5568" d="M137.95,-476.07C148.81,-467.34 161.38,-457.23 173.35,-447.6"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="180.98,-441.47 176.01,-451.24 178.04,-443.84 173.19,-447.74 173.19,-447.74 173.19,-447.74 178.04,-443.84 170.37,-444.23 180.98,-441.47"/>
+</g>
+<!-- Sektor2&#45;&gt;Variablen -->
+<g id="edge5" class="edge">
+<title>Sektor2-&gt;Variablen</title>
+<path fill="none" stroke="#4a5568" d="M301.05,-476.07C290.19,-467.34 277.62,-457.23 265.65,-447.6"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="258.02,-441.47 268.63,-444.23 260.96,-443.84 265.81,-447.74 265.81,-447.74 265.81,-447.74 260.96,-443.84 262.99,-451.24 258.02,-441.47"/>
+</g>
+<!-- Frage1 -->
+<g id="node6" class="node">
+<title>Frage1</title>
+<path fill="#fff5f5" stroke="#e53e3e" d="M199.38,-342.5C199.38,-342.5 17.62,-342.5 17.62,-342.5 11.62,-342.5 5.62,-336.5 5.62,-330.5 5.62,-330.5 5.62,-292.5 5.62,-292.5 5.62,-286.5 11.62,-280.5 17.62,-280.5 17.62,-280.5 199.38,-280.5 199.38,-280.5 205.38,-280.5 211.38,-286.5 211.38,-292.5 211.38,-292.5 211.38,-330.5 211.38,-330.5 211.38,-336.5 205.38,-342.5 199.38,-342.5"/>
+<text text-anchor="middle" x="108.5" y="-328.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">Langfristige Perspektive</text>
+<text text-anchor="middle" x="108.5" y="-314.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Wirtschaftswachstum über Jahrzehnte</text>
+<text text-anchor="middle" x="108.5" y="-301.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Unterschiede im Lebensstandard</text>
+<text text-anchor="middle" x="108.5" y="-287.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Ursachen von Armut</text>
+</g>
+<!-- Variablen&#45;&gt;Frage1 -->
+<g id="edge6" class="edge">
+<title>Variablen-&gt;Frage1</title>
+<path fill="none" stroke="#4a5568" d="M184.38,-378.12C174.05,-369.2 162.64,-359.32 151.86,-350"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="144.31,-343.47 154.82,-346.61 147.17,-345.95 151.88,-350.02 151.88,-350.02 151.88,-350.02 147.17,-345.95 148.93,-353.42 144.31,-343.47"/>
+</g>
+<!-- Frage2 -->
+<g id="node7" class="node">
+<title>Frage2</title>
+<path fill="#fff5f5" stroke="#e53e3e" d="M419.5,-342.5C419.5,-342.5 241.5,-342.5 241.5,-342.5 235.5,-342.5 229.5,-336.5 229.5,-330.5 229.5,-330.5 229.5,-292.5 229.5,-292.5 229.5,-286.5 235.5,-280.5 241.5,-280.5 241.5,-280.5 419.5,-280.5 419.5,-280.5 425.5,-280.5 431.5,-286.5 431.5,-292.5 431.5,-292.5 431.5,-330.5 431.5,-330.5 431.5,-336.5 425.5,-342.5 419.5,-342.5"/>
+<text text-anchor="middle" x="330.5" y="-328.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">Kurz- &amp; Mittelfristige Perspektive</text>
+<text text-anchor="middle" x="330.5" y="-314.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Konjunkturelle Schwankungen</text>
+<text text-anchor="middle" x="330.5" y="-301.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Oszillation um den langfristigen Trend</text>
+<text text-anchor="middle" x="330.5" y="-287.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#9b2c2c">• Rolle des Finanzsystems</text>
+</g>
+<!-- Variablen&#45;&gt;Frage2 -->
+<g id="edge7" class="edge">
+<title>Variablen-&gt;Frage2</title>
+<path fill="none" stroke="#4a5568" d="M254.62,-378.12C264.95,-369.2 276.36,-359.32 287.14,-350"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="294.69,-343.47 290.07,-353.42 291.83,-345.95 287.12,-350.02 287.12,-350.02 287.12,-350.02 291.83,-345.95 284.18,-346.61 294.69,-343.47"/>
+</g>
+<!-- Methodik -->
+<g id="node8" class="node">
+<title>Methodik</title>
+<path fill="#e6fffa" stroke="#319795" d="M341.12,-244.5C341.12,-244.5 97.88,-244.5 97.88,-244.5 91.88,-244.5 85.88,-238.5 85.88,-232.5 85.88,-232.5 85.88,-194.5 85.88,-194.5 85.88,-188.5 91.88,-182.5 97.88,-182.5 97.88,-182.5 341.12,-182.5 341.12,-182.5 347.12,-182.5 353.12,-188.5 353.12,-194.5 353.12,-194.5 353.12,-232.5 353.12,-232.5 353.12,-238.5 347.12,-244.5 341.12,-244.5"/>
+<text text-anchor="middle" x="219.5" y="-230.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#234e52">Methodischer Ansatz &amp; Werkzeuge</text>
+<text text-anchor="middle" x="219.5" y="-216.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#234e52">• Reduktion von Komplexität auf Kernbeziehungen</text>
+<text text-anchor="middle" x="219.5" y="-203.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#234e52">• Vereinfachte Modelle &amp; mathematische Werkzeuge</text>
+<text text-anchor="middle" x="219.5" y="-189.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#234e52">• Fiktives Labor (da reale Experimente unmöglich)</text>
+</g>
+<!-- Frage1&#45;&gt;Methodik -->
+<g id="edge8" class="edge">
+<title>Frage1-&gt;Methodik</title>
+<path fill="none" stroke="#4a5568" d="M143.62,-280.12C153.95,-271.2 165.36,-261.32 176.14,-252"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="183.69,-245.47 179.07,-255.42 180.83,-247.95 176.12,-252.02 176.12,-252.02 176.12,-252.02 180.83,-247.95 173.18,-248.61 183.69,-245.47"/>
+</g>
+<!-- Frage2&#45;&gt;Methodik -->
+<g id="edge9" class="edge">
+<title>Frage2-&gt;Methodik</title>
+<path fill="none" stroke="#4a5568" d="M295.38,-280.12C285.05,-271.2 273.64,-261.32 262.86,-252"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="255.31,-245.47 265.82,-248.61 258.17,-247.95 262.88,-252.02 262.88,-252.02 262.88,-252.02 258.17,-247.95 259.93,-255.42 255.31,-245.47"/>
+</g>
+<!-- Ziele -->
+<g id="node9" class="node">
+<title>Ziele</title>
+<path fill="#f0fff4" stroke="#38a169" d="M358.75,-146.5C358.75,-146.5 80.25,-146.5 80.25,-146.5 74.25,-146.5 68.25,-140.5 68.25,-134.5 68.25,-134.5 68.25,-110 68.25,-110 68.25,-104 74.25,-98 80.25,-98 80.25,-98 358.75,-98 358.75,-98 364.75,-98 370.75,-104 370.75,-110 370.75,-110 370.75,-134.5 370.75,-134.5 370.75,-140.5 364.75,-146.5 358.75,-146.5"/>
+<text text-anchor="middle" x="219.5" y="-132.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">Übergeordnete Ziele</text>
+<text text-anchor="middle" x="219.5" y="-118.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">• Tiefgreifendes Verständnis von Wirtschaftssystemen</text>
+<text text-anchor="middle" x="219.5" y="-105.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">• Quantitative Beurteilung des ökonomischen Wohlergehens</text>
+</g>
+<!-- Methodik&#45;&gt;Ziele -->
+<g id="edge10" class="edge">
+<title>Methodik-&gt;Ziele</title>
+<path fill="none" stroke="#4a5568" d="M219.5,-182.03C219.5,-174.3 219.5,-165.93 219.5,-158"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="219.5,-148.04 224,-158.04 219.5,-151.82 219.5,-158.04 219.5,-158.04 219.5,-158.04 219.5,-151.82 215,-158.04 219.5,-148.04"/>
+</g>
+<!-- Ziel1 -->
+<g id="node10" class="node">
+<title>Ziel1</title>
+<path fill="#f0fff4" stroke="#38a169" d="M187.88,-62C187.88,-62 39.12,-62 39.12,-62 33.12,-62 27.12,-56 27.12,-50 27.12,-50 27.12,-12 27.12,-12 27.12,-6 33.12,0 39.12,0 39.12,0 187.88,0 187.88,0 193.88,0 199.88,-6 199.88,-12 199.88,-12 199.88,-50 199.88,-50 199.88,-56 193.88,-62 187.88,-62"/>
+<text text-anchor="middle" x="113.5" y="-47.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">Wirtschaftspolitik</text>
+<text text-anchor="middle" x="113.5" y="-34.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">• Basis für Geld- und Fiskalpolitik</text>
+<text text-anchor="middle" x="113.5" y="-20.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">• Vorhersage nach Schocks</text>
+<text text-anchor="middle" x="113.5" y="-7.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">• Stabilisierende Maßnahmen</text>
+</g>
+<!-- Ziele&#45;&gt;Ziel1 -->
+<g id="edge11" class="edge">
+<title>Ziele-&gt;Ziel1</title>
+<path fill="none" stroke="#4a5568" d="M191.37,-97.57C181.11,-88.92 169.24,-78.93 157.9,-69.38"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="150.31,-62.99 160.85,-65.99 153.2,-65.43 157.96,-69.43 157.96,-69.43 157.96,-69.43 153.2,-65.43 155.06,-72.87 150.31,-62.99"/>
+</g>
+<!-- Ziel2 -->
+<g id="node11" class="node">
+<title>Ziel2</title>
+<path fill="#f0fff4" stroke="#38a169" d="M420.88,-62C420.88,-62 230.12,-62 230.12,-62 224.12,-62 218.12,-56 218.12,-50 218.12,-50 218.12,-12 218.12,-12 218.12,-6 224.12,0 230.12,0 230.12,0 420.88,0 420.88,0 426.88,0 432.88,-6 432.88,-12 432.88,-12 432.88,-50 432.88,-50 432.88,-56 426.88,-62 420.88,-62"/>
+<text text-anchor="middle" x="325.5" y="-47.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">Gesellschaftlicher Nutzen</text>
+<text text-anchor="middle" x="325.5" y="-34.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">• Bekämpfung von Massenarbeitslosigkeit</text>
+<text text-anchor="middle" x="325.5" y="-20.55" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">• Sicherung stabiler Preise</text>
+<text text-anchor="middle" x="325.5" y="-7.05" font-family="Helvetica,Arial,sans-serif" font-size="11.00" fill="#22543d">• Strategien zur Armutsbekämpfung</text>
+</g>
+<!-- Ziele&#45;&gt;Ziel2 -->
+<g id="edge12" class="edge">
+<title>Ziele-&gt;Ziel2</title>
+<path fill="none" stroke="#4a5568" d="M247.63,-97.57C257.89,-88.92 269.76,-78.93 281.1,-69.38"/>
+<polygon fill="#4a5568" stroke="#4a5568" points="288.69,-62.99 283.94,-72.87 285.8,-65.43 281.04,-69.43 281.04,-69.43 281.04,-69.43 285.8,-65.43 278.15,-65.99 288.69,-62.99"/>
+</g>
+</g>
+</svg>
