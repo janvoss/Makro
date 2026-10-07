@@ -324,6 +324,267 @@ print(f"SVG-Datei erfolgreich gespeichert unter: {output_file}")
 
 ![BIP vs. BNE](bip_vs_bne.svg)
 
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "BIP vs. BNE in Deutschland und Irland"
+
+library(rdbnomics)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# 1. AMECO Series-IDs definieren
+# OVGD = Reales BIP (Preise von 2015)
+# OVGN = Reales BNE (Preise von 2015)
+series_ids <- c(
+  "AMECO/OVGD/DEU.1.1.0.0.OVGD",
+  "AMECO/OVGN/DEU.1.1.0.0.OVGN",
+  "AMECO/OVGD/IRL.1.1.0.0.OVGD",
+  "AMECO/OVGN/IRL.1.1.0.0.OVGN"
+)
+
+# 2. Daten via DBnomics abrufen
+df_raw <- rdb(ids = series_ids)
+
+# 3. Aufbereiten und Zuordnen der Variablen
+df_clean <- df_raw %>%
+  filter(!is.na(value)) %>%
+  mutate(
+    year = as.numeric(substr(as.character(period), 1, 4)),
+    # Land festlegen und Faktoren-Reihenfolge erzwingen (Links: DE, Rechts: IRL)
+    country = case_when(
+      tolower(geo) == "deu" ~ "Deutschland",
+      tolower(geo) == "irl" ~ "Irland",
+      TRUE ~ toupper(geo)
+    ),
+    country = factor(country, levels = c("Deutschland", "Irland")),
+    
+    # Indikator identifizieren
+    indicator = case_when(
+      grepl("OVGD", series_code) ~ "Reales BIP",
+      grepl("OVGN", series_code) ~ "Reales BNE",
+      TRUE ~ "Sonstiges"
+    )
+  ) %>%
+  select(country, year, indicator, value) %>%
+  filter(year >= 1990) # Fokus auf die Entwicklung seit 1990
+
+# 4. Visualisierung mit ggplot2 & facet_wrap
+ggplot(df_clean, aes(x = year, y = value, color = indicator, linetype = indicator)) +
+  geom_line(linewidth = 1) +
+  facet_wrap(~ country, scales = "free_y", ncol = 2) +
+  scale_color_manual(
+    values = c("Reales BIP" = "#1F78B4", "Reales BNE" = "#E31A1C")
+  ) +
+  scale_linetype_manual(
+    values = c("Reales BIP" = "solid", "Reales BNE" = "dashed")
+  ) +
+  labs(
+    title    = "Reales BIP vs. Reales BNE im Vergleich (1990–heute)",
+    subtitle = "Starke Entkopplung in Irland durch Primäreinkommensabflüsse multinationaler Konzerne",
+    x        = NULL,
+    y        = "Milliarden Euro (Preise von 2015)",
+    color    = NULL,
+    linetype = NULL,
+    caption  = "Daten: AMECO (OVGD / OVGN) via DBnomics. Darstellung Jan S. Voßwinkel"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position  = "bottom",
+    strip.text       = element_text(face = "bold", size = 12),
+    plot.title       = element_text(face = "bold", size = 14),
+    plot.subtitle    = element_text(color = "gray30"),
+    panel.grid.minor = element_blank(),
+    panel.spacing    = unit(1.5, "lines")
+  )
+```
+
+## Marktpreise vs. Faktorkosten
+
+```{python}
+#| output: false
+
+
+import graphviz
+# from IPython.display import display, SVG
+
+# Graphviz-Objekt initialisieren
+dot = graphviz.Digraph(
+    name='bip_marktpreise_vs_faktorkosten',
+    comment='Marktpreise vs. Faktorkosten in der VGR',
+    format='svg'
+)
+
+# Globale Layout-Einstellungen
+dot.attr(
+    rankdir='TB',
+    fontname='Helvetica, Arial, sans-serif',
+    fontsize='12',
+    bgcolor='#FFFFFF',
+    nodesep='0.5',
+    ranksep='0.5',
+    compound='true'
+)
+
+# Standard-Attribute für Knoten
+dot.attr('node',
+    fontname='Helvetica, Arial, sans-serif',
+    fontsize='10',
+    shape='box',
+    style='filled,rounded',
+    penwidth='0',
+    margin='0.2,0.15'
+)
+
+# Standard-Attribute für Verbindungen
+dot.attr('edge',
+    fontname='Helvetica, Arial, sans-serif',
+    fontsize='9',
+    color='#475569',
+    penwidth='1.5',
+    arrowsize='0.8'
+)
+
+# ==============================================================================
+# 1. STUFE: ENTSTEHUNGSRECHNUNG (Von Faktorkosten zu Marktpreisen)
+# ==============================================================================
+
+bws_label = '''<
+<table border="0" cellborder="0" cellspacing="0" cellpadding="2">
+  <tr><td><font point-size="11"><b>Bruttowertschöpfung (BWS)</b></font></td></tr>
+  <tr><td><font color="#065F46" point-size="9">zu Herstellungspreisen / Faktorkosten</font></td></tr>
+  <hr/>
+  <tr><td align="left">• Reine Wertschöpfung der Wirtschaftssektoren</td></tr>
+  <tr><td align="left">• Faktorentlohnung (Arbeit &amp; Kapital) vor staatlichem Eingriff</td></tr>
+</table>>'''
+
+tax1_label = '''<
+<table border="0" cellborder="0" cellspacing="0" cellpadding="1">
+  <tr><td><font color="#B91C1C"><b>+ Gütersteuern</b> (z. B. MwSt, Mineralölsteuer)</font></td></tr>
+  <tr><td><font color="#065F46"><b>− Gütersubventionen</b></font></td></tr>
+  <tr><td><font color="#475569" point-size="9">= Netto-Gütersteuern (Staatlicher Preiseinfluss)</font></td></tr>
+</table>>'''
+
+bip_mp_label = '''<
+<table border="0" cellborder="0" cellspacing="0" cellpadding="2">
+  <tr><td><font point-size="12"><b>Bruttoinlandsprodukt (BIP zu Marktpreisen)</b></font></td></tr>
+  <tr><td><font color="#1E40AF" point-size="9">Markt- &amp; Nachfrageperspektive</font></td></tr>
+  <hr/>
+  <tr><td align="left">• Erfasst die von Käufern tatsächlich gezahlten Preise</td></tr>
+  <tr><td align="left">• Inklusive indirekter Steuern und abzüglich Subventionen</td></tr>
+</table>>'''
+
+dot.node('BWS', label=bws_label, fillcolor='#D1FAE5', fontcolor='#065F46')
+dot.node('TAX1', label=tax1_label, fillcolor='#FEE2E2', fontcolor='#991B1B')
+dot.node('BIP_MP', label=bip_mp_label, fillcolor='#DBEAFE', fontcolor='#1E40AF')
+
+# ==============================================================================
+# 2. ÜBERLEITUNG INLANDS- ZU INLÄNDER- UND NETTOKONZEPT
+# ==============================================================================
+
+trans_label = '''<
+<table border="0" cellborder="0" cellspacing="0" cellpadding="1">
+  <tr><td><font color="#475569"><b>+ Saldo der Primäreinkommen aus der übrigen Welt</b></font></td></tr>
+  <tr><td><font color="#475569"><b>− Abschreibungen</b> (Kapitalverschleiß)</font></td></tr>
+</table>>'''
+
+nne_mp_label = '''<
+<table border="0" cellborder="0" cellspacing="0" cellpadding="2">
+  <tr><td><font point-size="11"><b>Nettonationaleinkommen (NNE zu Marktpreisen)</b></font></td></tr>
+  <tr><td><font color="#1E40AF" point-size="9">Inländerkonzept zu Marktpreisen</font></td></tr>
+</table>>'''
+
+dot.node('TRANS', label=trans_label, fillcolor='#F1F5F9', fontcolor='#334155')
+dot.node('NNE_MP', label=nne_mp_label, fillcolor='#DBEAFE', fontcolor='#1E40AF')
+
+# ==============================================================================
+# 3. STUFE: VERTEILUNGSRECHNUNG (Rückkehr zu Faktorkosten = Volkseinkommen)
+# ==============================================================================
+
+tax2_label = '''<
+<table border="0" cellborder="0" cellspacing="0" cellpadding="1">
+  <tr><td><font color="#B91C1C"><b>− Produktions- und Importabgaben an den Staat</b></font></td></tr>
+  <tr><td><font color="#065F46"><b>+ Vom Staat gezahlte Subventionen</b></font></td></tr>
+  <tr><td><font color="#475569" point-size="9">= Bereinigung um indirekte staatliche Umverteilung</font></td></tr>
+</table>>'''
+
+ve_label = '''<
+<table border="0" cellborder="0" cellspacing="0" cellpadding="2">
+  <tr><td><font point-size="12"><b>Volkseinkommen (NNE zu Faktorkosten)</b></font></td></tr>
+  <tr><td><font color="#92400E" point-size="9">Reines Faktoreinkommen der Inländer</font></td></tr>
+  <hr/>
+  <tr><td align="left">• Summe aus Arbeitnehmerentgelt &amp; Unternehmens-/Vermögenseinkommen</td></tr>
+  <tr><td align="left">• Tatsächliche Vergütung für die Produktionsfaktoren Arbeit &amp; Kapital</td></tr>
+</table>>'''
+
+dot.node('TAX2', label=tax2_label, fillcolor='#FEE2E2', fontcolor='#991B1B')
+dot.node('VE', label=ve_label, fillcolor='#FEF3C7', fontcolor='#92400E')
+
+# ==============================================================================
+# 4. ANALYTISCHER ZWECK (SEITLICHE INFO-BOXEN)
+# ==============================================================================
+
+purpose_mp = '''<
+<table border="0" cellborder="0" cellspacing="0" cellpadding="2">
+  <tr><td><b>Ziel: Marktpreise</b></td></tr>
+  <hr/>
+  <tr><td align="left">• Abbildung der tatsächlichen Kaufkraft</td></tr>
+  <tr><td align="left">• Relevante Ausgabengröße der Nachfrager</td></tr>
+</table>>'''
+
+purpose_fk = '''<
+<table border="0" cellborder="0" cellspacing="0" cellpadding="2">
+  <tr><td><b>Ziel: Faktorkosten</b></td></tr>
+  <hr/>
+  <tr><td align="left">• Eliminierung verzerrender Staatseinflüsse</td></tr>
+  <tr><td align="left">• Unverzerrter Maßstab für Leistungskraft &amp; Verteilung</td></tr>
+</table>>'''
+
+dot.node('PURPOSE_MP', label=purpose_mp, fillcolor='#EFF6FF', fontcolor='#1D4ED8')
+dot.node('PURPOSE_FK', label=purpose_fk, fillcolor='#ECFDF5', fontcolor='#047857')
+
+# ==============================================================================
+# 5. VERBINDUNGEN (VERLAUF)
+# ==============================================================================
+
+# Hauptpfad
+dot.edge('BWS', 'TAX1')
+dot.edge('TAX1', 'BIP_MP')
+dot.edge('BIP_MP', 'TRANS')
+dot.edge('TRANS', 'NNE_MP')
+dot.edge('NNE_MP', 'TAX2')
+dot.edge('TAX2', 'VE')
+
+# Zuordnung zu den Info-Boxen (gestrichelt)
+dot.edge('BIP_MP', 'PURPOSE_MP', style='dashed', color='#93C5FD', constraint='false')
+dot.edge('VE', 'PURPOSE_FK', style='dashed', color='#6EE7B7', constraint='false')
+
+# Rang-Ausrichtungen für ein ausgewogenes Layout
+with dot.subgraph() as s:
+    s.attr(rank='same')
+    s.node('BIP_MP')
+    s.node('PURPOSE_MP')
+
+with dot.subgraph() as s:
+    s.attr(rank='same')
+    s.node('VE')
+    s.node('PURPOSE_FK')
+
+# ==============================================================================
+# 6. SPEICHERN (SVG) UND DISPLAY (IPython)
+# ==============================================================================
+
+output_file = dot.render(filename='bip_marktpreise_vs_faktorkosten', format='svg', cleanup=True)
+
+print(f"SVG-Datei erfolgreich gespeichert unter: {output_file}")
+
+# Anzeige im Jupyter Notebook / IPython
+# display(SVG(filename=output_file))
+```
+
+![Marktpreise vs Faktorkosten](bip_marktpreise_vs_faktorkosten.svg)
+
 ## Schwankungen es BIPs: Konjunktur
 
 ### Stilisierter Konjunkturverlauf

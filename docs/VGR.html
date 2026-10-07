@@ -260,16 +260,17 @@ window.Quarto = {
   <li><a href="#definition-und-berechnungswege" id="toc-definition-und-berechnungswege" class="nav-link" data-scroll-target="#definition-und-berechnungswege"><span class="header-section-number">3.2.1</span> Definition und Berechnungswege</a></li>
   </ul></li>
   <li><a href="#verwandtes-konzept-das-bruttonationaleinkommen" id="toc-verwandtes-konzept-das-bruttonationaleinkommen" class="nav-link" data-scroll-target="#verwandtes-konzept-das-bruttonationaleinkommen"><span class="header-section-number">3.3</span> Verwandtes Konzept: Das Bruttonationaleinkommen</a></li>
-  <li><a href="#schwankungen-es-bips-konjunktur" id="toc-schwankungen-es-bips-konjunktur" class="nav-link" data-scroll-target="#schwankungen-es-bips-konjunktur"><span class="header-section-number">3.4</span> Schwankungen es BIPs: Konjunktur</a>
+  <li><a href="#marktpreise-vs.-faktorkosten" id="toc-marktpreise-vs.-faktorkosten" class="nav-link" data-scroll-target="#marktpreise-vs.-faktorkosten"><span class="header-section-number">3.4</span> Marktpreise vs.&nbsp;Faktorkosten</a></li>
+  <li><a href="#schwankungen-es-bips-konjunktur" id="toc-schwankungen-es-bips-konjunktur" class="nav-link" data-scroll-target="#schwankungen-es-bips-konjunktur"><span class="header-section-number">3.5</span> Schwankungen es BIPs: Konjunktur</a>
   <ul class="collapse">
-  <li><a href="#stilisierter-konjunkturverlauf" id="toc-stilisierter-konjunkturverlauf" class="nav-link" data-scroll-target="#stilisierter-konjunkturverlauf"><span class="header-section-number">3.4.1</span> Stilisierter Konjunkturverlauf</a></li>
-  <li><a href="#probleme-des-stilisierten-konjunktuverlaufs" id="toc-probleme-des-stilisierten-konjunktuverlaufs" class="nav-link" data-scroll-target="#probleme-des-stilisierten-konjunktuverlaufs"><span class="header-section-number">3.4.2</span> Probleme des stilisierten Konjunktuverlaufs</a></li>
-  <li><a href="#der-hodrick-prescott-filter" id="toc-der-hodrick-prescott-filter" class="nav-link" data-scroll-target="#der-hodrick-prescott-filter"><span class="header-section-number">3.4.3</span> Der Hodrick-Prescott-Filter</a></li>
+  <li><a href="#stilisierter-konjunkturverlauf" id="toc-stilisierter-konjunkturverlauf" class="nav-link" data-scroll-target="#stilisierter-konjunkturverlauf"><span class="header-section-number">3.5.1</span> Stilisierter Konjunkturverlauf</a></li>
+  <li><a href="#probleme-des-stilisierten-konjunktuverlaufs" id="toc-probleme-des-stilisierten-konjunktuverlaufs" class="nav-link" data-scroll-target="#probleme-des-stilisierten-konjunktuverlaufs"><span class="header-section-number">3.5.2</span> Probleme des stilisierten Konjunktuverlaufs</a></li>
+  <li><a href="#der-hodrick-prescott-filter" id="toc-der-hodrick-prescott-filter" class="nav-link" data-scroll-target="#der-hodrick-prescott-filter"><span class="header-section-number">3.5.3</span> Der Hodrick-Prescott-Filter</a></li>
   </ul></li>
-  <li><a href="#entwicklung-zentraler-makroökonomischer-größen" id="toc-entwicklung-zentraler-makroökonomischer-größen" class="nav-link" data-scroll-target="#entwicklung-zentraler-makroökonomischer-größen"><span class="header-section-number">3.5</span> Entwicklung zentraler makroökonomischer Größen</a>
+  <li><a href="#entwicklung-zentraler-makroökonomischer-größen" id="toc-entwicklung-zentraler-makroökonomischer-größen" class="nav-link" data-scroll-target="#entwicklung-zentraler-makroökonomischer-größen"><span class="header-section-number">3.6</span> Entwicklung zentraler makroökonomischer Größen</a>
   <ul class="collapse">
-  <li><a href="#beschäftigung" id="toc-beschäftigung" class="nav-link" data-scroll-target="#beschäftigung"><span class="header-section-number">3.5.1</span> Beschäftigung</a></li>
-  <li><a href="#inflation" id="toc-inflation" class="nav-link" data-scroll-target="#inflation"><span class="header-section-number">3.5.2</span> Inflation</a></li>
+  <li><a href="#beschäftigung" id="toc-beschäftigung" class="nav-link" data-scroll-target="#beschäftigung"><span class="header-section-number">3.6.1</span> Beschäftigung</a></li>
+  <li><a href="#inflation" id="toc-inflation" class="nav-link" data-scroll-target="#inflation"><span class="header-section-number">3.6.2</span> Inflation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -629,68 +630,342 @@ window.Quarto = {
 <figcaption>BIP vs.&nbsp;BNE</figcaption>
 </figure>
 </div>
-</section>
-<section id="schwankungen-es-bips-konjunktur" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="schwankungen-es-bips-konjunktur"><span class="header-section-number">3.4</span> Schwankungen es BIPs: Konjunktur</h2>
-<section id="stilisierter-konjunkturverlauf" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="stilisierter-konjunkturverlauf"><span class="header-section-number">3.4.1</span> Stilisierter Konjunkturverlauf</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Data Frame erstellen und Phase + Block-ID ergänzen</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">20</span>, <span class="at">by =</span> <span class="fl">0.2</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sinus =</span> <span class="fu">sin</span>(x),</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">0.35</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fl">0.4</span> <span class="sc">*</span> sinus,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Phase =</span> <span class="fu">case_when</span>(</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>      sinus <span class="sc">&lt;</span> <span class="dv">0</span>  <span class="sc">&amp;</span> <span class="fu">cos</span>(x) <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Erholung"</span>,</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>      sinus <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="fu">cos</span>(x) <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Boom"</span>,</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>      sinus <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="fu">cos</span>(x) <span class="sc">&lt;</span> <span class="dv">0</span>  <span class="sc">~</span> <span class="st">"Abkühlung"</span>,</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>      sinus <span class="sc">&lt;</span> <span class="dv">0</span>  <span class="sc">&amp;</span> <span class="fu">cos</span>(x) <span class="sc">&lt;</span> <span class="dv">0</span>  <span class="sc">~</span> <span class="st">"Rezession"</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Phase =</span> <span class="fu">factor</span>(Phase, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Erholung"</span>, <span class="st">"Boom"</span>, <span class="st">"Abkühlung"</span>, <span class="st">"Rezession"</span>)),</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generiert eine fortlaufende ID pro Phasenblock (verhindert Fehlverbindungen im Ribbon)</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">block_id =</span> <span class="fu">consecutive_id</span>(Phase)</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot mit Hintergrundbändern</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Farblicher Hintergrund über</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">ymin =</span> <span class="fl">0.35</span> <span class="sc">*</span> x, <span class="at">ymax =</span> y, <span class="at">fill =</span> Phase, <span class="at">group =</span> block_id),</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.4</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>)<span class="sc">+</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Trendlinie (gestrichelt)</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fl">0.35</span> <span class="sc">*</span> x), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Konjunkturverlauf (durchgezogen)</span></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Erholung"</span>  <span class="ot">=</span> <span class="st">"yellow"</span>,</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Boom"</span>      <span class="ot">=</span> <span class="st">"green"</span>,</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Abkühlung"</span> <span class="ot">=</span> <span class="st">"orange"</span>,</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Rezession"</span> <span class="ot">=</span> <span class="st">"red"</span></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Achsenbeschriftungen / Breaks entfernen</span></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Stilisierter Konjunkturverlauf"</span>,</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Zeit"</span>,</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"BIP"</span>,</span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Konjunkturphase"</span></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdbnomics)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. AMECO Series-IDs definieren</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># OVGD = Reales BIP (Preise von 2015)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># OVGN = Reales BNE (Preise von 2015)</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>series_ids <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AMECO/OVGD/DEU.1.1.0.0.OVGD"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AMECO/OVGN/DEU.1.1.0.0.OVGN"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AMECO/OVGD/IRL.1.1.0.0.OVGD"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"AMECO/OVGN/IRL.1.1.0.0.OVGN"</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Daten via DBnomics abrufen</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>df_raw <span class="ot">&lt;-</span> <span class="fu">rdb</span>(<span class="at">ids =</span> series_ids)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Aufbereiten und Zuordnen der Variablen</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>df_clean <span class="ot">&lt;-</span> df_raw <span class="sc">%&gt;%</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(value)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(<span class="fu">as.character</span>(period), <span class="dv">1</span>, <span class="dv">4</span>)),</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Land festlegen und Faktoren-Reihenfolge erzwingen (Links: DE, Rechts: IRL)</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">country =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tolower</span>(geo) <span class="sc">==</span> <span class="st">"deu"</span> <span class="sc">~</span> <span class="st">"Deutschland"</span>,</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tolower</span>(geo) <span class="sc">==</span> <span class="st">"irl"</span> <span class="sc">~</span> <span class="st">"Irland"</span>,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">toupper</span>(geo)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">country =</span> <span class="fu">factor</span>(country, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Deutschland"</span>, <span class="st">"Irland"</span>)),</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Indikator identifizieren</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">"OVGD"</span>, series_code) <span class="sc">~</span> <span class="st">"Reales BIP"</span>,</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">"OVGN"</span>, series_code) <span class="sc">~</span> <span class="st">"Reales BNE"</span>,</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Sonstiges"</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country, year, indicator, value) <span class="sc">%&gt;%</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>) <span class="co"># Fokus auf die Entwicklung seit 1990</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Visualisierung mit ggplot2 &amp; facet_wrap</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_clean, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value, <span class="at">color =</span> indicator, <span class="at">linetype =</span> indicator)) <span class="sc">+</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> country, <span class="at">scales =</span> <span class="st">"free_y"</span>, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Reales BIP"</span> <span class="ot">=</span> <span class="st">"#1F78B4"</span>, <span class="st">"Reales BNE"</span> <span class="ot">=</span> <span class="st">"#E31A1C"</span>)</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype_manual</span>(</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Reales BIP"</span> <span class="ot">=</span> <span class="st">"solid"</span>, <span class="st">"Reales BNE"</span> <span class="ot">=</span> <span class="st">"dashed"</span>)</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"Reales BIP vs. Reales BNE im Vergleich (1990–heute)"</span>,</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Starke Entkopplung in Irland durch Primäreinkommensabflüsse multinationaler Konzerne"</span>,</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="cn">NULL</span>,</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="st">"Milliarden Euro (Preise von 2015)"</span>,</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">color    =</span> <span class="cn">NULL</span>,</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="cn">NULL</span>,</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption  =</span> <span class="st">"Daten: AMECO (OVGD / OVGN) via DBnomics. Darstellung Jan S. Voßwinkel"</span></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position  =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text       =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title       =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle    =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"gray30"</span>),</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.spacing    =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"lines"</span>)</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="VGR_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>BIP vs.&nbsp;BNE in Deutschland und Irland</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="marktpreise-vs.-faktorkosten" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="marktpreise-vs.-faktorkosten"><span class="header-section-number">3.4</span> Marktpreise vs.&nbsp;Faktorkosten</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># from IPython.display import display, SVG</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Graphviz-Objekt initialisieren</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>dot <span class="op">=</span> graphviz.Digraph(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'bip_marktpreise_vs_faktorkosten'</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    comment<span class="op">=</span><span class="st">'Marktpreise vs. Faktorkosten in der VGR'</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">'svg'</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Globale Layout-Einstellungen</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>dot.attr(</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    rankdir<span class="op">=</span><span class="st">'TB'</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    fontname<span class="op">=</span><span class="st">'Helvetica, Arial, sans-serif'</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="st">'12'</span>,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    bgcolor<span class="op">=</span><span class="st">'#FFFFFF'</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    nodesep<span class="op">=</span><span class="st">'0.5'</span>,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    ranksep<span class="op">=</span><span class="st">'0.5'</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    compound<span class="op">=</span><span class="st">'true'</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard-Attribute für Knoten</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'node'</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    fontname<span class="op">=</span><span class="st">'Helvetica, Arial, sans-serif'</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="st">'10'</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    shape<span class="op">=</span><span class="st">'box'</span>,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    style<span class="op">=</span><span class="st">'filled,rounded'</span>,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    penwidth<span class="op">=</span><span class="st">'0'</span>,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    margin<span class="op">=</span><span class="st">'0.2,0.15'</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard-Attribute für Verbindungen</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'edge'</span>,</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    fontname<span class="op">=</span><span class="st">'Helvetica, Arial, sans-serif'</span>,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="st">'9'</span>,</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'#475569'</span>,</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    penwidth<span class="op">=</span><span class="st">'1.5'</span>,</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    arrowsize<span class="op">=</span><span class="st">'0.8'</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. STUFE: ENTSTEHUNGSRECHNUNG (Von Faktorkosten zu Marktpreisen)</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>bws_label <span class="op">=</span> <span class="st">'''&lt;</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;table border="0" cellborder="0" cellspacing="0" cellpadding="2"&gt;</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font point-size="11"&gt;&lt;b&gt;Bruttowertschöpfung (BWS)&lt;/b&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font color="#065F46" point-size="9"&gt;zu Herstellungspreisen / Faktorkosten&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;hr/&gt;</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td align="left"&gt;• Reine Wertschöpfung der Wirtschaftssektoren&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td align="left"&gt;• Faktorentlohnung (Arbeit &amp;amp; Kapital) vor staatlichem Eingriff&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/table&gt;&gt;'''</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>tax1_label <span class="op">=</span> <span class="st">'''&lt;</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;table border="0" cellborder="0" cellspacing="0" cellpadding="1"&gt;</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font color="#B91C1C"&gt;&lt;b&gt;+ Gütersteuern&lt;/b&gt; (z. B. MwSt, Mineralölsteuer)&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font color="#065F46"&gt;&lt;b&gt;− Gütersubventionen&lt;/b&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font color="#475569" point-size="9"&gt;= Netto-Gütersteuern (Staatlicher Preiseinfluss)&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/table&gt;&gt;'''</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>bip_mp_label <span class="op">=</span> <span class="st">'''&lt;</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;table border="0" cellborder="0" cellspacing="0" cellpadding="2"&gt;</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font point-size="12"&gt;&lt;b&gt;Bruttoinlandsprodukt (BIP zu Marktpreisen)&lt;/b&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font color="#1E40AF" point-size="9"&gt;Markt- &amp;amp; Nachfrageperspektive&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;hr/&gt;</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td align="left"&gt;• Erfasst die von Käufern tatsächlich gezahlten Preise&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td align="left"&gt;• Inklusive indirekter Steuern und abzüglich Subventionen&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/table&gt;&gt;'''</span></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'BWS'</span>, label<span class="op">=</span>bws_label, fillcolor<span class="op">=</span><span class="st">'#D1FAE5'</span>, fontcolor<span class="op">=</span><span class="st">'#065F46'</span>)</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'TAX1'</span>, label<span class="op">=</span>tax1_label, fillcolor<span class="op">=</span><span class="st">'#FEE2E2'</span>, fontcolor<span class="op">=</span><span class="st">'#991B1B'</span>)</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'BIP_MP'</span>, label<span class="op">=</span>bip_mp_label, fillcolor<span class="op">=</span><span class="st">'#DBEAFE'</span>, fontcolor<span class="op">=</span><span class="st">'#1E40AF'</span>)</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. ÜBERLEITUNG INLANDS- ZU INLÄNDER- UND NETTOKONZEPT</span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>trans_label <span class="op">=</span> <span class="st">'''&lt;</span></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;table border="0" cellborder="0" cellspacing="0" cellpadding="1"&gt;</span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font color="#475569"&gt;&lt;b&gt;+ Saldo der Primäreinkommen aus der übrigen Welt&lt;/b&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font color="#475569"&gt;&lt;b&gt;− Abschreibungen&lt;/b&gt; (Kapitalverschleiß)&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/table&gt;&gt;'''</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>nne_mp_label <span class="op">=</span> <span class="st">'''&lt;</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;table border="0" cellborder="0" cellspacing="0" cellpadding="2"&gt;</span></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font point-size="11"&gt;&lt;b&gt;Nettonationaleinkommen (NNE zu Marktpreisen)&lt;/b&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font color="#1E40AF" point-size="9"&gt;Inländerkonzept zu Marktpreisen&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/table&gt;&gt;'''</span></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'TRANS'</span>, label<span class="op">=</span>trans_label, fillcolor<span class="op">=</span><span class="st">'#F1F5F9'</span>, fontcolor<span class="op">=</span><span class="st">'#334155'</span>)</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'NNE_MP'</span>, label<span class="op">=</span>nne_mp_label, fillcolor<span class="op">=</span><span class="st">'#DBEAFE'</span>, fontcolor<span class="op">=</span><span class="st">'#1E40AF'</span>)</span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. STUFE: VERTEILUNGSRECHNUNG (Rückkehr zu Faktorkosten = Volkseinkommen)</span></span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>tax2_label <span class="op">=</span> <span class="st">'''&lt;</span></span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;table border="0" cellborder="0" cellspacing="0" cellpadding="1"&gt;</span></span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font color="#B91C1C"&gt;&lt;b&gt;− Produktions- und Importabgaben an den Staat&lt;/b&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font color="#065F46"&gt;&lt;b&gt;+ Vom Staat gezahlte Subventionen&lt;/b&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font color="#475569" point-size="9"&gt;= Bereinigung um indirekte staatliche Umverteilung&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/table&gt;&gt;'''</span></span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>ve_label <span class="op">=</span> <span class="st">'''&lt;</span></span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;table border="0" cellborder="0" cellspacing="0" cellpadding="2"&gt;</span></span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font point-size="12"&gt;&lt;b&gt;Volkseinkommen (NNE zu Faktorkosten)&lt;/b&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;font color="#92400E" point-size="9"&gt;Reines Faktoreinkommen der Inländer&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;hr/&gt;</span></span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td align="left"&gt;• Summe aus Arbeitnehmerentgelt &amp;amp; Unternehmens-/Vermögenseinkommen&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td align="left"&gt;• Tatsächliche Vergütung für die Produktionsfaktoren Arbeit &amp;amp; Kapital&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/table&gt;&gt;'''</span></span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'TAX2'</span>, label<span class="op">=</span>tax2_label, fillcolor<span class="op">=</span><span class="st">'#FEE2E2'</span>, fontcolor<span class="op">=</span><span class="st">'#991B1B'</span>)</span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'VE'</span>, label<span class="op">=</span>ve_label, fillcolor<span class="op">=</span><span class="st">'#FEF3C7'</span>, fontcolor<span class="op">=</span><span class="st">'#92400E'</span>)</span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. ANALYTISCHER ZWECK (SEITLICHE INFO-BOXEN)</span></span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a>purpose_mp <span class="op">=</span> <span class="st">'''&lt;</span></span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;table border="0" cellborder="0" cellspacing="0" cellpadding="2"&gt;</span></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;b&gt;Ziel: Marktpreise&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;hr/&gt;</span></span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td align="left"&gt;• Abbildung der tatsächlichen Kaufkraft&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td align="left"&gt;• Relevante Ausgabengröße der Nachfrager&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/table&gt;&gt;'''</span></span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a>purpose_fk <span class="op">=</span> <span class="st">'''&lt;</span></span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;table border="0" cellborder="0" cellspacing="0" cellpadding="2"&gt;</span></span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td&gt;&lt;b&gt;Ziel: Faktorkosten&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;hr/&gt;</span></span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td align="left"&gt;• Eliminierung verzerrender Staatseinflüsse&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;tr&gt;&lt;td align="left"&gt;• Unverzerrter Maßstab für Leistungskraft &amp;amp; Verteilung&lt;/td&gt;&lt;/tr&gt;</span></span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/table&gt;&gt;'''</span></span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'PURPOSE_MP'</span>, label<span class="op">=</span>purpose_mp, fillcolor<span class="op">=</span><span class="st">'#EFF6FF'</span>, fontcolor<span class="op">=</span><span class="st">'#1D4ED8'</span>)</span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'PURPOSE_FK'</span>, label<span class="op">=</span>purpose_fk, fillcolor<span class="op">=</span><span class="st">'#ECFDF5'</span>, fontcolor<span class="op">=</span><span class="st">'#047857'</span>)</span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. VERBINDUNGEN (VERLAUF)</span></span>
+<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a><span class="co"># Hauptpfad</span></span>
+<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'BWS'</span>, <span class="st">'TAX1'</span>)</span>
+<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'TAX1'</span>, <span class="st">'BIP_MP'</span>)</span>
+<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'BIP_MP'</span>, <span class="st">'TRANS'</span>)</span>
+<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'TRANS'</span>, <span class="st">'NNE_MP'</span>)</span>
+<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'NNE_MP'</span>, <span class="st">'TAX2'</span>)</span>
+<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'TAX2'</span>, <span class="st">'VE'</span>)</span>
+<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a><span class="co"># Zuordnung zu den Info-Boxen (gestrichelt)</span></span>
+<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'BIP_MP'</span>, <span class="st">'PURPOSE_MP'</span>, style<span class="op">=</span><span class="st">'dashed'</span>, color<span class="op">=</span><span class="st">'#93C5FD'</span>, constraint<span class="op">=</span><span class="st">'false'</span>)</span>
+<span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'VE'</span>, <span class="st">'PURPOSE_FK'</span>, style<span class="op">=</span><span class="st">'dashed'</span>, color<span class="op">=</span><span class="st">'#6EE7B7'</span>, constraint<span class="op">=</span><span class="st">'false'</span>)</span>
+<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-155"><a href="#cb6-155" aria-hidden="true" tabindex="-1"></a><span class="co"># Rang-Ausrichtungen für ein ausgewogenes Layout</span></span>
+<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> dot.subgraph() <span class="im">as</span> s:</span>
+<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a>    s.attr(rank<span class="op">=</span><span class="st">'same'</span>)</span>
+<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'BIP_MP'</span>)</span>
+<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'PURPOSE_MP'</span>)</span>
+<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> dot.subgraph() <span class="im">as</span> s:</span>
+<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a>    s.attr(rank<span class="op">=</span><span class="st">'same'</span>)</span>
+<span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'VE'</span>)</span>
+<span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'PURPOSE_FK'</span>)</span>
+<span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-166"><a href="#cb6-166" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb6-167"><a href="#cb6-167" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. SPEICHERN (SVG) UND DISPLAY (IPython)</span></span>
+<span id="cb6-168"><a href="#cb6-168" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb6-169"><a href="#cb6-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-170"><a href="#cb6-170" aria-hidden="true" tabindex="-1"></a>output_file <span class="op">=</span> dot.render(filename<span class="op">=</span><span class="st">'bip_marktpreise_vs_faktorkosten'</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'svg'</span>, cleanup<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-171"><a href="#cb6-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-172"><a href="#cb6-172" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"SVG-Datei erfolgreich gespeichert unter: </span><span class="sc">{</span>output_file<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Anzeige im Jupyter Notebook / IPython</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># display(SVG(filename=output_file))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bip_marktpreise_vs_faktorkosten.svg" class="img-fluid figure-img"></p>
+<figcaption>Marktpreise vs Faktorkosten</figcaption>
+</figure>
+</div>
+</section>
+<section id="schwankungen-es-bips-konjunktur" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="schwankungen-es-bips-konjunktur"><span class="header-section-number">3.5</span> Schwankungen es BIPs: Konjunktur</h2>
+<section id="stilisierter-konjunkturverlauf" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="stilisierter-konjunkturverlauf"><span class="header-section-number">3.5.1</span> Stilisierter Konjunkturverlauf</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Data Frame erstellen und Phase + Block-ID ergänzen</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">20</span>, <span class="at">by =</span> <span class="fl">0.2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sinus =</span> <span class="fu">sin</span>(x),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">0.35</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fl">0.4</span> <span class="sc">*</span> sinus,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Phase =</span> <span class="fu">case_when</span>(</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>      sinus <span class="sc">&lt;</span> <span class="dv">0</span>  <span class="sc">&amp;</span> <span class="fu">cos</span>(x) <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Erholung"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>      sinus <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="fu">cos</span>(x) <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Boom"</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>      sinus <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="fu">cos</span>(x) <span class="sc">&lt;</span> <span class="dv">0</span>  <span class="sc">~</span> <span class="st">"Abkühlung"</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>      sinus <span class="sc">&lt;</span> <span class="dv">0</span>  <span class="sc">&amp;</span> <span class="fu">cos</span>(x) <span class="sc">&lt;</span> <span class="dv">0</span>  <span class="sc">~</span> <span class="st">"Rezession"</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Phase =</span> <span class="fu">factor</span>(Phase, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Erholung"</span>, <span class="st">"Boom"</span>, <span class="st">"Abkühlung"</span>, <span class="st">"Rezession"</span>)),</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generiert eine fortlaufende ID pro Phasenblock (verhindert Fehlverbindungen im Ribbon)</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">block_id =</span> <span class="fu">consecutive_id</span>(Phase)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot mit Hintergrundbändern</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Farblicher Hintergrund über</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">ymin =</span> <span class="fl">0.35</span> <span class="sc">*</span> x, <span class="at">ymax =</span> y, <span class="at">fill =</span> Phase, <span class="at">group =</span> block_id),</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.4</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>)<span class="sc">+</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Trendlinie (gestrichelt)</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fl">0.35</span> <span class="sc">*</span> x), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Konjunkturverlauf (durchgezogen)</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Erholung"</span>  <span class="ot">=</span> <span class="st">"yellow"</span>,</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Boom"</span>      <span class="ot">=</span> <span class="st">"green"</span>,</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Abkühlung"</span> <span class="ot">=</span> <span class="st">"orange"</span>,</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Rezession"</span> <span class="ot">=</span> <span class="st">"red"</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Achsenbeschriftungen / Breaks entfernen</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Stilisierter Konjunkturverlauf"</span>,</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Zeit"</span>,</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"BIP"</span>,</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Konjunkturphase"</span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="VGR_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Stilisierter Konjunkturverlauf</figcaption>
 </figure>
 </div>
@@ -699,88 +974,88 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, SVG</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Digraph mit der 'circo'-Engine für eine automatische kreisförmige Anordnung</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>dot <span class="op">=</span> graphviz.Digraph(</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'konjunkturzyklus'</span>,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    comment<span class="op">=</span><span class="st">'Vier Phasen des Konjunkturzyklus'</span>,</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    engine<span class="op">=</span><span class="st">'circo'</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Globale Layout- und Stileinstellungen</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>dot.attr(</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    bgcolor<span class="op">=</span><span class="st">'white'</span>,</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'Idealtypischer Konjunkturzyklus</span><span class="ch">\n</span><span class="st"> '</span>,</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    labelloc<span class="op">=</span><span class="st">'t'</span>,</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    fontname<span class="op">=</span><span class="st">'Helvetica-Bold'</span>,</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="st">'14'</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'node'</span>,</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    shape<span class="op">=</span><span class="st">'box'</span>,</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    style<span class="op">=</span><span class="st">'filled,rounded'</span>,</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    fontname<span class="op">=</span><span class="st">'Helvetica'</span>,</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="st">'10'</span>,</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    margin<span class="op">=</span><span class="st">'0.2,0.15'</span>,</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    penwidth<span class="op">=</span><span class="st">'1.5'</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'edge'</span>,</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    fontname<span class="op">=</span><span class="st">'Helvetica'</span>,</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="st">'9'</span>,</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    penwidth<span class="op">=</span><span class="st">'1.5'</span>,</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    arrowsize<span class="op">=</span><span class="st">'0.8'</span>,</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'#424242'</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Aufschwung / Erholung</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'aufschwung'</span>,</span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'1. Aufschwung / Erholung</span><span class="ch">\n\n</span><span class="st">• Anziehende Nachfrage</span><span class="ch">\n</span><span class="st">• Steigende Auslastung</span><span class="ch">\n</span><span class="st">• Stellenaufbau &amp; Abbau von Unterkapazitäten'</span>,</span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    fillcolor<span class="op">=</span><span class="st">'#E8F5E9'</span>,</span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'#2E7D32'</span>,</span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    fontcolor<span class="op">=</span><span class="st">'#1B5E20'</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Hochkonjunktur / Boom</span></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'boom'</span>,</span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'2. Hochkonjunktur / Boom</span><span class="ch">\n\n</span><span class="st">• Überauslastung des Potenzials</span><span class="ch">\n</span><span class="st">• Kapazitätsengpässe &amp; Überstunden</span><span class="ch">\n</span><span class="st">• Verstärkter Inflationsdruck'</span>,</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    fillcolor<span class="op">=</span><span class="st">'#FFF3E0'</span>,</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'#E65100'</span>,</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    fontcolor<span class="op">=</span><span class="st">'#BF360C'</span></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Abschwung / Abkühlung</span></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'abschwung'</span>,</span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'3. Abschwung / Abkühlung</span><span class="ch">\n\n</span><span class="st">• Nachlassendes Nachfragewachstum</span><span class="ch">\n</span><span class="st">• Investitionsrückgang</span><span class="ch">\n</span><span class="st">• Nachlassender Preisdruck'</span>,</span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>    fillcolor<span class="op">=</span><span class="st">'#ECEFF1'</span>,</span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'#546E7A'</span>,</span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>    fontcolor<span class="op">=</span><span class="st">'#263238'</span></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Konjunkturtief / Rezession</span></span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'tief'</span>,</span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'4. Konjunkturtief / Rezession</span><span class="ch">\n\n</span><span class="st">• Deutliche Unterauslastung</span><span class="ch">\n</span><span class="st">• Steigende Arbeitslosigkeit &amp; Insolvenzen</span><span class="ch">\n</span><span class="st">• Geringer Preisdruck / Deflationstendenzen'</span>,</span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>    fillcolor<span class="op">=</span><span class="st">'#FFEBEE'</span>,</span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'#C62828'</span>,</span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>    fontcolor<span class="op">=</span><span class="st">'#880E4F'</span></span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Phasenübergänge (gerichteter Kanten-Zyklus)</span></span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'aufschwung'</span>, <span class="st">'boom'</span>, label<span class="op">=</span><span class="st">' Beschleunigung'</span>)</span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'boom'</span>, <span class="st">'abschwung'</span>, label<span class="op">=</span><span class="st">' Wendepunkt (Hochpunkt)'</span>)</span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'abschwung'</span>, <span class="st">'tief'</span>, label<span class="op">=</span><span class="st">' Unterschreiten d. Potenzials'</span>)</span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'tief'</span>, <span class="st">'aufschwung'</span>, label<span class="op">=</span><span class="st">' Impulse / Marktmechanismen'</span>)</span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Als SVG-Datei speichern ('konjunkturzyklus.svg')</span></span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>dot.render(<span class="st">'konjunkturzyklus'</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'svg'</span>, cleanup<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, SVG</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Digraph mit der 'circo'-Engine für eine automatische kreisförmige Anordnung</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>dot <span class="op">=</span> graphviz.Digraph(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'konjunkturzyklus'</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    comment<span class="op">=</span><span class="st">'Vier Phasen des Konjunkturzyklus'</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    engine<span class="op">=</span><span class="st">'circo'</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Globale Layout- und Stileinstellungen</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>dot.attr(</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    bgcolor<span class="op">=</span><span class="st">'white'</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'Idealtypischer Konjunkturzyklus</span><span class="ch">\n</span><span class="st"> '</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    labelloc<span class="op">=</span><span class="st">'t'</span>,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    fontname<span class="op">=</span><span class="st">'Helvetica-Bold'</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="st">'14'</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'node'</span>,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    shape<span class="op">=</span><span class="st">'box'</span>,</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    style<span class="op">=</span><span class="st">'filled,rounded'</span>,</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    fontname<span class="op">=</span><span class="st">'Helvetica'</span>,</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="st">'10'</span>,</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    margin<span class="op">=</span><span class="st">'0.2,0.15'</span>,</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    penwidth<span class="op">=</span><span class="st">'1.5'</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'edge'</span>,</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    fontname<span class="op">=</span><span class="st">'Helvetica'</span>,</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="st">'9'</span>,</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    penwidth<span class="op">=</span><span class="st">'1.5'</span>,</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    arrowsize<span class="op">=</span><span class="st">'0.8'</span>,</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'#424242'</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Aufschwung / Erholung</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'aufschwung'</span>,</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'1. Aufschwung / Erholung</span><span class="ch">\n\n</span><span class="st">• Anziehende Nachfrage</span><span class="ch">\n</span><span class="st">• Steigende Auslastung</span><span class="ch">\n</span><span class="st">• Stellenaufbau &amp; Abbau von Unterkapazitäten'</span>,</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    fillcolor<span class="op">=</span><span class="st">'#E8F5E9'</span>,</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'#2E7D32'</span>,</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    fontcolor<span class="op">=</span><span class="st">'#1B5E20'</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Hochkonjunktur / Boom</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'boom'</span>,</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'2. Hochkonjunktur / Boom</span><span class="ch">\n\n</span><span class="st">• Überauslastung des Potenzials</span><span class="ch">\n</span><span class="st">• Kapazitätsengpässe &amp; Überstunden</span><span class="ch">\n</span><span class="st">• Verstärkter Inflationsdruck'</span>,</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>    fillcolor<span class="op">=</span><span class="st">'#FFF3E0'</span>,</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'#E65100'</span>,</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>    fontcolor<span class="op">=</span><span class="st">'#BF360C'</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Abschwung / Abkühlung</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'abschwung'</span>,</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'3. Abschwung / Abkühlung</span><span class="ch">\n\n</span><span class="st">• Nachlassendes Nachfragewachstum</span><span class="ch">\n</span><span class="st">• Investitionsrückgang</span><span class="ch">\n</span><span class="st">• Nachlassender Preisdruck'</span>,</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>    fillcolor<span class="op">=</span><span class="st">'#ECEFF1'</span>,</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'#546E7A'</span>,</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>    fontcolor<span class="op">=</span><span class="st">'#263238'</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Konjunkturtief / Rezession</span></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'tief'</span>,</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'4. Konjunkturtief / Rezession</span><span class="ch">\n\n</span><span class="st">• Deutliche Unterauslastung</span><span class="ch">\n</span><span class="st">• Steigende Arbeitslosigkeit &amp; Insolvenzen</span><span class="ch">\n</span><span class="st">• Geringer Preisdruck / Deflationstendenzen'</span>,</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>    fillcolor<span class="op">=</span><span class="st">'#FFEBEE'</span>,</span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'#C62828'</span>,</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>    fontcolor<span class="op">=</span><span class="st">'#880E4F'</span></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Phasenübergänge (gerichteter Kanten-Zyklus)</span></span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'aufschwung'</span>, <span class="st">'boom'</span>, label<span class="op">=</span><span class="st">' Beschleunigung'</span>)</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'boom'</span>, <span class="st">'abschwung'</span>, label<span class="op">=</span><span class="st">' Wendepunkt (Hochpunkt)'</span>)</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'abschwung'</span>, <span class="st">'tief'</span>, label<span class="op">=</span><span class="st">' Unterschreiten d. Potenzials'</span>)</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'tief'</span>, <span class="st">'aufschwung'</span>, label<span class="op">=</span><span class="st">' Impulse / Marktmechanismen'</span>)</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Als SVG-Datei speichern ('konjunkturzyklus.svg')</span></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>dot.render(<span class="st">'konjunkturzyklus'</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'svg'</span>, cleanup<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Direkt in IPython / Jupyter Notebook rendern</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#display(SVG(filename='konjunkturzyklus.svg'))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Direkt in IPython / Jupyter Notebook rendern</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#display(SVG(filename='konjunkturzyklus.svg'))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="quarto-figure quarto-figure-center">
@@ -790,8 +1065,8 @@ window.Quarto = {
 </figure>
 </div>
 </section>
-<section id="probleme-des-stilisierten-konjunktuverlaufs" class="level3" data-number="3.4.2">
-<h3 data-number="3.4.2" class="anchored" data-anchor-id="probleme-des-stilisierten-konjunktuverlaufs"><span class="header-section-number">3.4.2</span> Probleme des stilisierten Konjunktuverlaufs</h3>
+<section id="probleme-des-stilisierten-konjunktuverlaufs" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="probleme-des-stilisierten-konjunktuverlaufs"><span class="header-section-number">3.5.2</span> Probleme des stilisierten Konjunktuverlaufs</h3>
 <ul>
 <li><p>Empirische Konjunkturverläufe sind nicht so schön symmetrisch</p></li>
 <li><p>Was ist der Trend? Er ist nicht (direkt) beobachtbar</p>
@@ -804,8 +1079,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="der-hodrick-prescott-filter" class="level3" data-number="3.4.3">
-<h3 data-number="3.4.3" class="anchored" data-anchor-id="der-hodrick-prescott-filter"><span class="header-section-number">3.4.3</span> Der Hodrick-Prescott-Filter</h3>
+<section id="der-hodrick-prescott-filter" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="der-hodrick-prescott-filter"><span class="header-section-number">3.5.3</span> Der Hodrick-Prescott-Filter</h3>
 <p><span class="math display">\[HP= min_{T_t} \left( \sum_{t=1}^{N} (Y_t - T_t)^2 + \lambda \sum_{t=2}^{N-1} ((T_{t+1} - T_t) - (T_t - T_{t-1}))^2 \right)\]</span> Die Gleichung hat zwei Komponenten</p>
 <ul>
 <li><p><strong>Anpassungsgüte</strong> (<span class="math inline">\(\sum (Y_t - T_t)^2\)</span>): Der erste Teil der Gleichung bestraft die Abweichung des Trends (<span class="math inline">\(T_t\)</span>) von der ursprünglichen Zeitreihe (<span class="math inline">\(Y_t\)</span>). Je größer die Abweichungen, desto größer ist dieser Term. Dies stellt sicher, dass der Trend den Daten “folgt”.</p></li>
@@ -814,152 +1089,152 @@ window.Quarto = {
 <p>Wahl von <span class="math inline">\(\lambda\)</span>: Für Jahresdaten sind Werte wie 6,25 oder 100 üblich.</p>
 </section>
 </section>
-<section id="entwicklung-zentraler-makroökonomischer-größen" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="entwicklung-zentraler-makroökonomischer-größen"><span class="header-section-number">3.5</span> Entwicklung zentraler makroökonomischer Größen</h2>
+<section id="entwicklung-zentraler-makroökonomischer-größen" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="entwicklung-zentraler-makroökonomischer-größen"><span class="header-section-number">3.6</span> Entwicklung zentraler makroökonomischer Größen</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdbnomics)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"Lade reales BIP pro Kopf der G7-Staaten via DBnomics (Weltbank)..."</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>g7_countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"CAN"</span>, <span class="st">"FRA"</span>, <span class="st">"DEU"</span>, <span class="st">"ITA"</span>, <span class="st">"JPN"</span>, <span class="st">"GBR"</span>, <span class="st">"USA"</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>df_gdp_pc <span class="ot">&lt;-</span> <span class="fu">rdb</span>(</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_code =</span> <span class="st">"WB"</span>,</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataset_code  =</span> <span class="st">"WDI"</span>,</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">dimensions    =</span> <span class="fu">list</span>(</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">country   =</span> g7_countries,</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="st">"NY.GDP.PCAP.KD"</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>country_names <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CAN"</span> <span class="ot">=</span> <span class="st">"Kanada"</span>,</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"FRA"</span> <span class="ot">=</span> <span class="st">"Frankreich"</span>,</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"DEU"</span> <span class="ot">=</span> <span class="st">"Deutschland"</span>,</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ITA"</span> <span class="ot">=</span> <span class="st">"Italien"</span>,</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"JPN"</span> <span class="ot">=</span> <span class="st">"Japan"</span>,</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GBR"</span> <span class="ot">=</span> <span class="st">"Großbritannien"</span>,</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"USA"</span> <span class="ot">=</span> <span class="st">"USA"</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>gdp_pc_clean <span class="ot">&lt;-</span> df_gdp_pc <span class="sc">%&gt;%</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">country_code =</span> <span class="fu">toupper</span>(country)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">country_label =</span> country_names[country_code]) <span class="sc">%&gt;%</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(<span class="fu">as.character</span>(period), <span class="dv">1</span>, <span class="dv">4</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">country =</span> country_label, year, <span class="at">gdp_pc =</span> value) <span class="sc">%&gt;%</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(gdp_pc) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(country)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>)</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gdp_pc_clean, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdp_pc, <span class="at">color =</span> country)) <span class="sc">+</span></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>, <span class="at">name =</span> <span class="st">"Land"</span>) <span class="sc">+</span></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="co">#limits = c(0, NA),</span></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">dollar_format</span>(<span class="at">suffix =</span> <span class="st">" USD"</span>, <span class="at">prefix =</span> <span class="st">""</span>), <span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">pretty_breaks</span>(<span class="at">n =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"Reales BIP pro Kopf in den G7-Staaten"</span>,</span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"In konstanten US-Dollar (Basisjahr 2015), ab 1990"</span>,</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"Jahr"</span>,</span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="st">"Reales BIP pro Kopf (USD)"</span>,</span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption  =</span> <span class="st">"Datenquelle: Weltbank (WDI) / Indikator NY.GDP.PCAP.KD via DBnomics"</span></span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a> <span class="co">#   plot.title      = element_text(face = "bold"),</span></span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>)</span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdbnomics)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"Lade reales BIP pro Kopf der G7-Staaten via DBnomics (Weltbank)..."</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>g7_countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"CAN"</span>, <span class="st">"FRA"</span>, <span class="st">"DEU"</span>, <span class="st">"ITA"</span>, <span class="st">"JPN"</span>, <span class="st">"GBR"</span>, <span class="st">"USA"</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>df_gdp_pc <span class="ot">&lt;-</span> <span class="fu">rdb</span>(</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_code =</span> <span class="st">"WB"</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataset_code  =</span> <span class="st">"WDI"</span>,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">dimensions    =</span> <span class="fu">list</span>(</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">country   =</span> g7_countries,</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="st">"NY.GDP.PCAP.KD"</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>country_names <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CAN"</span> <span class="ot">=</span> <span class="st">"Kanada"</span>,</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"FRA"</span> <span class="ot">=</span> <span class="st">"Frankreich"</span>,</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"DEU"</span> <span class="ot">=</span> <span class="st">"Deutschland"</span>,</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ITA"</span> <span class="ot">=</span> <span class="st">"Italien"</span>,</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"JPN"</span> <span class="ot">=</span> <span class="st">"Japan"</span>,</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GBR"</span> <span class="ot">=</span> <span class="st">"Großbritannien"</span>,</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"USA"</span> <span class="ot">=</span> <span class="st">"USA"</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>gdp_pc_clean <span class="ot">&lt;-</span> df_gdp_pc <span class="sc">%&gt;%</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">country_code =</span> <span class="fu">toupper</span>(country)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">country_label =</span> country_names[country_code]) <span class="sc">%&gt;%</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(<span class="fu">as.character</span>(period), <span class="dv">1</span>, <span class="dv">4</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">country =</span> country_label, year, <span class="at">gdp_pc =</span> value) <span class="sc">%&gt;%</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(gdp_pc) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(country)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>)</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gdp_pc_clean, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> gdp_pc, <span class="at">color =</span> country)) <span class="sc">+</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>, <span class="at">name =</span> <span class="st">"Land"</span>) <span class="sc">+</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="co">#limits = c(0, NA),</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">dollar_format</span>(<span class="at">suffix =</span> <span class="st">" USD"</span>, <span class="at">prefix =</span> <span class="st">""</span>), <span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">pretty_breaks</span>(<span class="at">n =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"Reales BIP pro Kopf in den G7-Staaten"</span>,</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"In konstanten US-Dollar (Basisjahr 2015), ab 1990"</span>,</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"Jahr"</span>,</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="st">"Reales BIP pro Kopf (USD)"</span>,</span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption  =</span> <span class="st">"Datenquelle: Weltbank (WDI) / Indikator NY.GDP.PCAP.KD via DBnomics"</span></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a> <span class="co">#   plot.title      = element_text(face = "bold"),</span></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>)</span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="VGR_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="VGR_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="beschäftigung" class="level3" data-number="3.5.1">
-<h3 data-number="3.5.1" class="anchored" data-anchor-id="beschäftigung"><span class="header-section-number">3.5.1</span> Beschäftigung</h3>
+<section id="beschäftigung" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="beschäftigung"><span class="header-section-number">3.6.1</span> Beschäftigung</h3>
 </section>
-<section id="inflation" class="level3" data-number="3.5.2">
-<h3 data-number="3.5.2" class="anchored" data-anchor-id="inflation"><span class="header-section-number">3.5.2</span> Inflation</h3>
+<section id="inflation" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="inflation"><span class="header-section-number">3.6.2</span> Inflation</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdbnomics)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"Lade Inflationsraten der G7-Staaten via DBnomics (Weltbank)..."</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Länderliste (ISO3-Codes) für G7</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>g7_countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"CAN"</span>, <span class="st">"FRA"</span>, <span class="st">"DEU"</span>, <span class="st">"ITA"</span>, <span class="st">"JPN"</span>, <span class="st">"GBR"</span>, <span class="st">"USA"</span>)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Datenabruf über die Weltbank (WB)</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># FP.CPI.TOTL.ZG = Inflation, consumer prices (annual %)</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>df_inflation <span class="ot">&lt;-</span> <span class="fu">rdb</span>(</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_code =</span> <span class="st">"WB"</span>,</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataset_code  =</span> <span class="st">"WDI"</span>,</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">dimensions    =</span> <span class="fu">list</span>(</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">country   =</span> g7_countries,</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="st">"FP.CPI.TOTL.ZG"</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Ländernamen für die Beschriftung</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>country_names <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CAN"</span> <span class="ot">=</span> <span class="st">"Kanada"</span>,</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"FRA"</span> <span class="ot">=</span> <span class="st">"Frankreich"</span>,</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"DEU"</span> <span class="ot">=</span> <span class="st">"Deutschland"</span>,</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ITA"</span> <span class="ot">=</span> <span class="st">"Italien"</span>,</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"JPN"</span> <span class="ot">=</span> <span class="st">"Japan"</span>,</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GBR"</span> <span class="ot">=</span> <span class="st">"Großbritannien"</span>,</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"USA"</span> <span class="ot">=</span> <span class="st">"USA"</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Daten aufbereiten</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>inflation_clean <span class="ot">&lt;-</span> df_inflation <span class="sc">%&gt;%</span></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">country_code =</span> <span class="fu">toupper</span>(country)) <span class="sc">%&gt;%</span></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">country_label =</span> country_names[country_code]) <span class="sc">%&gt;%</span></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(<span class="fu">as.character</span>(period), <span class="dv">1</span>, <span class="dv">4</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Relevante Spalten auswählen und sauber benennen</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">country =</span> country_label, year, <span class="at">inflation_rate =</span> value) <span class="sc">%&gt;%</span></span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Unvollständige Daten filtern</span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(inflation_rate) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(country)) <span class="sc">%&gt;%</span></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Zeitreihe ab 1990 filtern</span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>)</span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Zeitreihenplot erstellen</span></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(inflation_clean, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> inflation_rate, <span class="at">color =</span> country)) <span class="sc">+</span></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Null-Linie hilft, Deflationsphasen (z.B. in Japan) sofort zu erkennen</span></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>, <span class="at">name =</span> <span class="st">"Land"</span>) <span class="sc">+</span></span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Y-Achse zentriert bei 0 beginnen zu lassen ist bei Inflation schwer, da es negative Werte gibt</span></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">pretty_breaks</span>(<span class="at">n =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"Inflationsrate in den G7-Staaten"</span>,</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Veränderung des Verbraucherpreisindex zum Vorjahr in %, ab 1990"</span>,</span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"Jahr"</span>,</span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="st">"Inflationsrate (%)"</span>,</span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption  =</span> <span class="st">"Datenquelle: Weltbank (WDI) via DBnomics"</span></span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title      =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>)</span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdbnomics)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">message</span>(<span class="st">"Lade Inflationsraten der G7-Staaten via DBnomics (Weltbank)..."</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Länderliste (ISO3-Codes) für G7</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>g7_countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"CAN"</span>, <span class="st">"FRA"</span>, <span class="st">"DEU"</span>, <span class="st">"ITA"</span>, <span class="st">"JPN"</span>, <span class="st">"GBR"</span>, <span class="st">"USA"</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Datenabruf über die Weltbank (WB)</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># FP.CPI.TOTL.ZG = Inflation, consumer prices (annual %)</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>df_inflation <span class="ot">&lt;-</span> <span class="fu">rdb</span>(</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_code =</span> <span class="st">"WB"</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataset_code  =</span> <span class="st">"WDI"</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">dimensions    =</span> <span class="fu">list</span>(</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">country   =</span> g7_countries,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">indicator =</span> <span class="st">"FP.CPI.TOTL.ZG"</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Ländernamen für die Beschriftung</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>country_names <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CAN"</span> <span class="ot">=</span> <span class="st">"Kanada"</span>,</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"FRA"</span> <span class="ot">=</span> <span class="st">"Frankreich"</span>,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"DEU"</span> <span class="ot">=</span> <span class="st">"Deutschland"</span>,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ITA"</span> <span class="ot">=</span> <span class="st">"Italien"</span>,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"JPN"</span> <span class="ot">=</span> <span class="st">"Japan"</span>,</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GBR"</span> <span class="ot">=</span> <span class="st">"Großbritannien"</span>,</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"USA"</span> <span class="ot">=</span> <span class="st">"USA"</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Daten aufbereiten</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>inflation_clean <span class="ot">&lt;-</span> df_inflation <span class="sc">%&gt;%</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">country_code =</span> <span class="fu">toupper</span>(country)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">country_label =</span> country_names[country_code]) <span class="sc">%&gt;%</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(<span class="fu">as.character</span>(period), <span class="dv">1</span>, <span class="dv">4</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Relevante Spalten auswählen und sauber benennen</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">country =</span> country_label, year, <span class="at">inflation_rate =</span> value) <span class="sc">%&gt;%</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Unvollständige Daten filtern</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(inflation_rate) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(country)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Zeitreihe ab 1990 filtern</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1990</span>)</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Zeitreihenplot erstellen</span></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(inflation_clean, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> inflation_rate, <span class="at">color =</span> country)) <span class="sc">+</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Null-Linie hilft, Deflationsphasen (z.B. in Japan) sofort zu erkennen</span></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>, <span class="at">name =</span> <span class="st">"Land"</span>) <span class="sc">+</span></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Y-Achse zentriert bei 0 beginnen zu lassen ist bei Inflation schwer, da es negative Werte gibt</span></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">pretty_breaks</span>(<span class="at">n =</span> <span class="dv">8</span>)) <span class="sc">+</span></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"Inflationsrate in den G7-Staaten"</span>,</span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Veränderung des Verbraucherpreisindex zum Vorjahr in %, ab 1990"</span>,</span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">x        =</span> <span class="st">"Jahr"</span>,</span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">y        =</span> <span class="st">"Inflationsrate (%)"</span>,</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption  =</span> <span class="st">"Datenquelle: Weltbank (WDI) via DBnomics"</span></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title      =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title    =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>)</span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="VGR_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="VGR_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -967,8 +1242,8 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Paket 'kableExtra' wurde unter R Version 4.3.3 erstellt</code></pre>
@@ -984,24 +1259,24 @@ Attache Paket: 'kableExtra'</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data Frame erstellen</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>bip_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Berechnungsmethode =</span> <span class="fu">c</span>(<span class="st">"Entstehungsrechnung"</span>, <span class="st">"Verwendungsrechnung"</span>, <span class="st">"Verteilungsrechnung"</span>),</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Blickwinkel / Perspektive</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Produktion:</span><span class="sc">\n</span><span class="st">Wo und durch welche Branchen wird der Mehrwert erbracht?"</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Nachfrage:</span><span class="sc">\n</span><span class="st">Wofür wird die Wirtschaftsleistung verwendet?"</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Einkommen:</span><span class="sc">\n</span><span class="st">Wie wird der Ertrag auf Arbeit und Kapital verteilt?"</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Berechnungsschema =</span> <span class="fu">c</span>(</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Summe der Bruttowertschöpfung aller Branchen</span><span class="sc">\n</span><span class="st">+ Gütersteuern abzüglich Gütersubventionen</span><span class="sc">\n</span><span class="st">= BIP"</span>,</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Private Konsumausgaben (C)</span><span class="sc">\n</span><span class="st">+ Konsumausgaben des Staates (G)</span><span class="sc">\n</span><span class="st">+ Bruttoinvestitionen (I)</span><span class="sc">\n</span><span class="st">+ Außenbeitrag (Exporte X − Importe M)</span><span class="sc">\n</span><span class="st">= BIP"</span>,</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Arbeitnehmerentgelt</span><span class="sc">\n</span><span class="st">+ Unternehmens- und Vermögenseinkommen (= Volkseinkommen)</span><span class="sc">\n</span><span class="st">+ Produktions- und Importabgaben netto</span><span class="sc">\n</span><span class="st">+ Abschreibungen</span><span class="sc">\n</span><span class="st">− Saldo der Primäreinkommen aus der übrigen Welt</span><span class="sc">\n</span><span class="st">= BIP"</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Variante A: Einfache Markdown/Pipe-Tabelle für Quarto/Rmd (nutzt \n als HTML-Break)</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(bip_df, <span class="at">format =</span> <span class="st">"pipe"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data Frame erstellen</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>bip_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Berechnungsmethode =</span> <span class="fu">c</span>(<span class="st">"Entstehungsrechnung"</span>, <span class="st">"Verwendungsrechnung"</span>, <span class="st">"Verteilungsrechnung"</span>),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Blickwinkel / Perspektive</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Produktion:</span><span class="sc">\n</span><span class="st">Wo und durch welche Branchen wird der Mehrwert erbracht?"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Nachfrage:</span><span class="sc">\n</span><span class="st">Wofür wird die Wirtschaftsleistung verwendet?"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Einkommen:</span><span class="sc">\n</span><span class="st">Wie wird der Ertrag auf Arbeit und Kapital verteilt?"</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Berechnungsschema =</span> <span class="fu">c</span>(</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Summe der Bruttowertschöpfung aller Branchen</span><span class="sc">\n</span><span class="st">+ Gütersteuern abzüglich Gütersubventionen</span><span class="sc">\n</span><span class="st">= BIP"</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Private Konsumausgaben (C)</span><span class="sc">\n</span><span class="st">+ Konsumausgaben des Staates (G)</span><span class="sc">\n</span><span class="st">+ Bruttoinvestitionen (I)</span><span class="sc">\n</span><span class="st">+ Außenbeitrag (Exporte X − Importe M)</span><span class="sc">\n</span><span class="st">= BIP"</span>,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Arbeitnehmerentgelt</span><span class="sc">\n</span><span class="st">+ Unternehmens- und Vermögenseinkommen (= Volkseinkommen)</span><span class="sc">\n</span><span class="st">+ Produktions- und Importabgaben netto</span><span class="sc">\n</span><span class="st">+ Abschreibungen</span><span class="sc">\n</span><span class="st">− Saldo der Primäreinkommen aus der übrigen Welt</span><span class="sc">\n</span><span class="st">= BIP"</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Variante A: Einfache Markdown/Pipe-Tabelle für Quarto/Rmd (nutzt \n als HTML-Break)</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(bip_df, <span class="at">format =</span> <span class="st">"pipe"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: 'xfun::attr()' ist veraltet.
@@ -1052,13 +1327,13 @@ Siehe help("Deprecated")</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variante B: Mit kableExtra für HTML-/PDF-Output mit fester Spaltenbreite</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>bip_df <span class="sc">%&gt;%</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">escape =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">width =</span> <span class="st">"12em"</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">2</span>, <span class="at">width =</span> <span class="st">"18em"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">3</span>, <span class="at">width =</span> <span class="st">"25em"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variante B: Mit kableExtra für HTML-/PDF-Output mit fester Spaltenbreite</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>bip_df <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">escape =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">width =</span> <span class="st">"12em"</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">2</span>, <span class="at">width =</span> <span class="st">"18em"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">3</span>, <span class="at">width =</span> <span class="st">"25em"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: 'xfun::attr()' ist veraltet.
