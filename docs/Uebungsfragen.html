@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.31">
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -118,43 +147,49 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Einleitung.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Einleitung</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Einleitung – Gegenstand und Relevanz der Makroökonomik</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Geschichte.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Die Geschichte der Makroökonomik</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./VGR.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Volkswirtschaftliche Gesamtrechnungen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Volkswirtschaftliche Gesamtrechnungen</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Mikromakro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Die Mikroökonomik der Makroökonomik</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Mittlere-Frist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Mittlere Frist</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Geld.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Geld</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Inflation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Inflation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Geld</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Kurze-Frist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Makroökonomik in der kurzen Frist</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Makroökonomik in der kurzen Frist</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lange-Frist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Makroökonomik in der langen Frist</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Makropolitik.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Makroökonomische Wirtschaftspolitik</span></span></a>
+  <a href="./Anwendungen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Anwendungen</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -174,8 +209,14 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Überblick</h2>
+   
+  <ul>
+  <li><a href="#vgr" id="toc-vgr" class="nav-link active" data-scroll-target="#vgr">VGR</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -199,8 +240,80 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="vgr" class="level2">
+<h2 class="anchored" data-anchor-id="vgr">VGR</h2>
+<ol type="1">
+<li><p><strong>Entstehungsrechnung</strong><br>
+In einer Volkswirtschaft beträgt die Summe der Bruttowertschöpfung aller Wirtschaftsbereiche 3.000 Mrd. €. Die Gütersteuern liegen bei 350 Mrd. €, die Gütersubventionen bei 50 Mrd. €.<br>
+<strong>Gesucht</strong>: Bruttoinlandsprodukt (BIP) zu Marktpreisen.</p></li>
+<li><p><strong>Verwendungsrechnung</strong><br>
+Gegeben sind folgende Werte einer Volkswirtschaft (in Mrd. €):</p>
+<ul>
+<li>Private Konsumausgaben (<span class="math inline">\(C\)</span>): 1.800<br>
+</li>
+<li>Konsumausgaben des Staates (<span class="math inline">\(G\)</span>): 600<br>
+</li>
+<li>Bruttoinvestitionen (<span class="math inline">\(I\)</span>): 700<br>
+</li>
+<li>Exporte (<span class="math inline">\(X\)</span>): 1.200<br>
+</li>
+<li>Importe (<span class="math inline">\(M\)</span>): 1.000<br>
+<strong>Gesucht</strong>: Der Außenbeitrag sowie das BIP zu Marktpreisen.</li>
+</ul></li>
+<li><p><strong>BIP zu Nettoinlandsprodukt</strong><br>
+Das BIP zu Marktpreisen einer Volkswirtschaft beläuft sich auf 3.500 Mrd. €. Das Statistische Bundesamt weist für denselben Zeitraum Abschreibungen von 500 Mrd. € aus.<br>
+<strong>Gesucht</strong>: Nettoinlandsprodukt (NIP) zu Marktpreisen.</p></li>
+<li><p><strong>BIP zu Bruttonationaleinkommen</strong><br>
+Das BIP zu Marktpreisen beträgt 4.000 Mrd. €. Inländer beziehen aus der übrigen Welt Primäreinkommen in Höhe von 180 Mrd. €, während an die übrige Welt Primäreinkommen von 120 Mrd. € gezahlt werden.<br>
+<strong>Gesucht</strong>: Saldo der Primäreinkommen mit der übrigen Welt und das Bruttonationaleinkommen (BNE).</p></li>
+<li><p><strong>Marktpreise zu Faktorkosten</strong><br>
+Das Nettonationaleinkommen (NNE) zu Marktpreisen beträgt 3.200 Mrd. €. Die Gütersteuern betragen 400 Mrd. € und die Gütersubventionen 50 Mrd. €.<br>
+<strong>Gesucht</strong>: Das Volkseinkommen (NNE zu Faktorkosten).</p></li>
+<li><p><strong>Verteilungsrechnung &amp; Lohnquote</strong><br>
+Das Volkseinkommen einer Volkswirtschaft beträgt 2.500 Mrd. €. Das Arbeitnehmerentgelt liegt bei 1.750 Mrd. €.<br>
+<strong>Gesucht</strong>: Die Unternehmens- und Vermögenseinkommen sowie die Lohnquote (in %).</p></li>
+<li><p><strong>Brutto- vs.&nbsp;Nettoinvestitionen</strong><br>
+Die Bruttoinvestitionen betragen 800 Mrd. €, während die Abschreibungen bei 500 Mrd. € liegen.<br>
+<strong>Gesucht</strong>: Die Nettoinvestitionen und eine kurze ökonomische Interpretation des Ergebnisses.</p></li>
+<li><p><strong>Überleitung BIP zum Volkseinkommen</strong><br>
+Gegeben sind folgende Werte (in Mrd. €):</p>
+<ul>
+<li><span class="math inline">\(\text{BIP} = 3.800\)</span><br>
+</li>
+<li>Saldo der Primäreinkommen = <span class="math inline">\(+100\)</span><br>
+</li>
+<li>Abschreibungen = <span class="math inline">\(600\)</span><br>
+</li>
+<li>Netto-Gütersteuern (Gütersteuern − Subventionen) = <span class="math inline">\(400\)</span><br>
+<strong>Gesucht</strong>:<br>
+</li>
+</ul>
+<ol type="a">
+<li>BNE<br>
+</li>
+<li>NNE zu Marktpreisen<br>
+</li>
+<li>Volkseinkommen</li>
+</ol></li>
+<li><p><strong>Bruttowertschöpfung entlang einer Wertschöpfungskette</strong><br>
+Ein Holzfäller verkauft Rohholz für 100 € an ein Sägewerk. Das Sägewerk fertigt daraus Bretter und verkauft sie für 250 € an einen Tischler. Der Tischler baut einen Tisch und verkauft diesen für 600 € an einen Endverbraucher.<br>
+<strong>Gesucht</strong>: Die Bruttowertschöpfung jeder Stufe sowie der Gesamtbeitrag dieser Kette zum BIP.</p></li>
+<li><p><strong>Rückwärtsrechnung vom Volkseinkommen zum BIP</strong><br>
+Gegeben sind folgende Werte (in Mrd. €):</p>
+<ul>
+<li>Volkseinkommen = 2.400<br>
+</li>
+<li>Netto-Gütersteuern (Gütersteuern − Subventionen) = 300<br>
+</li>
+<li>Abschreibungen = 400<br>
+</li>
+<li>Saldo der Primäreinkommen aus der übrigen Welt = −50<br>
+<strong>Gesucht</strong>: Das Bruttoinlandsprodukt (BIP) zu Marktpreisen.</li>
+</ul></li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

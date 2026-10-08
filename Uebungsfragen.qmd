@@ -1,2 +1,59 @@
 # Übungsfragen {-}
 
+## VGR
+
+1. **Entstehungsrechnung**  
+   In einer Volkswirtschaft beträgt die Summe der Bruttowertschöpfung aller Wirtschaftsbereiche 3.000 Mrd. €. Die Gütersteuern liegen bei 350 Mrd. €, die Gütersubventionen bei 50 Mrd. €.  
+   **Gesucht**: Bruttoinlandsprodukt (BIP) zu Marktpreisen.
+
+1. **Verwendungsrechnung**  
+   Gegeben sind folgende Werte einer Volkswirtschaft (in Mrd. €):  
+   - Private Konsumausgaben ($C$): 1.800  
+   - Konsumausgaben des Staates ($G$): 600  
+   - Bruttoinvestitionen ($I$): 700  
+   - Exporte ($X$): 1.200  
+   - Importe ($M$): 1.000  
+   **Gesucht**: Der Außenbeitrag sowie das BIP zu Marktpreisen.
+
+1. **BIP zu Nettoinlandsprodukt**  
+   Das BIP zu Marktpreisen einer Volkswirtschaft beläuft sich auf 3.500 Mrd. €. Das Statistische Bundesamt weist für denselben Zeitraum Abschreibungen von 500 Mrd. € aus.  
+   **Gesucht**: Nettoinlandsprodukt (NIP) zu Marktpreisen.
+
+1. **BIP zu Bruttonationaleinkommen**  
+   Das BIP zu Marktpreisen beträgt 4.000 Mrd. €. Inländer beziehen aus der übrigen Welt Primäreinkommen in Höhe von 180 Mrd. €, während an die übrige Welt Primäreinkommen von 120 Mrd. € gezahlt werden.  
+   **Gesucht**: Saldo der Primäreinkommen mit der übrigen Welt und das Bruttonationaleinkommen (BNE).
+
+1. **Marktpreise zu Faktorkosten**  
+   Das Nettonationaleinkommen (NNE) zu Marktpreisen beträgt 3.200 Mrd. €. Die Gütersteuern betragen 400 Mrd. € und die Gütersubventionen 50 Mrd. €.  
+   **Gesucht**: Das Volkseinkommen (NNE zu Faktorkosten).
+
+1. **Verteilungsrechnung & Lohnquote**  
+   Das Volkseinkommen einer Volkswirtschaft beträgt 2.500 Mrd. €. Das Arbeitnehmerentgelt liegt bei 1.750 Mrd. €.  
+   **Gesucht**: Die Unternehmens- und Vermögenseinkommen sowie die Lohnquote (in %).
+
+1. **Brutto- vs. Nettoinvestitionen**  
+   Die Bruttoinvestitionen betragen 800 Mrd. €, während die Abschreibungen bei 500 Mrd. € liegen.  
+   **Gesucht**: Die Nettoinvestitionen und eine kurze ökonomische Interpretation des Ergebnisses.
+
+1. **Überleitung BIP zum Volkseinkommen**  
+   Gegeben sind folgende Werte (in Mrd. €):  
+   - $\text{BIP} = 3.800$  
+   - Saldo der Primäreinkommen = $+100$  
+   - Abschreibungen = $600$  
+   - Netto-Gütersteuern (Gütersteuern − Subventionen) = $400$  
+   **Gesucht**:  
+   (a) BNE  
+   (b) NNE zu Marktpreisen  
+   (c) Volkseinkommen
+
+1. **Bruttowertschöpfung entlang einer Wertschöpfungskette**  
+   Ein Holzfäller verkauft Rohholz für 100 € an ein Sägewerk. Das Sägewerk fertigt daraus Bretter und verkauft sie für 250 € an einen Tischler. Der Tischler baut einen Tisch und verkauft diesen für 600 € an einen Endverbraucher.  
+   **Gesucht**: Die Bruttowertschöpfung jeder Stufe sowie der Gesamtbeitrag dieser Kette zum BIP.
+
+1. **Rückwärtsrechnung vom Volkseinkommen zum BIP**  
+   Gegeben sind folgende Werte (in Mrd. €):  
+   - Volkseinkommen = 2.400  
+   - Netto-Gütersteuern (Gütersteuern − Subventionen) = 300  
+   - Abschreibungen = 400  
+   - Saldo der Primäreinkommen aus der übrigen Welt = −50  
+   **Gesucht**: Das Bruttoinlandsprodukt (BIP) zu Marktpreisen.
