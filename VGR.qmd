@@ -1,6 +1,14 @@
 # Volkswirtschaftliche Gesamtrechnungen
 
 
+::: {.callout-tip icon="false" collapse="true"}
+# Der Podcast zur Vorlesung: Das BIP {.unnumbered}
+
+<script class="podigee-podcast-player" src="https://player.podigee-cdn.net/podcast-player/javascripts/podigee-podcast-player.js" data-configuration="https://wirtschaftskunde.podigee.io/44-makro-am-mikro-02-das-bruttoinlandsprodukt/embed?context=external"></script>
+
+
+:::
+
 ## Wozu VGR?
 
 * **Messung der Wirtschaftsleistung:** Quantifizierung von Entstehung, Verteilung und Verwendung des Gesamteinkommens sowie aggregierter Kennzahlen (BIP, BNE, Nettonationaleinkommen).

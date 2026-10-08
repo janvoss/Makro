@@ -1,5 +1,14 @@
 # Einleitung -- Gegenstand und Relevanz der Makroökonomik
 
+
+::: {.callout-tip icon="false" collapse="true"}
+# Der Soundtrack zur Vorlesung {.unnumbered}
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/zAJpCgBEDRY?si=PeeBVLtm2W5VrAGk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+:::
+
 ::: {.callout-tip icon="false" collapse="true"}
 # Der Podcast zur Vorlesung: Was ist Makroökonomik {.unnumbered}
 
