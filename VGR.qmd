@@ -390,7 +390,7 @@ ggplot(df_clean, aes(x = year, y = value, color = indicator, linetype = indicato
   ) +
   labs(
     title    = "Reales BIP vs. Reales BNE im Vergleich (1990–heute)",
-    subtitle = "Starke Entkopplung in Irland durch Primäreinkommensabflüsse multinationaler Konzerne",
+    subtitle = "Starke Entkopplung in Irland durch Primäreinkommensabflüsse",
     x        = NULL,
     y        = "Milliarden Euro (Preise von 2015)",
     color    = NULL,
@@ -593,7 +593,131 @@ print(f"SVG-Datei erfolgreich gespeichert unter: {output_file}")
 
 ![Marktpreise vs Faktorkosten](bip_marktpreise_vs_faktorkosten.svg)
 
-## Schwankungen es BIPs: Konjunktur
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Wohin fließen Erlöse?"
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+df <- data.frame(
+  Situation = c("Situation 1", "Situation 2"),
+  Lohn = c(100, 100),
+  Kapitalentlohnung = c(80, 80),
+  Gütersteuern = c(30, 60)
+)
+
+# Daten ins Long-Format bringen und Faktor-Reihenfolge für das Stacking festlegen
+df_long <- df %>%
+  pivot_longer(
+    cols = c(Lohn, Kapitalentlohnung, Gütersteuern),
+    names_to = "Komponente",
+    values_to = "Wert"
+  ) %>%
+  mutate(Komponente = factor(Komponente, levels = c("Gütersteuern", "Lohn", "Kapitalentlohnung")))
+
+# Gestapeltes Säulendiagramm erstellen
+ggplot(df_long, aes(x = Situation, y = Wert, fill = Komponente)) +
+  geom_bar(stat = "identity", width = 0.5) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(
+    title = "Wohin fließen Erlöse?",
+    x = NULL,
+    y = "Wert",
+    fill = "Komponente"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+
+
+```{r}
+#| warning: false
+#| message: false
+
+library(rdbnomics)
+library(dplyr)
+library(ggplot2)
+
+message("Lade ALCD2 aus der AMECO-Datenbank via DBnomics...")
+
+# 1. Länderliste (ISO3-Codes)
+eu_countries <- c("DEU", "FRA", "ITA", "ESP", "NLD", "AUT", "GRC", "SWE", "POL", "USA")
+
+# 2. Series-IDs konstruieren und Daten abrufen
+series_ids <- paste0(eu_countries, ".1.0.0.0.ALCD2")
+ameco_alcd2 <- rdb(ids = paste0("AMECO/ALCD2/", series_ids))
+
+# 3. Ländernamen für die Beschriftung
+country_names <- c(
+  "DEU" = "Deutschland",
+  "FRA" = "Frankreich",
+  "ITA" = "Italien",
+  "ESP" = "Spanien",
+  "NLD" = "Niederlande",
+  "AUT" = "Österreich",
+  "GRC" = "Griechenland",
+  "SWE" = "Schweden",
+  "POL" = "Polen",
+  "USA" = "USA"
+)
+
+# 4. Daten aufbereiten – Zeitreihe für alle Jahre
+wage_share_clean <- ameco_alcd2 %>%
+  # geo in Großbuchstaben für das Mapping
+  mutate(geo_upper = toupper(geo)) %>%
+  # Jahr aus period extrahieren (robust für "YYYY" oder Datum)
+  mutate(year = as.numeric(substr(as.character(period), 1, 4))) %>%
+  # Ländernamen hinzufügen
+  mutate(country = country_names[geo_upper]) %>%
+  # Relevante Spalten auswählen und umbenennen
+  select(country, year, Lohnquote = value) %>%
+  # Nur vollständige Zeilen behalten
+  filter(!is.na(Lohnquote) & !is.na(country))
+
+# 5. Zeitreihenplot erstellen
+ggplot(wage_share_clean, aes(x = year, y = Lohnquote, color = country)) +
+  geom_line(linewidth = 0.8) +
+  geom_point(size = 1.5) +
+  scale_color_brewer(palette = "Set1", name = "Land") +
+  labs(
+    title    = "Bereinigte Lohnquote (ALCD2) in ausgewählten EU-Ländern",
+    subtitle = "Zeitreihe aus AMECO via DBnomics",
+    x        = "Jahr",
+    y        = "Bereinigte Lohnquote (in % vom BIP zu Faktorkosten)",
+    caption  = "Datenquelle: EU-Kommission / AMECO via DBnomics"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title   = element_text(face = "bold"),
+    legend.position = "bottom",
+    legend.title = element_text(face = "bold")
+  )
+```
+
+## Schwankungen des BIPs: Konjunktur
+
+### Methodische Vorbemerkung: Logarithmierte Daten {-}
+
+- Makroökonomische Zeitreihen verwenden regelmäßig logarithmierte Daten
+
+- Grundidee: ökonomische Aggregate verändern sich relativ zu ihrer Größe
+
+- Absolut gesehen schwankt das BIP einer großen Volkswirtschaft c.p. stärker als das einer kleinen
+
+- Relativ gesehen aber nicht. 
+
+Es wird ein exponenzielles Wachstumsmodell angenommen: 
+
+$Y(t) = Y_{t-1} \times e^{r}$
+
+Die Differenz der logarithmierten Größen entspricht dann der gesuchten Wachstumsrate $r$.
+
+$\iff ln(Y_t)= ln(Y_{t-1}) +r$
+
+$\iff r=ln(Y_t)-ln(Y_{t-1})$
 
 ### Stilisierter Konjunkturverlauf
 
@@ -763,8 +887,122 @@ Die Gleichung hat zwei Komponenten
 
 Wahl von $\lambda$: Für Jahresdaten sind Werte wie 6,25 oder 100 üblich.
 
+```{r}
+#| message: false
+#| warning: false
+
+library(rdbnomics)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(mFilter)
+
+# ------------------------------------------------------------------------------
+# 0. Konfiguration
+# ------------------------------------------------------------------------------
+LAMBDA <- 6.25 # Ravn & Uhlig (2002) Standard für Jahresdaten
+
+# ------------------------------------------------------------------------------
+# 1. Lookup-Tabelle für G7-Länder & AMECO-Series-Codes
+# ------------------------------------------------------------------------------
+g7_df <- tibble(
+  series_code = paste0(c("DEU", "FRA", "ITA", "GBR", "CAN", "JPN", "USA"), ".1.1.0.0.OVGD"),
+  country   = factor(
+    c("Deutschland", "Frankreich", "Italien", "Großbritannien", "Kanada", "Japan", "USA"),
+    levels = c("Deutschland", "Frankreich", "Italien", "Großbritannien", "Kanada", "Japan", "USA")
+  )
+)
+
+api_ids <- paste0("AMECO/OVGD/", g7_df$series_code)
+
+# ------------------------------------------------------------------------------
+# 2. Daten via DBnomics abrufen und aufbereiten
+# ------------------------------------------------------------------------------
+gdp_data <- rdb(ids = api_ids) %>%
+  filter(!is.na(value)) %>%
+  inner_join(g7_df, by = "series_code") %>%
+  mutate(year = as.numeric(substr(as.character(period), 1, 4))) %>%
+  select(country, year, value) %>%
+  arrange(country, year)
+
+# ------------------------------------------------------------------------------
+# 3. HP-Filter anwenden & Daten im Logarithmus belassen
+# ------------------------------------------------------------------------------
+gdp_hp <- gdp_data %>%
+  group_by(country) %>%
+  group_modify(~ {
+    log_y <- log(.x$value)
+    hp    <- hpfilter(log_y, freq = LAMBDA, type = "lambda")
+    
+    .x %>%
+      mutate(
+        log_bip   = log_y,
+        log_trend = as.numeric(hp$trend),
+        cycle     = as.numeric(hp$cycle) * 100  # Zyklische Komponente in %
+      )
+  }) %>%
+  ungroup()
+
+# -----------------------------------------
 
 
+
+# ------------------------------------------------------------------------------
+# 1. Funktion zur Erstellung einzelner Plots für ein bestimmtes Land
+# ------------------------------------------------------------------------------
+plot_country_hp <- function(df, target_country) {
+  df %>%
+    filter(country == target_country) %>%
+    ggplot(aes(x = year)) +
+    geom_line(aes(y = log_bip, color = "Log(Reales BIP)"), linewidth = 0.9) +
+    geom_line(aes(y = log_trend, color = "HP-Trend (Log)"), linewidth = 0.9, linetype = "dashed") +
+    geom_smooth(aes(y = log_bip, color = "Linearer OLS-Trend"), method = "lm", se = FALSE, linetype = "dotted", linewidth = 0.7) +
+    scale_color_manual(
+      name   = NULL,
+      values = c(
+        "Log(Reales BIP)"   = "#1F78B4",
+        "HP-Trend (Log)"     = "#E31A1C",
+        "Linearer OLS-Trend" = "#33A02C"
+      )
+    ) +
+    labs(
+      title    = paste("Logarithmiertes reales BIP und HP-Trend:", target_country),
+      subtitle = paste0("Vergleich von Log-BIP, geglättetem HP-Trend (λ = ", LAMBDA, ") und linearem Trend"),
+      x        = "Jahr",
+      y        = "Logarithmiertes reales BIP",
+      caption  = "Datenquelle: AMECO (OVGD) via DBnomics"
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(
+      legend.position  = "bottom",
+      plot.title       = element_text(face = "bold", size = 14),
+      plot.subtitle    = element_text(color = "gray30"),
+      panel.grid.minor = element_blank()
+    )
+}
+
+# ------------------------------------------------------------------------------
+# 2. Einzelne Plots aufrufen und in Variablen speichern
+# ------------------------------------------------------------------------------
+p_deu <- plot_country_hp(gdp_hp, "Deutschland")
+p_fra <- plot_country_hp(gdp_hp, "Frankreich")
+p_ita <- plot_country_hp(gdp_hp, "Italien")
+p_usa <- plot_country_hp(gdp_hp, "USA")
+
+# Einzelnen Plot anzeigen (z. B. Deutschland)
+p_deu
+p_fra
+p_ita
+p_usa
+```
+
+::: {.callout-note icon="false" collapse="true"}
+# Der HP Filter und die deutsche Konjuktur  {.unnumbered}
+
+<iframe src=https://shinylive.io/r/app/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IIgMQACAIwYJAESjkI9KJ1qcJ7OQFEAqhKxwo1OBoBCASQAK0gJwB2AAwBaAEyPXAZmEQAJgDMJAB5nCU5SRgBXAlJIxjh2OnD2YkiyNgB9Yl84CQBeCQJ2ITAdXRLcCRKyiqrSvVrqhrw6mrwRJvKWzsb6rsqe7r7etoHhodHW5twO8bHJwfnpqf6VkeXFtfbROa2l1c3D3aOFudnTi43j68uDm+nzq9v1u+eJp4-+x9fPl5KBSqsIyMfKFdhSByOSoQ+xSaEOVzw+yeGYQGEAFiRAFYkQA2JH2JEADiRtnhRKhdiJcKpiKpKKpmJEEKJOKp+KphKpJKpZLstkpENsNKFdKFDKFmP5OOZtlsHKFXKFPKFfPcjkp6pp6rp6oZ6ql6rZ6vxInVXPVPPVascUk1tu1tt1tv1tsNtuNto57ikhLNtqttpt7kq7lcjtczq8AIk9FoqFBRSknlsRPsRPRmYFuMcGHsZOZmdcOfRUlxWKJnk8GFcSqxjnRuNLjlx2axGCxYqx9nLrnrqeF6IwKehWIFWO7fZzjnsw6ZaO7uPssNrPc8Q+70PL6IpDlx4eRHZVsKDqax6M8GYwRIVPbLWLtth3KYwqdRUkr6J7ObLM9zuJVG8WykL8+ztatN2kNMG1xD9OyJVxbDzaEb08GdyxbexuzzRFmSJWwvFhWEpHDdsn3hdFuwIzwezlIcR35O18LLS8AOvQNPFxXFPHDWtXEzDs4X9csPzTBw7xrQ0QN9etwyrGc829SNOxg30dzI7V1zkgiJx3JChIgfjYPTODWNxDB91DfsSMvRxOKrYcLR3RtkwvLx3AwKRjXPdEG1rOy5VzZFUT7SseKbWT6wwFtQxLED1xvECiU82L62pFM+3RVxkpiiR-NLOUsU4kDzPsXDDKwzsEovB9koI0NK3PalkzlAjhzVIlKy8zrYIiySGuXSjHHlJKh0QkLWWRRwfNhNiPwagVOuTBtiostVhXcddHHw2wJw7Dk0K8X1bXzdTPPKzwpGTLyEq03MEMqS6LzsscnztIcPFDeVfO-ACc3bB9Hu2-NYTHaa+wskkRB44aPz82CP08rkeMjWD0J2gGeR4ziV249dz1fR60IQxD3GfJCG1RKtuwrbsIU8B99setzKNTHtKPbabHs7TNu2RXzS2HLGJwFXybzA1wLJlCAGYcS7kRo9En36iR8flLFuK8DV7rpBnWyu4r5ScPMaXshn82LOUPMuqn934q20MvJCaIEGNGCIAB3DBoHgDQCiKAA5ABBSpnHPAAZGMCGoVQ-bBEpSHoagMgCCpZkT6hel8RQoAwfxmHgf4fHEPLZAACSsZwADFaGocgQXYMxVFyLAJAAWUURhaAALwoeICG4CA0gAcx8bhUAyfxa-rjIVE4XIQgkfw0hiWgSHYVhKhjmB6Gz0FzL7AQJBAEQJAkAA3YxaF8DJr4AD2CUIAEJ1G9qAN58M-WCyEwoAgM-H4SFYMAS+dAb73wALqnwkP-ABcDAEmAgMPUg3AN4-yMBAYusDaCBHYP-IIEh0RH3CEQVAxQwBtz4DkcIFANDogkGYOARAVAD1iEgigEg4CMH8EQRgORGB0AHhgf4HRYEWEAb4WgUBh54M-vIQBMBO60DvuwSkEB3Ye1BP-UIdIIDEGoFouRPCG60AkHwaQiA8ESB0a7Y+0Cz5yGALQSotAIHwMXlIex8gnEuIkAAamkG4xebgvGOOcWY-xeUgmhE8bAgAvqIs+Qd3GhHEQE7eu8oASAAFSaFIFoI+ABSbJhT5ByIiBQXwgDOBEGoOfBIIcgHoL-nIggrBo4L1CN-Dpf9rESAqX4RJEh4icAyAMqpi94hkODhkeIxgMhbwoMg1Bgg5EjKyO0kwgCpnsBmXM5OiykEoI-lgs+6zxkgKvuA3wd9okSFUBgepMReHsHGWs0wGyOmXLAbfG5dyHlPNIC8tpHTTnDLgLERgEB2DZ1ILnfOsAEhePGaCc58Q-CojgSCrZBR1nYrgNA12IgEmiAgJIasEhdAWGcHIOAU8IC0FIGvUlkRTGL38NQVlvgrDSKRbAplpATA8ogHAag5Cy5EF8F3AgABrZwVgRnEFIKQCQNc65cM0IYYwpgGHWHkHASIpBOADxjn4YQYAATQOgWoHIKhGDhygKwIghriiwLPjauAdrhWitdfAsIYCuEWAgKgF1Xi4F8BDaQCwVSCglAydnNObr4Ex3oKKgBBQy4ABU27h3IQAcWoAAE+VSPTgqAWCIvrpoAAZPGqAABuAQiB-iYr9RIGA5i4EFChGGgBiiH5dryhqVtfrQGRFyGfAoB9pZtrCOQBM6aJC5j7L2y1Saz7cEYOwNdfq4XD04AAEkkefX1bbwisBxXUHhZBnBqF7ogJdr44AwHrYUWpvCH1iAnFietibZ17sPfQchWBaCsI9lw8gS8AA-IIABSUBN2mFhRQZtFqR3wIAweyIYre1wMw3QV50jAPkMAN3A+8axYlQzGEoBgoDnwgM4XQ3A6DDwkAAZThX4FgvgW24YAfh2ghH90HqAyUMjBQ7SOCo2MSljAy2MCg0gwR3ANUV2cBxv+2c+G8fXRhojB6COYdE2AcTS7pN1AkAAaTgHwLhJhTEFuLWw1j7BM3opjbqqw5q5F+p8wAvzO6AFeMUXwb1OHdOoGoEQUgAB5Q1kbyHjwyJF6LtQVO0GHtwFVsawDTlQHfERSa5E+CwZIIc7GuH1MYM4cORBh60BlSIeejAquAOXnopl68I2GsqM60gkbKjz04GoEgR8T6wOgX1yNB6kspZVZMypXCrBRfyeNuBUXh6z3jAgurML-AifjH5rxkg1VVrmTKpl59YxcLgAPEVpK4FJZGYApLU91WMFns3RIdWtuoC3rATJoJuukAMwD7OR2k2SGW9Fmrjq+sPtcBIAAWjZxBmgy4ADeVMQCq9wQtdcGUaE8IgKQfnh5dxvooiIyiFFKJUUmUMMZ1Ge1BLo-RoJSdeJjk6l15Pr4ZCp13O+lR0uZaNYmdgEoiVJq8eWrdiiQT+3YFKDcoYOzQml3A47EgYupviCCaHpAH0B1oPUqAkQL6cFkG5ypsuVunrgQEA9QIWBbx+3GP7vbSCsFQLkHL9BaioAHhzjk7OctiCkFXdMZh0S1GoB7DzMgZ3wLvim0EJRagXqgPQdPYBasyMsF5v98CQv-wKOWmhjhgNGBMOYPVaQqlqZt34TQpnajuwb+wYHoOd7Z0Z2MbzXiycU5SLU3PLGsvk8dXH73uffDRfIDxi1XPbOcD2874EIuJ4jIPeMyoYe6hiG0JdIOUgADCceE+s-VxIOurBWcQ-W3AYelSHdBbAECyLdLSDF6fy-lvSuJQjCzCUArCI8geqg5AVeJQTe7mreuelQHefgXewahqPemS-edQ3mgWWKY+i6RQJQEeUeRIMevQR+J+5+Omfqd+g6DOeUOBACQe3AtB4IHIwcDBZ88eVS+B4IN+ksWIHBsYs+i6JQOwQ+Xi2uugZAN2BuK2D6SOrAMqnKGgKBEghSfmc2b+Z8TuLujAW+sypgB6+KOS0gw6XuPufudQ3Al+HmDIB+OCoq887AT2hhxhAAfN2mMGIFWEHB4BfkMOQVIKfv4YIantnrnvBpupnmnjlkHPQOBqBtwCPJoOob-n2lAOYjlpZiQAAFZpAXZxDdyKHKGaBxEJEDzJHnxEAwASDN5VLmKpFgDiFJrZ50AirOGgiUgH4lBJygGNYtA0ESbD7Xyj4GI5YT6kBT6sAz7345bz7KpwBL6P4AKSB5rMBTwypy6VoardxxBQayrzykC9wPYALc59bghyJxI+AkpNa8D8BBzoDsCsqgisqDaVYaoFDNZVY+BgBxIQJAA width="100%" height="800" title="Interaktives Solow-Modell">
+
+</iframe>
+:::
 
 ## Entwicklung zentraler makroökonomischer Größen
 
