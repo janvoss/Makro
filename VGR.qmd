@@ -1086,6 +1086,13 @@ Sie teilen die Suppe gemäß der Hexenformel $\text{Grenzoroduktivität}\times \
 
 - Wie teilt sich die Suppe auf die beiden auf?
 
+:::{.callout-note 
+    icon=false 
+    collapse=true }
+    
+# Lösung {-}    
+Ausgangssituation ($K = 10, L = 10$)Produktion:$$Y = 0,5(10) + 0,5(10) = 5 + 5 = 10 \text{ Einheiten Hexensuppe}$$Aufteilung (Grenzprodukt $\times$ Input):Da die Grenzprodukte konstant sind ($\text{MP}_K = 0,5$ und $\text{MP}_L = 0,5$), erhalten beide genau ihren Beitrag:Klara: $0,5 \times 10 = 5 \text{ Einheiten}$Lara: $0,5 \times 10 = 5 \text{ Einheiten}$
+:::
 
 Klara verdreifacht heimlich ihren Input. 
 
@@ -1256,8 +1263,82 @@ ggplot(df_plot, aes(x = year, y = Lohnquote, color = Nenner_Basis)) +
 
 ```
 
+- Lohnquote ist relativ konstant trotz steigendem Kapitalstock pro Arbeitsstunde.
+
+- Wenn man annimmt, dass die Entlohnung von Arbeit und Kapital mit der Grenzproduktivität zusammenhängt, dann ähnelt die gesamtwirtschaftliche Produktionsfunktion eher der Form $Y=K^{\alpha} \times L^{1-\alpha}$ als $Y=\alpha \times K + \alpha \times L$
+
 
 ### Beschäftigung/ Arbeitslosigkeit
+
+
+```{r}
+#| message: false
+#| warning: false
+
+library(rdbnomics)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# 1. G7-Länder definieren
+g7_map <- c(
+  "DEU" = "Deutschland",
+  "FRA" = "Frankreich",
+  "ITA" = "Italien",
+  "GBR" = "Großbritannien",
+  "CAN" = "Kanada",
+  "JPN" = "Japan",
+  "USA" = "USA"
+)
+
+# AMECO-IDs zusammenstellen:
+# NETD = Erwerbstätige insgesamt (1.0.0.0.NETD)
+# NPAN = Bevölkerung 15-64 Jahre (1.0.0.0.NPAN)
+ids_netd <- paste0("AMECO/NETD/", names(g7_map), ".1.0.0.0.NETD")
+ids_npan <- paste0("AMECO/NPAN/", names(g7_map), ".1.0.0.0.NPAN")
+
+# 2. Daten via DBnomics abrufen und aufbereiten
+raw_data <- rdb(ids = c(ids_netd, ids_npan))
+
+emp_rate <- raw_data %>%
+  filter(!is.na(value)) %>%
+  mutate(
+    year    = as.numeric(substr(as.character(period), 1, 4)),
+    country = factor(toupper(geo), levels = names(g7_map), labels = g7_map),
+    var     = if_else(grepl("NETD", series_code), "employment", "pop_15_64")
+  ) %>%
+  select(country, year, var, value) %>%
+  pivot_wider(names_from = var, values_from = value) %>%
+  # Berechnung der Erwerbstätigenquote (%)
+  mutate(rate = (employment / pop_15_64) * 100) %>%
+  filter(!is.na(rate), year >= 1990) %>%
+  arrange(country, year)
+
+# 3. Visualisierung mit ggplot2
+ggplot(emp_rate, aes(x = year, y = rate)) +
+  geom_line(color = "#2B5C8F", linewidth = 0.9) +
+  geom_point(color = "#2B5C8F", size = 1.1, alpha = 0.7) +
+  facet_wrap(~ country, ncol = 3, scales = "fixed") +
+  scale_x_continuous(breaks = seq(1990, 2025, by = 10)) +
+  scale_y_continuous(labels = function(x) paste0(round(x), "%")) +
+  labs(
+    title    = "Erwerbstätigenquote in den G7-Staaten (1990–heute)",
+    subtitle = "Anteil der Erwerbstätigen an der Bevölkerung im Erwerbsalter (15–64 Jahre)",
+    x        = NULL,
+    y        = "Erwerbstätigenquote (%)",
+    caption  = "Datenquelle: AMECO (NETD / NPAN) via DBnomics"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(
+    strip.text       = element_text(face = "bold"),
+    plot.title       = element_text(face = "bold", size = 14),
+    plot.subtitle    = element_text(color = "gray30"),
+    panel.grid.minor = element_blank(),
+    panel.spacing    = unit(1, "lines")
+  )
+
+```
+
 
 ```{r}
 #| message: false
@@ -1408,13 +1489,16 @@ ggplot(inflation_clean, aes(x = year, y = inflation_rate, color = country)) +
 
 
 ```{r}
-library(knitr)
-library(kableExtra)
-
 #| eval: false
+#| echo: false
 #| output: false
 #| warning: false
 #| message: false
+
+library(knitr)
+library(kableExtra)
+
+
 
 # Data Frame erstellen
 bip_df <- data.frame(
@@ -1433,7 +1517,7 @@ bip_df <- data.frame(
 )
 
 # Variante A: Einfache Markdown/Pipe-Tabelle für Quarto/Rmd (nutzt \n als HTML-Break)
-# kable(bip_df, format = "pipe")
+kable(bip_df, format = "pipe")
 
 # Variante B: Mit kableExtra für HTML-/PDF-Output mit fester Spaltenbreite
 bip_df %>%

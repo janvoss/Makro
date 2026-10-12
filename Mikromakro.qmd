@@ -2,14 +2,32 @@
 
 ## Konsumtheorie
 
+- Haushalte/Individuen entscheiden über ihren Konsum in mehreren Zeitperioden
+
 ### Grundmodel
 
-1. Die intertemporale Nutzenfunktion
+- Hier angenommen Zwei Perioden $t$ und $t+1$
 
-$$ U = u(C_t) + \beta u(C_{t+1}) $$$U$: Gesamtnutzen (Lifetime Utility) über beide Perioden.
+- Zunächst angenommen: In jeder Periode ein exogenes einkommen $Y_t$ bzw. $Y_{t+1}$
+
+- Zum Zinssatz $r$ kann Einkommen zwischen beiden Perioden verschoben werden (Sparen, Kreditaufnahme)
+
+- Budgetestriktion: $$C_t + S_t \le Y_t$$,
+$$C_{t+1} + S_{t+1} \le Y_{t+1} + (1 + r_t) S_t$$
+
+- Es gilt also $$C_{t+1} + S_{t+1} - S_t \le Y_{t+1} + r_t S_t$$
+
+#### Die intertemporale Nutzenfunktion
+
+$$ U = u(C_t) + \beta u(C_{t+1}) $$$U$: Gesamtnutzen über beide Perioden.
 
 
 $C_t, C_{t+1}$: Konsum in der heutigen ($t$) und zukünftigen Periode ($t+1$).
+
+
+#### Die Nutzenfunktion in jeder Periode
+
+$$
 
 $u(\cdot)$: Periodennutzenfunktion. 
 
