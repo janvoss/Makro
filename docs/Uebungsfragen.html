@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -311,6 +346,151 @@ Gegeben sind folgende Werte (in Mrd. €):</p>
 <strong>Gesucht</strong>: Das Bruttoinlandsprodukt (BIP) zu Marktpreisen.</li>
 </ul></li>
 </ol>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lösungen
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>lösungen_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Nr =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Gesuchte_Groesse =</span> <span class="fu">c</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BIP zu Marktpreisen"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Außenbeitrag &amp; BIP"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"NIP zu Marktpreisen"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Saldo Primäreinkommen &amp; BNE"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Volkseinkommen"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Unternehmenseinkommen &amp; Lohnquote"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Nettoinvestitionen"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BNE, NNE_m &amp; Volkseinkommen"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Bruttowertschöpfung Stufen &amp; BIP"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BIP zu Marktpreisen (Rückwärts)"</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">Rechenweg =</span> <span class="fu">c</span>(</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"3.000 + 350 - 50"</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Außenbeitrag: 1.200 - 1.000 = 200; BIP: 1.800 + 600 + 700 + 200"</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"3.500 - 500"</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Saldo: 180 - 120 = +60; BNE: 4.000 + 60"</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"3.200 - (400 - 50)"</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"UVE: 2.500 - 1.750 = 750; Lohnquote: (1.750 / 2.500) * 100"</span>,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"800 - 500 (Kapitalstock wächst)"</span>,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BNE: 3.800 + 100 = 3.900; NNE_m: 3.900 - 600 = 3.300; VE: 3.300 - 400"</span>,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Stufe 1: 100; Stufe 2: 150; Stufe 3: 350; Summe BIP-Beitrag: 100 + 150 + 350"</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"NNE_m = 2.400 + 300 = 2.700; BNE = 2.700 + 400 = 3.100; BIP = 3.100 - (-50)"</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">Ergebnis =</span> <span class="fu">c</span>(</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"3.300 Mrd. €"</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"AB: 200 Mrd. €, BIP: 3.300 Mrd. €"</span>,</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"3.000 Mrd. €"</span>,</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Saldo: +60 Mrd. €, BNE: 4.060 Mrd. €"</span>,</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2.850 Mrd. €"</span>,</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"UVE: 750 Mrd. €, Lohnquote: 70,0 %"</span>,</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"300 Mrd. €"</span>,</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BNE: 3.900, NNE_m: 3.300, VE: 2.900 Mrd. €"</span>,</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BWS: 100€ / 150€ / 350€; BIP: 600 €"</span>,</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"3.150 Mrd. €"</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Render-Befehl für Quarto / RMarkdown:</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(lösungen_df, <span class="at">format =</span> <span class="st">"pipe"</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Nr."</span>, <span class="st">"Gesuchte Größe"</span>, <span class="st">"Rechenweg"</span>, <span class="st">"Ergebnis"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 21%">
+<col style="width: 48%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Nr.</th>
+<th style="text-align: left;">Gesuchte Größe</th>
+<th style="text-align: left;">Rechenweg</th>
+<th style="text-align: left;">Ergebnis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">BIP zu Marktpreisen</td>
+<td style="text-align: left;">3.000 + 350 - 50</td>
+<td style="text-align: left;">3.300 Mrd. €</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Außenbeitrag &amp; BIP</td>
+<td style="text-align: left;">Außenbeitrag: 1.200 - 1.000 = 200; BIP: 1.800 + 600 + 700 + 200</td>
+<td style="text-align: left;">AB: 200 Mrd. €, BIP: 3.300 Mrd. €</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">NIP zu Marktpreisen</td>
+<td style="text-align: left;">3.500 - 500</td>
+<td style="text-align: left;">3.000 Mrd. €</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Saldo Primäreinkommen &amp; BNE</td>
+<td style="text-align: left;">Saldo: 180 - 120 = +60; BNE: 4.000 + 60</td>
+<td style="text-align: left;">Saldo: +60 Mrd. €, BNE: 4.060 Mrd. €</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Volkseinkommen</td>
+<td style="text-align: left;">3.200 - (400 - 50)</td>
+<td style="text-align: left;">2.850 Mrd. €</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Unternehmenseinkommen &amp; Lohnquote</td>
+<td style="text-align: left;">UVE: 2.500 - 1.750 = 750; Lohnquote: (1.750 / 2.500) * 100</td>
+<td style="text-align: left;">UVE: 750 Mrd. €, Lohnquote: 70,0 %</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Nettoinvestitionen</td>
+<td style="text-align: left;">800 - 500 (Kapitalstock wächst)</td>
+<td style="text-align: left;">300 Mrd. €</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">BNE, NNE_m &amp; Volkseinkommen</td>
+<td style="text-align: left;">BNE: 3.800 + 100 = 3.900; NNE_m: 3.900 - 600 = 3.300; VE: 3.300 - 400</td>
+<td style="text-align: left;">BNE: 3.900, NNE_m: 3.300, VE: 2.900 Mrd. €</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Bruttowertschöpfung Stufen &amp; BIP</td>
+<td style="text-align: left;">Stufe 1: 100; Stufe 2: 150; Stufe 3: 350; Summe BIP-Beitrag: 100 + 150 + 350</td>
+<td style="text-align: left;">BWS: 100€ / 150€ / 350€; BIP: 600 €</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">BIP zu Marktpreisen (Rückwärts)</td>
+<td style="text-align: left;">NNE_m = 2.400 + 300 = 2.700; BNE = 2.700 + 400 = 3.100; BIP = 3.100 - (-50)</td>
+<td style="text-align: left;">3.150 Mrd. €</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 </section>

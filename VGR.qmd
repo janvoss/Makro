@@ -1006,6 +1006,8 @@ p_usa
 
 ## Entwicklung zentraler makroökonomischer Größen
 
+### BIP pro Kopf
+
 ```{r}
 #| message: false
 #| warning: false
@@ -1068,8 +1070,268 @@ ggplot(gdp_pc_clean, aes(x = year, y = gdp_pc, color = country)) +
 
 
 
+### Kapitalakkumulation
 
-### Beschäftigung
+:::{.callout-note 
+    icon=false 
+    collapse=true }
+
+# Hexensuppe {.unnumbered}
+
+Klara und Lara kochen zu Helloween **Hexensuppe**. Beide steuern 10 Einheiten Kräuter bei. Laut Hexenrezept entstehen daraus $0,5\times K+0,5\times L= 10$ Einheiten Hexensuppe.
+
+Sie teilen die Suppe gemäß der Hexenformel $\text{Grenzoroduktivität}\times \text{jeweilige Inputmenge}$.
+
+- Wie viel wird produziert? 
+
+- Wie teilt sich die Suppe auf die beiden auf?
+
+
+Klara verdreifacht heimlich ihren Input. 
+
+- Wie viel wird produziert?
+
+- Wie teilt sich die Suppe auf?
+
+Lara wechselt das Rezept. Die Suppe folgt jetzt der Formel $K^{0,5} \times L^{0,5}$.
+
+- Wie viel wird bei den Inputs 10, 10 produziert und wie teilt sich die Suppe auf? 
+
+- Was passiert, wenn Klara heimlich ihren Input verdreifacht? 
+
+:::
+
+```{r}
+#| message: false
+#| warning: false
+
+# Paket installieren, falls noch nicht vorhanden
+if (!requireNamespace("rdbnomics", quietly = TRUE)) {
+  install.packages("rdbnomics")
+}
+
+library(rdbnomics)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+
+message("Lade Kapitalstock (OKND) und Arbeitsstunden (NLHA) für Deutschland aus AMECO...")
+
+# 1. Spezifische Zeitreihen für Deutschland (DEU) direkt über IDs laden
+# OKND: Net capital stock at constant prices (total economy)
+# NLHA: Total hours worked (total economy)
+ameco_capital <- rdb(ids = "AMECO/OKND/DEU.1.0.0.0.OKND")
+ameco_hours   <- rdb(ids = "AMECO/NLHA/DEU.1.0.0.0.NLHA")
+
+# 2. Daten für Deutschland aufbereiten und jahresweise extrahieren
+df_capital <- ameco_capital %>%
+  mutate(year = as.numeric(substr(as.character(period), 1, 4))) %>%
+  select(year, capital_stock_mrd = value)
+
+df_hours <- ameco_hours %>%
+  mutate(year = as.numeric(substr(as.character(period), 1, 4))) %>%
+  select(year, hours_mio = value)
+
+# 3. Zusammenführen und K/L (Kapitalintensität pro Arbeitsstunde) berechnen
+# Umrechnung: (Kapitalstock in Mrd. Euro * 1000) / (Arbeitsstunden in Mio.)
+# = Euro Nettokapitalstock pro geleisteter Arbeitsstunde
+df_k_per_hour <- inner_join(df_capital, df_hours, by = "year") %>%
+  mutate(
+    k_l_per_hour = (capital_stock_mrd * 1000) / hours_mio
+  ) %>%
+  filter(year >= 1991) %>%
+  drop_na()
+
+# 4. Zeitreihen-Plot erstellen
+ggplot(df_k_per_hour, aes(x = year, y = k_l_per_hour)) +
+  geom_line(linewidth = 1.2, color = "#d35400") +
+  geom_point(color = "#d35400", size = 2) +
+  theme_minimal() +
+  labs(
+    title = "Kapitalintensität pro Arbeitsstunde in Deutschland (1991–heute)",
+    subtitle = "Realer Nettokapitalstock pro geleisteter Arbeitsstunde (in Euro/Stunde)",
+    x = "Jahr",
+    y = "Kapitalstock pro Arbeitsstunde (EUR/Stunde)",
+    caption = "Datenquelle: EU-Kommission / AMECO (Variables: OKND, NLHA) via DBnomics"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r}
+#| message: false
+#| warning: false
+
+library(rdbnomics)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+message("Lade AMECO-Zeitreihen für Deutschland via DBnomics...")
+
+# Sichere Funktion zum Abrufen von AMECO-Reihen für Deutschland
+fetch_ameco_deu <- function(dataset_code, var_name) {
+  # Korrekte ID-Struktur: AMECO/<CODE>/DEU.1.0.0.0.<CODE>
+  series_id <- paste0("AMECO/", dataset_code, "/DEU.1.0.0.0.", dataset_code)
+
+  df <- tryCatch(
+    rdb(ids = series_id),
+    error = function(e) {
+      warning(paste("Konnte Daten für", dataset_code, "nicht laden:", e$message))
+      NULL
+    }
+  )
+
+  if (is.null(df) || nrow(df) == 0) {
+    stop(paste("Keine Daten für", dataset_code, "von DBnomics erhalten."))
+  }
+
+  df %>%
+    mutate(year = as.numeric(substr(as.character(period), 1, 4))) %>%
+    filter(year >= 1960) %>%
+    select(year, value) %>%
+    drop_na() %>%
+    group_by(year) %>%
+    summarise(!!sym(var_name) := mean(value, na.rm = TRUE), .groups = "drop")
+}
+
+# 1. Grundreihen laden
+# UWCD:  Arbeitnehmerentgelt (Mio. EUR)
+# NETD:  Erwerbstätige insgesamt (Tsd. Personen)
+# NWTD:  Arbeitnehmer / unselbstständig (Tsd. Personen)
+# UYND:  Nettonationaleinkommen zu Faktorkosten / Volkseinkommen (Mio. EUR) -> KORRIGIERT
+# ALCD2: Bereinigte Lohnquote am BIP z.F. (%)
+
+df_uwcd  <- fetch_ameco_deu("UWCD", "uwcd")
+df_netd  <- fetch_ameco_deu("NETD", "netd")
+df_nwtd  <- fetch_ameco_deu("NWTD", "nwtd")
+df_uynd  <- fetch_ameco_deu("UYND", "uynd")   # KORRIGIERT: UYND statt UUNF
+df_alcd2 <- fetch_ameco_deu("ALCD2", "alcd2")
+
+# 2. Zusammenführen und bereinigte Lohnquote am Volkseinkommen berechnen
+df_lohnquote <- df_uwcd %>%
+  inner_join(df_netd, by = "year") %>%
+  inner_join(df_nwtd, by = "year") %>%
+  inner_join(df_uynd, by = "year") %>%    # KORRIGIERT
+  inner_join(df_alcd2, by = "year") %>%
+  mutate(
+    # Bereinigungsfaktor für Selbstständige = (Erwerbstätige / Arbeitnehmer)
+    bereinigungsfaktor = netd / nwtd,
+    # Bereinigtes Arbeitnehmerentgelt
+    uwcd_bereinigt = uwcd * bereinigungsfaktor,
+    # Bereinigte Lohnquote am Nettonationaleinkommen zu Faktorkosten (in %)
+    lohnquote_nne_fk = (uwcd_bereinigt / uynd) * 100   # KORRIGIERT: uynd statt uunf
+  )
+
+# 3. Datensatz für ggplot ins Long-Format bringen
+df_plot <- df_lohnquote %>%
+  select(year,
+         `Nettonationaleinkommen z.F. (Volkseinkommen)` = lohnquote_nne_fk,
+         `Bruttoinlandsprodukt z.F. (ALCD2)` = alcd2) %>%
+  pivot_longer(cols = -year, names_to = "Nenner_Basis", values_to = "Lohnquote")
+
+# 4. Diagramm erstellen
+ggplot(df_plot, aes(x = year, y = Lohnquote, color = Nenner_Basis)) +
+  geom_line(linewidth = 1.2) +
+  scale_color_manual(values = c(
+    "Nettonationaleinkommen z.F. (Volkseinkommen)" = "#27ae60",
+    "Bruttoinlandsprodukt z.F. (ALCD2)" = "#2980b9"
+  )) +
+  theme_minimal() +
+  labs(
+    title = "Bereinigte Lohnquote in Deutschland (1960–heute)",
+    subtitle = "Vergleich: Nettonationaleinkommen zu Faktorkosten (UYND) vs. BIP zu Faktorkosten (ALCD2)",
+    x = "Jahr",
+    y = "Bereinigte Lohnquote (in %)",
+    color = "Bezugsgröße (Nenner)",
+    caption = "Berechnung: (UWCD * (NETD/NWTD) / UYND) * 100. Datenquelle: EU-Kommission / AMECO via DBnomics"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "bottom",
+    panel.grid.minor = element_blank()
+  )
+
+```
+
+
+### Beschäftigung/ Arbeitslosigkeit
+
+```{r}
+#| message: false
+#| warning: false
+
+
+library(rdbnomics)
+library(dplyr)
+library(ggplot2)
+
+message("Lade Arbeitslosenquoten (ILO-Standard) der G7-Staaten via DBnomics (Weltbank)...")
+
+# 1. Länderliste (ISO3-Codes) für G7
+g7_countries <- c("CAN", "FRA", "DEU", "ITA", "JPN", "GBR", "USA")
+
+# 2. Datenabruf über die Weltbank (WB) anstelle von AMECO
+# SL.UEM.TOTL.ZS = Unemployment, total (% of total labor force) (modeled ILO estimate)
+df_unemployment <- rdb(
+  provider_code = "WB",
+  dataset_code  = "WDI",
+  dimensions    = list(
+    country   = g7_countries,
+    indicator = "SL.UEM.TOTL.ZS"
+  )
+)
+
+# 3. Ländernamen für die Beschriftung
+country_names <- c(
+  "CAN" = "Kanada",
+  "FRA" = "Frankreich",
+  "DEU" = "Deutschland",
+  "ITA" = "Italien",
+  "JPN" = "Japan",
+  "GBR" = "Großbritannien",
+  "USA" = "USA"
+)
+
+# 4. Daten aufbereiten
+unemployment_clean <- df_unemployment %>%
+  # Bei der Weltbank heißt die DBnomics-Dimension 'country' (statt 'geo' bei AMECO)
+  mutate(country_code = toupper(country)) %>%
+  # Deutschen Namen zuweisen
+  mutate(country_label = country_names[country_code]) %>%
+  # Jahr extrahieren
+  mutate(year = as.numeric(substr(as.character(period), 1, 4))) %>%
+  # Relevante Spalten auswählen und sauber benennen
+  select(country = country_label, year, unemployment_rate = value) %>%
+  # Unvollständige Daten filtern
+  filter(!is.na(unemployment_rate) & !is.na(country)) %>%
+  # Zeitreihe ab 1990 filtern
+  filter(year >= 1990)
+
+# 5. Zeitreihenplot erstellen
+ggplot(unemployment_clean, aes(x = year, y = unemployment_rate, color = country)) +
+  geom_line(linewidth = 0.8) +
+  geom_point(size = 1.5) +
+  scale_color_brewer(palette = "Set1", name = "Land") +
+  # Y-Achse zwingend bei 0 beginnen lassen für sauberen visuellen Vergleich
+  scale_y_continuous(limits = c(0, NA), breaks = scales::pretty_breaks(n = 8)) +
+  labs(
+    title    = "Arbeitslosenquote in den G7-Staaten",
+    subtitle = "Anteil an der Erwerbsbevölkerung in % (ILO-Standard), ab 1990",
+    x        = "Jahr",
+    y        = "Arbeitslosenquote (%)",
+    caption  = "Datenquelle: Weltbank (WDI) via DBnomics"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title      = element_text(face = "bold"),
+    legend.position = "bottom",
+    legend.title    = element_text(face = "bold")
+  )
+```
+
 
 ### Inflation
 
@@ -1149,6 +1411,11 @@ ggplot(inflation_clean, aes(x = year, y = inflation_rate, color = country)) +
 library(knitr)
 library(kableExtra)
 
+#| eval: false
+#| output: false
+#| warning: false
+#| message: false
+
 # Data Frame erstellen
 bip_df <- data.frame(
   Berechnungsmethode = c("Entstehungsrechnung", "Verwendungsrechnung", "Verteilungsrechnung"),
@@ -1166,7 +1433,7 @@ bip_df <- data.frame(
 )
 
 # Variante A: Einfache Markdown/Pipe-Tabelle für Quarto/Rmd (nutzt \n als HTML-Break)
-kable(bip_df, format = "pipe")
+# kable(bip_df, format = "pipe")
 
 # Variante B: Mit kableExtra für HTML-/PDF-Output mit fester Spaltenbreite
 bip_df %>%

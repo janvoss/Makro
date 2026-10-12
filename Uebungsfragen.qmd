@@ -57,3 +57,64 @@
    - Abschreibungen = 400  
    - Saldo der Primäreinkommen aus der übrigen Welt = −50  
    **Gesucht**: Das Bruttoinlandsprodukt (BIP) zu Marktpreisen.
+   
+
+:::{.callout-note 
+    icon=false 
+    collapse=true }
+
+# Lösungen {.unnumbered}
+
+
+```{r}
+#| message: false
+#| warning: false
+
+library(knitr)
+library(kableExtra)
+
+lösungen_df <- data.frame(
+  Nr = 1:10,
+  Gesuchte_Groesse = c(
+    "BIP zu Marktpreisen",
+    "Außenbeitrag & BIP",
+    "NIP zu Marktpreisen",
+    "Saldo Primäreinkommen & BNE",
+    "Volkseinkommen",
+    "Unternehmenseinkommen & Lohnquote",
+    "Nettoinvestitionen",
+    "BNE, NNE_m & Volkseinkommen",
+    "Bruttowertschöpfung Stufen & BIP",
+    "BIP zu Marktpreisen (Rückwärts)"
+  ),
+  Rechenweg = c(
+    "3.000 + 350 - 50",
+    "Außenbeitrag: 1.200 - 1.000 = 200; BIP: 1.800 + 600 + 700 + 200",
+    "3.500 - 500",
+    "Saldo: 180 - 120 = +60; BNE: 4.000 + 60",
+    "3.200 - (400 - 50)",
+    "UVE: 2.500 - 1.750 = 750; Lohnquote: (1.750 / 2.500) * 100",
+    "800 - 500 (Kapitalstock wächst)",
+    "BNE: 3.800 + 100 = 3.900; NNE_m: 3.900 - 600 = 3.300; VE: 3.300 - 400",
+    "Stufe 1: 100; Stufe 2: 150; Stufe 3: 350; Summe BIP-Beitrag: 100 + 150 + 350",
+    "NNE_m = 2.400 + 300 = 2.700; BNE = 2.700 + 400 = 3.100; BIP = 3.100 - (-50)"
+  ),
+  Ergebnis = c(
+    "3.300 Mrd. €",
+    "AB: 200 Mrd. €, BIP: 3.300 Mrd. €",
+    "3.000 Mrd. €",
+    "Saldo: +60 Mrd. €, BNE: 4.060 Mrd. €",
+    "2.850 Mrd. €",
+    "UVE: 750 Mrd. €, Lohnquote: 70,0 %",
+    "300 Mrd. €",
+    "BNE: 3.900, NNE_m: 3.300, VE: 2.900 Mrd. €",
+    "BWS: 100€ / 150€ / 350€; BIP: 600 €",
+    "3.150 Mrd. €"
+  )
+)
+
+# Render-Befehl für Quarto / RMarkdown:
+kable(lösungen_df, format = "pipe", col.names = c("Nr.", "Gesuchte Größe", "Rechenweg", "Ergebnis"))
+```
+
+:::
