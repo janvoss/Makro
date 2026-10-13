@@ -244,15 +244,37 @@ window.Quarto = {
 </header>
 
 
+<blockquote class="twitter-tweet blockquote">
+<p lang="en" dir="ltr">
+</p><p>My first job was teaching principles of macro. The textbook opened with an old Keynesian consumption function.</p>
+<p>Absolutely horrible.</p>
+Luckily, you can teach everything in 2 time periods with graphs, and I did the rest of my time.
+<p></p>
+— Brian Albrecht (<span class="citation" data-cites="BrianCAlbrecht">(<a href="#ref-BrianCAlbrecht" role="doc-biblioref"><strong>BrianCAlbrecht?</strong></a>)</span>) <a href="https://x.com/BrianCAlbrecht/status/2109960677301321921?ref_src=twsrc%5Etfw">October 13, 2026</a>
+</blockquote>
+<script async="" src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 <section id="konsumtheorie" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="konsumtheorie"><span class="header-section-number">4.1</span> Konsumtheorie</h2>
+<ul>
+<li>Haushalte/Individuen entscheiden über ihren Konsum in mehreren Zeitperioden</li>
+</ul>
 <section id="grundmodel" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="grundmodel"><span class="header-section-number">4.1.1</span> Grundmodel</h3>
-<ol type="1">
-<li>Die intertemporale Nutzenfunktion</li>
-</ol>
-<p><span class="math display">\[ U = u(C_t) + \beta u(C_{t+1}) \]</span><span class="math inline">\(U\)</span>: Gesamtnutzen (Lifetime Utility) über beide Perioden.</p>
+<ul>
+<li><p>Hier angenommen Zwei Perioden <span class="math inline">\(t\)</span> und <span class="math inline">\(t+1\)</span></p></li>
+<li><p>Zunächst angenommen: In jeder Periode ein exogenes einkommen <span class="math inline">\(Y_t\)</span> bzw. <span class="math inline">\(Y_{t+1}\)</span></p></li>
+<li><p>Zum Zinssatz <span class="math inline">\(r\)</span> kann Einkommen zwischen beiden Perioden verschoben werden (Sparen, Kreditaufnahme)</p></li>
+<li><p>Budgetestriktion: <span class="math display">\[C_t + S_t \le Y_t\]</span>, <span class="math display">\[C_{t+1} + S_{t+1} \le Y_{t+1} + (1 + r_t) S_t\]</span></p></li>
+<li><p>Es gilt also <span class="math display">\[C_{t+1} + S_{t+1} - S_t \le Y_{t+1} + r_t S_t\]</span></p></li>
+</ul>
+<section id="die-intertemporale-nutzenfunktion" class="level4" data-number="4.1.1.1">
+<h4 data-number="4.1.1.1" class="anchored" data-anchor-id="die-intertemporale-nutzenfunktion"><span class="header-section-number">4.1.1.1</span> Die intertemporale Nutzenfunktion</h4>
+<p><span class="math display">\[ U = u(C_t) + \beta u(C_{t+1}) \]</span><span class="math inline">\(U\)</span>: Gesamtnutzen über beide Perioden.</p>
 <p><span class="math inline">\(C_t, C_{t+1}\)</span>: Konsum in der heutigen (<span class="math inline">\(t\)</span>) und zukünftigen Periode (<span class="math inline">\(t+1\)</span>).</p>
+</section>
+<section id="die-nutzenfunktion-in-jeder-periode" class="level4" data-number="4.1.1.2">
+<h4 data-number="4.1.1.2" class="anchored" data-anchor-id="die-nutzenfunktion-in-jeder-periode"><span class="header-section-number">4.1.1.2</span> Die Nutzenfunktion in jeder Periode</h4>
+<p>$$</p>
 <p><span class="math inline">\(u(\cdot)\)</span>: Periodennutzenfunktion.</p>
 <p>Annahme: <span class="math inline">\(u'(C) &gt; 0\)</span> (positiver Grenznutzen) und <span class="math inline">\(u''(C) &lt; 0\)</span> (abnehmender Grenznutzen).</p>
 <p><span class="math inline">\(\beta\)</span>: Subjektiver Diskontfaktor (<span class="math inline">\(0 &lt; \beta &lt; 1\)</span>, wobei <span class="math inline">\(\beta = \frac{1}{1+\rho}\)</span> und <span class="math inline">\(\rho\)</span> die Zeitpräferenzrate ist). Misst die Ungeduld der Haushalte.</p>
@@ -262,6 +284,7 @@ window.Quarto = {
 <p>Die Intertemporale Budgetrestriktion (IBC)(Entsteht durch Auflösen von Periode <span class="math inline">\(t+1\)</span> nach <span class="math inline">\(S_t\)</span> und Einsetzen in Periode <span class="math inline">\(t\)</span>)<span class="math display">\[ C_t + \frac{C_{t+1}}{1+r_t} = Y_t - T_t + \frac{Y_{t+1} - T_{t+1}}{1+r_t} \]</span></p>
 
 
+</section>
 </section>
 </section>
 

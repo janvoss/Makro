@@ -1,5 +1,12 @@
 # Die Mikroökonomik der Makroökonomik
 
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">My first job was teaching principles of macro. The textbook opened with an old Keynesian consumption function.
+
+Absolutely horrible.
+
+Luckily, you can teach everything in 2 time periods with graphs, and I did the rest of my time.</p>&mdash; Brian Albrecht (@BrianCAlbrecht) <a href="https://x.com/BrianCAlbrecht/status/2109960677301321921?ref_src=twsrc%5Etfw">October 13, 2026</a></blockquote>
+<script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+
 ## Konsumtheorie
 
 - Haushalte/Individuen entscheiden über ihren Konsum in mehreren Zeitperioden
