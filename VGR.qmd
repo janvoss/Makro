@@ -1091,7 +1091,13 @@ Sie teilen die Suppe gemäß der Hexenformel $\text{Grenzoroduktivität}\times \
     collapse=true }
     
 # Lösung {-}    
-Ausgangssituation ($K = 10, L = 10$)Produktion:$$Y = 0,5(10) + 0,5(10) = 5 + 5 = 10 \text{ Einheiten Hexensuppe}$$Aufteilung (Grenzprodukt $\times$ Input):Da die Grenzprodukte konstant sind ($\text{MP}_K = 0,5$ und $\text{MP}_L = 0,5$), erhalten beide genau ihren Beitrag:Klara: $0,5 \times 10 = 5 \text{ Einheiten}$Lara: $0,5 \times 10 = 5 \text{ Einheiten}$
+Ausgangssituation ($K = 10, L = 10$).
+
+Produktion:$$Y = 0,5 \times 10 + 0,5 \times 10 = 10 \text{ Einheiten Hexensuppe}
+
+$$Aufteilung (Grenzprodukt $\times$ Input):
+
+Da die Grenzprodukte konstant sind ($\text{MP}_K = 0,5$ und $\text{MP}_L = 0,5$), erhalten beide genau ihren Beitrag: Klara: $0,5 \times 10 = 5 \text{ Einheiten}$, Lara: $0,5 \times 10 = 5 \text{ Einheiten}$
 :::
 
 Klara verdreifacht heimlich ihren Input. 
@@ -1100,11 +1106,70 @@ Klara verdreifacht heimlich ihren Input.
 
 - Wie teilt sich die Suppe auf?
 
+:::{.callout-note 
+    icon=false 
+    collapse=true }
+    
+# Lösung {-}    
+
+Produktion:
+
+$$Y = 0,5(30) + 0,5(10) = 15 + 5 = 20 \text{ Einheiten Hexensuppe}$$
+
+Aufteilung: 
+
+Klara: $0,5 \times 30 = 15 \text{ Einheiten}$, Lara: $0,5 \times 10 = 5 \text{ Einheiten}$
+
+Ergebnis: 
+
+Laras Portion bleibt starr bei 5, obwohl die Suppe insgesamt von 10 auf 20 wächst. Klara erhält den gesamten Zuwachs.
+
+:::
+
+
 Lara wechselt das Rezept. Die Suppe folgt jetzt der Formel $K^{0,5} \times L^{0,5}$.
 
 - Wie viel wird bei den Inputs 10, 10 produziert und wie teilt sich die Suppe auf? 
 
+
+:::{.callout-note 
+    icon=false 
+    collapse=true }
+    
+# Lösung {-}    
+
+Produktion: 
+
+$$Y = 10^{0,5} \cdot 10^{0,5} = \sqrt{10 \cdot 10} = 10 \text{ Einheiten Hexensuppe}$$
+
+Grenzprodukte:
+
+Klara: $\text{MP}_K = 0,5 \cdot K^{-0,5} \cdot L^{0,5} = 0,5 \cdot \sqrt{\frac{10}{10}} = 0,5$
+
+Lara: $\text{MP}_L = 0,5 \cdot K^{0,5} \cdot L^{-0,5} = 0,5 \cdot \sqrt{\frac{10}{10}} = 0,5$
+
+Aufteilung (Grenzprodukt $\times$ Input):
+
+Klara: $0,5 \times 10 = 5 \text{ Einheiten}$
+
+Lara: $0,5 \times 10 = 5 \text{ Einheiten}$
+
+Ergebnis: Bei gleichen Inputs (10 und 10) produzieren beide exakt dieselbe Menge wie beim linearen Rezept (10 Einheiten) und teilen sie sich hälftig (5 zu 5).
+
+
+:::
+
 - Was passiert, wenn Klara heimlich ihren Input verdreifacht? 
+
+:::{.callout-note 
+    icon=false 
+    collapse=true }
+    
+# Lösung {-}    
+
+
+
+:::
 
 :::
 

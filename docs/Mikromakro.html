@@ -2,17 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>4&nbsp; Die Mikroökonomik der Makroökonomik – Makroökonomik -- Wohlstand und Stabilität</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -38,10 +44,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c599ca7844cfd5ff950332d51a54001f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-174fd6913be23cc9900c0b0ca550f0a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -84,7 +90,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -244,6 +250,27 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Mikrofundierung der Makro und der aktuelle Nobelpreis
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Der Wirtschaftsnobelpreis 2026 geht an die beiden US-Ökonomen Robert E. Hall und Michael Woodford für ihre bahnbrechenden Arbeiten zu den „mikroökonomischen Grundlagen der makroökonomischen Stabilisierung“.</p>
+<p>Die Auszeichnung würdigt die wissenschaftliche Leistung, makroökonomische Modelle und geldpolitische Konzepte konsequent auf dem optimierenden Verhalten einzelner wirtschaftlicher Akteure – also auf einer soliden Mikrofundierung – aufzubauen.</p>
+<p>Was bedeutet Mikrofundierung?</p>
+<p>Historisch basierte die makroökonomische Krisensteuerung (wie der klassische Keynesianismus) oft auf rein statistischen Zusammenhängen zwischen aggregierten Größen wie Gesamtkonsum, Inflation und Arbeitslosigkeit. In den Krisen der 1970er-Jahre scheiterten diese Modelle, da sie die Verhaltensanpassungen der Menschen ignorierten (die sogenannte Lucas-Kritik).</p>
+<p>Hall und Woodford leiteten gesamtwirtschaftliche Phänomene strikt aus den Entscheidungen rationaler Individuen:</p>
+<ul>
+<li><p>Das Mikro-Fundament: Anstatt den Konsum als feste makroökonomische Quote zu betrachten, analysierten sie detailliert, wann einzelne Haushalte sparen oder konsumieren und wann Firmen ihre Preise anpassen.</p></li>
+<li><p>Die mikroökonomische Stabilisierung: Weil Märkte aufgrund von verzögerten Preis- und Lohnanpassungen (Nominelle Rigiditäten) nicht sofort ins Gleichgewicht finden, können staatliche Eingriffe angebracht sein.</p></li>
+</ul>
 <blockquote class="twitter-tweet blockquote">
 <p lang="en" dir="ltr">
 </p><p>My first job was teaching principles of macro. The textbook opened with an old Keynesian consumption function.</p>
@@ -253,8 +280,58 @@ Luckily, you can teach everything in 2 time periods with graphs, and I did the r
 — Brian Albrecht (<span class="citation" data-cites="BrianCAlbrecht">(<a href="#ref-BrianCAlbrecht" role="doc-biblioref"><strong>BrianCAlbrecht?</strong></a>)</span>) <a href="https://x.com/BrianCAlbrecht/status/2109960677301321921?ref_src=twsrc%5Etfw">October 13, 2026</a>
 </blockquote>
 <script async="" src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+</div>
+</div>
+</div>
 <section id="konsumtheorie" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="konsumtheorie"><span class="header-section-number">4.1</span> Konsumtheorie</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Der Podcast zur Vorlesung: Das BIP
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<script class="podigee-podcast-player" src="https://player.podigee-cdn.net/podcast-player/javascripts/podigee-podcast-player.js" data-configuration="https://wirtschaftskunde.podigee.io/47-makro-am-mikro-05-konsumtheorie/embed?context=external"></script>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Aufwärmfragen
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Was ist eine Nutzenfunktion?</p></li>
+<li><p>Was heißt Grenznutzen?</p></li>
+</ol>
+<ol type="a">
+<li><p>Was passiert, wenn ich weniger von einer Aktivität durchführe, die mir einen geringen Grenznutzen verschafft?</p></li>
+<li><p>Was passiert, wenn ich dafür mehr von einer AKtivität durchführe, die mir einen höheren Grenzutzen verschafft?</p></li>
+<li><p>Wenn ich eine Nutzenfunktion mit abnehmendem Grenznutzen habe, was passiert mit meinem Grenznutzen, wenn ich eine AKtivität einschränke/ ausweite?</p></li>
+</ol>
+<ol type="1">
+<li><p>Was heißt diskontieren? Wofür nutzt man es?</p></li>
+<li><p>Was ist ein Zins?</p></li>
+<li><p>Was ist eine Indifferenzkurve?</p></li>
+<li><p>Was ist eine Budgetrestriktion?</p></li>
+<li><p>Woran erkennt man ein optimales Güterbündel im 2-Güter-Fall?</p></li>
+</ol>
+</div>
+</div>
+</div>
 <ul>
 <li>Haushalte/Individuen entscheiden über ihren Konsum in mehreren Zeitperioden</li>
 </ul>
@@ -340,13 +417,14 @@ Luckily, you can teach everything in 2 time periods with graphs, and I did the r
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

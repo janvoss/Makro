@@ -6,3 +6,5 @@
 Unterlagen-Pfister/
 
 /.quarto/
+
+**/*.quarto_ipynb

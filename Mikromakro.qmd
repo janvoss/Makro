@@ -1,5 +1,28 @@
 # Die Mikroökonomik der Makroökonomik
 
+:::{.callout-note 
+    icon=false 
+    collapse=true }
+
+# Mikrofundierung der Makro und der aktuelle Nobelpreis {-}
+
+
+Der Wirtschaftsnobelpreis 2026 geht an die beiden US-Ökonomen Robert E. Hall und Michael Woodford für ihre bahnbrechenden Arbeiten zu den „mikroökonomischen Grundlagen der makroökonomischen Stabilisierung“. 
+
+Die Auszeichnung würdigt die wissenschaftliche Leistung, makroökonomische Modelle und geldpolitische Konzepte konsequent auf dem optimierenden Verhalten einzelner wirtschaftlicher Akteure – also auf einer soliden Mikrofundierung – aufzubauen.
+
+Was bedeutet Mikrofundierung?
+
+Historisch basierte die makroökonomische Krisensteuerung (wie der klassische Keynesianismus) oft auf rein statistischen Zusammenhängen zwischen aggregierten Größen wie Gesamtkonsum, Inflation und Arbeitslosigkeit. In den Krisen der 1970er-Jahre scheiterten diese Modelle, da sie die Verhaltensanpassungen der Menschen ignorierten (die sogenannte Lucas-Kritik).
+
+Hall und Woodford leiteten gesamtwirtschaftliche Phänomene strikt aus den Entscheidungen rationaler Individuen:
+
+  - Das Mikro-Fundament: Anstatt den Konsum als feste makroökonomische Quote zu betrachten, analysierten sie detailliert, wann einzelne Haushalte sparen oder konsumieren und wann Firmen ihre Preise anpassen.
+  
+  - Die mikroökonomische Stabilisierung: Weil Märkte aufgrund von verzögerten Preis- und Lohnanpassungen (Nominelle Rigiditäten) nicht sofort ins Gleichgewicht finden, können staatliche Eingriffe angebracht sein.
+
+
+
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">My first job was teaching principles of macro. The textbook opened with an old Keynesian consumption function.
 
 Absolutely horrible.
@@ -7,7 +30,44 @@ Absolutely horrible.
 Luckily, you can teach everything in 2 time periods with graphs, and I did the rest of my time.</p>&mdash; Brian Albrecht (@BrianCAlbrecht) <a href="https://x.com/BrianCAlbrecht/status/2109960677301321921?ref_src=twsrc%5Etfw">October 13, 2026</a></blockquote>
 <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
+:::
+
 ## Konsumtheorie
+
+::: {.callout-tip icon="false" collapse="true"}
+# Der Podcast zur Vorlesung: Konsumtheorie {.unnumbered}
+
+<script class="podigee-podcast-player" src="https://player.podigee-cdn.net/podcast-player/javascripts/podigee-podcast-player.js" data-configuration="https://wirtschaftskunde.podigee.io/47-makro-am-mikro-05-konsumtheorie/embed?context=external"></script>
+
+:::
+
+:::{.callout-note 
+    icon=false 
+    collapse=true }
+
+# Aufwärmfragen {-}
+
+1. Was ist eine Nutzenfunktion?
+
+1. Was heißt Grenznutzen?
+
+  a. Was passiert, wenn ich weniger von einer Aktivität durchführe, die  mir einen geringen Grenznutzen verschafft?
+  
+  b. Was passiert, wenn ich dafür mehr von einer AKtivität durchführe, die mir einen höheren Grenzutzen verschafft? 
+  
+  c. Wenn ich eine Nutzenfunktion mit abnehmendem Grenznutzen habe, was passiert mit meinem Grenznutzen, wenn ich eine AKtivität einschränke/ ausweite?
+
+1. Was heißt diskontieren? Wofür nutzt man es?
+
+1. Was ist ein Zins?
+
+1. Was ist eine Indifferenzkurve?
+
+1. Was ist eine Budgetrestriktion?
+
+1. Woran erkennt man ein optimales Güterbündel im 2-Güter-Fall?
+    
+:::
 
 - Haushalte/Individuen entscheiden über ihren Konsum in mehreren Zeitperioden
 
