@@ -184,7 +184,7 @@ dot.render('bip_berechnungsmethoden', format='svg', cleanup=True)
 
 ![Die drei Wege zum BIP](bip_berechnungsmethoden.svg)
 
-## Verwandtes Konzept: Das Bruttonationaleinkommen
+### Verwandtes Konzept: Das Bruttonationaleinkommen
 
 ```{python}
 #| output: false
@@ -408,7 +408,7 @@ ggplot(df_clean, aes(x = year, y = value, color = indicator, linetype = indicato
   )
 ```
 
-## Marktpreise vs. Faktorkosten
+### Marktpreise vs. Faktorkosten
 
 ```{python}
 #| output: false
@@ -696,6 +696,74 @@ ggplot(wage_share_clean, aes(x = year, y = Lohnquote, color = country)) +
     legend.title = element_text(face = "bold")
   )
 ```
+
+
+### Grundsätzliche Erhebungs- und Interpretationsprobleme
+
+```{python}
+#| output: false
+
+import graphviz
+# from IPython.display import display, SVG
+
+# Erstellen des Graphen für die VGR-Struktur und Messprobleme
+dot = graphviz.Digraph(comment='Herausforderungen der Volkswirtschaftlichen Gesamtrechnung', format='svg')
+dot.attr(rankdir='TB', splines='ortho', fontname='Helvetica')
+
+# Zentrales Element: Bruttoinlandsprodukt / VGR
+dot.node('bip', 'Volkswirtschaftliche Gesamtrechnung (VGR)\n& Bruttoinlandsprodukt (BIP)',
+         shape='rectangle', style='filled,rounded', fillcolor='#d0e1fd', fontname='Helvetica', fontsize='13', width='4.5', height='1.1')
+
+# --- KLUSTER 1: AGGREGATION & BEWERTUNGSMAßSTAB ---
+with dot.subgraph(name='cluster_aggregation') as c1:
+    c1.attr(label='1. Aggregation & Monetärer Maßstab', style='rounded,filled', fillcolor='#fcfcfc', color='#d1d1d1', fontname='Helvetica', fontsize='11')
+    c1.node('ag1', 'Heterogene Güter\n(Nahrung, Fahrzeuge, Dienste)', shape='ellipse', style='filled', fillcolor='#e2f0d9', fontname='Helvetica', fontsize='10', width='2.8')
+    c1.node('ag2', 'Monetäre Bewertung\n(Menge × Preis = Gesamtwert)', shape='ellipse', style='filled', fillcolor='#e2f0d9', fontname='Helvetica', fontsize='10', width='2.8')
+    c1.edge('ag1', 'ag2', label='Kommensurabel machen')
+
+# --- KLUSTER 2: PREIS- UND KOSTENKONZEPTE (vertikal angeordnet) ---
+with dot.subgraph(name='cluster_konzepte') as c2:
+    c2.attr(label='2. Preis- und Kostenkonzepte', style='rounded,filled', fillcolor='#fcfcfc', color='#d1d1d1', fontname='Helvetica', fontsize='11')
+    c2.node('kp1', 'Marktpreise\n(inkl. Gütersteuern & Subventionen)', shape='rectangle', style='filled,rounded', fillcolor='#fff2cc', fontname='Helvetica', fontsize='10', width='3.2')
+    c2.node('kp2', 'Faktorkosten / Herstellungskosten\n(Reiner privatwirtschaftlicher Ressourcenaufwand)', shape='rectangle', style='filled,rounded', fillcolor='#fff2cc', fontname='Helvetica', fontsize='10', width='3.2')
+    c2.node('kp3', 'Nichtmarktproduktion (Staat)\n(Bewertung zu Inputkosten / Verzerrungsgefahr)', shape='rectangle', style='filled,rounded', fillcolor='#fff2cc', fontname='Helvetica', fontsize='10', width='3.2')
+    # Unsichtbare Kanten erzwingen vertikale Anordnung
+    c2.edge('kp1', 'kp2', style='invis')
+    c2.edge('kp2', 'kp3', style='invis')
+
+# --- KLUSTER 3: NOMINALE VS. REALE GRÖßEN ---
+with dot.subgraph(name='cluster_nom_real') as c3:
+    c3.attr(label='3. Nominale vs. Reale Größen', style='rounded,filled', fillcolor='#fcfcfc', color='#d1d1d1', fontname='Helvetica', fontsize='11')
+    c3.node('nr1', 'Nominales BIP\n(Laufende Preise, inkl. Inflation)', shape='rectangle', style='filled,rounded', fillcolor='#fce5cd', fontname='Helvetica', fontsize='10', width='3.0')
+    c3.node('nr2', 'Reales BIP\n(Preisbereinigung durch Kettenindizes)', shape='rectangle', style='filled,rounded', fillcolor='#fce5cd', fontname='Helvetica', fontsize='10', width='3.0')
+    c3.node('nr3', 'Hedonische Methoden\n(Rechnerische Qualitätsbereinigung)', shape='rectangle', style='filled,rounded', fillcolor='#fce5cd', fontname='Helvetica', fontsize='10', width='3.0')
+    c3.edge('nr1', 'nr2', label='Deflationierung')
+    c3.edge('nr2', 'nr3', label='Qualitätskorrektur')
+
+# --- KLUSTER 4: WOHLFAHRTS- & VOLLSTÄNDIGKEITSPROBLEME (vertikal angeordnet) ---
+with dot.subgraph(name='cluster_wohlfahrt') as c4:
+    c4.attr(label='4. Vollständigkeit & Wohlfahrtsaussage', style='rounded,filled', fillcolor='#fcfcfc', color='#d1d1d1', fontname='Helvetica', fontsize='11')
+    c4.node('wf1', 'Unvollständige Markterfassung\n(Hausarbeit, Subsistenz, Schwarzarbeit)', shape='rectangle', style='filled,rounded', fillcolor='#f8cecc', fontname='Helvetica', fontsize='10', width='3.2')
+    c4.node('wf2', 'Fehlende Wohlfahrtsfaktoren\n(Freizeit, Gesundheit unberücksichtigt)', shape='rectangle', style='filled,rounded', fillcolor='#f8cecc', fontname='Helvetica', fontsize='10', width='3.2')
+    c4.node('wf3', 'Ökologische Nachhaltigkeit\n(Keine Abschreibungen auf Naturkapital)', shape='rectangle', style='filled,rounded', fillcolor='#f8cecc', fontname='Helvetica', fontsize='10', width='3.2')
+    # Unsichtbare Kanten erzwingen vertikale Anordnung
+    c4.edge('wf1', 'wf2', style='invis')
+    c4.edge('wf2', 'wf3', style='invis')
+
+# Verbindungen vom zentralen BIP zu den Themenbereichen
+dot.edge('bip', 'ag2', color='#666666')
+dot.edge('bip', 'kp1', color='#666666')
+dot.edge('bip', 'nr1', color='#666666')
+dot.edge('bip', 'wf1', color='#666666')
+
+# Als SVG rendern und anzeigen
+output_file = 'vgr_analyse_struktur'
+dot.render(output_file, cleanup=True)
+# display(SVG(filename=f'{output_file}.svg'))
+
+print(f"Diagramm erfolgreich als '{output_file}.svg' gespeichert und angezeigt!")
+```
+![Mess- und Interpretationsprobleme im Zusammenhang mit dem BIP](vgr_analyse_struktur.svg)
 
 ## Schwankungen des BIPs: Konjunktur
 
