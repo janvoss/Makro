@@ -1333,6 +1333,67 @@ ggplot(df_plot, aes(x = year, y = Lohnquote, color = Nenner_Basis)) +
 - Wenn man annimmt, dass die Entlohnung von Arbeit und Kapital mit der Grenzproduktivität zusammenhängt, dann ähnelt die gesamtwirtschaftliche Produktionsfunktion eher der Form $Y=K^{\alpha} \times L^{1-\alpha}$ als $Y=\alpha \times K + \alpha \times L$
 
 
+```{python}
+#| output: false
+
+import graphviz
+# from IPython.display import display, SVG
+
+# Erstellen des Graphen für die Analyse der Lohnquote mit vertikaler Cluster-Anordnung
+dot = graphviz.Digraph(comment='Methodische Probleme der Lohnquote', format='svg')
+dot.attr(rankdir='TB', splines='ortho', fontname='Helvetica')
+
+# Zentrales Element: Funktionale Lohnquote
+dot.node('root', 'Funktionale Lohnquote\n& Einkommensverteilung in der VGR',
+         shape='rectangle', style='filled,rounded', fillcolor='#d0e1fd', fontname='Helvetica', fontsize='13', width='4.5', height='1.1')
+
+# --- KLUSTER 1: SELBSTÄNDIGEN-EINKOMMEN ---
+with dot.subgraph(name='cluster_selbststaendige') as c1:
+    c1.attr(label='1. Selbstständigen-Einkommen (Mischeinkommen)', style='rounded,filled', fillcolor='#fcfcfc', color='#d1d1d1', fontname='Helvetica', fontsize='11')
+    c1.node('s1', 'Unbereinigte Lohnquote\n(Nur Arbeitnehmerentgelt; anfällig für Struktureffekte)', shape='rectangle', style='filled,rounded', fillcolor='#fff2cc', fontname='Helvetica', fontsize='10', width='3.2')
+    c1.node('s2', 'Bereinigte Lohnquote\n(Fiktive Zurechnung von Unternehmerlohn als Näherung)', shape='rectangle', style='filled,rounded', fillcolor='#fff2cc', fontname='Helvetica', fontsize='10', width='3.2')
+    # Erzwinge vertikale Anordnung
+    c1.edge('s1', 's2', style='invis')
+
+# --- KLUSTER 2: WAHL DER BEZUGSGRÖSSE ---
+with dot.subgraph(name='cluster_bezugsgrösse') as c2:
+    c2.attr(label='2. Wahl der Bezugsgröße (Nenner)', style='rounded,filled', fillcolor='#fcfcfc', color='#d1d1d1', fontname='Helvetica', fontsize='11')
+    c2.node('b1', 'BIP zu Marktpreisen\n(Inkl. Abschreibungen & indirekter Steuern/Subventionen)', shape='rectangle', style='filled,rounded', fillcolor='#e2f0d9', fontname='Helvetica', fontsize='10', width='3.2')
+    c2.node('b2', 'Volkseinkommen / Nettonationaleinkommen\n(Bereinigt um Abschreibungen & Abgaben zu Faktorkosten)', shape='rectangle', style='filled,rounded', fillcolor='#e2f0d9', fontname='Helvetica', fontsize='10', width='3.2')
+    # Erzwinge vertikale Anordnung
+    c2.edge('b1', 'b2', style='invis')
+
+# --- KLUSTER 3: KAPITALKOSTEN & IMMATERIELLES KAPITAL ---
+with dot.subgraph(name='cluster_kapital') as c3:
+    c3.attr(label='3. Kapitalkosten & Immaterielles Kapital', style='rounded,filled', fillcolor='#fcfcfc', color='#d1d1d1', fontname='Helvetica', fontsize='11')
+    c3.node('k1', 'Buchhalterische vs. Ökonomische Gewinne\n(Einfluss von Sachkapitalbesitz & Residualgrößen)', shape='rectangle', style='filled,rounded', fillcolor='#fce5cd', fontname='Helvetica', fontsize='10', width='3.2')
+    c3.node('k2', 'Immaterielles Kapital & Automatisierung\n(F&E, Software, Substitution von Arbeit)', shape='rectangle', style='filled,rounded', fillcolor='#fce5cd', fontname='Helvetica', fontsize='10', width='3.2')
+    # Erzwinge vertikale Anordnung
+    c3.edge('k1', 'k2', style='invis')
+
+# --- KLUSTER 4: STAATSSEKTOR & WOHLFAHRT ---
+with dot.subgraph(name='cluster_staat') as c4:
+    c4.attr(label='4. Staatssektor & Wohlfahrtsaussage', style='rounded,filled', fillcolor='#fcfcfc', color='#d1d1d1', fontname='Helvetica', fontsize='11')
+    c4.node('w1', 'Staatsektor & Nichtmarktaktivitäten\n(Struktureller Anstieg der Lohnquote durch öffentliche Löhne)', shape='rectangle', style='filled,rounded', fillcolor='#f8cecc', fontname='Helvetica', fontsize='10', width='3.2')
+    c4.node('w2', 'Funktionale vs. Personelle Verteilung\n(Keine direkte Aussagekraft über Wohlfahrt & Ungleichheit)', shape='rectangle', style='filled,rounded', fillcolor='#f8cecc', fontname='Helvetica', fontsize='10', width='3.2')
+    # Erzwinge vertikale Anordnung
+    c4.edge('w1', 'w2', style='invis')
+
+# Verbindungen vom zentralen Knoten zu den jeweiligen Startknoten der Cluster
+dot.edge('root', 's1', color='#666666')
+dot.edge('root', 'b1', color='#666666')
+dot.edge('root', 'k1', color='#666666')
+dot.edge('root', 'w1', color='#666666')
+
+# Als SVG rendern und im Notebook anzeigen
+output_file = 'lohnquote_analyse'
+dot.render(output_file, cleanup=True)
+# display(SVG(filename=f'{output_file}.svg'))
+
+print(f"Diagramm erfolgreich als '{output_file}.svg' gespeichert und angezeigt!")
+```
+![Probleme der Lohnquotenberechnung und -interpretation](lohnquote_analyse.svg)
+
 ### Beschäftigung/ Arbeitslosigkeit
 
 
@@ -1477,6 +1538,70 @@ ggplot(unemployment_clean, aes(x = year, y = unemployment_rate, color = country)
     legend.title    = element_text(face = "bold")
   )
 ```
+
+```{python}
+#| output: false
+
+import graphviz
+# from IPython.display import display, SVG
+
+# Erstellen des Graphen für die Arbeitsmarktstatistik mit vertikaler Cluster-Anordnung
+dot = graphviz.Digraph(comment='Herausforderungen der Arbeitsmarktstatistik', format='svg')
+dot.attr(rankdir='TB', splines='ortho', fontname='Helvetica')
+
+# Zentrales Element: Offizielle Arbeitslosenquote
+dot.node('quote', 'Offizielle Arbeitslosenquote\n& Arbeitsmarktstatistik',
+         shape='rectangle', style='filled,rounded', fillcolor='#d0e1fd', fontname='Helvetica', fontsize='13', width='4.5', height='1.1')
+
+# --- KLUSTER 1: STILLE RESERVE & ERWERBSBEVÖLKERUNG ---
+with dot.subgraph(name='cluster_reserve') as c1:
+    c1.attr(label='1. Stille Reserve & Definition', style='rounded,filled', fillcolor='#fcfcfc', color='#d1d1d1', fontname='Helvetica', fontsize='11')
+    c1.node('r1', 'Arbeitslosenquote\n(Arbeitslose / Erwerbspersonen)', shape='rectangle', style='filled,rounded', fillcolor='#fff2cc', fontname='Helvetica', fontsize='10', width='3.2')
+    c1.node('r2', 'Stille Reserve / Entmutigte\n(Aufgabe der Suche -> sinkende Quote ohne neue Jobs)', shape='rectangle', style='filled,rounded', fillcolor='#fff2cc', fontname='Helvetica', fontsize='10', width='3.2')
+    c1.edge('r1', 'r2', label='Statistischer Effekt', fontname='Helvetica', fontsize='9')
+
+# --- KLUSTER 2: QUALITÄT & ARBEITSVOLUMEN ---
+with dot.subgraph(name='cluster_qualitaet') as c2:
+    c2.attr(label='2. Qualität, Umfang & Interner Arbeitsmarkt', style='rounded,filled', fillcolor='#fcfcfc', color='#d1d1d1', fontname='Helvetica', fontsize='11')
+    c2.node('q1', 'Kurzarbeit & Labor Hoarding\n(Konstante Kopfzahl, sinkende Arbeitsstunden)', shape='rectangle', style='filled,rounded', fillcolor='#e2f0d9', fontname='Helvetica', fontsize='10', width='3.2')
+    c2.node('q2', 'Unvollkommene Beschäftigungsformen\n(Vollzeit, Teilzeit, unfreiwillige Unterbeschäftigung)', shape='rectangle', style='filled,rounded', fillcolor='#e2f0d9', fontname='Helvetica', fontsize='10', width='3.2')
+    c2.node('q3', 'Verdeckte Unterbeschäftigung\n(Geringer produktiver Beitrag in Landwirtschaft/Familie)', shape='rectangle', style='filled,rounded', fillcolor='#e2f0d9', fontname='Helvetica', fontsize='10', width='3.2')
+    # Erzwinge vertikale Anordnung durch unsichtbare Kanten
+    c2.edge('q1', 'q2', style='invis')
+    c2.edge('q2', 'q3', style='invis')
+
+# --- KLUSTER 3: INFORMELLE & NICHTMARKTLICHE BEREICHE ---
+with dot.subgraph(name='cluster_informell') as c3:
+    c3.attr(label='3. Informelle & Nichtmarktliche Bereiche', style='rounded,filled', fillcolor='#fcfcfc', color='#d1d1d1', fontname='Helvetica', fontsize='11')
+    c3.node('i1', 'Schwarzarbeit & informeller Sektor\n(Kaum oder nur über Schätzungen erfasst)', shape='rectangle', style='filled,rounded', fillcolor='#fce5cd', fontname='Helvetica', fontsize='10', width='3.2')
+    c3.node('i2', 'Unbezahlte Eigenleistungen\n(Hausarbeit, Kinderbetreuung, Subsistenz)', shape='rectangle', style='filled,rounded', fillcolor='#fce5cd', fontname='Helvetica', fontsize='10', width='3.2')
+    # Erzwinge vertikale Anordnung
+    c3.edge('i1', 'i2', style='invis')
+
+# --- KLUSTER 4: STATISTISCHE ABGRENZUNGSKONZEPTE ---
+with dot.subgraph(name='cluster_konzepte') as c4:
+    c4.attr(label='4. Statistik- & Messkonzepte', style='rounded,filled', fillcolor='#fcfcfc', color='#d1d1d1', fontname='Helvetica', fontsize='11')
+    c4.node('k1', 'Administrative Registerdaten\n(Nationale Arbeitsverwaltung)', shape='rectangle', style='filled,rounded', fillcolor='#f8cecc', fontname='Helvetica', fontsize='10', width='3.2')
+    c4.node('k2', 'ILO-Konzept\n(Internationale Stichprobenbefragungen)', shape='rectangle', style='filled,rounded', fillcolor='#f8cecc', fontname='Helvetica', fontsize='10', width='3.2')
+    # Erzwinge vertikale Anordnung
+    c4.edge('k1', 'k2', style='invis')
+
+# Verbindungen vom zentralen Knoten zu den jeweiligen Startknoten der Cluster
+dot.edge('quote', 'r1', color='#666666')
+dot.edge('quote', 'q1', color='#666666')
+dot.edge('quote', 'i1', color='#666666')
+dot.edge('quote', 'k1', color='#666666')
+
+# Als SVG rendern und im Notebook anzeigen
+output_file = 'arbeitsmarktstatistik_vertikal'
+dot.render(output_file, cleanup=True)
+# display(SVG(filename=f'{output_file}.svg'))
+
+print(f"Diagramm erfolgreich als '{output_file}.svg' gespeichert und angezeigt!")
+```
+
+
+![Arbeitsmarktstatistik und Arbeitslosigkeit](arbeitsmarktstatistik_vertikal.svg)
 
 
 ### Inflation
