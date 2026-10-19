@@ -1146,7 +1146,7 @@ ggplot(gdp_pc_clean, aes(x = year, y = gdp_pc, color = country)) +
 
 # Hexensuppe {.unnumbered}
 
-Klara und Lara kochen zu Helloween **Hexensuppe**. Beide steuern 10 Einheiten Kräuter bei. Laut Hexenrezept entstehen daraus $0,5\times K+0,5\times L= 10$ Einheiten Hexensuppe.
+Klara und Lara kochen zu Helloween **Hexensuppe**. Beide steuern 10 Einheiten Kräuter bei. Laut Hexenrezept entstehen daraus $0,5\times K+0,5\times L= 10$ Einheiten Hexensuppe ($Y$).
 
 Sie teilen die Suppe gemäß der Hexenformel $\text{Grenzoroduktivität}\times \text{jeweilige Inputmenge}$.
 
@@ -1235,8 +1235,40 @@ Ergebnis: Bei gleichen Inputs (10 und 10) produzieren beide exakt dieselbe Menge
     
 # Lösung {-}    
 
+Produktion:$$Y = 30^{0,5} \cdot 10^{0,5} = \sqrt{30 \cdot 10} = \sqrt{300} \approx 17,32 \text{ Einheiten Hexensuppe}$$
+
+Die neue Aufteilung (Grenzprodukt $\times$ Input):
+
+Klara ($K = 30$):
+
+$$\text{MP}_K \cdot 30 = \left(0,5 \cdot \sqrt{\frac{10}{30}}\right) \cdot 30 = 0,5 \cdot \frac{1}{\sqrt{3}} \cdot 30 = \frac{15}{\sqrt{3}} \approx 8,66 \text{ Einheiten}$$
+
+Lara ($L = 10$):
+
+$$\text{MP}_L \cdot 10 = \left(0,5 \cdot \sqrt{\frac{30}{10}}\right) \cdot 10 = 0,5 \cdot \sqrt{3} \cdot 10 = 5\sqrt{3} \approx 8,66 \text{ Einheiten}$$
 
 
+:::
+
+Trotz der unterschiedlichen Beiträge teilt sich die Suppe also symmetrisch auf beide Hexen auf. Woran liegt das?
+
+:::{.callout-note 
+    icon=false 
+    collapse=true }
+    
+# Lösung {-}    
+
+Sei das allgemeine Rezept $Y=K^\alpha \cdot L^{1-\alpha}$.
+
+Bezeichne $w$ das Grenprodukt von Laras input. Dann gilt
+
+$$w = \frac{\partial Y}{\partial L} = (1-\alpha) \cdot K^\alpha A^{1-\alpha} L^{-\alpha} = (1-\alpha) \frac{Y}{L}$$
+
+Multipliziert man diesen Lohn mit den geleisteten Arbeitsstunden $L$ und teilt durch das Gesamteinkommen $Y$, erhält man die Aufteilung der Hexensuppe:$$\text{Hexenanteil} = \frac{w \cdot L}{Y} = \frac{(1-\alpha) \frac{Y}{L} \cdot L}{Y} = 1-\alpha$$
+
+Entsprechendes gilgt für Klaras Anteil $\alpha$. 
+
+Bei einem solchen Rezept und der Orientierung an der Grenzproduktivität werden die Anteile also durch den Exponenten $\alpha$ bestimmt und nicht durch die Anteile der Inputs.
 :::
 
 :::

@@ -69,9 +69,11 @@ Luckily, you can teach everything in 2 time periods with graphs, and I did the r
     
 :::
 
-- Haushalte/Individuen entscheiden über ihren Konsum in mehreren Zeitperioden
+- Haushalte/Individuen entscheiden über ihren Konsum in mehreren Zeitperioden, zunächst beie exogenem Einkommen in jeder Periode
 
-### Grundmodel
+## Grundmodel
+
+## Die intertemporale Budgetrestriktion
 
 - Hier angenommen Zwei Perioden $t$ und $t+1$
 
@@ -84,17 +86,26 @@ $$C_{t+1} + S_{t+1} \le Y_{t+1} + (1 + r_t) S_t$$
 
 - Es gilt also $$C_{t+1} + S_{t+1} - S_t \le Y_{t+1} + r_t S_t$$
 
+- Nach den zwei Perioden endet annahmegemäß der Planungshorizont. Niemand wird dem Haushalt in Periode $t+1$ einen Kredit geben.  Es gilt daher $S_{t+1}=0$
+
+Daher gilt auch
+
+$$C_t + S_t = Y_t$$
+$$C_{t+1} = Y_{t+1} + (1 + r_t) S_t$$
+
+$$S_t = \frac{C_{t+1}}{1 + r_t} - \frac{Y_{t+1}}{1 + r_t} $$
+
+$$\boxed{C_t + \frac{C_{t+1}}{1 + r_t} = Y_t + \frac{Y_{t+1}}{1 + r_t} }$$
+$\Rightarrow$ Der Barwert des Konsums muss also dem Barwert des Einkommens entsprchen
+
+
 #### Die intertemporale Nutzenfunktion
 
-$$ U = u(C_t) + \beta u(C_{t+1}) $$$U$: Gesamtnutzen über beide Perioden.
+$$ U = u(C_t) + \beta u(C_{t+1}) $$
 
+$U$: Gesamtnutzen über beide Perioden.
 
 $C_t, C_{t+1}$: Konsum in der heutigen ($t$) und zukünftigen Periode ($t+1$).
-
-
-#### Die Nutzenfunktion in jeder Periode
-
-$$
 
 $u(\cdot)$: Periodennutzenfunktion. 
 
@@ -102,10 +113,30 @@ Annahme: $u'(C) > 0$ (positiver Grenznutzen) und $u''(C) < 0$ (abnehmender Grenz
 
 $\beta$: Subjektiver Diskontfaktor ($0 < \beta < 1$, wobei $\beta = \frac{1}{1+\rho}$ und $\rho$ die Zeitpräferenzrate ist). Misst die Ungeduld der Haushalte.
 
-Periode $t$:  $$ C_t + S_t = Y_t - T_t $$$Y_t - T_t$: Verfügbares Einkommen in $t$ (Einkommen minus Pauschalsteuern).
+#### Die 
 
-$S_t$: Ersparnis (kann negativ sein = Kreditaufnahme).
 
-Periode $t+1$: $$ C_{t+1} = Y_{t+1} - T_{t+1} + (1+r_t)S_t $$$r_t$: Realzins.Konsum morgen entspricht dem morgigen Einkommen plus der verzinsten Ersparnis von heute.
 
-Die Intertemporale Budgetrestriktion (IBC)(Entsteht durch Auflösen von Periode $t+1$ nach $S_t$ und Einsetzen in Periode $t$)$$ C_t + \frac{C_{t+1}}{1+r_t} = Y_t - T_t + \frac{Y_{t+1} - T_{t+1}}{1+r_t} $$
+## Intertemporale Konsumoptimierung
+
+Der Haushalt muss folgendes Problem lösen:
+
+$$\max_{C_t, C_{t+1}} \quad U = u(C_t) + \beta u(C_{t+1})$$
+u.d.N.
+
+$$C_t + \frac{C_{t+1}}{1 + r_t} = Y_t + \frac{Y_{t+1}}{1 + r_t}$$
+$C_{t+1}$ ergibt sich aber aus der Entscheidung über $C_t$.
+
+Umformulieren und einsetzen
+
+$$C_{t+1} = (1 + r_t)(Y_t - C_t) + Y_{t+1}$$
+
+$$\max_{C_t} \quad U = u(C_t) + \beta u\left((1 + r_t)(Y_t - C_t) + Y_{t+1}\right)$$
+
+$$\frac{\partial U}{\partial C_t} = u'(C_t) + \beta u'\left((1 + r_t)(Y_t - C_t) + Y_{t+1}\right) \times -(1 + r_t)$$
+
+Das führt zu der **Euler-Bedingung**
+
+$$\boxed{u'(C_t) = \beta (1 + r_t) u'(C_{t+1})}$$
+
+Der korrigierte Grenznutzen muss in beiden Perioden gleich sein.
