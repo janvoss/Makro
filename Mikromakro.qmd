@@ -69,37 +69,134 @@ Luckily, you can teach everything in 2 time periods with graphs, and I did the r
     
 :::
 
-- Haushalte/Individuen entscheiden über ihren Konsum in mehreren Zeitperioden, zunächst beie exogenem Einkommen in jeder Periode
+- Haushalte/Individuen entscheiden über ihren Konsum in mehreren Zeitperioden, zunächst bei exogenem Einkommen in jeder Periode
 
-## Grundmodel
+- Die Entscheidungen für die Gegenwart sind dabei durch die Optimierung für die Zukunft geprägt.
 
-## Die intertemporale Budgetrestriktion
+### Die intertemporale Budgetrestriktion
 
-- Hier angenommen Zwei Perioden $t$ und $t+1$
+- Haushalte wollen in jeder Periode konsumieren und verwenden dafür Einkommen.
 
-- Zunächst angenommen: In jeder Periode ein exogenes einkommen $Y_t$ bzw. $Y_{t+1}$
+- Hier angenommen: 2 Perioden $t$ und $t+1$
 
-- Zum Zinssatz $r$ kann Einkommen zwischen beiden Perioden verschoben werden (Sparen, Kreditaufnahme)
+- Zunächst angenommen: In jeder Periode ein *exogenes* Einkommen $Y_t$ bzw. $Y_{t+1}$
 
-- Budgetestriktion: $$C_t + S_t \le Y_t$$,
-$$C_{t+1} + S_{t+1} \le Y_{t+1} + (1 + r_t) S_t$$
+- Zum Zinssatz $r$ kann Einkommen zwischen beiden Perioden verschoben werden (durch Sparen oder Kreditaufnahme). Es gibt keine exogene Begrenzung der Kreditaufnahme oder der Ersparnis
 
-- Es gilt also $$C_{t+1} + S_{t+1} - S_t \le Y_{t+1} + r_t S_t$$
+  - In Periode $t+1$ endet jedoch der Planungshorizont für alle und in dieser Periode müssen alle Kredite zurückgezahlt sein. 
+  
+  - Niemand hat einen Anreiz in Periode $t+1$ zu sparen.
 
-- Nach den zwei Perioden endet annahmegemäß der Planungshorizont. Niemand wird dem Haushalt in Periode $t+1$ einen Kredit geben.  Es gilt daher $S_{t+1}=0$
+- Budgetrestriktion:  $$\text{Periode }t\text{: }C_t + S_t \le Y_t$$,
+$$\text{Periode }t+1\text{: }C_{t+1} + S_{t+1} \le Y_{t+1} + (1 + r_t) S_t$$
 
-Daher gilt auch
+- Nach den zwei Perioden endet annahmegemäß der Planungshorizont. Niemand wird dem Haushalt in Periode $t+1$ einen Kredit geben. Es gilt daher $S_{t+1}=0$
+
+- Daher gilt auch
 
 $$C_t + S_t = Y_t$$
+
+  und
+
 $$C_{t+1} = Y_{t+1} + (1 + r_t) S_t$$
 
-$$S_t = \frac{C_{t+1}}{1 + r_t} - \frac{Y_{t+1}}{1 + r_t} $$
+$$ \iff S_t = \frac{C_{t+1}}{1 + r_t} - \frac{Y_{t+1}}{1 + r_t} $$
+
+- Daher
 
 $$\boxed{C_t + \frac{C_{t+1}}{1 + r_t} = Y_t + \frac{Y_{t+1}}{1 + r_t} }$$
-$\Rightarrow$ Der Barwert des Konsums muss also dem Barwert des Einkommens entsprchen
+$\Rightarrow$ Der Barwert des Konsums muss also dem Barwert des Einkommens entsprechen
+
+$\Rightarrow$ Das Timing des Konsums lässt sich also (zumindest teilweise) vom Timing der Einkommenszuflüsse entkoppeln
+
+Die **Budgetgerade** lautet also:
+$$\boxed{C_{t+1} = (1 + r_t)(Y_t - C_t) + Y_{t+1}}$$
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Die intertemporale Budgetgerade"
+
+library(ggplot2)
+
+# --- 1. Parameter festlegen ---
+Y_t   <- 100  # Einkommen in Periode t
+Y_tp1 <- 100  # Einkommen in Periode t+1
+r     <- 0.05 # Zinssatz
+
+# --- 2. Daten für die Budgetgerade erzeugen ---
+# Maximaler Konsum in Periode t (falls C_{t+1} = 0)
+max_Ct <- Y_t + Y_tp1 / (1 + r)
+
+# Datenrahmen mit C_t Werten und berechneten C_{t+1} Werten
+budget_data <- data.frame(
+  C_t = seq(0, max_Ct, length.out = 100)
+)
+budget_data$C_tp1 <- (1 + r) * (Y_t - budget_data$C_t) + Y_tp1
+
+# Ausstattungspunkt (Endowment)
+endowment <- data.frame(C_t = Y_t, C_tp1 = Y_tp1)
+
+# --- 3. ggplot2 Visualisierung ---
+p <- ggplot(budget_data, aes(x = C_t, y = C_tp1)) +
+  # Budgetgerade
+  geom_line(color = "#1f78b4", linewidth = 1.1) +
+  
+  # Ausstattungspunkt einzeichnen
+  geom_point(data = endowment, aes(x = C_t, y = C_tp1), color = "#e31a1c", size = 3.5) +
+  annotate("text", x = endowment$C_t, y = endowment$C_tp1, 
+           label = "  Ausstattung in beiden Perioden", parse = FALSE, 
+           color = "#e31a1c", hjust = 0, vjust = -1, fontface = "bold") +
+  
+  # Achsenlimits und -ursprung bei (0,0)
+  scale_x_continuous(expand = c(0, 0), limits = c(0, max_Ct * 1.15)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, ((1 + r) * Y_t + Y_tp1) * 1.15)) +
+  
+  # Beschriftungen (mit mathematischen Ausdrücken)
+  labs(
+    title = "Intertemporale Budgetgerade",
+    subtitle = paste0("Einkommen in Periode t: = ", Y_t, ", Einkommen in Periode t+1 = ", Y_tp1, " | Zins: r = ", r * 100, "%"),
+    x = expression(C[t]),
+    y = expression(C[t+1])
+  ) +
+  
+  # Akademisches Theme
+  theme_light(#base_size = 13
+    ) +
+  theme(
+    panel.grid.minor = element_blank(),
+  #  plot.title = element_text(face = "bold", hjust = 0.5),
+  #  plot.subtitle = element_text(hjust = 0.5, color = "gray40"),
+#    axis.title.x = element_text(face = "italic" #, size = 14
+ #                               ),
+ #   axis.title.y = element_text(face = "italic", # size = 14,
+  #                              angle = 0, vjust = 0.5)
+  )
+
+# Plot anzeigen
+p
+```
 
 
-#### Die intertemporale Nutzenfunktion
+[Interaktive intertemporale Budgetgerade](https://shinylive.io/r/app/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAYgB9cACAZ1KggBMoAbEuRB0gCcArnAA6EOowBuASzgB3OIIAScWQHMAFqX4A2AAwGJErrIBGgqIICeACiZbZEGwEoTEYbIYAeALQMAGZcXuwAClAacHYSDAKypFxwERBwXDFgAJJkyuQwqERWSQwAQsLsUaRRVuziYK64sQxNTLK15tYAMlA2RMKkMRBxca3t1ilpg8PDTGa1gtmo-RkAmgD6pGJ4zWAAos4A1kQw8EPODGHKskS1AohbjE3Tzy8MMOcAvAwGjDBQAB4ML4AJiMMm4oiBDAAjGDmORUFCAKwNJ4zObKRbLLbrUioaEPHb7CBHE4UBjnS6Ca63UgAamh922aNer3eQy+PzeAKhoK50ghcChsK5LDgiK+KMaQ2eszamIgSwGW0EhK2AC1nEwmFBSAAvBh2QSuJmPGWs1nsqEGDBcv6AzkYJHgkJCx0GZ3w8XW23Q9zmhiogNov7OCbpFkMVA8UgAeX6Soy5nKlTCMcJWnU2lIUK2ABYkQZUP8tkGXpmuKgACpwf7KsAAEXkpRTcCqyigtz+ggO8kEOfYzekykCAB+NB1BOT7bI-kkhgBpEhMYRkiBRM5DczqWpDKk0iiltH+uL+-0SJjKYeCXwBQLCCAEUjXCB2ZxKxh9PH9RiX7Uv1wGBAJomi-JUABJkwqNs0yIHN-AYKcOGUWCBmAgNcWGBD336cDcTRXF8VvClFVwwiCQDG9pmw0jSHA1VgwDe01gAYXggJMLpBhyIYAB6Q1oQYLjjTRNEWI2NYBS4JgsICS8AEc7DtAFWNIRh5w0UgtAwL9hULE9hnEvFoUk7gZIQuxBOEwCACpDUwgIjNM6TAK48jRIDVBrDsbsoQIOw8ydRhAs9ABmRhgVcAy4jRagLhjBhpEKbcpwSck7CILRUgYKB+mOXVZCYAhMwYABBYrLyGB92AYABlVgOGsdg-CwAAT5CRM8mM7CcqSmEYIz8Wc-qBBsVA3R2CA1QDZ5-jMGA-KU4L9LNC0bHmxauULAwy1Zf4ARkr4tlkQkbAO3MwBOvBI2GAE4EOhgADFSs6WrdmlC05qgcwoVrVAp3-EgeuAUgAF0GmaGbpnW77fv+f77taIGWJBhlwY+y0oE+HZsnIfs4HyQpuCFMpoPbGo6gx14CFrDBQw5GEMGBRgaf+DAuFhr5oQwaFGECEhSHZzmGFC6LIemOKAHEEjxswIHkM4FpUZw8Y0EQODRNW2jsYguAusxszVnpCS4UgbAu9g4PIdgj0YiWyoq8laygA4c23bwDCjIhWmfEg+0PAMAUKyzGAKB6uV1KEFKWhgCy5cxzclHb1KgB6-TRIOmDsZmvfDxhI6+aOtrhBPkWThgObTsXYpbMnqk7IV1AgPV1GK1IpoDOX7p6iS+oGjYhr7hhdYu6hoUCAB2AAOcw8xNhQapBJ1q4DOLSuEbVWFIUgHw0JglhJHMm5b2Q24D6YChVrPcUYciWaIPWjpoOBQuhKBoQIQlUGK4UAE4WdrMKDAU8V72xKPdYq1JAg73XAwWoMl16b11DAveB9XZMDROQOsdgb7cQHrzCu300gPS2GVDeLBkG7xIgwd2u4LhXBuIebYYcoR5nvo-HY1AX5vw-oSfmZBeQGQAL7+iER4RwzgbClXQHYLwv4rzKFcGAIRoMgA)
+
+
+
+***
+Die Annahme, dass die Zukunft mit Sicherheit eintritt und bekannt ist, ist natürlich völlig unrealisitisch. Aber von diesem Ausgangspunkt kann man eine Zukunftsorientierung auch bei nicht-perfekter Voraussicht und Erwartungsbildung modellieren. 
+
+Die gegenteilige Annahme, dass Individuen die Zukunft *gar nicht* berücksichtigen, ist ebenso stark, erlaubt aber nicht (so ohne weiteres) die Erweiterung hin zu einer nicht-perfekten Berücksichtigung.
+
+***
+
+### Die intertemporale Nutzenfunktion
+
+Individuen/Haushalte erhalten in jeder Periode Nutzen $u$ aus Konsum $C_t$ bzw. $C_{t+1}$.
+
+Der intertemporale Gesamtnutzen $U$ ist die gewichtete Summe des Nutzens in den Perioden. Der Konsum in $t+1$ wird mit $\beta \in[0;1]$ gewichtet.
+
+$\beta = \frac{1}{1+\rho}$ und $\rho$, $\rho$ ist der subjektive Diskontfaktor  
+
 
 $$ U = u(C_t) + \beta u(C_{t+1}) $$
 
@@ -113,11 +210,8 @@ Annahme: $u'(C) > 0$ (positiver Grenznutzen) und $u''(C) < 0$ (abnehmender Grenz
 
 $\beta$: Subjektiver Diskontfaktor ($0 < \beta < 1$, wobei $\beta = \frac{1}{1+\rho}$ und $\rho$ die Zeitpräferenzrate ist). Misst die Ungeduld der Haushalte.
 
-#### Die 
 
-
-
-## Intertemporale Konsumoptimierung
+### Intertemporale Konsumoptimierung
 
 Der Haushalt muss folgendes Problem lösen:
 
