@@ -1161,9 +1161,9 @@ Sie teilen die Suppe gemäß der Hexenformel $\text{Grenzoroduktivität}\times \
 # Lösung {-}    
 Ausgangssituation ($K = 10, L = 10$).
 
-Produktion:$$Y = 0,5 \times 10 + 0,5 \times 10 = 10 \text{ Einheiten Hexensuppe}
+Produktion:$Y = 0,5 \times 10 + 0,5 \times 10 = 10 \text{ Einheiten Hexensuppe}$
 
-$$Aufteilung (Grenzprodukt $\times$ Input):
+Aufteilung (Grenzprodukt $\times$ Input):
 
 Da die Grenzprodukte konstant sind ($\text{MP}_K = 0,5$ und $\text{MP}_L = 0,5$), erhalten beide genau ihren Beitrag: Klara: $0,5 \times 10 = 5 \text{ Einheiten}$, Lara: $0,5 \times 10 = 5 \text{ Einheiten}$
 :::
