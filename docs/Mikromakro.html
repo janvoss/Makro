@@ -486,21 +486,259 @@ Luckily, you can teach everything in 2 time periods with graphs, and I did the r
 <p><span class="math inline">\(u(\cdot)\)</span>: Periodennutzenfunktion.</p>
 <p>Annahme: <span class="math inline">\(u'(C) &gt; 0\)</span> (positiver Grenznutzen) und <span class="math inline">\(u''(C) &lt; 0\)</span> (abnehmender Grenznutzen).</p>
 <p><span class="math inline">\(\beta\)</span>: Subjektiver Diskontfaktor (<span class="math inline">\(0 &lt; \beta &lt; 1\)</span>, wobei <span class="math inline">\(\beta = \frac{1}{1+\rho}\)</span> und <span class="math inline">\(\rho\)</span> die Zeitpräferenzrate ist). Misst die Ungeduld der Haushalte.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Parameter (hier direkt anpassen) ---</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>sigma    <span class="ot">&lt;-</span> <span class="fl">1.0</span>   <span class="co"># Substitutionselastizität (σ = 1 entspricht Log-Nutzen)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>beta_val <span class="ot">&lt;-</span> <span class="fl">0.95</span>  <span class="co"># Diskontfaktor (β)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Hilfsfunktionen ---</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Nutzenfunktion u(c)</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>u_func <span class="ot">&lt;-</span> <span class="cf">function</span>(c, s) {</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">abs</span>(s <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">&lt;</span> <span class="fl">1e-5</span>) <span class="fu">return</span>(<span class="fu">log</span>(c))</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>((c<span class="sc">^</span>(<span class="dv">1</span> <span class="sc">-</span> s)) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> s))</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Indifferenzkurve (berechnet C_{t+1} für ein gegebenes Nutzenniveau U)</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>get_c_future <span class="ot">&lt;-</span> <span class="cf">function</span>(c_t, target_U, s, beta_val) {</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># U = u(C_t) + beta * u(C_{t+1})  =&gt;  u(C_{t+1}) = (U - u(C_t)) / beta</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  u_c_future_val <span class="ot">&lt;-</span> (target_U <span class="sc">-</span> <span class="fu">u_func</span>(c_t, s)) <span class="sc">/</span> beta_val</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">abs</span>(s <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">&lt;</span> <span class="fl">1e-5</span>) {</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">exp</span>(u_c_future_val))</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    term <span class="ot">&lt;-</span> u_c_future_val <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> s)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">ifelse</span>(term <span class="sc">&gt;</span> <span class="dv">0</span>, term<span class="sc">^</span>(<span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> s)), <span class="cn">NA</span>))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Datenberechnung ---</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Referenz-Nutzenniveau festlegen (Ankerpunkt Ct = 50, Ct+1 = 50)</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>c_ref <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>U_target <span class="ot">&lt;-</span> <span class="fu">u_func</span>(c_ref, sigma) <span class="sc">+</span> beta_val <span class="sc">*</span> <span class="fu">u_func</span>(c_ref, sigma)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Konsumwerte für die X-Achse generieren</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>c_vals <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">150</span>, <span class="at">length.out =</span> <span class="dv">500</span>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataframe für Plot 1 (Nutzenfunktion)</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>df_left <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">c_t  =</span> c_vals,</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">util =</span> <span class="fu">u_func</span>(c_vals, sigma)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataframe für Plot 2 (Indifferenzkurve)</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>df_right <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">c_t =</span> c_vals</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>df_right<span class="sc">$</span>c_future <span class="ot">&lt;-</span> <span class="fu">sapply</span>(df_right<span class="sc">$</span>c_t, <span class="cf">function</span>(c) <span class="fu">get_c_future</span>(c, U_target, sigma, beta_val))</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Erstellung der ggplot2-Diagramme ---</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 1: Nutzenfunktion u(Ct)</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_left, <span class="fu">aes</span>(<span class="at">x =</span> c_t, <span class="at">y =</span> util)) <span class="sc">+</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"darkgreen"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Nutzenfunktion u(Ct)"</span>,</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="cf">if</span>(<span class="fu">abs</span>(sigma <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="st">"Spezialfall: Log-Nutzen"</span> <span class="cf">else</span> <span class="st">"CRRA-Nutzenfunktion"</span>,</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Konsum heute ("</span>, C[t], <span class="st">")"</span>)),</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Nutzenwert"</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 2: Indifferenzkurve</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_right, <span class="fu">aes</span>(<span class="at">x =</span> c_t, <span class="at">y =</span> c_future)) <span class="sc">+</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">150</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">150</span>)) <span class="sc">+</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Indifferenzkurve"</span>,</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Kombinationen für gleiches U"</span>,</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Konsum heute ("</span>, C[t], <span class="st">")"</span>)),</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Konsum morgen ("</span>, C[t<span class="sc">+</span><span class="dv">1</span>], <span class="st">")"</span>))</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Nebeneinander anordnen und anzeigen ---</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>combined_plot <span class="ot">&lt;-</span> p1 <span class="sc">+</span> p2</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(combined_plot)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Mikromakro_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Nutzenfunktion und Indifferenzkurve</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="https://shinylive.io/r/app/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IIoqlK0SnLgVqoKAXgCcq4aIgBiAAQBVAJLaAInABmfWpJLb2Aa2pROnWpwLdtMS9tPUArrQATAAUoAHM4dX9tAB4AWm8-QJDw9hFtbUlSajgQiDhqVLAgxgAT0zhGCgAvCkRtADlfUhqIU18IWysIbQAybX0IANpTcsqIKttfRgA3OCEwAVw07WXnALh6FgAZKFYiJtTu9O01jZZc-MPj4+4AFkKQ5nhyRnnF5evOOnXGAdQD+bOUIwKDzXArMAAZV89E4mSaUggnHyjkkVUsJVINkAw8ACRBglZHa7EkkePjaRTaAAM4JBAA8KdoAKzg6ZQPxwRkARnBcLgqEZVIwXPeROOX0CFT+ALA9DgpFBeAhRhcthIpFMUE6REYNkATcB4gkfUkmzzdSlCqk8jxQBmU61sjmCjDKFkncgCi0YK2ikncfKoAAqcDppEK2O52gopE4qEYtDcWJ+2i2RFCsUazQobQ6XQwbyWYvS3EY7F9xP91CDIbD8xVnIGQxGFWqkxmnIA7rRGAFvAAf3VwcnlPmcBpNFoQWizKC+bRyypuPKkcEBRzzofaADCWMpTKp2navZ3AGouYz91HGJUE9wsV2e-mFsby+ljSC+BcCsb0qhqERSAAeSaf5azAOMzBbCACByf9SAJf1aFCO9GXmAB2fdUDpN4X2WdR1BEHRIQqWZdVTUJaFsERkXbXU4m8doCC6dg+FA8F9lIUCBG0EBlmWHQAAlaGoUxOBzTpEX7XV1m6TMWkPdgCHUdJfAAfRzAgYniDTmIIXluN4sVhhsKBYS4bR4hFGJtC5OBYiZbjKlIKYIHYf9QkUgRlOOJyXPYRSAD12HPeJOC87QAHobBCk4vOWABfPijkE4TRPEropO0IYG0GYZRlbKZZhsBc4CXeVt1UkBSDPeLvPCUhVIIdSmimTl6J0xFFNUlcMhYerVN0XlwTlBVVMdAzjR0XRGV8dgt267iTw3BVtAAKgU+aqpq7z0h0WbNuqrlasZdhpvifaFu4qKRtBMU1KatpnMqMb2S0mwFUYfqzsPZroK6nqwqu5aoBe6hjWNYz2FMmQx0s7johsuyHJ4n9tF8xhXJDVB2Hu5qnrgUG4rFeKo2oZEUaLbQppgWw4BLdLETqTTKWAOd1uC2IwoAXSCrkIo5wHUZeGA3txx7WtBtboos2LUfR1zhnyZF2GF7QAD5qXBYXeci6XQq88F6gAQSJ65EqOc23yODjQIAEgg-LoNggC3rGH4gjg9hDM+N7WKaW2gRBY0bsl+i-dIW2bvBsUdB2PYmjqAAmbQPYAsd2heIdoEGCobGTgAtIdsggcFz0hVB2XIHbtAr0sYFMRgiA7RkCHYRPS8WG1dUpVvbgwN0+7dABmcFE9N45Ju0LBILGKoMwnCgpxnOcRyyOBwm6dgjY6Cp-lzbdd2ZGkD7PC8qWrprKlMN792NXRur68r6LUjSuqv-TtCWkPHSll-GLfsw+lo7XB0EYKA5BugbwqLQKCxomqOjHPRZEABHdgbouT7nBMXUIpBuAYA4mfc+wDjg6C5BgFOcFtBEDlBAOoclsztAktYC6pBq4ImoKDRB51fqt3geyTgQCxR-gAl1BB4J2GcK1qwBQqEaAEmINQWRa5GC2FCJUCgBJqAdl7JSRO-dCwmm0HSBw9BGRY0qE4TqFc+SFAANLSF8CLf0TROSFHBFuYApAubghwgsV8JJWAmNkfQiAHYKjwTwKjY4H5zQ11RHAQoISGbMLmqwgkwwoZmU4LEKyCNLTI3mPEci88syiDAKTcmhTtxYCwEbEpLQ3jVzUYEMsxDdraD0RQl2Gdaj9Fys2WebZZhwLxhLBBb1OBoD-BwPhZNwQdRIJ5bQ-UHotUqIpcE98Pr1SGsDQm1djTCLDLMgR2hVn40kRkaRnJKTzDBkqBRsjNBUipGhROAAhROmjtGMj0SyKJ6RjG0BFj3dgx8MHn3BIE4FLcwWl33P44kxjTJmLpBBSxizrHkDsQ4pxcAXE2AJB4rxPjnx+IMSaQJKLKTmLgBi1yWKEnzHsUiRxHgdQb0JUqYlZ5vEQmEOSgFNpyS3LAI2PKUEJiFVcfYmA9A+DgMRBQTKoRsi3jpXoAVTT4wBFaRbdQ5tCLaCNugd0LAIHUV4PwE12MoiUn8LyEiudKQ0VIuoMA8UuZAA">Interaktive Nutzenfunktion und Indifferenzkurve</a></p>
 </section>
 <section id="intertemporale-konsumoptimierung" class="level3" data-number="4.1.3">
 <h3 data-number="4.1.3" class="anchored" data-anchor-id="intertemporale-konsumoptimierung"><span class="header-section-number">4.1.3</span> Intertemporale Konsumoptimierung</h3>
+<section id="allgemeine-gleichung-für-zwei-perioden" class="level4" data-number="4.1.3.1">
+<h4 data-number="4.1.3.1" class="anchored" data-anchor-id="allgemeine-gleichung-für-zwei-perioden"><span class="header-section-number">4.1.3.1</span> Allgemeine Gleichung für zwei Perioden</h4>
 <p>Der Haushalt muss folgendes Problem lösen:</p>
 <p><span class="math display">\[\max_{C_t, C_{t+1}} \quad U = u(C_t) + \beta u(C_{t+1})\]</span> u.d.N.</p>
 <p><span class="math display">\[C_t + \frac{C_{t+1}}{1 + r_t} = Y_t + \frac{Y_{t+1}}{1 + r_t}\]</span> <span class="math inline">\(C_{t+1}\)</span> ergibt sich aber aus der Entscheidung über <span class="math inline">\(C_t\)</span>.</p>
 <p>Umformulieren und einsetzen</p>
 <p><span class="math display">\[C_{t+1} = (1 + r_t)(Y_t - C_t) + Y_{t+1}\]</span></p>
 <p><span class="math display">\[\max_{C_t} \quad U = u(C_t) + \beta u\left((1 + r_t)(Y_t - C_t) + Y_{t+1}\right)\]</span></p>
-<p><span class="math display">\[\frac{\partial U}{\partial C_t} = u'(C_t) + \beta u'\left((1 + r_t)(Y_t - C_t) + Y_{t+1}\right) \times -(1 + r_t)\]</span></p>
+<p><span class="math display">\[\frac{\partial U}{\partial C_t} = u'(C_t) + \beta u'\left((1 + r_t)(Y_t - C_t) + Y_{t+1}\right) \times -(1 + r_t)\stackrel{!}{=}0\]</span></p>
+<p><span class="math display">\[\iff u'(C_t)=\beta u'(\underbrace{(1+r)(Y_t-C_t)+Y_{t+1}}_{C_{t+1}})\]</span></p>
 <p>Das führt zu der <strong>Euler-Bedingung</strong></p>
 <p><span class="math display">\[\boxed{u'(C_t) = \beta (1 + r_t) u'(C_{t+1})}\]</span></p>
-<p>Der korrigierte Grenznutzen muss in beiden Perioden gleich sein.</p>
+<ul>
+<li>Der korrigierte Grenznutzen muss in beiden Perioden gleich sein.</li>
+</ul>
+<p>Korrigiert um</p>
+<ul>
+<li><p>den Diskontfaktor <span class="math inline">\(\beta\)</span>. <span class="math inline">\(\beta\)</span> misst die Geduld. Je niedriger zukünftiger Nutzen gewichtet wird (je geringer die Geduld ist), desto höher muss der zukünftige Grenznutzen sein;</p></li>
+<li><p>den Zinssatz <span class="math inline">\(r\)</span>. <span class="math inline">\(r\)</span> ist der Preis der Ungeduld und die Belohnung für Geduld. Je höher der Preis der Ungeduld ist, desto mehr Konsum in die Zukunf geschoben und desto niedriger muss der zukünftige Grenznutzen sein.</p></li>
+<li><p>wenn gilt: <span class="math inline">\(\beta= \frac{1}{1+r}\)</span>, gleichen sich die Grenznutzen genau aus.</p></li>
+</ul>
+</section>
+<section id="grafische-herleitung-für-zwei-perioden" class="level4" data-number="4.1.3.2">
+<h4 data-number="4.1.3.2" class="anchored" data-anchor-id="grafische-herleitung-für-zwei-perioden"><span class="header-section-number">4.1.3.2</span> Grafische Herleitung für zwei Perioden</h4>
+<p>Aus der Euler-Gleichung lässt sich schreiben</p>
+<p><span class="math display">\[u'(C_t) = \beta (1 + r_t) u'(C_{t+1})\]</span></p>
+<p><span class="math display">\[\iff -\frac{u'(C_t)}{\beta u'(C_{t+1})}=-(1+r)\]</span></p>
+<p><span class="math display">\[\iff MRS=\text{Steigung der Budgetgerade}\]</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lade notwendige Bibliothek</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Parameterdefinitionen</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">0.875</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Wir berechnen die Utility-Level so, dass die Kurven exakt</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># durch die gewünschten visuellen Koordinaten verlaufen.</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>U0 <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fl">1.4</span>) <span class="sc">+</span> beta <span class="sc">*</span> <span class="fu">log</span>(<span class="fl">3.8</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>U1 <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fl">2.0</span>) <span class="sc">+</span> beta <span class="sc">*</span> <span class="fu">log</span>(<span class="fl">3.5</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>U2 <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fl">2.3</span>) <span class="sc">+</span> beta <span class="sc">*</span> <span class="fu">log</span>(<span class="fl">6.0</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Funktion der Indifferenzkurve (Umgestellt nach C_{t+1})</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># U = ln(C_t) + beta * ln(C_{t+1})  =&gt;  C_{t+1} = exp((U - ln(C_t)) / beta)</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>IC <span class="ot">&lt;-</span> <span class="cf">function</span>(x, U) { <span class="fu">exp</span>((U <span class="sc">-</span> <span class="fu">log</span>(x)) <span class="sc">/</span> beta) }</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Koordinaten der relevanten Punkte: Endowment (Y), P0, P3 (Tangentialpunkt), P2, P1</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>pts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="fl">1.0</span>, <span class="fl">1.4</span>, <span class="fl">2.0</span>, <span class="fl">2.3</span>, <span class="fl">2.6</span>),</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">c</span>(<span class="fl">5.5</span>, <span class="fl">3.8</span>, <span class="fl">3.5</span>, <span class="fl">6.0</span>, <span class="fl">2.3</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Achsenbeschriftungen definieren</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>x_bks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.0</span>, <span class="fl">1.4</span>, <span class="fl">2.0</span>, <span class="fl">2.3</span>, <span class="fl">2.6</span>, <span class="fl">3.75</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>x_lbls <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expression</span>(Y[t]),</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expression</span>(C[<span class="dv">0</span><span class="sc">*</span><span class="st">","</span><span class="sc">*</span>t]),</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expression</span>(C[<span class="dv">3</span><span class="sc">*</span><span class="st">","</span><span class="sc">*</span>t]),</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expression</span>(C[<span class="dv">2</span><span class="sc">*</span><span class="st">","</span><span class="sc">*</span>t]),</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expression</span>(C[<span class="dv">1</span><span class="sc">*</span><span class="st">","</span><span class="sc">*</span>t]),</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expression</span>(Y[t] <span class="sc">+</span> <span class="fu">frac</span>(Y[t<span class="sc">+</span><span class="dv">1</span>], <span class="dv">1</span><span class="sc">+</span>r[t]))</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>y_bks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.3</span>, <span class="fl">3.5</span>, <span class="fl">3.8</span>, <span class="fl">5.5</span>, <span class="fl">6.0</span>, <span class="fl">7.5</span>)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>y_lbls <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expression</span>(C[<span class="dv">1</span><span class="sc">*</span><span class="st">","</span><span class="sc">*</span>t<span class="sc">+</span><span class="dv">1</span>]),</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expression</span>(C[<span class="dv">3</span><span class="sc">*</span><span class="st">","</span><span class="sc">*</span>t<span class="sc">+</span><span class="dv">1</span>]),</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expression</span>(C[<span class="dv">0</span><span class="sc">*</span><span class="st">","</span><span class="sc">*</span>t<span class="sc">+</span><span class="dv">1</span>]),</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expression</span>(Y[t<span class="sc">+</span><span class="dv">1</span>]),</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expression</span>(C[<span class="dv">2</span><span class="sc">*</span><span class="st">","</span><span class="sc">*</span>t<span class="sc">+</span><span class="dv">1</span>]),</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expression</span>((<span class="dv">1</span><span class="sc">+</span>r[t])<span class="sc">*</span>Y[t] <span class="sc">+</span> Y[t<span class="sc">+</span><span class="dv">1</span>])</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Plot erstellen</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Budgetgerade zeichnen (Start- und Endpunkte auf den Achsen)</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="fl">7.5</span>, <span class="at">xend =</span> <span class="fl">3.75</span>, <span class="at">yend =</span> <span class="dv">0</span>), <span class="at">linewidth =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Indifferenzkurven zeichnen (mit passendem Definitionsbereich für die X-Achse)</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">IC</span>(x, U0), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">3.4</span>), <span class="at">linewidth =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">IC</span>(x, U1), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.85</span>, <span class="fl">3.7</span>), <span class="at">linewidth =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> <span class="cf">function</span>(x) <span class="fu">IC</span>(x, U2), <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">4.1</span>), <span class="at">linewidth =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Gestrichelte Linien zu den Achsen</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> pts, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">xend =</span> x, <span class="at">yend =</span> y),</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> pts, <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> y, <span class="at">xend =</span> x, <span class="at">yend =</span> y),</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Markierungspunkte auf den Kurven und der Budgetgeraden</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> pts, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Bezeichnungen der Indifferenzkurven am rechten Rand</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">3.5</span>, <span class="at">y =</span> <span class="fu">IC</span>(<span class="fl">3.4</span>, U0), <span class="at">label =</span> <span class="fu">expression</span>(U <span class="sc">==</span> U[<span class="dv">0</span>]), <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">3.8</span>, <span class="at">y =</span> <span class="fu">IC</span>(<span class="fl">3.7</span>, U1), <span class="at">label =</span> <span class="fu">expression</span>(U <span class="sc">==</span> U[<span class="dv">1</span>]), <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">4</span>, <span class="at">y =</span> <span class="fu">IC</span>(<span class="fl">4.3</span>, U2), <span class="at">label =</span> <span class="fu">expression</span>(U <span class="sc">==</span> U[<span class="dv">2</span>]), <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Bezeichnungen der Konsumbündel (nah an den Punkten)</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">1.2</span>, <span class="at">y =</span> <span class="fl">3.6</span>, <span class="at">label =</span> <span class="st">"(0)"</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">1.85</span>, <span class="at">y =</span> <span class="fl">3.25</span>, <span class="at">label =</span> <span class="st">"(3)"</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">2.45</span>, <span class="at">y =</span> <span class="fl">6.2</span>,  <span class="at">label =</span> <span class="st">"(2)"</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">2.80</span>, <span class="at">y =</span> <span class="fl">2.50</span>, <span class="at">label =</span> <span class="st">"(1)"</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Skalen und Tick-Marks konfigurieren</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> x_bks, <span class="at">labels =</span> x_lbls, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> y_bks, <span class="at">labels =</span> y_lbls, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Zeichenbereich strikt setzen, damit die Pfeilspitzen der Achsen exakt abschließen (clip = "off" verhindert das Abschneiden)</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">4.5</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">8.3</span>), <span class="at">expand =</span> F, <span class="at">clip =</span> <span class="st">"on"</span>) <span class="sc">+</span> <span class="co"># Changed clip = "off" to "on"</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Manuelle Positionierung der globalen Achsen-Titel</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>  <span class="co">#annotate("text", x = 4.4, y = -0.4, label = expression(C[t]), size = 4.5) +</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>  <span class="co">#annotate("text", x = -0.4, y = 8.3, label = expression(C[t+1]), size = 4.5) +</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Titel der Abbildung</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Optimales Konsumprofil"</span>) <span class="sc">+</span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="fu">expression</span>(C[t]),</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">expression</span>(C[t<span class="sc">+</span><span class="dv">1</span>]))<span class="sc">+</span></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Design &amp; Theme analog zur Vorlage</span></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  axis.line = element_line(arrow = arrow(length = unit(0.3, "cm"), type = "closed")),</span></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>, <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">5</span>), <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>, <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">r =</span> <span class="dv">5</span>), <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  plot.title = element_text(hjust = 0.5, size = 13, face = "plain", margin = margin(b = 20)),</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a> <span class="co">#   plot.margin = margin(t = 20, r = 25, b = 20, l = 25),</span></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  axis.title = element_blank() # Standard-Achsentitel ausblenden, da manuell mit annotate eingefügt</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot anzeigen</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Mikromakro_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Intertemporales Konsumoptimum</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="https://shinylive.io/r/app/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IIgMQACALQyJAVQCS0mSICutCQB4pEgGbV1AEwAKUAOZx2IiRNK1S1OKYhxqVsArJxG5GKiLMjhIA0iScqvBknATccLSGqhBmQmACuNYSGZzxcPQsADJQrESqpFYQNjbZhrkszq7llZWcdDWMnqil7qwADCm4mWAAonwA1kQwkRKxpXAS7KQCiP0SMHwSALwSPQMwUAAemxIATD07EgBuUAZzWwCMZwOc5KhHAKxpGU0tOe0QnWUUqw7isUiMIONJhRVgELBUFgBqO5LFZrCpbc57Q5bU7nK43I4Pc7POCvLYfdIVJoSH5tDpdFKMUFgABafE4nCgpAAXvNGCi8Kt1lspD0MMddgdCRg8ddVLdtjK3k8XkcxT0KV9KtxGOxPlTvq1vPTAWB6HBSFBmQARWiccZkWjeRJmTi6KCjUgBeZCISqHoAZnoxwFu2FirukuxEjuMoG+PlaowAHYVaSkxr9dSaUa-gD3NkzHtmVg7bRxlALt5siQfX7AwQA6GheiI1H3nHLnKFWLlTTVRiMMitVnKlq9nx6m4tTZUNQiKQAPKlfMpB3hGDGeekFaxWhmbikI4pAAsbx6qH2KVHTR1esp2f0RiwRAA7o1sxJiAYYBB2AA2AYZ0-bUT3cRdUDsPYglCCAN0iOFllSB8QOzKtGDyKCABU4H2JcVwZMAiEggBlCI9jYa9gJsG9qW-CI-0AzIDVQ0D3GCCgIG5KBuEcCAkNo1jLm8TDaBgHC8OXUhVzAOBiAgMjJhYVgqJYpphDUiQNPUjINI08RlB0EjvHQwyRE4EzvC0HRdESAg7BIdg+ABAYSmk0oBAkEAMgySQAAlaGoXQ3UST1aBICgMgsUgAH0AHVrL0OyHL-RgBl6dLkS8rVGAtVRGD-XoJARCRgQkAB6eY7mKiR+W0iQAF8fKpaKYoIHpEtsiB7PC1Knn3PZ0vOYEBnNS1PO8liEu0CRWri9g0tK4bhxY9rEoSyr2GqkqxqgAA9LbysLPZPIAKiqmr+QOrapGOqABCOgb7vqmxctIfK-3a+qmqpKKLTa6qZq6nrHMWu6Bna0aLXu7LVsBnR2F2iRzq2y6BAEA67keosYfO9qcrygr2AIFabB+mw-tiuROuS3rifOEn+pxqHxthppaF0eY7s2e4JuAt6PvYeczHpzyduh5GJGF4nkRexqJFcCy2epAWifpzHbqe9Hypuu6xYkJGUZJjW9Ye3Wtbl8nGuamxWoUABhGnupS+mYosgBHAY5CZwaDehvmWI5rmnp5mMA+zEnEtw1B2HYamdGl9q3bgd30Yqv3xq1BqFeoJXJrQ65ErjyXUZ0PXpC-Hpk-dzGK9N9PduAyOZtymOADkAEEBj4sxSG4V2PfR4D8XiRL8QkAA+bYm7uYAR8MABdMfrjn654gX2vNuqsuLazgn3qJknvptiRJC3BdZoobwnVy0QqTcgEABJ1wic+jxbig2jf9h88qIqZucqUR+vQtRlQAf8IBwIcqJUAaQR+TIWJI3AU-RuLFubIKAXdLUWppo6DmgtIamU5ZJ2Iu-PB-12oEJpE9QhpVIwZ3ulqEmMVSGJVaiTKh4NK4sMgizRhLE5A8LIZfKmrtSEQzuEIn2UA+Fy3HAcGKhwZpYnYMcc8AwErnVjKTSoWIYqsESiotR5xNEXRKvySW2i5GrSrh7RKHt2CYgUfsbuFBe7cAwG5I4AYzjEMkfQVQhhopF22rVM68wEo6CToPbBNiYq0AINXexKdHFDijIo1xSQ+6eNKN43xTDJEJLYf9B2rsEnVy9lI6hzMGHWKaJIGQOgABCUAlZYAkG-MyLE5wLi2gMUgrBUAKhSKIQU1EbD7DoDAI4BBHHpP2GkUqUyZlzNWAowQKFPz7AOJwY8YBaArFYDsvZBy8DjIkJMqA9AjjR1yhyOmKRYIbgkOsI87hJb22AKQJe50qLIWYqhVg1Ark3P2KgO5NY-yPLCBEF5FRSBIh9GAD5XykQ-MGMIZC5yJytlQK08g7hPDkB8HAPwARrhwF2RBKCEQkIDEYCUCAhh2BxQGLLTZEdcIYGBdc+44oIZcpxdKEMsSmhmEYPEYmRBqB7LoAeUg4qigrGoAMvZhgFzkEMMq18hhCR1MqHQFwnAB4pwkTFAJQSLQQ2lXskkrh6A3G1bqnEctDWUrKYkj2ZqEnWplVsFIuhaC5SYAk0YTqjgipYlqfwfBSDGoynQgYqAYiEgAJy+r2Yq1gPiVgEFwtKD4WpyB4XYAmkagwJBDHmB3VQHJLSkHekkTFSaiC7K2CeDN-qwBZpzYKXQJAjwutFZUGNUQxG8K-JI8REhk3cDTZ2wYDqoAEDDYKPN0ZYyFpYsWsoJCJ3MOnSkCQHd5jUrEhEZtM7W3eIXSkJdK6Vj9rIBG-VVQ4BFgoHG9g+wOpbD3aQIaaoBj7Gqn+qu06yp-qnfum1Xb72ru7qqodaD32RC-T+oDS0ZnQYAxc0D3CIP4YPTBv1i7gUPsFCqgxyGyb1V8hICSlpa1mCuXMXQAAfxgEhSFiQpSEGFUIkiRXvgROBpDFIUQMR-Jl3hGM-yYeByCxTYqUNgfAgYamuFqYTdp+handp+KEcpgGTkIFwMWppmhBGJ36f9sO2c+K4A9A-E0FIgAiAn43BWFrz5j21IKdJY2YVgMsSMy-9AwQxATAL6UZHKKZgA8087z8LEXsD80iALiB4v0sZWFnDEW5bfTo1SSQjGoDMdY3oTjEhXxBrjTEKAugHAJNiCETi3FeLQkqkMRgnA8UFTtBkB+QC5IkAk8pRKt82hyd-jYf9xnVNmfU3Cp+Wmls6fW3ppbBmtQkQ6hguBRUomKZ3FGtB9ba0wN0OwK5xq9ueU0IqHoWVZtjjABxPgcwet9ZYBAO01bSgsFGE6TFWcc5Kw5uwPbWhtjh2pHikkznHm5UMPYcruhoDcHgPMEiMRVDUEMC4Ra0Ou05dC1D84kWMWqSaNnRWcxXsOcR+4b7-W-ucHoIFBISR5gAHFqAABPVCc4sMT39xVgu5YpwVqLmLLb2ZnY5pHml3OVt62z-7PmoeLCy29snTLpcnEWSkGL-RgKq5IhdzguuhKucFM8LktaRwZAahpH65leD8A7ugdg6gniWX5CIMADUF5AA">Interaktive Grafik zur Konsumoptimierung</a></p>
+</section>
+<section id="lösung-für-crra-nutzenfunktion" class="level4" data-number="4.1.3.3">
+<h4 data-number="4.1.3.3" class="anchored" data-anchor-id="lösung-für-crra-nutzenfunktion"><span class="header-section-number">4.1.3.3</span> Lösung für CRRA-Nutzenfunktion</h4>
 
 
+</section>
 </section>
 </section>
 

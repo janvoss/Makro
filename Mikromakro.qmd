@@ -211,7 +211,100 @@ Annahme: $u'(C) > 0$ (positiver Grenznutzen) und $u''(C) < 0$ (abnehmender Grenz
 $\beta$: Subjektiver Diskontfaktor ($0 < \beta < 1$, wobei $\beta = \frac{1}{1+\rho}$ und $\rho$ die Zeitpräferenzrate ist). Misst die Ungeduld der Haushalte.
 
 
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Nutzenfunktion und Indifferenzkurve"
+
+library(ggplot2)
+library(patchwork)
+
+options(scipen = 999)
+
+# --- Parameter (hier direkt anpassen) ---
+sigma    <- 1.0   # Substitutionselastizität (σ = 1 entspricht Log-Nutzen)
+beta_val <- 0.95  # Diskontfaktor (β)
+
+# --- Hilfsfunktionen ---
+
+# 1. Nutzenfunktion u(c)
+u_func <- function(c, s) {
+  if (abs(s - 1) < 1e-5) return(log(c))
+  return((c^(1 - s)) / (1 - s))
+}
+
+# 2. Indifferenzkurve (berechnet C_{t+1} für ein gegebenes Nutzenniveau U)
+get_c_future <- function(c_t, target_U, s, beta_val) {
+  # U = u(C_t) + beta * u(C_{t+1})  =>  u(C_{t+1}) = (U - u(C_t)) / beta
+  u_c_future_val <- (target_U - u_func(c_t, s)) / beta_val
+  
+  if (abs(s - 1) < 1e-5) {
+    return(exp(u_c_future_val))
+  } else {
+    term <- u_c_future_val * (1 - s)
+    return(ifelse(term > 0, term^(1 / (1 - s)), NA))
+  }
+}
+
+# --- Datenberechnung ---
+
+# Referenz-Nutzenniveau festlegen (Ankerpunkt Ct = 50, Ct+1 = 50)
+c_ref <- 50
+U_target <- u_func(c_ref, sigma) + beta_val * u_func(c_ref, sigma)
+
+# Konsumwerte für die X-Achse generieren
+c_vals <- seq(5, 150, length.out = 500)
+
+# Dataframe für Plot 1 (Nutzenfunktion)
+df_left <- data.frame(
+  c_t  = c_vals,
+  util = u_func(c_vals, sigma)
+)
+
+# Dataframe für Plot 2 (Indifferenzkurve)
+df_right <- data.frame(
+  c_t = c_vals
+)
+df_right$c_future <- sapply(df_right$c_t, function(c) get_c_future(c, U_target, sigma, beta_val))
+
+
+# --- Erstellung der ggplot2-Diagramme ---
+
+# Plot 1: Nutzenfunktion u(Ct)
+p1 <- ggplot(df_left, aes(x = c_t, y = util)) +
+  geom_line(color = "darkgreen", linewidth = 1.2) +
+  labs(
+    title = "Nutzenfunktion u(Ct)",
+    subtitle = if(abs(sigma - 1) < 0.05) "Spezialfall: Log-Nutzen" else "CRRA-Nutzenfunktion",
+    x = expression(paste("Konsum heute (", C[t], ")")),
+    y = "Nutzenwert"
+  ) +
+  theme_minimal(base_size = 13)
+
+# Plot 2: Indifferenzkurve
+p2 <- ggplot(df_right, aes(x = c_t, y = c_future)) +
+  geom_line(color = "#0072B2", linewidth = 1.2, na.rm = TRUE) +
+  coord_cartesian(xlim = c(0, 150), ylim = c(0, 150)) +
+  labs(
+    title = "Indifferenzkurve",
+    subtitle = "Kombinationen für gleiches U",
+    x = expression(paste("Konsum heute (", C[t], ")")),
+    y = expression(paste("Konsum morgen (", C[t+1], ")"))
+  ) +
+  theme_minimal(base_size = 13)
+
+# --- Nebeneinander anordnen und anzeigen ---
+combined_plot <- p1 + p2
+print(combined_plot)
+```
+
+
+[Interaktive Nutzenfunktion und Indifferenzkurve](https://shinylive.io/r/app/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IIoqlK0SnLgVqoKAXgCcq4aIgBiAAQBVAJLaAInABmfWpJLb2Aa2pROnWpwLdtMS9tPUArrQATAAUoAHM4dX9tAB4AWm8-QJDw9hFtbUlSajgQiDhqVLAgxgAT0zhGCgAvCkRtADlfUhqIU18IWysIbQAybX0IANpTcsqIKttfRgA3OCEwAVw07WXnALh6FgAZKFYiJtTu9O01jZZc-MPj4+4AFkKQ5nhyRnnF5evOOnXGAdQD+bOUIwKDzXArMAAZV89E4mSaUggnHyjkkVUsJVINkAw8ACRBglZHa7EkkePjaRTaAAM4JBAA8KdoAKzg6ZQPxwRkARnBcLgqEZVIwXPeROOX0CFT+ALA9DgpFBeAhRhcthIpFMUE6REYNkATcB4gkfUkmzzdSlCqk8jxQBmU61sjmCjDKFkncgCi0YK2ikncfKoAAqcDppEK2O52gopE4qEYtDcWJ+2i2RFCsUazQobQ6XQwbyWYvS3EY7F9xP91CDIbD8xVnIGQxGFWqkxmnIA7rRGAFvAAf3VwcnlPmcBpNFoQWizKC+bRyypuPKkcEBRzzofaADCWMpTKp2navZ3AGouYz91HGJUE9wsV2e-mFsby+ljSC+BcCsb0qhqERSAAeSaf5azAOMzBbCACByf9SAJf1aFCO9GXmAB2fdUDpN4X2WdR1BEHRIQqWZdVTUJaFsERkXbXU4m8doCC6dg+FA8F9lIUCBG0EBlmWHQAAlaGoUxOBzTpEX7XV1m6TMWkPdgCHUdJfAAfRzAgYniDTmIIXluN4sVhhsKBYS4bR4hFGJtC5OBYiZbjKlIKYIHYf9QkUgRlOOJyXPYRSAD12HPeJOC87QAHobBCk4vOWABfPijkE4TRPEropO0IYG0GYZRlbKZZhsBc4CXeVt1UkBSDPeLvPCUhVIIdSmimTl6J0xFFNUlcMhYerVN0XlwTlBVVMdAzjR0XRGV8dgt267iTw3BVtAAKgU+aqpq7z0h0WbNuqrlasZdhpvifaFu4qKRtBMU1KatpnMqMb2S0mwFUYfqzsPZroK6nqwqu5aoBe6hjWNYz2FMmQx0s7johsuyHJ4n9tF8xhXJDVB2Hu5qnrgUG4rFeKo2oZEUaLbQppgWw4BLdLETqTTKWAOd1uC2IwoAXSCrkIo5wHUZeGA3txx7WtBtboos2LUfR1zhnyZF2GF7QAD5qXBYXeci6XQq88F6gAQSJ65EqOc23yODjQIAEgg-LoNggC3rGH4gjg9hDM+N7WKaW2gRBY0bsl+i-dIW2bvBsUdB2PYmjqAAmbQPYAsd2heIdoEGCobGTgAtIdsggcFz0hVB2XIHbtAr0sYFMRgiA7RkCHYRPS8WG1dUpVvbgwN0+7dABmcFE9N45Ju0LBILGKoMwnCgpxnOcRyyOBwm6dgjY6Cp-lzbdd2ZGkD7PC8qWrprKlMN792NXRur68r6LUjSuqv-TtCWkPHSll-GLfsw+lo7XB0EYKA5BugbwqLQKCxomqOjHPRZEABHdgbouT7nBMXUIpBuAYA4mfc+wDjg6C5BgFOcFtBEDlBAOoclsztAktYC6pBq4ImoKDRB51fqt3geyTgQCxR-gAl1BB4J2GcK1qwBQqEaAEmINQWRa5GC2FCJUCgBJqAdl7JSRO-dCwmm0HSBw9BGRY0qE4TqFc+SFAANLSF8CLf0TROSFHBFuYApAubghwgsV8JJWAmNkfQiAHYKjwTwKjY4H5zQ11RHAQoISGbMLmqwgkwwoZmU4LEKyCNLTI3mPEci88syiDAKTcmhTtxYCwEbEpLQ3jVzUYEMsxDdraD0RQl2Gdaj9Fys2WebZZhwLxhLBBb1OBoD-BwPhZNwQdRIJ5bQ-UHotUqIpcE98Pr1SGsDQm1djTCLDLMgR2hVn40kRkaRnJKTzDBkqBRsjNBUipGhROAAhROmjtGMj0SyKJ6RjG0BFj3dgx8MHn3BIE4FLcwWl33P44kxjTJmLpBBSxizrHkDsQ4pxcAXE2AJB4rxPjnx+IMSaQJKLKTmLgBi1yWKEnzHsUiRxHgdQb0JUqYlZ5vEQmEOSgFNpyS3LAI2PKUEJiFVcfYmA9A+DgMRBQTKoRsi3jpXoAVTT4wBFaRbdQ5tCLaCNugd0LAIHUV4PwE12MoiUn8LyEiudKQ0VIuoMA8UuZAA)
+
 ### Intertemporale Konsumoptimierung
+
+
+#### Allgemeine Gleichung für zwei Perioden
 
 Der Haushalt muss folgendes Problem lösen:
 
@@ -227,10 +320,151 @@ $$C_{t+1} = (1 + r_t)(Y_t - C_t) + Y_{t+1}$$
 
 $$\max_{C_t} \quad U = u(C_t) + \beta u\left((1 + r_t)(Y_t - C_t) + Y_{t+1}\right)$$
 
-$$\frac{\partial U}{\partial C_t} = u'(C_t) + \beta u'\left((1 + r_t)(Y_t - C_t) + Y_{t+1}\right) \times -(1 + r_t)$$
+$$\frac{\partial U}{\partial C_t} = u'(C_t) + \beta u'\left((1 + r_t)(Y_t - C_t) + Y_{t+1}\right) \times -(1 + r_t)\stackrel{!}{=}0$$
+
+$$\iff u'(C_t)=\beta u'(\underbrace{(1+r)(Y_t-C_t)+Y_{t+1}}_{C_{t+1}})$$
 
 Das führt zu der **Euler-Bedingung**
 
 $$\boxed{u'(C_t) = \beta (1 + r_t) u'(C_{t+1})}$$
 
-Der korrigierte Grenznutzen muss in beiden Perioden gleich sein.
+- Der korrigierte Grenznutzen muss in beiden Perioden gleich sein.
+
+Korrigiert um
+
+  - den Diskontfaktor $\beta$. $\beta$ misst die Geduld. Je niedriger zukünftiger Nutzen gewichtet wird (je geringer die Geduld ist), desto höher muss der zukünftige Grenznutzen sein;
+  
+  - den Zinssatz $r$. $r$ ist der Preis der Ungeduld und die Belohnung für Geduld. Je höher der Preis der Ungeduld ist, desto mehr Konsum in die Zukunf geschoben und desto niedriger muss der zukünftige Grenznutzen sein. 
+  
+  - wenn gilt: $\beta= \frac{1}{1+r}$, gleichen sich die Grenznutzen genau aus.
+  
+  
+#### Grafische Herleitung für zwei Perioden
+
+Aus der Euler-Gleichung lässt sich schreiben
+
+$$u'(C_t) = \beta (1 + r_t) u'(C_{t+1})$$ 
+
+$$\iff -\frac{u'(C_t)}{\beta u'(C_{t+1})}=-(1+r)$$
+
+$$\iff MRS=\text{Steigung der Budgetgerade}$$
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Intertemporales Konsumoptimum"
+
+# Lade notwendige Bibliothek
+library(ggplot2)
+
+# ==========================================
+# 1. Parameterdefinitionen
+# ==========================================
+beta <- 0.875
+
+# Wir berechnen die Utility-Level so, dass die Kurven exakt
+# durch die gewünschten visuellen Koordinaten verlaufen.
+U0 <- log(1.4) + beta * log(3.8)
+U1 <- log(2.0) + beta * log(3.5)
+U2 <- log(2.3) + beta * log(6.0)
+
+# Funktion der Indifferenzkurve (Umgestellt nach C_{t+1})
+# U = ln(C_t) + beta * ln(C_{t+1})  =>  C_{t+1} = exp((U - ln(C_t)) / beta)
+IC <- function(x, U) { exp((U - log(x)) / beta) }
+
+# Koordinaten der relevanten Punkte: Endowment (Y), P0, P3 (Tangentialpunkt), P2, P1
+pts <- data.frame(
+  x = c(1.0, 1.4, 2.0, 2.3, 2.6),
+  y = c(5.5, 3.8, 3.5, 6.0, 2.3)
+)
+
+# ==========================================
+# 2. Achsenbeschriftungen definieren
+# ==========================================
+x_bks <- c(1.0, 1.4, 2.0, 2.3, 2.6, 3.75)
+x_lbls <- c(
+  expression(Y[t]),
+  expression(C[0*","*t]),
+  expression(C[3*","*t]),
+  expression(C[2*","*t]),
+  expression(C[1*","*t]),
+  expression(Y[t] + frac(Y[t+1], 1+r[t]))
+)
+
+y_bks <- c(2.3, 3.5, 3.8, 5.5, 6.0, 7.5)
+y_lbls <- c(
+  expression(C[1*","*t+1]),
+  expression(C[3*","*t+1]),
+  expression(C[0*","*t+1]),
+  expression(Y[t+1]),
+  expression(C[2*","*t+1]),
+  expression((1+r[t])*Y[t] + Y[t+1])
+)
+
+# ==========================================
+# 3. Plot erstellen
+# ==========================================
+p <- ggplot() +
+  # Budgetgerade zeichnen (Start- und Endpunkte auf den Achsen)
+  geom_segment(aes(x = 0, y = 7.5, xend = 3.75, yend = 0), linewidth = 0.7) +
+
+  # Indifferenzkurven zeichnen (mit passendem Definitionsbereich für die X-Achse)
+  stat_function(fun = function(x) IC(x, U0), xlim = c(0.7, 3.4), linewidth = 0.7) +
+  stat_function(fun = function(x) IC(x, U1), xlim = c(0.85, 3.7), linewidth = 0.7) +
+  stat_function(fun = function(x) IC(x, U2), xlim = c(1.2, 4.1), linewidth = 0.7) +
+
+  # Gestrichelte Linien zu den Achsen
+  geom_segment(data = pts, aes(x = x, y = 0, xend = x, yend = y),
+               linetype = "dashed", color = "gray50", linewidth = 0.5) +
+  geom_segment(data = pts, aes(x = 0, y = y, xend = x, yend = y),
+               linetype = "dashed", color = "gray50", linewidth = 0.5) +
+
+  # Markierungspunkte auf den Kurven und der Budgetgeraden
+  geom_point(data = pts, aes(x = x, y = y), size = 2) +
+
+  # Bezeichnungen der Indifferenzkurven am rechten Rand
+  annotate("text", x = 3.5, y = IC(3.4, U0), label = expression(U == U[0]), hjust = 0, size = 4) +
+  annotate("text", x = 3.8, y = IC(3.7, U1), label = expression(U == U[1]), hjust = 0, size = 4) +
+  annotate("text", x = 4, y = IC(4.3, U2), label = expression(U == U[2]), hjust = 0, size = 4) +
+
+  # Bezeichnungen der Konsumbündel (nah an den Punkten)
+  annotate("text", x = 1.2, y = 3.6, label = "(0)", size = 3.5) +
+  annotate("text", x = 1.85, y = 3.25, label = "(3)", size = 3.5) +
+  annotate("text", x = 2.45, y = 6.2,  label = "(2)", size = 3.5) +
+  annotate("text", x = 2.80, y = 2.50, label = "(1)", size = 3.5) +
+
+  # Skalen und Tick-Marks konfigurieren
+  scale_x_continuous(breaks = x_bks, labels = x_lbls, expand = c(0, 10)) +
+  scale_y_continuous(breaks = y_bks, labels = y_lbls, expand = c(0, 0)) +
+
+  # Zeichenbereich strikt setzen, damit die Pfeilspitzen der Achsen exakt abschließen (clip = "off" verhindert das Abschneiden)
+  coord_cartesian(xlim = c(0, 4.5), ylim = c(0, 8.3), expand = F, clip = "on") + # Changed clip = "off" to "on"
+
+  # Manuelle Positionierung der globalen Achsen-Titel
+  #annotate("text", x = 4.4, y = -0.4, label = expression(C[t]), size = 4.5) +
+  #annotate("text", x = -0.4, y = 8.3, label = expression(C[t+1]), size = 4.5) +
+
+  # Titel der Abbildung
+  ggtitle("Optimales Konsumprofil") +
+  labs(x= expression(C[t]),
+       y = expression(C[t+1]))+
+
+  # Design & Theme analog zur Vorlage
+  theme_classic() +
+  theme(
+  #  axis.line = element_line(arrow = arrow(length = unit(0.3, "cm"), type = "closed")),
+    axis.text.x = element_text(size = 11, margin = margin(t = 5), color = "black"),
+    axis.text.y = element_text(size = 11, margin = margin(r = 5), color = "black"),
+  #  plot.title = element_text(hjust = 0.5, size = 13, face = "plain", margin = margin(b = 20)),
+ #   plot.margin = margin(t = 20, r = 25, b = 20, l = 25),
+  #  axis.title = element_blank() # Standard-Achsentitel ausblenden, da manuell mit annotate eingefügt
+  )
+
+# Plot anzeigen
+print(p)
+```
+
+
+[Interaktive Grafik zur Konsumoptimierung](https://shinylive.io/r/app/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IIgMQACALQyJAVQCS0mSICutCQB4pEgGbV1AEwAKUAOZx2IiRNK1S1OKYhxqVsArJxG5GKiLMjhIA0iScqvBknATccLSGqhBmQmACuNYSGZzxcPQsADJQrESqpFYQNjbZhrkszq7llZWcdDWMnqil7qwADCm4mWAAonwA1kQwkRKxpXAS7KQCiP0SMHwSALwSPQMwUAAemxIATD07EgBuUAZzWwCMZwOc5KhHAKxpGU0tOe0QnWUUqw7isUiMIONJhRVgELBUFgBqO5LFZrCpbc57Q5bU7nK43I4Pc7POCvLYfdIVJoSH5tDpdFKMUFgABafE4nCgpAAXvNGCi8Kt1lspD0MMddgdCRg8ddVLdtjK3k8XkcxT0KV9KtxGOxPlTvq1vPTAWB6HBSFBmQARWiccZkWjeRJmTi6KCjUgBeZCISqHoAZnoxwFu2FirukuxEjuMoG+PlaowAHYVaSkxr9dSaUa-gD3NkzHtmVg7bRxlALt5siQfX7AwQA6GheiI1H3nHLnKFWLlTTVRiMMitVnKlq9nx6m4tTZUNQiKQAPKlfMpB3hGDGeekFaxWhmbikI4pAAsbx6qH2KVHTR1esp2f0RiwRAA7o1sxJiAYYBB2AA2AYZ0-bUT3cRdUDsPYglCCAN0iOFllSB8QOzKtGDyKCABU4H2JcVwZMAiEggBlCI9jYa9gJsG9qW-CI-0AzIDVQ0D3GCCgIG5KBuEcCAkNo1jLm8TDaBgHC8OXUhVzAOBiAgMjJhYVgqJYpphDUiQNPUjINI08RlB0EjvHQwyRE4EzvC0HRdESAg7BIdg+ABAYSmk0oBAkEAMgySQAAlaGoXQ3UST1aBICgMgsUgAH0AHVrL0OyHL-RgBl6dLkS8rVGAtVRGD-XoJARCRgQkAB6eY7mKiR+W0iQAF8fKpaKYoIHpEtsiB7PC1Knn3PZ0vOYEBnNS1PO8liEu0CRWri9g0tK4bhxY9rEoSyr2GqkqxqgAA9LbysLPZPIAKiqmr+QOrapGOqABCOgb7vqmxctIfK-3a+qmqpKKLTa6qZq6nrHMWu6Bna0aLXu7LVsBnR2F2iRzq2y6BAEA67keosYfO9qcrygr2AIFabB+mw-tiuROuS3rifOEn+pxqHxthppaF0eY7s2e4JuAt6PvYeczHpzyduh5GJGF4nkRexqJFcCy2epAWifpzHbqe9Hypuu6xYkJGUZJjW9Ye3Wtbl8nGuamxWoUABhGnupS+mYosgBHAY5CZwaDehvmWI5rmnp5mMA+zEnEtw1B2HYamdGl9q3bgd30Yqv3xq1BqFeoJXJrQ65ErjyXUZ0PXpC-Hpk-dzGK9N9PduAyOZtymOADkAEEBj4sxSG4V2PfR4D8XiRL8QkAA+bYm7uYAR8MABdMfrjn654gX2vNuqsuLazgn3qJknvptiRJC3BdZoobwnVy0QqTcgEABJ1wic+jxbig2jf9h88qIqZucqUR+vQtRlQAf8IBwIcqJUAaQR+TIWJI3AU-RuLFubIKAXdLUWppo6DmgtIamU5ZJ2Iu-PB-12oEJpE9QhpVIwZ3ulqEmMVSGJVaiTKh4NK4sMgizRhLE5A8LIZfKmrtSEQzuEIn2UA+Fy3HAcGKhwZpYnYMcc8AwErnVjKTSoWIYqsESiotR5xNEXRKvySW2i5GrSrh7RKHt2CYgUfsbuFBe7cAwG5I4AYzjEMkfQVQhhopF22rVM68wEo6CToPbBNiYq0AINXexKdHFDijIo1xSQ+6eNKN43xTDJEJLYf9B2rsEnVy9lI6hzMGHWKaJIGQOgABCUAlZYAkG-MyLE5wLi2gMUgrBUAKhSKIQU1EbD7DoDAI4BBHHpP2GkUqUyZlzNWAowQKFPz7AOJwY8YBaArFYDsvZBy8DjIkJMqA9AjjR1yhyOmKRYIbgkOsI87hJb22AKQJe50qLIWYqhVg1Ark3P2KgO5NY-yPLCBEF5FRSBIh9GAD5XykQ-MGMIZC5yJytlQK08g7hPDkB8HAPwARrhwF2RBKCEQkIDEYCUCAhh2BxQGLLTZEdcIYGBdc+44oIZcpxdKEMsSmhmEYPEYmRBqB7LoAeUg4qigrGoAMvZhgFzkEMMq18hhCR1MqHQFwnAB4pwkTFAJQSLQQ2lXskkrh6A3G1bqnEctDWUrKYkj2ZqEnWplVsFIuhaC5SYAk0YTqjgipYlqfwfBSDGoynQgYqAYiEgAJy+r2Yq1gPiVgEFwtKD4WpyB4XYAmkagwJBDHmB3VQHJLSkHekkTFSaiC7K2CeDN-qwBZpzYKXQJAjwutFZUGNUQxG8K-JI8REhk3cDTZ2wYDqoAEDDYKPN0ZYyFpYsWsoJCJ3MOnSkCQHd5jUrEhEZtM7W3eIXSkJdK6Vj9rIBG-VVQ4BFgoHG9g+wOpbD3aQIaaoBj7Gqn+qu06yp-qnfum1Xb72ru7qqodaD32RC-T+oDS0ZnQYAxc0D3CIP4YPTBv1i7gUPsFCqgxyGyb1V8hICSlpa1mCuXMXQAAfxgEhSFiQpSEGFUIkiRXvgROBpDFIUQMR-Jl3hGM-yYeByCxTYqUNgfAgYamuFqYTdp+handp+KEcpgGTkIFwMWppmhBGJ36f9sO2c+K4A9A-E0FIgAiAn43BWFrz5j21IKdJY2YVgMsSMy-9AwQxATAL6UZHKKZgA8087z8LEXsD80iALiB4v0sZWFnDEW5bfTo1SSQjGoDMdY3oTjEhXxBrjTEKAugHAJNiCETi3FeLQkqkMRgnA8UFTtBkB+QC5IkAk8pRKt82hyd-jYf9xnVNmfU3Cp+Wmls6fW3ppbBmtQkQ6hguBRUomKZ3FGtB9ba0wN0OwK5xq9ueU0IqHoWVZtjjABxPgcwet9ZYBAO01bSgsFGE6TFWcc5Kw5uwPbWhtjh2pHikkznHm5UMPYcruhoDcHgPMEiMRVDUEMC4Ra0Ou05dC1D84kWMWqSaNnRWcxXsOcR+4b7-W-ucHoIFBISR5gAHFqAABPVCc4sMT39xVgu5YpwVqLmLLb2ZnY5pHml3OVt62z-7PmoeLCy29snTLpcnEWSkGL-RgKq5IhdzguuhKucFM8LktaRwZAahpH65leD8A7ugdg6gniWX5CIMADUF5AA)
+
+#### Lösung für CRRA-Nutzenfunktion
