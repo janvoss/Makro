@@ -796,24 +796,24 @@ print(p_combined)
 library(knitr)
 library(kableExtra)
 
-df_clean <- data.frame(
-  Type = c("Kreditnehmer", "Sparer", "Kreditnehmer", "Sparer"),
-  "Substitutionseffekt" = c("-", "-", "+", "+"),
-  "Einkommenseffekt"       = c("-", "+", "-", "+"),
-  "Gesamteffekt"        = c("-", "?", "?", "+"),
+df_clean <- data.frame(  
+  Type = c("Kreditnehmer", "Sparer", "Kreditnehmer", "Sparer"),  
+  "Substitutionseffekt" = c("-", "-", "+", "+"),  
+  "Einkommenseffekt"       = c("-", "+", "-", "+"),  
+  "Gesamteffekt"        = c("-", "?", "?", "+"),  
   check.names = FALSE
 )
 
-kable(
-  df_clean, 
-  col.names = c("", "Substitutionseffekt", "Einkommenseffekt", "Gesamteffekt"),
-  align = c("l", "c", "c", "c"),
-  caption = "Einkommens und Substitutionsffekt eines Zinsanstiegs $r_t$",
+kable(  
+  df_clean,   
+  col.names = c("", "Substitutionseffekt", "Einkommenseffekt", "Gesamteffekt"),  
+  align = c("l", "c", "c", "c"),  
+  caption = "Einkommens- und Substitutionseffekt eines Zinsanstiegs $r_t$",  
   escape = FALSE
-) %>%
-  kable_styling(full_width = FALSE) %>%
-  pack_rows("$C_t$", 1, 2) %>%
-  pack_rows("$C_{t+1}$", 3, 4)
+) %>%  
+  kable_styling(full_width = FALSE) %>%  
+  pack_rows("$C_t$", 1, 2, escape = FALSE) %>%  
+  pack_rows("$C_{t+1}$", 3, 4, escape = FALSE)
 ```
 
 ```{r}
