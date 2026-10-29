@@ -110,6 +110,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
@@ -739,6 +743,251 @@ Luckily, you can teach everything in 2 time periods with graphs, and I did the r
 <p>Hier wird häufig die folgende Nutzenfunktion verwendet:</p>
 <p><span class="math display">\[u(C_t) = \begin{cases} \dfrac{C_t^{1-\sigma}}{1-\sigma} &amp;\text{für } \sigma \neq 1 \\[15pt]\ln(C_t) &amp; \text{für } \sigma= 1 \end{cases}\]</span></p>
 <p>Der Grenznutzen ist dann <span class="math display">\[u'(C_t)=C^{-\sigma}\]</span></p>
+</section>
+<section id="veränderung-des-heutigen-einkommens" class="level4" data-number="4.1.3.4">
+<h4 data-number="4.1.3.4" class="anchored" data-anchor-id="veränderung-des-heutigen-einkommens"><span class="header-section-number">4.1.3.4</span> Veränderung des heutigen Einkommens</h4>
+</section>
+<section id="veränderung-des-zukünftigen-einkommens" class="level4" data-number="4.1.3.5">
+<h4 data-number="4.1.3.5" class="anchored" data-anchor-id="veränderung-des-zukünftigen-einkommens"><span class="header-section-number">4.1.3.5</span> Veränderung des zukünftigen Einkommens</h4>
+</section>
+<section id="veränderung-des-einkommens-in-allen-perioden" class="level4" data-number="4.1.3.6">
+<h4 data-number="4.1.3.6" class="anchored" data-anchor-id="veränderung-des-einkommens-in-allen-perioden"><span class="header-section-number">4.1.3.6</span> Veränderung des Einkommens in allen Perioden</h4>
+</section>
+<section id="veränderung-des-zinssatzes" class="level4" data-number="4.1.3.7">
+<h4 data-number="4.1.3.7" class="anchored" data-anchor-id="veränderung-des-zinssatzes"><span class="header-section-number">4.1.3.7</span> Veränderung des Zinssatzes</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df_clean <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Type =</span> <span class="fu">c</span>(<span class="st">"Kreditnehmer"</span>, <span class="st">"Sparer"</span>, <span class="st">"Kreditnehmer"</span>, <span class="st">"Sparer"</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Substitutionseffekt"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-"</span>, <span class="st">"+"</span>, <span class="st">"+"</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Einkommenseffekt"</span>       <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"+"</span>, <span class="st">"-"</span>, <span class="st">"+"</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Gesamteffekt"</span>        <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"?"</span>, <span class="st">"?"</span>, <span class="st">"+"</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  df_clean, </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"Substitutionseffekt"</span>, <span class="st">"Einkommenseffekt"</span>, <span class="st">"Gesamteffekt"</span>),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Einkommens und Substitutionsffekt eines Zinsanstiegs $r_t$"</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">escape =</span> <span class="cn">FALSE</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pack_rows</span>(<span class="st">"$C_t$"</span>, <span class="dv">1</span>, <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pack_rows</span>(<span class="st">"$C_{t+1}$"</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<caption>Einkommens und Substitutionsffekt eines Zinsanstiegs $r_t$</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Substitutionseffekt</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Einkommenseffekt</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Gesamteffekt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd" data-grouplength="2">
+<td colspan="4" style="border-bottom: 1px solid"><strong>$C_t$</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Kreditnehmer</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Sparer</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">?</td>
+</tr>
+<tr class="even" data-grouplength="2">
+<td colspan="4" style="border-bottom: 1px solid"><strong>$C_{t+1}$</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Kreditnehmer</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">?</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding-left: 2em;" data-indentlevel="1">Sparer</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Benötigte Pakete laden</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Parameter definieren</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>beta   <span class="ot">&lt;-</span> <span class="fl">0.95</span>       <span class="co"># Diskontierungsfaktor</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>Y_t    <span class="ot">&lt;-</span> <span class="dv">100</span>        <span class="co"># Einkommen in Periode t (hohes Anfangseinkommen -&gt; Sparer)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>Y_t1   <span class="ot">&lt;-</span> <span class="dv">40</span>         <span class="co"># Einkommen in Periode t+1 (niedriges Zukunftseinkommen)</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>r_low  <span class="ot">&lt;-</span> <span class="fl">0.05</span>       <span class="co"># Alter Zinssatz (5%)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>r_high <span class="ot">&lt;-</span> <span class="fl">0.80</span>       <span class="co"># Neuer Zinssatz (80%)</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>sigma  <span class="ot">&lt;-</span> <span class="fl">0.5</span>        <span class="co"># sigma &lt; 1 -&gt; EIS &gt; 1 -&gt; SE dominiert EE</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Hilfsfunktionen für das Modell</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>get_W <span class="ot">&lt;-</span> <span class="cf">function</span>(r, Y_t, Y_t1) {</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(Y_t <span class="sc">+</span> Y_t1 <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> r))</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>get_C_t <span class="ot">&lt;-</span> <span class="cf">function</span>(r, sigma, Y_t, Y_t1, beta) {</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  W <span class="ot">&lt;-</span> <span class="fu">get_W</span>(r, Y_t, Y_t1)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  C_t <span class="ot">&lt;-</span> W <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> beta<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span>sigma) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> r)<span class="sc">^</span>((<span class="dv">1</span><span class="sc">-</span>sigma)<span class="sc">/</span>sigma))</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(C_t)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>get_C_t1 <span class="ot">&lt;-</span> <span class="cf">function</span>(r, sigma, C_t, beta) {</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>((beta <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> r))<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span>sigma) <span class="sc">*</span> C_t)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>get_U <span class="ot">&lt;-</span> <span class="cf">function</span>(C_t, C_t1, sigma, beta) {</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (sigma <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">log</span>(C_t) <span class="sc">+</span> beta <span class="sc">*</span> <span class="fu">log</span>(C_t1))</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>((C_t<span class="sc">^</span>(<span class="dv">1</span><span class="sc">-</span>sigma))<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>sigma) <span class="sc">+</span> beta <span class="sc">*</span> (C_t1<span class="sc">^</span>(<span class="dv">1</span><span class="sc">-</span>sigma))<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>sigma))</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>get_IC <span class="ot">&lt;-</span> <span class="cf">function</span>(C_t_seq, U, sigma, beta) {</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (sigma <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    C_t1 <span class="ot">&lt;-</span> <span class="fu">exp</span>((U <span class="sc">-</span> <span class="fu">log</span>(C_t_seq)) <span class="sc">/</span> beta)</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    val <span class="ot">&lt;-</span> (U <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> sigma) <span class="sc">-</span> C_t_seq<span class="sc">^</span>(<span class="dv">1</span> <span class="sc">-</span> sigma)) <span class="sc">/</span> beta</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    C_t1 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(val <span class="sc">&gt;</span> <span class="dv">0</span>, val<span class="sc">^</span>(<span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> sigma)), <span class="cn">NA</span>)</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(C_t1)</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Punkte A, B und Hicks-Punkt C berechnen</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Punkt A: Optimum bei r_low</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>C_t_A  <span class="ot">&lt;-</span> <span class="fu">get_C_t</span>(r_low, sigma, Y_t, Y_t1, beta)</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>C_t1_A <span class="ot">&lt;-</span> <span class="fu">get_C_t1</span>(r_low, sigma, C_t_A, beta)</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>U_A    <span class="ot">&lt;-</span> <span class="fu">get_U</span>(C_t_A, C_t1_A, sigma, beta)</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Punkt B: Optimum bei r_high</span></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>C_t_B  <span class="ot">&lt;-</span> <span class="fu">get_C_t</span>(r_high, sigma, Y_t, Y_t1, beta)</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>C_t1_B <span class="ot">&lt;-</span> <span class="fu">get_C_t1</span>(r_high, sigma, C_t_B, beta)</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>U_B    <span class="ot">&lt;-</span> <span class="fu">get_U</span>(C_t_B, C_t1_B, sigma, beta)</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Punkt C: Hicks-Zerlegung (Neues Preisverhältnis, altes Nutzenniveau U_A)</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> (beta <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> r_high))<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span>sigma)</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (sigma <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>  C_t_C <span class="ot">&lt;-</span> <span class="fu">exp</span>((U_A <span class="sc">-</span> beta <span class="sc">*</span> <span class="fu">log</span>(K)) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> beta))</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>  term <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> beta <span class="sc">*</span> K<span class="sc">^</span>(<span class="dv">1</span> <span class="sc">-</span> sigma)</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>  C_t_C <span class="ot">&lt;-</span> ((U_A <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> sigma)) <span class="sc">/</span> term)<span class="sc">^</span>(<span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> sigma))</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>C_t1_C <span class="ot">&lt;-</span> K <span class="sc">*</span> C_t_C</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>W_C    <span class="ot">&lt;-</span> C_t_C <span class="sc">+</span> C_t1_C <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> r_high)</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Daten für Visualisierung vorbereiten</span></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>C_t_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">160</span>, <span class="at">length.out =</span> <span class="dv">500</span>)</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>budget_low <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>  <span class="at">C_t =</span> C_t_seq,</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>  <span class="at">C_t1 =</span> (<span class="dv">1</span> <span class="sc">+</span> r_low) <span class="sc">*</span> (<span class="fu">get_W</span>(r_low, Y_t, Y_t1) <span class="sc">-</span> C_t_seq),</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">Szenario =</span> <span class="st">"Budget Alt (r = 5%)"</span></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(C_t1 <span class="sc">&gt;=</span> <span class="dv">0</span>)</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>budget_high <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>  <span class="at">C_t =</span> C_t_seq,</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>  <span class="at">C_t1 =</span> (<span class="dv">1</span> <span class="sc">+</span> r_high) <span class="sc">*</span> (<span class="fu">get_W</span>(r_high, Y_t, Y_t1) <span class="sc">-</span> C_t_seq),</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>  <span class="at">Szenario =</span> <span class="st">"Budget Neu (r = 80%)"</span></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(C_t1 <span class="sc">&gt;=</span> <span class="dv">0</span>)</span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>budget_fict <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>  <span class="at">C_t =</span> C_t_seq,</span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>  <span class="at">C_t1 =</span> (<span class="dv">1</span> <span class="sc">+</span> r_high) <span class="sc">*</span> (W_C <span class="sc">-</span> C_t_seq),</span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>  <span class="at">Szenario =</span> <span class="st">"Fiktives Budget (Hicks)"</span></span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(C_t1 <span class="sc">&gt;=</span> <span class="dv">0</span>)</span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a><span class="co"># Indifferenzkurven</span></span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>C_t_ic <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">160</span>, <span class="at">length.out =</span> <span class="dv">500</span>)</span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>ic_A <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">C_t =</span> C_t_ic, <span class="at">C_t1 =</span> <span class="fu">get_IC</span>(C_t_ic, U_A, sigma, beta)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(C_t1 <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> C_t1 <span class="sc">&lt;=</span> <span class="dv">250</span>)</span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>ic_B <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">C_t =</span> C_t_ic, <span class="at">C_t1 =</span> <span class="fu">get_IC</span>(C_t_ic, U_B, sigma, beta)) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(C_t1 <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> C_t1 <span class="sc">&lt;=</span> <span class="dv">250</span>)</span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a><span class="co"># Punkte-Dataframe</span></span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a>points_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>  <span class="at">C_t =</span> <span class="fu">c</span>(Y_t, C_t_A, C_t_B, C_t_C),</span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>  <span class="at">C_t1 =</span> <span class="fu">c</span>(Y_t1, C_t1_A, C_t1_B, C_t1_C),</span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>  <span class="at">Label =</span> <span class="fu">c</span>(<span class="st">"E"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),</span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>  <span class="at">Desc =</span> <span class="fu">c</span>(<span class="st">"Ausstattung"</span>, <span class="st">"Alt"</span>, <span class="st">"Neu"</span>, <span class="st">"Hicks"</span>)</span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Plot erstellen</span></span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Budgetgeraden</span></span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> budget_low, <span class="fu">aes</span>(<span class="at">x =</span> C_t, <span class="at">y =</span> C_t1, <span class="at">color =</span> Szenario), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> budget_high, <span class="fu">aes</span>(<span class="at">x =</span> C_t, <span class="at">y =</span> C_t1, <span class="at">color =</span> Szenario), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> budget_fict, <span class="fu">aes</span>(<span class="at">x =</span> C_t, <span class="at">y =</span> C_t1, <span class="at">color =</span> Szenario), <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Manuelle Farben</span></span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Budget Alt (r = 5%)"</span> <span class="ot">=</span> <span class="st">"steelblue"</span>,</span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Budget Neu (r = 80%)"</span> <span class="ot">=</span> <span class="st">"firebrick"</span>,</span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Fiktives Budget (Hicks)"</span> <span class="ot">=</span> <span class="st">"gray40"</span>)) <span class="sc">+</span></span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Indifferenzkurven</span></span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> ic_A, <span class="fu">aes</span>(<span class="at">x =</span> C_t, <span class="at">y =</span> C_t1), <span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> ic_B, <span class="fu">aes</span>(<span class="at">x =</span> C_t, <span class="at">y =</span> C_t1), <span class="at">color =</span> <span class="st">"firebrick"</span>, <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Vertikale gestrichelte Verbindungslinien zu den Achsen</span></span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> C_t_A, <span class="at">xend =</span> C_t_A, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">yend =</span> C_t1_A, <span class="at">linetype =</span> <span class="st">"dotted"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
+<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> C_t_C, <span class="at">xend =</span> C_t_C, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">yend =</span> C_t1_C, <span class="at">linetype =</span> <span class="st">"dotted"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> C_t_B, <span class="at">xend =</span> C_t_B, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">yend =</span> C_t1_B, <span class="at">linetype =</span> <span class="st">"dotted"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
+<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Punkte E, A, B, C</span></span>
+<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> points_data, <span class="fu">aes</span>(<span class="at">x =</span> C_t, <span class="at">y =</span> C_t1), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> points_data, <span class="fu">aes</span>(<span class="at">x =</span> C_t, <span class="at">y =</span> C_t1, <span class="at">label =</span> <span class="fu">paste</span>(Label, <span class="st">"-"</span>, Desc)),</span>
+<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">size =</span> <span class="fl">3.8</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a>  <span class="co"># --- PFEILE FÜR DIE EFFEKTE AUF C_t ---</span></span>
+<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Substitutionseffekt (SE: A -&gt; C nach links)</span></span>
+<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> C_t_A, <span class="at">xend =</span> C_t_C, <span class="at">y =</span> <span class="dv">15</span>, <span class="at">yend =</span> <span class="dv">15</span>,</span>
+<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a>           <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>)), <span class="at">color =</span> <span class="st">"darkorange"</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fu">mean</span>(<span class="fu">c</span>(C_t_A, C_t_C)), <span class="at">y =</span> <span class="dv">22</span>, <span class="at">label =</span> <span class="st">"SE"</span>, <span class="at">color =</span> <span class="st">"darkorange"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Einkommenseffekt (EE: C -&gt; B nach rechts, gegenläufig)</span></span>
+<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> C_t_C, <span class="at">xend =</span> C_t_B, <span class="at">y =</span> <span class="dv">5</span>, <span class="at">yend =</span> <span class="dv">5</span>,</span>
+<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a>           <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>)), <span class="at">color =</span> <span class="st">"purple"</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fu">mean</span>(<span class="fu">c</span>(C_t_C, C_t_B)), <span class="at">y =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">label =</span> <span class="st">"EE"</span>, <span class="at">color =</span> <span class="st">"purple"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Achsen und Layout</span></span>
+<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">140</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">200</span>)) <span class="sc">+</span></span>
+<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Hicks-Zerlegung bei Zinsanstieg (Dominanter Substitutionseffekt)"</span>,</span>
+<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">"Gegenläufige Effekte für einen Sparer bei \u03c3 = "</span>, sigma, <span class="st">" (EIS &gt; 1): |SE| &gt; |EE|"</span>),</span>
+<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">bquote</span>(<span class="st">"Konsum in Periode t ("</span> <span class="sc">~</span> C[t] <span class="sc">~</span> <span class="st">")"</span>),</span>
+<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">bquote</span>(<span class="st">"Konsum in Periode t+1 ("</span> <span class="sc">~</span> C[t<span class="sc">+</span><span class="dv">1</span>] <span class="sc">~</span> <span class="st">")"</span>),</span>
+<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">13</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Mikromakro_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Einkommens- und Substitutionseffekt eines Zinsanstiegs</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="https://shinylive.io/r/app/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IIgMQACALQyJARgwSAErWoAzTmoCuEANalaJChPZQtAfbiNuUavQkATOJwkBlKwDcrLtQB-GEvTOnFZwEgAKVmpEjDBQEARwAtIyIiIA5nCkAPoA6hIAPFIS2gkGJOyMuBIAmtmk1XWkcskgIhISjFlajBDsTRIA1LX1chIA9CZjw4wCwhAAvmkQmTkAwvWFxaUE5X1VEpy06XGN9WfN1UGkUK3tEvlFEqt5lRcXLfcbpFsPE1NDQJZKAAPXYcnGRxOtwkACoATMBGDwVIoXEBJDjuj5h0uqQen1vvMlqIVllst8xk8dns3ocsVBqt8rsC7hBcd1eux2NcoHCEZ05mCIWiYfCiSISRlyQBVX40wyE84SSnVUUsm5sjq0NQmUUSAC8BvkWo6nU5fWoRHS7CJgN5-KtNspc3uCwkcGoIQkbXZZrxBO532FqIZc3GKNFyWGDvhttGIajGMjYZxEhJUrJOQAkmt5Tpdor4zkQgBHaoytUMjUw33a3VcBmG40tH33DqU35wAAeqG5cuKTuL2TLc3+vLT7s93rrZo8tl+7DlcbGxSj0hV9RHcFLwo3SfHwPbEkkADkAIISABePV8BF0mSCEGqalsXscVgkABUrDAJDpyACJwAlyHor09CQIDgdIoAMDwJAAd1oRgHGPTsnh1ac4HYedqAkAA+CQAAZqlwvdJnBfdU2qC9J3uAMuRdSVlnEFJigAJkUGVsykAAROA1D4Wg9jY5YtFoeVqHEhxwigTJ2HuAxSGoOBZKg6gFLAFR704KQAC0rBU9IdHSCRaD-dipEiRhDCcCApAAWSIJxqGoIQwAEXB7nuI4nHoFgABkoFYIgtFIBS-Q6Xy4H8xg1M9CKzTNTg6GA7MIFQMLNKadzqncgBRPhdCIGB4HZPgIisWywh+fp6gERBcokGAKpbEjmqgbtDQkdiiPa3CtDCNr2s4chUG6gBWTzjyi1KrHSzLwvcpo5CagqipKsqzPZazqokUhBjGOqDpaRq8Ga1riOqOIuuNXr+tsQbuoAFhGsbJumyLkrmxgFqy9zGGyWxSDWsBz2oQCJD0vhOE4WCrxMQHgYapqWvZY0iIwdqbu6hQHqkobiKxia1XejHic+pLZtoNKMv+sBAagrRQdPOBBoCaGIFh+HEeyJmUfOtHusx7HOtxjASYkAbCcxgAON64HG8miKmryvup2nFs03lQd42hOGKshaCsEzNCgfQYhMCczuuy7MclnGWyx0jHpljAAE5JdGxXhaxlo1apw4fr+pawFFUGsH12hiqgLxGCOEh-gAcWoAAT0h8RWPUwxti70aJ9jrrF40JudqXXfFhWlaJ-2ZokbhGHYSmqe4T1UB-btQ5UCAELgfXEAeCh2X1Qixh0BxHCgFx0ocWgPBprQtD-VxUBYT99dqgZCKJaoHBKoSrB+Ig1B+YCJEKvRNooEI1DUOB9BMfL8uSOy3C0ehRuEsLFRvu+H-YVwz8MDuTTB0ZuHRjxxD4PFDSddUBWlIAAeTClrdyvAdLhAQU1VuxxuA-GNO5AAbH1VA3YQHHjTPMeYyxJAyGKAAZkUO4RgccpABWtNHUSpIQgsM-NSAstI+CLWqKFUgi1TT3FEYtAAJOg3QnBMFEB+E8LoEBgKKPCrODokgL4wSfBIMwKVnAUGPAMDoGE6akGkTlL6K1zHFCEWFaxoxjyAytAhX4jirFIwhq47IvB0jcE8ZY6RjM2bHgdMEmROsvr6gsTI8OX1jySHCDoB+54B6INQAYGAS8gQSTcUQBCaEtyXl+C8b4lRsjuKrNCd4IxLhAk1CU5o2RLxPAqaMKpNT6R1M3Dkc8NZQESBlG0pKHTZTDkGf0uQbTamnCabcY8ySIhpJ+AAIUydk8yeSggFP8bglp2R1n2OeOSSpgMAncHmYyBpHwhktNmSciZ6wumXNwTcpkW51kPK+qMk5ZoXnZBlMOH5MzjmfMWcMlZqS9A-DWAPbS8j9KGWgiZEwrNBouHCF0fWcduCpwhhAfW1RgbOAkKeMK4EIDEq8GYEZbThkAGlFyxgFO8wJQpwSYmhMMnU2doTNhNG2dW-SKRdl7P2MZxQ2VDiZWOCi0woXDKnF6MIWizSAT-E8JVbKmV7jXGGOu3xxVPClZeFcVFeXJEmFqpElFFVWuxMeEkSVKSmuKCy8UW41jHlyB6sVeZhjurzI6mYBzOXLK+pIc8BBuAhHsgFcywkXAOFYNAFqnA41Ai6HGqCpIko3TyL8G67AXi5G6UU+pK1PJnJyBWjl1y7kNP9g8CkwzuzZBxk8UtcgJqi07fkeEChPhfVYF2sWPbOrgn7UXQd-JKLDFLYUhC1RG1jmHRgUdSUVkAA0pDuFLINCACM-BAWNhIJNxKTFfRNWWX4ZZwTVE7TdaoKkVikG4BgURk0+rQujRIdZWgHCrEyMwV+QRc3cHzY87I9BgMvHcacxdnRqlFOSHGctlbV3NprRuO9O5hnuvgyB8kVzFxKvXQurDjbq2jGSMUAjpYiOjDgwh8kgldgUcBFRuM-q8yMa3KOKNSVJAzx1HfVRV5dA9C8OySDcA803rdax2gBAxlAtzMOMsFY5m9IWROWDanjnlPJFppjumwXqihSJs0tDZDhACogr858sCuC-PlAKAV8qnhMOs88gCJBYAY6kL6q9G5xACMaAg7BJaS2etUdi0Ya7JEkFgVOajPzxFXrDZTZoVkBTgKEFwTKiAxFntAcgXNWDez-GYNQV5jatwLWaeBSj2DtXaqQVgqBCbuVEOdbsdA-zRY68+id3Za2sGG91GL7Vx03XAYHIbUB7DGh7KgLosMizuVK1zPJFVdrORqiYdy-I1jAFIAAXX5OQjyAdA4dGm6t7qG2tsJz6LtkgnADs7Sqsd-ah1TtgHO5dw6N34R3aW1TKB+d1qX1KtfYo4834fyUt-b7Ak-61SRbpAyjAjImWEHgOuZpEjdgwLD8WktycYGoC9p2SXbPaMA+x0gYGoCv3Amp6DeWOh0CgpwbTO5gDEbZ2hjx+EMZXa+a0kjiGimi9Y-L8kSGpfERlxIYgeECFh3IJ6egBMmrUAQhPO6wyBfOGF6WJXcvxfkfV0RTXYvSM5Cubb2ZKu3e4IItL6o2vuruUEl0JgandDG9N91JnX1LdC6Yx7tjrvsicZ+I753yvxcp4T175PanU9+610QHXEh3LpGYKwftEezc9Tfd1qP-7RMSHE7fUIJ6ZO8PZNzpTLX+d8CtxZ8FxnpkB9197A3Rvzom+r9HpKsfrey9mcZsFI+S9gGDzFGy94q-1+ZyeZQqgNAC+Np3rQH52SxvjcYHCh9o62GGSEE4FBSBC+7ERbqJrpmsDfxjZ9YxjQf+qFYD-3BWmQhlYG6noX9yL0DzADL2CmIXIViWgjKmf3YFf3f2+UAO-yugkG7GAJNTBSAIwNaTBTAIgKgOL1L3LwQI8mPAfxQJf2wJNTWCwOFl-2IIpEAPwNYxYIkDIONEgML0oNgOoKIkQJ3QA1hX0DCHymqGmTBTzD7hPT7m72PFQCID4FQJiyaFlz0wIN0LWFrW0NGAXz0NYwUJ4NrVQGzRbHdn9x7Gpwbzs1WThTYVW2nGPHIE7mOnuVX3yhMHPC0FhhuAziJyanUJcGNASxKBIHwR6mGS8PCgAJALyjBgCIhmJ2qAiPIJiLICjwoJgLHzsAnwSJ7CSMwPBTBXchOXYExUyIkGyIEJfFiPyKEJgPX1Dy31oK+kSOHF4JDVSLzHYFx3qMaIkEEOiDyLugKN1zgNYHoTEO6IkMbzoQiAADF8psxvMJA1iAAdrAc+NYjYplDzLhJKcdb0J4BbMWeEEWWWY8cdIrX4a4rqW4rGehXfFJO+VQVHT+fEPYX+e+WqQBAeS8KQbeYZFgRgIpRgjgz-bAi4uAdg--H1Lg7qREvKUVKmFfdyBwFgYqZgMkbfaYvgigdIT9X2PtUo7w+AeIdgGLZI5guYQA7cQEdgF4-kEWJLVIwBJqHEsAPExgAk+ITIJqSYuImffLSQ74vCC+YqRHLmLHIEx+fKAeATQidZSExgaEhCWElE9YVg40R4pE3A7gnIQg4A40zEx7JKfkzKRgeBOAYkmvUkj9IJcmKkzwso9gWkvoBk1EsVTUqbbIJ44YdkibTkrGbkvw-KPk6A3Xe0x0sUlo83T4y9aCCgJwY8IyTMzSUgIgTbXBEGc6UnWfDMtRWbTSIDV3CQcGYs1I6s1YClcJEssANY6OOCclRsrIEwEYkBB7G0to0bdyIow3QaUGDozfcPVsuYyve7EvLE2fSPEk-grXJ9eQRLWtegOvXXAbScYkGhNiWs9AQ4G4RgKrLhHgPgVgc8dAdgcSbqcSNUTwT8Y0HhOOeYMABYK7IAA">Interaktive Grafik zu Einkommens- und Substitutionseffekten</a></p>
 
 
 </section>

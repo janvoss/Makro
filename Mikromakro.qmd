@@ -474,3 +474,195 @@ Hier wird häufig die folgende Nutzenfunktion verwendet:
 $$u(C_t) = \begin{cases} \dfrac{C_t^{1-\sigma}}{1-\sigma} &\text{für } \sigma \neq 1 \\[15pt]\ln(C_t) & \text{für } \sigma= 1 \end{cases}$$
 
 Der Grenznutzen ist dann $$u'(C_t)=C^{-\sigma}$$
+
+#### Veränderung des heutigen Einkommens
+
+#### Veränderung des zukünftigen Einkommens
+
+#### Veränderung des Einkommens in allen Perioden
+
+#### Veränderung des Zinssatzes
+
+```{r}
+#| warning: false
+#| message: false
+
+library(knitr)
+library(kableExtra)
+
+df_clean <- data.frame(
+  Type = c("Kreditnehmer", "Sparer", "Kreditnehmer", "Sparer"),
+  "Substitutionseffekt" = c("-", "-", "+", "+"),
+  "Einkommenseffekt"       = c("-", "+", "-", "+"),
+  "Gesamteffekt"        = c("-", "?", "?", "+"),
+  check.names = FALSE
+)
+
+kable(
+  df_clean, 
+  col.names = c("", "Substitutionseffekt", "Einkommenseffekt", "Gesamteffekt"),
+  align = c("l", "c", "c", "c"),
+  caption = "Einkommens und Substitutionsffekt eines Zinsanstiegs $r_t$",
+  escape = FALSE
+) %>%
+  kable_styling(full_width = FALSE) %>%
+  pack_rows("$C_t$", 1, 2) %>%
+  pack_rows("$C_{t+1}$", 3, 4)
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| fig-cap: "Einkommens- und Substitutionseffekt eines Zinsanstiegs"
+
+# Benötigte Pakete laden
+library(ggplot2)
+library(dplyr)
+
+# 1. Parameter definieren
+beta   <- 0.95       # Diskontierungsfaktor
+Y_t    <- 100        # Einkommen in Periode t (hohes Anfangseinkommen -> Sparer)
+Y_t1   <- 40         # Einkommen in Periode t+1 (niedriges Zukunftseinkommen)
+r_low  <- 0.05       # Alter Zinssatz (5%)
+r_high <- 0.80       # Neuer Zinssatz (80%)
+sigma  <- 0.5        # sigma < 1 -> EIS > 1 -> SE dominiert EE
+
+# 2. Hilfsfunktionen für das Modell
+get_W <- function(r, Y_t, Y_t1) {
+  return(Y_t + Y_t1 / (1 + r))
+}
+
+get_C_t <- function(r, sigma, Y_t, Y_t1, beta) {
+  W <- get_W(r, Y_t, Y_t1)
+  C_t <- W / (1 + beta^(1/sigma) * (1 + r)^((1-sigma)/sigma))
+  return(C_t)
+}
+
+get_C_t1 <- function(r, sigma, C_t, beta) {
+  return((beta * (1 + r))^(1/sigma) * C_t)
+}
+
+get_U <- function(C_t, C_t1, sigma, beta) {
+  if (sigma == 1) {
+    return(log(C_t) + beta * log(C_t1))
+  } else {
+    return((C_t^(1-sigma))/(1-sigma) + beta * (C_t1^(1-sigma))/(1-sigma))
+  }
+}
+
+get_IC <- function(C_t_seq, U, sigma, beta) {
+  if (sigma == 1) {
+    C_t1 <- exp((U - log(C_t_seq)) / beta)
+  } else {
+    val <- (U * (1 - sigma) - C_t_seq^(1 - sigma)) / beta
+    C_t1 <- ifelse(val > 0, val^(1 / (1 - sigma)), NA)
+  }
+  return(C_t1)
+}
+
+# 3. Punkte A, B und Hicks-Punkt C berechnen
+# Punkt A: Optimum bei r_low
+C_t_A  <- get_C_t(r_low, sigma, Y_t, Y_t1, beta)
+C_t1_A <- get_C_t1(r_low, sigma, C_t_A, beta)
+U_A    <- get_U(C_t_A, C_t1_A, sigma, beta)
+
+# Punkt B: Optimum bei r_high
+C_t_B  <- get_C_t(r_high, sigma, Y_t, Y_t1, beta)
+C_t1_B <- get_C_t1(r_high, sigma, C_t_B, beta)
+U_B    <- get_U(C_t_B, C_t1_B, sigma, beta)
+
+# Punkt C: Hicks-Zerlegung (Neues Preisverhältnis, altes Nutzenniveau U_A)
+K <- (beta * (1 + r_high))^(1/sigma)
+if (sigma == 1) {
+  C_t_C <- exp((U_A - beta * log(K)) / (1 + beta))
+} else {
+  term <- 1 + beta * K^(1 - sigma)
+  C_t_C <- ((U_A * (1 - sigma)) / term)^(1 / (1 - sigma))
+}
+C_t1_C <- K * C_t_C
+W_C    <- C_t_C + C_t1_C / (1 + r_high)
+
+# 4. Daten für Visualisierung vorbereiten
+C_t_seq <- seq(0, 160, length.out = 500)
+
+budget_low <- data.frame(
+  C_t = C_t_seq,
+  C_t1 = (1 + r_low) * (get_W(r_low, Y_t, Y_t1) - C_t_seq),
+  Szenario = "Budget Alt (r = 5%)"
+) %>% filter(C_t1 >= 0)
+
+budget_high <- data.frame(
+  C_t = C_t_seq,
+  C_t1 = (1 + r_high) * (get_W(r_high, Y_t, Y_t1) - C_t_seq),
+  Szenario = "Budget Neu (r = 80%)"
+) %>% filter(C_t1 >= 0)
+
+budget_fict <- data.frame(
+  C_t = C_t_seq,
+  C_t1 = (1 + r_high) * (W_C - C_t_seq),
+  Szenario = "Fiktives Budget (Hicks)"
+) %>% filter(C_t1 >= 0)
+
+# Indifferenzkurven
+C_t_ic <- seq(10, 160, length.out = 500)
+ic_A <- data.frame(C_t = C_t_ic, C_t1 = get_IC(C_t_ic, U_A, sigma, beta)) %>% filter(C_t1 >= 0 & C_t1 <= 250)
+ic_B <- data.frame(C_t = C_t_ic, C_t1 = get_IC(C_t_ic, U_B, sigma, beta)) %>% filter(C_t1 >= 0 & C_t1 <= 250)
+
+# Punkte-Dataframe
+points_data <- data.frame(
+  C_t = c(Y_t, C_t_A, C_t_B, C_t_C),
+  C_t1 = c(Y_t1, C_t1_A, C_t1_B, C_t1_C),
+  Label = c("E", "A", "B", "C"),
+  Desc = c("Ausstattung", "Alt", "Neu", "Hicks")
+)
+
+# 5. Plot erstellen
+ggplot() +
+  # Budgetgeraden
+  geom_line(data = budget_low, aes(x = C_t, y = C_t1, color = Szenario), size = 1) +
+  geom_line(data = budget_high, aes(x = C_t, y = C_t1, color = Szenario), size = 1) +
+  geom_line(data = budget_fict, aes(x = C_t, y = C_t1, color = Szenario), size = 0.8, linetype = "dashed") +
+
+  # Manuelle Farben
+  scale_color_manual(values = c("Budget Alt (r = 5%)" = "steelblue",
+                                "Budget Neu (r = 80%)" = "firebrick",
+                                "Fiktives Budget (Hicks)" = "gray40")) +
+
+  # Indifferenzkurven
+  geom_line(data = ic_A, aes(x = C_t, y = C_t1), color = "steelblue", size = 0.8, alpha = 0.6) +
+  geom_line(data = ic_B, aes(x = C_t, y = C_t1), color = "firebrick", size = 0.8, alpha = 0.6) +
+
+  # Vertikale gestrichelte Verbindungslinien zu den Achsen
+  annotate("segment", x = C_t_A, xend = C_t_A, y = 0, yend = C_t1_A, linetype = "dotted", color = "gray50") +
+  annotate("segment", x = C_t_C, xend = C_t_C, y = 0, yend = C_t1_C, linetype = "dotted", color = "gray50") +
+  annotate("segment", x = C_t_B, xend = C_t_B, y = 0, yend = C_t1_B, linetype = "dotted", color = "gray50") +
+
+  # Punkte E, A, B, C
+  geom_point(data = points_data, aes(x = C_t, y = C_t1), size = 3, color = "black") +
+  geom_text(data = points_data, aes(x = C_t, y = C_t1, label = paste(Label, "-", Desc)),
+            vjust = -1, hjust = -0.1, size = 3.8, fontface = "bold") +
+
+  # --- PFEILE FÜR DIE EFFEKTE AUF C_t ---
+  # Substitutionseffekt (SE: A -> C nach links)
+  annotate("segment", x = C_t_A, xend = C_t_C, y = 15, yend = 15,
+           arrow = arrow(length = unit(0.2, "cm")), color = "darkorange", size = 1.2) +
+  annotate("text", x = mean(c(C_t_A, C_t_C)), y = 22, label = "SE", color = "darkorange", fontface = "bold", size = 4) +
+
+  # Einkommenseffekt (EE: C -> B nach rechts, gegenläufig)
+  annotate("segment", x = C_t_C, xend = C_t_B, y = 5, yend = 5,
+           arrow = arrow(length = unit(0.2, "cm")), color = "purple", size = 1.2) +
+  annotate("text", x = mean(c(C_t_C, C_t_B)), y = -2, label = "EE", color = "purple", fontface = "bold", size = 4) +
+
+  # Achsen und Layout
+  coord_cartesian(xlim = c(40, 140), ylim = c(-5, 200)) +
+  labs(title = "Hicks-Zerlegung bei Zinsanstieg (Dominanter Substitutionseffekt)",
+       subtitle = paste0("Gegenläufige Effekte für einen Sparer bei \u03c3 = ", sigma, " (EIS > 1): |SE| > |EE|"),
+       x = bquote("Konsum in Periode t (" ~ C[t] ~ ")"),
+       y = bquote("Konsum in Periode t+1 (" ~ C[t+1] ~ ")"),
+       color = "") +
+  theme_minimal() +
+  theme(legend.position = "top",
+        plot.title = element_text(face = "bold", size = 13))
+```
+
+[Interaktive Grafik zu Einkommens- und Substitutionseffekten](https://shinylive.io/r/app/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IIgMQACALQyJARgwSAErWoAzTmoCuEANalaJChPZQtAfbiNuUavQkATOJwkBlKwDcrLtQB-GEvTOnFZwEgAKVmpEjDBQEARwAtIyIiIA5nCkAPoA6hIAPFIS2gkGJOyMuBIAmtmk1XWkcskgIhISjFlajBDsTRIA1LX1chIA9CZjw4wCwhAAvmkQmTkAwvWFxaUE5X1VEpy06XGN9WfN1UGkUK3tEvlFEqt5lRcXLfcbpFsPE1NDQJZKAAPXYcnGRxOtwkACoATMBGDwVIoXEBJDjuj5h0uqQen1vvMlqIVllst8xk8dns3ocsVBqt8rsC7hBcd1eux2NcoHCEZ05mCIWiYfCiSISRlyQBVX40wyE84SSnVUUsm5sjq0NQmUUSAC8BvkWo6nU5fWoRHS7CJgN5-KtNspc3uCwkcGoIQkbXZZrxBO532FqIZc3GKNFyWGDvhttGIajGMjYZxEhJUrJOQAkmt5Tpdor4zkQgBHaoytUMjUw33a3VcBmG40tH33DqU35wAAeqG5cuKTuL2TLc3+vLT7s93rrZo8tl+7DlcbGxSj0hV9RHcFLwo3SfHwPbEkkADkAIISABePV8BF0mSCEGqalsXscVgkABUrDAJDpyACJwAlyHor09CQIDgdIoAMDwJAAd1oRgHGPTsnh1ac4HYedqAkAA+CQAAZqlwvdJnBfdU2qC9J3uAMuRdSVlnEFJigAJkUGVsykAAROA1D4Wg9jY5YtFoeVqHEhxwigTJ2HuAxSGoOBZKg6gFLAFR704KQAC0rBU9IdHSCRaD-dipEiRhDCcCApAAWSIJxqGoIQwAEXB7nuI4nHoFgABkoFYIgtFIBS-Q6Xy4H8xg1M9CKzTNTg6GA7MIFQMLNKadzqncgBRPhdCIGB4HZPgIisWywh+fp6gERBcokGAKpbEjmqgbtDQkdiiPa3CtDCNr2s4chUG6gBWTzjyi1KrHSzLwvcpo5CagqipKsqzPZazqokUhBjGOqDpaRq8Ga1riOqOIuuNXr+tsQbuoAFhGsbJumyLkrmxgFqy9zGGyWxSDWsBz2oQCJD0vhOE4WCrxMQHgYapqWvZY0iIwdqbu6hQHqkobiKxia1XejHic+pLZtoNKMv+sBAagrRQdPOBBoCaGIFh+HEeyJmUfOtHusx7HOtxjASYkAbCcxgAON64HG8miKmryvup2nFs03lQd42hOGKshaCsEzNCgfQYhMCczuuy7MclnGWyx0jHpljAAE5JdGxXhaxlo1apw4fr+pawFFUGsH12hiqgLxGCOEh-gAcWoAAT0h8RWPUwxti70aJ9jrrF40JudqXXfFhWlaJ-2ZokbhGHYSmqe4T1UB-btQ5UCAELgfXEAeCh2X1Qixh0BxHCgFx0ocWgPBprQtD-VxUBYT99dqgZCKJaoHBKoSrB+Ig1B+YCJEKvRNooEI1DUOB9BMfL8uSOy3C0ehRuEsLFRvu+H-YVwz8MDuTTB0ZuHRjxxD4PFDSddUBWlIAAeTClrdyvAdLhAQU1VuxxuA-GNO5AAbH1VA3YQHHjTPMeYyxJAyGKAAZkUO4RgccpABWtNHUSpIQgsM-NSAstI+CLWqKFUgi1TT3FEYtAAJOg3QnBMFEB+E8LoEBgKKPCrODokgL4wSfBIMwKVnAUGPAMDoGE6akGkTlL6K1zHFCEWFaxoxjyAytAhX4jirFIwhq47IvB0jcE8ZY6RjM2bHgdMEmROsvr6gsTI8OX1jySHCDoB+54B6INQAYGAS8gQSTcUQBCaEtyXl+C8b4lRsjuKrNCd4IxLhAk1CU5o2RLxPAqaMKpNT6R1M3Dkc8NZQESBlG0pKHTZTDkGf0uQbTamnCabcY8ySIhpJ+AAIUydk8yeSggFP8bglp2R1n2OeOSSpgMAncHmYyBpHwhktNmSciZ6wumXNwTcpkW51kPK+qMk5ZoXnZBlMOH5MzjmfMWcMlZqS9A-DWAPbS8j9KGWgiZEwrNBouHCF0fWcduCpwhhAfW1RgbOAkKeMK4EIDEq8GYEZbThkAGlFyxgFO8wJQpwSYmhMMnU2doTNhNG2dW-SKRdl7P2MZxQ2VDiZWOCi0woXDKnF6MIWizSAT-E8JVbKmV7jXGGOu3xxVPClZeFcVFeXJEmFqpElFFVWuxMeEkSVKSmuKCy8UW41jHlyB6sVeZhjurzI6mYBzOXLK+pIc8BBuAhHsgFcywkXAOFYNAFqnA41Ai6HGqCpIko3TyL8G67AXi5G6UU+pK1PJnJyBWjl1y7kNP9g8CkwzuzZBxk8UtcgJqi07fkeEChPhfVYF2sWPbOrgn7UXQd-JKLDFLYUhC1RG1jmHRgUdSUVkAA0pDuFLINCACM-BAWNhIJNxKTFfRNWWX4ZZwTVE7TdaoKkVikG4BgURk0+rQujRIdZWgHCrEyMwV+QRc3cHzY87I9BgMvHcacxdnRqlFOSHGctlbV3NprRuO9O5hnuvgyB8kVzFxKvXQurDjbq2jGSMUAjpYiOjDgwh8kgldgUcBFRuM-q8yMa3KOKNSVJAzx1HfVRV5dA9C8OySDcA803rdax2gBAxlAtzMOMsFY5m9IWROWDanjnlPJFppjumwXqihSJs0tDZDhACogr858sCuC-PlAKAV8qnhMOs88gCJBYAY6kL6q9G5xACMaAg7BJaS2etUdi0Ya7JEkFgVOajPzxFXrDZTZoVkBTgKEFwTKiAxFntAcgXNWDez-GYNQV5jatwLWaeBSj2DtXaqQVgqBCbuVEOdbsdA-zRY68+id3Za2sGG91GL7Vx03XAYHIbUB7DGh7KgLosMizuVK1zPJFVdrORqiYdy-I1jAFIAAXX5OQjyAdA4dGm6t7qG2tsJz6LtkgnADs7Sqsd-ah1TtgHO5dw6N34R3aW1TKB+d1qX1KtfYo4834fyUt-b7Ak-61SRbpAyjAjImWEHgOuZpEjdgwLD8WktycYGoC9p2SXbPaMA+x0gYGoCv3Amp6DeWOh0CgpwbTO5gDEbZ2hjx+EMZXa+a0kjiGimi9Y-L8kSGpfERlxIYgeECFh3IJ6egBMmrUAQhPO6wyBfOGF6WJXcvxfkfV0RTXYvSM5Cubb2ZKu3e4IItL6o2vuruUEl0JgandDG9N91JnX1LdC6Yx7tjrvsicZ+I753yvxcp4T175PanU9+610QHXEh3LpGYKwftEezc9Tfd1qP-7RMSHE7fUIJ6ZO8PZNzpTLX+d8CtxZ8FxnpkB9197A3Rvzom+r9HpKsfrey9mcZsFI+S9gGDzFGy94q-1+ZyeZQqgNAC+Np3rQH52SxvjcYHCh9o62GGSEE4FBSBC+7ERbqJrpmsDfxjZ9YxjQf+qFYD-3BWmQhlYG6noX9yL0DzADL2CmIXIViWgjKmf3YFf3f2+UAO-yugkG7GAJNTBSAIwNaTBTAIgKgOL1L3LwQI8mPAfxQJf2wJNTWCwOFl-2IIpEAPwNYxYIkDIONEgML0oNgOoKIkQJ3QA1hX0DCHymqGmTBTzD7hPT7m72PFQCID4FQJiyaFlz0wIN0LWFrW0NGAXz0NYwUJ4NrVQGzRbHdn9x7Gpwbzs1WThTYVW2nGPHIE7mOnuVX3yhMHPC0FhhuAziJyanUJcGNASxKBIHwR6mGS8PCgAJALyjBgCIhmJ2qAiPIJiLICjwoJgLHzsAnwSJ7CSMwPBTBXchOXYExUyIkGyIEJfFiPyKEJgPX1Dy31oK+kSOHF4JDVSLzHYFx3qMaIkEEOiDyLugKN1zgNYHoTEO6IkMbzoQiAADF8psxvMJA1iAAdrAc+NYjYplDzLhJKcdb0J4BbMWeEEWWWY8cdIrX4a4rqW4rGehXfFJO+VQVHT+fEPYX+e+WqQBAeS8KQbeYZFgRgIpRgjgz-bAi4uAdg--H1Lg7qREvKUVKmFfdyBwFgYqZgMkbfaYvgigdIT9X2PtUo7w+AeIdgGLZI5guYQA7cQEdgF4-kEWJLVIwBJqHEsAPExgAk+ITIJqSYuImffLSQ74vCC+YqRHLmLHIEx+fKAeATQidZSExgaEhCWElE9YVg40R4pE3A7gnIQg4A40zEx7JKfkzKRgeBOAYkmvUkj9IJcmKkzwso9gWkvoBk1EsVTUqbbIJ44YdkibTkrGbkvw-KPk6A3Xe0x0sUlo83T4y9aCCgJwY8IyTMzSUgIgTbXBEGc6UnWfDMtRWbTSIDV3CQcGYs1I6s1YClcJEssANY6OOCclRsrIEwEYkBB7G0to0bdyIow3QaUGDozfcPVsuYyve7EvLE2fSPEk-grXJ9eQRLWtegOvXXAbScYkGhNiWs9AQ4G4RgKrLhHgPgVgc8dAdgcSbqcSNUTwT8Y0HhOOeYMABYK7IAA)
