@@ -304,7 +304,9 @@ print(combined_plot)
 ### Intertemporale Konsumoptimierung
 
 
-#### Allgemeine Gleichung für zwei Perioden
+
+
+#### Allgemeine Gleichungen für zwei Perioden
 
 Der Haushalt muss folgendes Problem lösen:
 
@@ -473,13 +475,317 @@ Hier wird häufig die folgende Nutzenfunktion verwendet:
 
 $$u(C_t) = \begin{cases} \dfrac{C_t^{1-\sigma}}{1-\sigma} &\text{für } \sigma \neq 1 \\[15pt]\ln(C_t) & \text{für } \sigma= 1 \end{cases}$$
 
+
+
 Der Grenznutzen ist dann $$u'(C_t)=C^{-\sigma}$$
+
+[Lösung für Ct und C t+1]::
+
+Die intertemporale Nutzenfunktion lautet: $$U(C_t, C_{t+1}) = \frac{C_t^{1-\sigma}}{1-\sigma} + \beta \frac{C_{t+1}^{1-\sigma}}{1-\sigma}$$
+
+Die intertemporale Budgetrestriktion mit Lebenseinkommen $W$ ist:$$C_t + \frac{C_{t+1}}{1+r} = Y_t + \frac{Y_{t+1}}{1+r} \equiv W$$
+
+Aus der Optimierung (Nutzenmaximierung unter Nebenbedingung) ergibt sich die **Euler-Gleichung**: $$C_t^{-\sigma} = \beta (1+r) C_{t+1}^{-\sigma} \quad \implies \quad C_{t+1} = \left( \beta (1+r) \right)^{\frac{1}{\sigma}} C_{t}$$
+
+Setzt man dies in die Budgetrestriktion ein, erhält man die explizite Konsumfunktion für Periode $t$: $$C_t(r, W) = \frac{W}{1 + \beta^{\frac{1}{\sigma}} (1+r)^{\frac{1-\sigma}{\sigma}}}$$
+
+Für $\sigma=1$ vereinfacht sich das zu $$C_t(r, W) = \frac{W}{1 + \beta}$$
+
+Für $\beta=1$ bedeutet dies eine hälftige Aufteilung, für $\beta < 1$ bedeutet dies eine Bevorzugung heutigen Konsums.
+
+$$\frac{\partial C_t}{\partial Y_t} = \frac{1}{1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}}$$
+
+  $$\frac{\partial C_t}{\partial Y_{t+1}} = \frac{\frac{1}{1+r}}{1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}} = \frac{1}{(1+r) \left(1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}\right)}$$ bzw.
+  
+$$\frac{\partial C_t}{\partial Y_{t+1}} = \frac{1}{1+r} \cdot \frac{\partial C_t}{\partial Y_t}$$
 
 #### Veränderung des heutigen Einkommens
 
+[Grafik]::
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Effekt einer heutigen Einkommenserhöhung auf heutigen Konsum"
+
+library(ggplot2)
+#library(patchwork)
+
+options(scipen = 999)
+
+# --- 1. Hilfsfunktionen ---
+get_W <- function(r, y0, y1) {
+  return(y0 + y1 / (1 + r))
+}
+
+get_c0 <- function(r, sigma, y0, y1, beta) {
+  W <- get_W(r, y0, y1)
+  c0 <- W / (1 + beta^(1/sigma) * (1 + r)^((1-sigma)/sigma))
+  return(c0)
+}
+
+get_c1 <- function(r, sigma, c0, beta) {
+  c1 <- (beta * (1 + r))^(1/sigma) * c0
+  return(c1)
+}
+
+get_U <- function(c0, c1, sigma, beta) {
+  if (sigma == 1) {
+    return(log(c0) + beta * log(c1))
+  } else {
+    return((c0^(1-sigma))/(1-sigma) + beta * (c1^(1-sigma))/(1-sigma))
+  }
+}
+
+get_IC <- function(c0_seq, U, sigma, beta) {
+  if (sigma == 1) {
+    c1 <- exp((U - log(c0_seq)) / beta)
+  } else {
+    val <- (U * (1 - sigma) - c0_seq^(1 - sigma)) / beta
+    c1 <- rep(NA, length(c0_seq))
+    valid <- val > 0
+    c1[valid] <- val[valid]^(1 / (1 - sigma))
+  }
+  return(c1)
+}
+
+# --- 2. Modellparameter ---
+r     <- 0.05
+beta  <- 0.7
+sigma <- 0.5
+
+# Gemeinsame Achsenbegrenzung für Vergleichbarkeit
+max_val <- 250
+c0_seq  <- seq(0.1, max_val, length.out = 300)
+
+# --- 3. Szenario A: Höheres Einkommen heute (Y_t) ---
+y0_base <- 100; y1_base <- 100
+y0_new  <- 130; y1_new  <- 100
+
+# Baseline Berechnungen
+W_base <- get_W(r, y0_base, y1_base)
+c0_opt_base <- get_c0(r, sigma, y0_base, y1_base, beta)
+c1_opt_base <- get_c1(r, sigma, c0_opt_base, beta)
+U_opt_base  <- get_U(c0_opt_base, c1_opt_base, sigma, beta)
+
+c1_budget_base <- (1 + r) * (W_base - c0_seq)
+c1_ic_base     <- get_IC(c0_seq, U_opt_base, sigma, beta)
+
+# Neues Szenario (höheres Y_t)
+W_new_y0 <- get_W(r, y0_new, y1_new)
+c0_opt_new_y0 <- get_c0(r, sigma, y0_new, y1_new, beta)
+c1_opt_new_y0 <- get_c1(r, sigma, c0_opt_new_y0, beta)
+U_opt_new_y0  <- get_U(c0_opt_new_y0, c1_opt_new_y0, sigma, beta)
+
+c1_budget_new_y0 <- (1 + r) * (W_new_y0 - c0_seq)
+c1_ic_new_y0     <- get_IC(c0_seq, U_opt_new_y0, sigma, beta)
+
+df_y0 <- data.frame(
+  c0 = rep(c0_seq, 2),
+  c1 = c0_cat <- c(pmax(0, c1_budget_base), pmax(0, c1_budget_new_y0)),
+  Budget = rep(c("Baseline (100/100)", "Höheres Y_t (130/100)"), each = length(c0_seq))
+)
+
+# Plot 1: Effekt von Y_t
+p_y0 <- ggplot() +
+  geom_line(data = data.frame(c0 = c0_seq, c1 = pmax(0, c1_budget_base)), aes(x = c0, y = c1, color = "Baseline"), linewidth = 1.1) +
+  geom_line(data = data.frame(c0 = c0_seq, c1 = pmax(0, c1_budget_new_y0)), aes(x = c0, y = c1, color = "Neues Budget"), linewidth = 1.1) +
+  geom_line(data = data.frame(c0 = c0_seq, c1 = c1_ic_base), aes(x = c0, y = c1), color = "gray40", linetype = "dashed", linewidth = 0.8) +
+  geom_line(data = data.frame(c0 = c0_seq, c1 = c1_ic_new_y0), aes(x = c0, y = c1), color = "firebrick", linetype = "dashed", linewidth = 0.8) +
+  # Ausstattungspunkte
+  geom_point(aes(x = y0_base, y = y1_base), color = "steelblue", size = 3) +
+  geom_text(aes(x = y0_base, y = y1_base, label = " E"), hjust = -0.2, vjust = -0.5, fontface = "bold", color = "steelblue") +
+  geom_point(aes(x = y0_new, y = y1_new), color = "firebrick", size = 3) +
+  geom_text(aes(x = y0_new, y = y1_new, label = " E'"), hjust = -0.2, vjust = -0.5, fontface = "bold", color = "firebrick") +
+  # Optima
+  geom_point(aes(x = c0_opt_base, y = c1_opt_base), color = "black", size = 2.5) +
+  geom_point(aes(x = c0_opt_new_y0, y = c1_opt_new_y0), color = "firebrick", size = 2.5) +
+  coord_cartesian(xlim = c(0, max_val), ylim = c(0, max_val), expand = FALSE) +
+  scale_color_manual(name = "Budgetgerade", values = c("Baseline" = "steelblue", "Neues Budget" = "firebrick")) +
+  labs(
+    title = "Effekt von höherem Einkommen heute (Y_t)",
+    subtitle = "Ausstattung E verschiebt sich nach rechts (Y_t = 130)",
+    x = expression("Konsum in t (" * C[t] * ")"),
+    y = expression("Konsum in t+1 (" * C[t+1] * ")")
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom")
+
+
+# --- 4. Szenario B: Höheres Einkommen morgen (Y_{t+1}) ---
+y0_low_t1 <- 100; y1_low_t1 <- 100
+y0_high_t1 <- 100; y1_high_t1 <- 140
+
+# Neues Szenario (höheres Y_{t+1})
+W_new_y1 <- get_W(r, y0_high_t1, y1_high_t1)
+c0_opt_new_y1 <- get_c0(r, sigma, y0_high_t1, y1_high_t1, beta)
+c1_opt_new_y1 <- get_c1(r, sigma, c0_opt_new_y1, beta)
+U_opt_new_y1  <- get_U(c0_opt_new_y1, c1_opt_new_y1, sigma, beta)
+
+c1_budget_new_y1 <- (1 + r) * (W_new_y1 - c0_seq)
+c1_ic_new_y1     <- get_IC(c0_seq, U_opt_new_y1, sigma, beta)
+
+# Plot 2: Effekt von Y_{t+1}
+p_y1 <- ggplot() +
+  geom_line(data = data.frame(c0 = c0_seq, c1 = pmax(0, c1_budget_base)), aes(x = c0, y = c1, color = "Baseline"), linewidth = 1.1) +
+  geom_line(data = data.frame(c0 = c0_seq, c1 = pmax(0, c1_budget_new_y1)), aes(x = c0, y = c1, color = "Neues Budget"), linewidth = 1.1) +
+  geom_line(data = data.frame(c0 = c0_seq, c1 = c1_ic_base), aes(x = c0, y = c1), color = "gray40", linetype = "dashed", linewidth = 0.8) +
+  geom_line(data = data.frame(c0 = c0_seq, c1 = c1_ic_new_y1), aes(x = c0, y = c1), color = "darkgreen", linetype = "dashed", linewidth = 0.8) +
+  # Ausstattungspunkte
+  geom_point(aes(x = y0_low_t1, y = y1_low_t1), color = "steelblue", size = 3) +
+  geom_text(aes(x = y0_low_t1, y = y1_low_t1, label = " E"), hjust = -0.2, vjust = -0.5, fontface = "bold", color = "steelblue") +
+  geom_point(aes(x = y0_high_t1, y = y1_high_t1), color = "darkgreen", size = 3) +
+  geom_text(aes(x = y0_high_t1, y = y1_high_t1, label = " E'"), hjust = -0.2, vjust = -0.5, fontface = "bold", color = "darkgreen") +
+  # Optima
+  geom_point(aes(x = c0_opt_base, y = c1_opt_base), color = "black", size = 2.5) +
+  geom_point(aes(x = c0_opt_new_y1, y = c1_opt_new_y1), color = "darkgreen", size = 2.5) +
+  coord_cartesian(xlim = c(0, max_val), ylim = c(0, max_val), expand = FALSE) +
+  scale_color_manual(name = "Budgetgerade", values = c("Baseline" = "steelblue", "Neues Budget" = "darkgreen")) +
+  labs(
+    title = "Effekt von höherem Einkommen morgen (Y_{t+1})",
+    subtitle = "Ausstattung E verschiebt sich nach oben (Y_{t+1} = 140)",
+    x = expression("Konsum in t (" * C[t] * ")"),
+    y = expression("Konsum in t+1 (" * C[t+1] * ")")
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom")
+
+# --- 5. Kombination nebeneinander via patchwork ---
+#combined_plots <- p_y0 + p_y1
+#print(combined_plots)
+
+p_y0
+```
+
+
 #### Veränderung des zukünftigen Einkommens
 
+[Grafik]::
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Effekt einer künftigen Einkommenserhöhung auf heutigen Konsum"
+
+p_y1
+```
+
 #### Veränderung des Einkommens in allen Perioden
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Effekt einer Einkommenserhöhung in allen Perioden auf heutigen Konsum"
+
+library(ggplot2)
+
+options(scipen = 999)
+
+# --- 1. Hilfsfunktionen ---
+get_W <- function(r, y0, y1) {
+  return(y0 + y1 / (1 + r))
+}
+
+get_c0 <- function(r, sigma, y0, y1, beta) {
+  W <- get_W(r, y0, y1)
+  c0 <- W / (1 + beta^(1/sigma) * (1 + r)^((1-sigma)/sigma))
+  return(c0)
+}
+
+get_c1 <- function(r, sigma, c0, beta) {
+  c1 <- (beta * (1 + r))^(1/sigma) * c0
+  return(c1)
+}
+
+get_U <- function(c0, c1, sigma, beta) {
+  if (sigma == 1) {
+    return(log(c0) + beta * log(c1))
+  } else {
+    return((c0^(1-sigma))/(1-sigma) + beta * (c1^(1-sigma))/(1-sigma))
+  }
+}
+
+get_IC <- function(c0_seq, U, sigma, beta) {
+  if (sigma == 1) {
+    c1 <- exp((U - log(c0_seq)) / beta)
+  } else {
+    val <- (U * (1 - sigma) - c0_seq^(1 - sigma)) / beta
+    c1 <- rep(NA, length(c0_seq))
+    valid <- val > 0
+    c1[valid] <- val[valid]^(1 / (1 - sigma))
+  }
+  return(c1)
+}
+
+# --- 2. Modellparameter ---
+r     <- 0.05
+beta  <- 0.7
+sigma <- 0.5
+
+# Ausgangswerte vs. kombinierte neue Werte
+y0_base <- 100; y1_base <- 100
+y0_new  <- 130; y1_new  <- 140
+
+max_val <- 280
+c0_seq  <- seq(0.1, max_val, length.out = 300)
+
+# --- 3. Berechnungen Baseline ---
+W_base <- get_W(r, y0_base, y1_base)
+c0_opt_base <- get_c0(r, sigma, y0_base, y1_base, beta)
+c1_opt_base <- get_c1(r, sigma, c0_opt_base, beta)
+U_opt_base  <- get_U(c0_opt_base, c1_opt_base, sigma, beta)
+
+c1_budget_base <- (1 + r) * (W_base - c0_seq)
+c1_ic_base     <- get_IC(c0_seq, U_opt_base, sigma, beta)
+
+# --- 4. Berechnungen kombiniertes Szenario ---
+W_new <- get_W(r, y0_new, y1_new)
+c0_opt_new <- get_c0(r, sigma, y0_new, y1_new, beta)
+c1_opt_new <- get_c1(r, sigma, c0_opt_new, beta)
+U_opt_new  <- get_U(c0_opt_new, c1_opt_new, sigma, beta)
+
+c1_budget_new <- (1 + r) * (W_new - c0_seq)
+c1_ic_new     <- get_IC(c0_seq, U_opt_new, sigma, beta)
+
+# --- 5. ggplot Erstellung ---
+p_combined <- ggplot() +
+  # Budgetgeraden
+  geom_line(data = data.frame(c0 = c0_seq, c1 = pmax(0, c1_budget_base)), 
+            aes(x = c0, y = c1, color = "Baseline (100/100)"), linewidth = 1.1) +
+  geom_line(data = data.frame(c0 = c0_seq, c1 = pmax(0, c1_budget_new)), 
+            aes(x = c0, y = c1, color = "Kombiniert (130/140)"), linewidth = 1.1) +
+  # Indifferenzkurven
+  geom_line(data = data.frame(c0 = c0_seq, c1 = c1_ic_base), 
+            aes(x = c0, y = c1), color = "steelblue", linetype = "dashed", linewidth = 0.8) +
+  geom_line(data = data.frame(c0 = c0_seq, c1 = c1_ic_new), 
+            aes(x = c0, y = c1), color = "purple4", linetype = "dashed", linewidth = 0.8) +
+  # Ausstattungspunkte (Endowments)
+  geom_point(aes(x = y0_base, y = y1_base), color = "steelblue", size = 3.5) +
+  geom_text(aes(x = y0_base, y = y1_base, label = " E (100/100)"), hjust = -0.15, vjust = -0.5, fontface = "bold", color = "steelblue") +
+  geom_point(aes(x = y0_new, y = y1_new), color = "purple4", size = 3.5) +
+  geom_text(aes(x = y0_new, y = y1_new, label = " E' (130/140)"), hjust = -0.15, vjust = -0.5, fontface = "bold", color = "purple4") +
+  # Optimale Konsumpunkte
+  geom_point(aes(x = c0_opt_base, y = c1_opt_base), color = "black", size = 2.5) +
+  geom_point(aes(x = c0_opt_new, y = c1_opt_new), color = "purple4", size = 2.5) +
+  # Layout & Achsen
+  coord_cartesian(xlim = c(0, max_val), ylim = c(0, max_val), expand = FALSE) +
+  scale_color_manual(name = "Budgetgerade", 
+                     values = c("Baseline (100/100)" = "steelblue", "Kombiniert (130/140)" = "purple4")) +
+  labs(
+    title = "Effekt einer kombinierten Einkommenserhöhung in beiden Perioden",
+    subtitle = "Gleichzeitiger Anstieg von Y_t auf 130 und Y_{t+1} auf 140",
+    x = expression("Konsum in t (" * C[t] + ")"),
+    y = expression("Konsum in t+1 (" * C[t+1] + ")")
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "bottom")
+
+print(p_combined)
+```
+
+
+
+
 
 #### Veränderung des Zinssatzes
 
