@@ -303,9 +303,6 @@ print(combined_plot)
 
 ### Intertemporale Konsumoptimierung
 
-
-
-
 #### Allgemeine Gleichungen für zwei Perioden
 
 Der Haushalt muss folgendes Problem lösen:
@@ -493,11 +490,6 @@ Für $\sigma=1$ vereinfacht sich das zu $$C_t(r, W) = \frac{W}{1 + \beta}$$
 
 Für $\beta=1$ bedeutet dies eine hälftige Aufteilung, für $\beta < 1$ bedeutet dies eine Bevorzugung heutigen Konsums.
 
-$$\frac{\partial C_t}{\partial Y_t} = \frac{1}{1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}}$$
-
-  $$\frac{\partial C_t}{\partial Y_{t+1}} = \frac{\frac{1}{1+r}}{1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}} = \frac{1}{(1+r) \left(1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}\right)}$$ bzw.
-  
-$$\frac{\partial C_t}{\partial Y_{t+1}} = \frac{1}{1+r} \cdot \frac{\partial C_t}{\partial Y_t}$$
 
 #### Veränderung des heutigen Einkommens
 
@@ -657,6 +649,8 @@ p_y1 <- ggplot() +
 p_y0
 ```
 
+$\Rightarrow$ Ein Anstieg des *heutigen* Einkommens erhöht den Konsum *heute und morgen*
+
 
 #### Veränderung des zukünftigen Einkommens
 
@@ -669,6 +663,8 @@ p_y0
 
 p_y1
 ```
+
+$\Rightarrow$ Ein Anstieg des *morgigen* Einkommens erhöht den Konsum *heute und morgen*
 
 #### Veränderung des Einkommens in allen Perioden
 
@@ -784,7 +780,7 @@ print(p_combined)
 ```
 
 
-
+$\Rightarrow$ Ein Anstieg des *heutigen und morgigen* Einkommens erhöht den Konsum *heute und morgen* stärker als nur ein Einkommenseinstieg heute oder morgen.
 
 
 #### Veränderung des Zinssatzes
@@ -812,8 +808,8 @@ kable(
   escape = FALSE
 ) %>%  
   kable_styling(full_width = FALSE) %>%  
-  pack_rows("$C_t$", 1, 2, escape = FALSE) %>%  
-  pack_rows("$C_{t+1}$", 3, 4, escape = FALSE)
+  pack_rows("C<sub>t</sub>", 1, 2, escape = FALSE) %>%  
+ pack_rows("C<sub>t+1</sub>", 3, 4, escape = FALSE)
 ```
 
 ```{r}
@@ -972,3 +968,294 @@ ggplot() +
 ```
 
 [Interaktive Grafik zu Einkommens- und Substitutionseffekten](https://shinylive.io/r/app/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IIgMQACALQyJARgwSAErWoAzTmoCuEANalaJChPZQtAfbiNuUavQkATOJwkBlKwDcrLtQB-GEvTOnFZwEgAKVmpEjDBQEARwAtIyIiIA5nCkAPoA6hIAPFIS2gkGJOyMuBIAmtmk1XWkcskgIhISjFlajBDsTRIA1LX1chIA9CZjw4wCwhAAvmkQmTkAwvWFxaUE5X1VEpy06XGN9WfN1UGkUK3tEvlFEqt5lRcXLfcbpFsPE1NDQJZKAAPXYcnGRxOtwkACoATMBGDwVIoXEBJDjuj5h0uqQen1vvMlqIVllst8xk8dns3ocsVBqt8rsC7hBcd1eux2NcoHCEZ05mCIWiYfCiSISRlyQBVX40wyE84SSnVUUsm5sjq0NQmUUSAC8BvkWo6nU5fWoRHS7CJgN5-KtNspc3uCwkcGoIQkbXZZrxBO532FqIZc3GKNFyWGDvhttGIajGMjYZxEhJUrJOQAkmt5Tpdor4zkQgBHaoytUMjUw33a3VcBmG40tH33DqU35wAAeqG5cuKTuL2TLc3+vLT7s93rrZo8tl+7DlcbGxSj0hV9RHcFLwo3SfHwPbEkkADkAIISABePV8BF0mSCEGqalsXscVgkABUrDAJDpyACJwAlyHor09CQIDgdIoAMDwJAAd1oRgHGPTsnh1ac4HYedqAkAA+CQAAZqlwvdJnBfdU2qC9J3uAMuRdSVlnEFJigAJkUGVsykAAROA1D4Wg9jY5YtFoeVqHEhxwigTJ2HuAxSGoOBZKg6gFLAFR704KQAC0rBU9IdHSCRaD-dipEiRhDCcCApAAWSIJxqGoIQwAEXB7nuI4nHoFgABkoFYIgtFIBS-Q6Xy4H8xg1M9CKzTNTg6GA7MIFQMLNKadzqncgBRPhdCIGB4HZPgIisWywh+fp6gERBcokGAKpbEjmqgbtDQkdiiPa3CtDCNr2s4chUG6gBWTzjyi1KrHSzLwvcpo5CagqipKsqzPZazqokUhBjGOqDpaRq8Ga1riOqOIuuNXr+tsQbuoAFhGsbJumyLkrmxgFqy9zGGyWxSDWsBz2oQCJD0vhOE4WCrxMQHgYapqWvZY0iIwdqbu6hQHqkobiKxia1XejHic+pLZtoNKMv+sBAagrRQdPOBBoCaGIFh+HEeyJmUfOtHusx7HOtxjASYkAbCcxgAON64HG8miKmryvup2nFs03lQd42hOGKshaCsEzNCgfQYhMCczuuy7MclnGWyx0jHpljAAE5JdGxXhaxlo1apw4fr+pawFFUGsH12hiqgLxGCOEh-gAcWoAAT0h8RWPUwxti70aJ9jrrF40JudqXXfFhWlaJ-2ZokbhGHYSmqe4T1UB-btQ5UCAELgfXEAeCh2X1Qixh0BxHCgFx0ocWgPBprQtD-VxUBYT99dqgZCKJaoHBKoSrB+Ig1B+YCJEKvRNooEI1DUOB9BMfL8uSOy3C0ehRuEsLFRvu+H-YVwz8MDuTTB0ZuHRjxxD4PFDSddUBWlIAAeTClrdyvAdLhAQU1VuxxuA-GNO5AAbH1VA3YQHHjTPMeYyxJAyGKAAZkUO4RgccpABWtNHUSpIQgsM-NSAstI+CLWqKFUgi1TT3FEYtAAJOg3QnBMFEB+E8LoEBgKKPCrODokgL4wSfBIMwKVnAUGPAMDoGE6akGkTlL6K1zHFCEWFaxoxjyAytAhX4jirFIwhq47IvB0jcE8ZY6RjM2bHgdMEmROsvr6gsTI8OX1jySHCDoB+54B6INQAYGAS8gQSTcUQBCaEtyXl+C8b4lRsjuKrNCd4IxLhAk1CU5o2RLxPAqaMKpNT6R1M3Dkc8NZQESBlG0pKHTZTDkGf0uQbTamnCabcY8ySIhpJ+AAIUydk8yeSggFP8bglp2R1n2OeOSSpgMAncHmYyBpHwhktNmSciZ6wumXNwTcpkW51kPK+qMk5ZoXnZBlMOH5MzjmfMWcMlZqS9A-DWAPbS8j9KGWgiZEwrNBouHCF0fWcduCpwhhAfW1RgbOAkKeMK4EIDEq8GYEZbThkAGlFyxgFO8wJQpwSYmhMMnU2doTNhNG2dW-SKRdl7P2MZxQ2VDiZWOCi0woXDKnF6MIWizSAT-E8JVbKmV7jXGGOu3xxVPClZeFcVFeXJEmFqpElFFVWuxMeEkSVKSmuKCy8UW41jHlyB6sVeZhjurzI6mYBzOXLK+pIc8BBuAhHsgFcywkXAOFYNAFqnA41Ai6HGqCpIko3TyL8G67AXi5G6UU+pK1PJnJyBWjl1y7kNP9g8CkwzuzZBxk8UtcgJqi07fkeEChPhfVYF2sWPbOrgn7UXQd-JKLDFLYUhC1RG1jmHRgUdSUVkAA0pDuFLINCACM-BAWNhIJNxKTFfRNWWX4ZZwTVE7TdaoKkVikG4BgURk0+rQujRIdZWgHCrEyMwV+QRc3cHzY87I9BgMvHcacxdnRqlFOSHGctlbV3NprRuO9O5hnuvgyB8kVzFxKvXQurDjbq2jGSMUAjpYiOjDgwh8kgldgUcBFRuM-q8yMa3KOKNSVJAzx1HfVRV5dA9C8OySDcA803rdax2gBAxlAtzMOMsFY5m9IWROWDanjnlPJFppjumwXqihSJs0tDZDhACogr858sCuC-PlAKAV8qnhMOs88gCJBYAY6kL6q9G5xACMaAg7BJaS2etUdi0Ya7JEkFgVOajPzxFXrDZTZoVkBTgKEFwTKiAxFntAcgXNWDez-GYNQV5jatwLWaeBSj2DtXaqQVgqBCbuVEOdbsdA-zRY68+id3Za2sGG91GL7Vx03XAYHIbUB7DGh7KgLosMizuVK1zPJFVdrORqiYdy-I1jAFIAAXX5OQjyAdA4dGm6t7qG2tsJz6LtkgnADs7Sqsd-ah1TtgHO5dw6N34R3aW1TKB+d1qX1KtfYo4834fyUt-b7Ak-61SRbpAyjAjImWEHgOuZpEjdgwLD8WktycYGoC9p2SXbPaMA+x0gYGoCv3Amp6DeWOh0CgpwbTO5gDEbZ2hjx+EMZXa+a0kjiGimi9Y-L8kSGpfERlxIYgeECFh3IJ6egBMmrUAQhPO6wyBfOGF6WJXcvxfkfV0RTXYvSM5Cubb2ZKu3e4IItL6o2vuruUEl0JgandDG9N91JnX1LdC6Yx7tjrvsicZ+I753yvxcp4T175PanU9+610QHXEh3LpGYKwftEezc9Tfd1qP-7RMSHE7fUIJ6ZO8PZNzpTLX+d8CtxZ8FxnpkB9197A3Rvzom+r9HpKsfrey9mcZsFI+S9gGDzFGy94q-1+ZyeZQqgNAC+Np3rQH52SxvjcYHCh9o62GGSEE4FBSBC+7ERbqJrpmsDfxjZ9YxjQf+qFYD-3BWmQhlYG6noX9yL0DzADL2CmIXIViWgjKmf3YFf3f2+UAO-yugkG7GAJNTBSAIwNaTBTAIgKgOL1L3LwQI8mPAfxQJf2wJNTWCwOFl-2IIpEAPwNYxYIkDIONEgML0oNgOoKIkQJ3QA1hX0DCHymqGmTBTzD7hPT7m72PFQCID4FQJiyaFlz0wIN0LWFrW0NGAXz0NYwUJ4NrVQGzRbHdn9x7Gpwbzs1WThTYVW2nGPHIE7mOnuVX3yhMHPC0FhhuAziJyanUJcGNASxKBIHwR6mGS8PCgAJALyjBgCIhmJ2qAiPIJiLICjwoJgLHzsAnwSJ7CSMwPBTBXchOXYExUyIkGyIEJfFiPyKEJgPX1Dy31oK+kSOHF4JDVSLzHYFx3qMaIkEEOiDyLugKN1zgNYHoTEO6IkMbzoQiAADF8psxvMJA1iAAdrAc+NYjYplDzLhJKcdb0J4BbMWeEEWWWY8cdIrX4a4rqW4rGehXfFJO+VQVHT+fEPYX+e+WqQBAeS8KQbeYZFgRgIpRgjgz-bAi4uAdg--H1Lg7qREvKUVKmFfdyBwFgYqZgMkbfaYvgigdIT9X2PtUo7w+AeIdgGLZI5guYQA7cQEdgF4-kEWJLVIwBJqHEsAPExgAk+ITIJqSYuImffLSQ74vCC+YqRHLmLHIEx+fKAeATQidZSExgaEhCWElE9YVg40R4pE3A7gnIQg4A40zEx7JKfkzKRgeBOAYkmvUkj9IJcmKkzwso9gWkvoBk1EsVTUqbbIJ44YdkibTkrGbkvw-KPk6A3Xe0x0sUlo83T4y9aCCgJwY8IyTMzSUgIgTbXBEGc6UnWfDMtRWbTSIDV3CQcGYs1I6s1YClcJEssANY6OOCclRsrIEwEYkBB7G0to0bdyIow3QaUGDozfcPVsuYyve7EvLE2fSPEk-grXJ9eQRLWtegOvXXAbScYkGhNiWs9AQ4G4RgKrLhHgPgVgc8dAdgcSbqcSNUTwT8Y0HhOOeYMABYK7IAA)
+
+Für das Folgende wird i.d.R. unterstellt, dass im Zweifel der Substitutionseffekt den Einkommenserfekt überwiegt.
+
+#### Zusammenfassung der Effekte
+
+##### Totales Differenzial und partielle Ableitungen
+
+$C_t = C^d(\underbrace{Y_t}_{+}, \underbrace{Y_{t+1}}_{+}, \underbrace{r_t}_{-})$
+
+
+**Totales Differenzial**:
+
+Das totale Differenzial beschreibt die **Gesamtänderung der abhängigen Variablen ($dC_t$), die dadurch entsteht, dass sich mehrere oder alle unabhängigen Einflussfaktoren gleichzeitig verändern** (jeweils um infinitesimale Beträge wie $dY_t, dY_{t+1}, dr_t$).
+
+Es ist die **Summe aller gewichteten partiellen Effekte**:
+
+$dC_t = \frac{\partial C^d(\cdot)}{\partial Y_t} dY_t + \frac{\partial C^d(\cdot)}{\partial Y_{t+1}} dY_{t+1} + \frac{\partial C^d(\cdot)}{\partial r_t} dr_t$
+
+
+Da sowohl $\frac{\partial C^d(\cdot)}{\partial Y_t}$ als auch $\frac{\partial C^d(\cdot)}{\partial Y_{t+1}}$ positiv sind, ist der Effekt einer Einkommensänderung in allen Perioden auf den gegenwärtigen Konsum größer als der Effekt einer Einkommensänderung nur in einer der Perioden.
+
+
+##### Für die CRRA-Nutzenfunktion
+
+$$C_t(r, W) = \frac{W}{1 + \beta^{\frac{1}{\sigma}} (1+r)^{\frac{1-\sigma}{\sigma}}}$$
+
+$$\frac{\partial C_t}{\partial Y_t} = \frac{1}{1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}}$$
+
+  $$\frac{\partial C_t}{\partial Y_{t+1}} = \frac{\frac{1}{1+r}}{1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}} = \frac{1}{(1+r) \left(1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}\right)}$$ bzw.
+  
+$$\frac{\partial C_t}{\partial Y_{t+1}} = \frac{1}{1+r} \cdot \frac{\partial C_t}{\partial Y_t}$$
+
+$$\frac{\partial C_t}{\partial r} = - \frac{W \cdot \beta^{\frac{1}{\sigma}} \left( \frac{1-\sigma}{\sigma} \right) (1+r)^{\frac{1-\sigma}{\sigma}-1}}{\left( 1 + \beta^{\frac{1}{\sigma}} (1+r)^{\frac{1-\sigma}{\sigma}} \right)^2}$$
+
+Für $\sigma=1$ vereinfacht sich das zu
+
+$\frac{\partial C_t}{\partial Y_t} = \frac{1}{1 + \beta} \\[6pt]$
+
+$\frac{\partial C_t}{\partial Y_{t+1}} = \frac{1}{1 + \beta} \frac{1}{1 + r_t}$
+
+
+$$\frac{\partial C_t}{\partial r} = 0$$
+#### Das allgemeine Gleichgewicht
+
+-  Bislang gibt es noch keine Unternehmen, die investieren
+
+- Es gibt auch keinen Staat, der Einkommen umverteilen kann
+
+- Wenn alle Individuen gleich sind, kann keiner sparen
+
+- Wenn sich die Individuen unterscheiden, muss die Gesamterspartnis genau 0 sein
+
+- Gesucht wird also der Zins, bei dem die Gesamterstparnis 0 ist und das nachgefragte Einkommen gleich dem tatsächlichen Einkommen ist
+
+$$S_t=0 \rightarrow C_t=Y_t$$
+
+Es muss also gelten
+
+$$Y_t^d = C^d(Y_t, Y_{t+1}, r_t)$$
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Die IS-Kurve"
+
+# Zusätzliches Paket für die Plot-Ausrichtung laden
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+# 1. Modellparameter
+beta <- 0.95
+sigma <- 1
+y1 <- 100
+r_values <- c(0.05, 0.15, 0.30, 0.50)
+
+# 2. Hilfsfunktionen
+get_c0 <- function(y0, y1, r, sigma, beta) {
+  W <- y0 + y1 / (1 + r)
+  c0 <- W / (1 + beta^(1/sigma) * (1 + r)^((1-sigma)/sigma))
+  return(c0)
+}
+
+get_r_eq <- function(y0, y1, sigma, beta) {
+  r_eq <- (1 / beta) * (y1 / y0)^sigma - 1
+  return(r_eq)
+}
+
+# 3. Daten generieren
+df_upper <- expand.grid(
+  y0 = seq(50, 120, length.out = 200),
+  r = r_values
+) %>%
+  mutate(c0 = get_c0(y0, y1, r, sigma, beta))
+
+df_lower <- data.frame(y0 = seq(50, 120, length.out = 200)) %>%
+  mutate(r_eq = get_r_eq(y0, y1, sigma, beta))
+
+# Gleichgewichtspunkte berechnen (für die vertikalen Linien)
+eq_points <- data.frame(r = r_values) %>%
+  mutate(
+    y0_eq = y1 / (beta^(1/sigma) * (1 + r)^(1/sigma)),
+    c0_eq = y0_eq
+  )
+
+# 4. Plots erstellen
+# Oberer Plot
+p1 <- ggplot(df_upper, aes(x = y0, y = c0, color = as.factor(r))) +
+  # Vertikale Verbindungslinien (unter die anderen Geome gelegt)
+  geom_vline(data = eq_points, aes(xintercept = y0_eq),
+             linetype = "dotted", color = "gray40", size = 0.8, alpha = 0.7) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "gray50", size = 0.8) +
+  geom_line(size = 1) +
+  geom_point(data = eq_points, aes(x = y0_eq, y = c0_eq), color = "black", size = 3, show.legend = FALSE) +
+#  coord_cartesian(xlim = c(60, 150), ylim = c(60, 150)) +
+  labs(
+    title = "Allgemeines Gleichgewicht im 2-Perioden-Modell",
+    y = bquote(Y[t]^d),
+  color = bquote(Y[t]^d ~ "zu unterschiedlichen Zinssätzen (" * r * ")")) +
+  theme_light() +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "right",
+    # x-Achsentext und -titel ausblenden, da sie im unteren Plot stehen
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    # Rand unten entfernen für nahtlosen Übergang
+  #  plot.margin = margin(t = 10, r = 10, b = 0, l = 10)
+  )
+
+# Unterer Plot
+p2 <- ggplot(df_lower, aes(x = y0, y = r_eq)) +
+  # Vertikale Verbindungslinien (exakt gleiche x-Werte wie oben)
+  geom_vline(data = eq_points, aes(xintercept = y0_eq),
+             linetype = "dotted", color = "gray40", size = 0.8, alpha = 0.7) +
+  geom_hline(data = eq_points, aes(yintercept = r), linetype = "dashed", color = "gray70") +
+  geom_line(color = "firebrick", size = 1.2) +
+  geom_point(data = eq_points, aes(x = y0_eq, y = r), color = "black", size = 3) +
+#  coord_cartesian(xlim = c(60, 150), ylim = c(0, 0.6)) +
+  labs(
+    x = bquote("Heutige Anfangsausstattung (" ~ y[t] ~ ")"),
+    y = bquote("Gleichgewichtszins (" ~ r^"*" ~ ")")
+  ) +
+  theme_light() +
+  theme(
+    # Rand oben entfernen für nahtlosen Übergang
+ #   plot.margin = margin(t = 0, r = 10, b = 10, l = 10)
+  )
+
+# 5. Plots mit Patchwork übereinanderlegen und ausrichten
+# Das '/' Symbol stapelt die Plots vertikal
+kombinierter_plot <- p1 / p2 +
+  plot_layout(heights = c(2, 1.2)) # Der obere Plot bekommt etwas mehr Höhe
+
+# Plot anzeigen
+kombinierter_plot
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Veränderung des zukünftigen Einkommens"
+
+# Notwendige Bibliotheken laden
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+# ==========================================
+# 1. Modellparameter & Szenarien für Y_{t+1}
+# ==========================================
+beta <- 0.95
+sigma <- 1
+r_fixed <- 0.12  # Fester Realzins für den oberen Plot
+
+# Zwei verschiedene Zukunftseinkommen (Y_{t+1})
+y1_low  <- 80    # Ausgangswert (Graue Kurve)
+y1_high <- 110   # Erhöhtes Zukunftseinkommen (Blaue Kurve)
+
+# ==========================================
+# 2. Hilfsfunktionen
+# ==========================================
+# Aggregierte Nachfrage / Konsum c0 als Funktion von y0, y1, r
+get_c0 <- function(y0, y1, r, sigma, beta) {
+  W <- y0 + y1 / (1 + r)
+  c0 <- W / (1 + beta^(1/sigma) * (1 + r)^((1-sigma)/sigma))
+  return(c0)
+}
+
+# Inverse IS-Kurve: y0 als Funktion von r und y1 (für das Marktwachstum/Gleichgewicht)
+get_y0_from_r <- function(r, y1, sigma, beta) {
+  y1 / (beta * (1 + r))^(1 / sigma)
+}
+
+# ==========================================
+# 3. Daten generieren
+# ==========================================
+y0_seq <- seq(40, 140, length.out = 200)
+
+# Daten für den oberen Plot (Nachfragekurven bei fixem r)
+df_upper <- data.frame(y0 = rep(y0_seq, 2)) %>%
+  mutate(
+    y1 = rep(c("y1_low", "y1_high"), each = length(y0_seq)),
+    y1_val = ifelse(y1 == "y1_low", y1_low, y1_high),
+    yd = get_c0(y0, y1_val, r_fixed, sigma, beta)
+  )
+
+# Daten für den unteren Plot (IS-Kurven)
+r_seq <- seq(0.0, 0.45, length.out = 200)
+df_lower <- data.frame(r = rep(r_seq, 2)) %>%
+  mutate(
+    y1 = rep(c("y1_low", "y1_high"), each = length(r_seq)),
+    y1_val = ifelse(y1 == "y1_low", y1_low, y1_high),
+    y0 = get_y0_from_r(r, y1_val, sigma, beta)
+  )
+
+# Gleichgewichtspunkte (Schnittpunkte mit 45-Grad-Linie / festem Zins)
+eq_low_y0  <- get_y0_from_r(r_fixed, y1_low, sigma, beta)
+eq_high_y0 <- get_y0_from_r(r_fixed, y1_high, sigma, beta)
+
+eq_points_upper <- data.frame(
+  y0 = c(eq_low_y0, eq_high_y0),
+  yd = c(get_c0(eq_low_y0, y1_low, r_fixed, sigma, beta),
+         get_c0(eq_high_y0, y1_high, r_fixed, sigma, beta)),
+  y1 = c("y1_low", "y1_high")
+)
+
+# ==========================================
+# 4. Plots erstellen (Analog zu Abb. 11.3)
+# ==========================================
+
+# Oberer Plot: Aggregierte Nachfrage (Y^d)
+p1 <- ggplot() +
+  # 45-Grad-Linie (Y^d = Y_t)
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "gray50", size = 0.8) +
+  # Nachfragekurven
+  geom_line(data = df_upper, aes(x = y0, y = yd, color = y1), size = 1) +
+  # Gestrichelte Verbindungslinien zwischen oberem und unterem Plot
+  geom_vline(xintercept = eq_low_y0, linetype = "dotted", color = "gray40", size = 0.7) +
+  geom_vline(xintercept = eq_high_y0, linetype = "dotted", color = "gray40", size = 0.7) +
+  # Gleichgewichtspunkte
+  geom_point(data = eq_points_upper, aes(x = y0, y = yd), color = "black", size = 3) +
+  scale_color_manual(values = c("y1_low" = "gray60", "y1_high" = "royalblue")) +
+  coord_cartesian(xlim = c(50, 130), ylim = c(50, 130)) +
+  labs(
+    title = "Verschiebung der IS-Kurve infolge einer Änderung des zukünftigen Einkommens",
+    y = bquote(Y^d)
+  ) +
+  theme_light() +
+  theme(
+    plot.title = element_text(face = "bold", size = 11),
+    legend.position = "none",
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank()
+  )
+
+# Unterer Plot: IS-Kurven-Verschiebung
+p2 <- ggplot() +
+  # IS-Kurven
+  geom_line(data = df_lower, aes(x = y0, y = r, color = y1), size = 1.2) +
+  # Horizontale Linie für den festen Zins r_fixed
+  geom_hline(yintercept = r_fixed, linetype = "dotted", color = "gray50", size = 0.7) +
+  # Vertikale Hilfslinien zur Ausrichtung
+  geom_vline(xintercept = eq_low_y0, linetype = "dotted", color = "gray40", size = 0.7) +
+  geom_vline(xintercept = eq_high_y0, linetype = "dotted", color = "gray40", size = 0.7) +
+  # Gleichgewichtspunkte auf den IS-Kurven
+  geom_point(data = data.frame(y0 = c(eq_low_y0, eq_high_y0), r = c(r_fixed, r_fixed), y1 = c("y1_low", "y1_high")),
+             aes(x = y0, y = r), color = "black", size = 3) +
+  # Bewegungspfeil einfügen (optional zur Verdeutlichung der Rechtsverschiebung)
+  annotate("segment", x = eq_low_y0 + 3, xend = eq_high_y0 - 3, y = r_fixed, yend = r_fixed,
+           arrow = arrow(length = unit(0.2, "cm")), color = "royalblue", size = 0.9) +
+  scale_color_manual(values = c("y1_low" = "gray60", "y1_high" = "royalblue")) +
+  coord_cartesian(xlim = c(50, 130), ylim = c(0, 0.35)) +
+  labs(
+    x = bquote(Y[t]),
+    y = bquote(r[t])
+  ) +
+  theme_light() +
+  theme(
+    legend.position = "none"
+  )
+
+# ==========================================
+# 5. Zusammenfügen mit Patchwork
+# ==========================================
+kombinierter_plot <- p1 / p2 + plot_layout(heights = c(2, 1.2))
+
+# Plot ausgeben
+print(kombinierter_plot)
+```
+
