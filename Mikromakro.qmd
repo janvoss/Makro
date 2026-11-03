@@ -994,13 +994,13 @@ Da sowohl $\frac{\partial C^d(\cdot)}{\partial Y_t}$ als auch $\frac{\partial C^
 
 $$C_t(r, W) = \frac{W}{1 + \beta^{\frac{1}{\sigma}} (1+r)^{\frac{1-\sigma}{\sigma}}}$$
 
-$$\frac{\partial C_t}{\partial Y_t} = \frac{1}{1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}}$$
+$$\frac{\partial C_t}{\partial Y_t} = \frac{1}{1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}}>0$$
 
-  $$\frac{\partial C_t}{\partial Y_{t+1}} = \frac{\frac{1}{1+r}}{1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}} = \frac{1}{(1+r) \left(1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}\right)}$$ bzw.
+$$\frac{\partial C_t}{\partial Y_{t+1}} = \frac{\frac{1}{1+r}}{1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}} = \frac{1}{(1+r) \left(1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}\right)}$$ bzw.
   
-$$\frac{\partial C_t}{\partial Y_{t+1}} = \frac{1}{1+r} \cdot \frac{\partial C_t}{\partial Y_t}$$
+$$\frac{\partial C_t}{\partial Y_{t+1}} = \frac{1}{1+r} \cdot \frac{\partial C_t}{\partial Y_t}>0$$
 
-$$\frac{\partial C_t}{\partial r} = - \frac{W \cdot \beta^{\frac{1}{\sigma}} \left( \frac{1-\sigma}{\sigma} \right) (1+r)^{\frac{1-\sigma}{\sigma}-1}}{\left( 1 + \beta^{\frac{1}{\sigma}} (1+r)^{\frac{1-\sigma}{\sigma}} \right)^2}$$
+$$\frac{\partial C_t}{\partial r} = - \frac{W \cdot \beta^{\frac{1}{\sigma}} \left( \frac{1-\sigma}{\sigma} \right) (1+r)^{\frac{1-\sigma}{\sigma}-1}}{\left( 1 + \beta^{\frac{1}{\sigma}} (1+r)^{\frac{1-\sigma}{\sigma}} \right)^2} \lessgtr 0$$
 
 Für $\sigma=1$ vereinfacht sich das zu
 
@@ -1011,7 +1011,11 @@ $\frac{\partial C_t}{\partial Y_{t+1}} = \frac{1}{1 + \beta} \frac{1}{1 + r_t}$
 
 $$\frac{\partial C_t}{\partial r} = 0$$
 
-#### Das allgemeine Gleichgewicht
+#### Das wettbewerbliche Gleichgewicht
+
+##### Die IS-Kurve
+
+- Annahme: Niemand kann allein das Gleichgewicht beeinflussen (alle sind Preisnehmer (hier: Zinsnehmer))
 
 -  Bislang gibt es noch keine Unternehmen, die investieren
 
@@ -1021,7 +1025,7 @@ $$\frac{\partial C_t}{\partial r} = 0$$
 
 - Wenn sich die Individuen unterscheiden, muss die Gesamterspartnis genau 0 sein
 
-- Gesucht wird also der Zins, bei dem die Gesamterstparnis 0 ist und das nachgefragte Einkommen gleich dem tatsächlichen Einkommen ist
+- Gesucht wird also der Zins, bei dem die Gesamtersparnis 0 ist und das nachgefragte Einkommen gleich dem tatsächlichen Einkommen ist
 
 $$S_t=0 \rightarrow C_t=Y_t$$
 
@@ -1085,12 +1089,13 @@ p1 <- ggplot(df_upper, aes(x = y0, y = c0, color = as.factor(r))) +
   geom_point(data = eq_points, aes(x = y0_eq, y = c0_eq), color = "black", size = 3, show.legend = FALSE) +
 #  coord_cartesian(xlim = c(60, 150), ylim = c(60, 150)) +
   labs(
-    title = "Allgemeines Gleichgewicht im 2-Perioden-Modell",
+    title = "Wettbewerbliches Gleichgewicht im 2-Perioden-Modell",
+    subtitle = bquote("Gestrichelte Linie zeigt " * Y[t] == Y[t]^d),
     y = bquote(Y[t]^d),
   color = bquote(Y[t]^d ~ "zu unterschiedlichen Zinssätzen (" * r * ")")) +
   theme_light() +
   theme(
-    plot.title = element_text(face = "bold"),
+#    plot.title = element_text(face = "bold"),
     legend.position = "right",
     # x-Achsentext und -titel ausblenden, da sie im unteren Plot stehen
     axis.title.x = element_blank(),
@@ -1109,7 +1114,7 @@ p2 <- ggplot(df_lower, aes(x = y0, y = r_eq)) +
   geom_point(data = eq_points, aes(x = y0_eq, y = r), color = "black", size = 3) +
 #  coord_cartesian(xlim = c(60, 150), ylim = c(0, 0.6)) +
   labs(
-    x = bquote("Heutige Anfangsausstattung (" ~ y[t] ~ ")"),
+    x = bquote("Heutige Anfangsausstattung (" ~ Y[t] ~ ")"),
     y = bquote("Gleichgewichtszins (" ~ r^"*" ~ ")")
   ) +
   theme_light() +
@@ -1126,6 +1131,9 @@ kombinierter_plot <- p1 / p2 +
 # Plot anzeigen
 kombinierter_plot
 ```
+
+##### Verschiebung der IS-Kurve
+
 
 ```{r}
 #| message: false
@@ -1258,5 +1266,274 @@ kombinierter_plot <- p1 / p2 + plot_layout(heights = c(2, 1.2))
 
 # Plot ausgeben
 print(kombinierter_plot)
+```
+
+
+##### Die Angebotsseite
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Die IS-Kurve und die Angebotsseite"
+
+# Notwendige Bibliotheken laden
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+# ==========================================
+# 1. Modellparameter & Gleichgewichtszins
+# ==========================================
+beta <- 0.95
+sigma <- 1
+y1 <- 100
+r_eq <- 0.12  # Bestimmter Gleichgewichtszins im Markt
+
+# Hilfsfunktion für die Konsumnachfrage / Aggregierte Nachfrage
+get_c0 <- function(y0, y1, r, sigma, beta) {
+  W <- y0 + y1 / (1 + r)
+  c0 <- W / (1 + beta^(1/sigma) * (1 + r)^((1-sigma)/sigma))
+  return(c0)
+}
+
+# Inverse IS-Kurve: y0 als Funktion von r
+get_y0_from_r <- function(r, y1, sigma, beta) {
+  y1 / (beta * (1 + r))^(1 / sigma)
+}
+
+# Gleichgewichtseinkommen Y_{0,t} bei r_eq berechnen
+y0_eq <- get_y0_from_r(r_eq, y1, sigma, beta)
+yd_eq <- get_c0(y0_eq, y1, r_eq, sigma, beta)
+
+# ==========================================
+# 2. Daten generieren
+# ==========================================
+y0_seq <- seq(40, 140, length.out = 200)
+df_upper <- data.frame(y0 = y0_seq) %>%
+  mutate(yd = get_c0(y0, y1, r_eq, sigma, beta))
+
+r_seq <- seq(0.0, 0.35, length.out = 200)
+df_lower <- data.frame(r = r_seq) %>%
+  mutate(y0 = get_y0_from_r(r, y1, sigma, beta))
+
+# ==========================================
+# 3. Plots erstellen (Figure 11.5)
+# ==========================================
+
+# Oberer Plot: Gütermarktgleichgewicht (Y^d = Y_t)
+p1 <- ggplot() +
+  # 45-Grad-Linie
+  geom_abline(slope = 1, intercept = 0, linetype = "solid", color = "gray50", size = 0.8) +
+  # Nachfragekurve bei fixem r_eq
+  geom_line(data = df_upper, aes(x = y0, y = yd), color = "gray80", size = 1) +
+  # Gestrichelte Hilfslinien zum Gleichgewichtspunkt
+  geom_vline(xintercept = y0_eq, linetype = "dotted", color = "gray50", size = 0.7) +
+  geom_hline(yintercept = yd_eq, linetype = "dotted", color = "gray50", size = 0.7) +
+  # Gleichgewichtspunkt
+  geom_point(aes(x = y0_eq, y = yd_eq), color = "black", size = 3) +
+  # Beschriftung der Kurve im oberen Plot
+  annotate("text", x = 110, y = 103, label = expression(Y[t]^d == C[d](Y[t], Y[t+1], r[0*","*t])), size = 3, color = "gray70") +
+  annotate("text", x = 115, y = 122, label = expression(Y[t]^d == Y[t]), size = 3, color = "gray50") +
+  coord_cartesian(xlim = c(50, 130), ylim = c(50, 130)) +
+  labs(
+    title = "IS-Kurve mit Angebotsseite",
+    y = bquote(Y[t]^d)
+  ) +
+  theme_light() +
+  theme(
+    plot.title = element_text(face = "bold", size = 11),
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank()
+  )
+
+# Unterer Plot: IS-Kurve und vertikale Angebotskurve (Y^s)
+p2 <- ggplot() +
+  # IS-Kurve
+  geom_line(data = df_lower, aes(x = y0, y = r), color = "gray80", size = 1.2) +
+  # Vertikale Angebotskurve Y^s (festes Y bei y0_eq)
+  geom_vline(xintercept = y0_eq, color = "black", size = 0.9) +
+  # Horizontale Hilfslinie zum Zins r_{0,t}
+  geom_hline(yintercept = r_eq, linetype = "dotted", color = "gray50", size = 0.7) +
+  # Gleichgewichtspunkt
+  geom_point(aes(x = y0_eq, y = r_eq), color = "black", size = 3) +
+  # Beschriftungen
+  annotate("text", x = y0_eq + 3, y = 0.3, label = expression(Y^s), fontface = "bold", size = 4) +
+  annotate("text", x = 115, y = 0.05, label = "IS", fontface = "bold", size = 4, color = "gray70") +
+  coord_cartesian(xlim = c(50, 130), ylim = c(0, 0.35)) +
+  labs(
+    x = bquote(Y[t]),
+    y = bquote(r[t])
+  ) +
+  theme_light()
+
+# ==========================================
+# 4. Zusammenfügen mit Patchwork
+# ==========================================
+kombinierter_plot <- p1 / p2 + plot_layout(heights = c(2, 1.2))
+
+# Plot ausgeben
+print(kombinierter_plot)
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Verschiebung der Angebotskurve"
+
+# Notwendige Bibliotheken laden
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+# ==========================================
+# 1. Modellparameter & Gleichgewichte
+# ==========================================
+beta <- 0.95
+sigma <- 1
+y1 <- 100
+
+# Ausgangssituation (Zustand 0)
+r_eq0 <- 0.12  # Initialer Gleichgewichtszins
+
+# Hilfsfunktion für die Konsumnachfrage / Aggregierte Nachfrage
+get_c0 <- function(y0, y1, r, sigma, beta) {
+  W <- y0 + y1 / (1 + r)
+  c0 <- W / (1 + beta^(1/sigma) * (1 + r)^((1-sigma)/sigma))
+  return(c0)
+}
+
+# Inverse IS-Kurve: y0 als Funktion von r
+get_y0_from_r <- function(r, y1, sigma, beta) {
+  y1 / (beta * (1 + r))^(1 / sigma)
+}
+
+# 1. Initiales Gleichgewicht
+y0_eq0 <- get_y0_from_r(r_eq0, y1, sigma, beta)
+yd_eq0 <- get_c0(y0_eq0, y1, r_eq0, sigma, beta)
+
+# 2. Angebotsschock: Erhöhung von Y_t auf Y_{1,t}
+# Wir definieren das neue höhere Angebot Y_{1,t} (z.B. +15 Einheiten)
+y0_eq1 <- y0_eq0 + 10
+
+# Der neue Gleichgewichtszins ergibt sich aus der IS-Kurve für y0_eq1
+# Da r = y1 / (beta * y0) - 1 bei sigma = 1:
+r_eq1 <- (y1 / (beta * y0_eq1))^(sigma) - 1
+
+# Neue Konsumnachfrage beim neuen Zins r_eq1
+yd_eq1 <- get_c0(y0_eq1, y1, r_eq1, sigma, beta)
+
+# ==========================================
+# 2. Daten generieren
+# ==========================================
+y0_seq <- seq(40, 140, length.out = 200)
+
+# Nachfragekurven oben (altes r vs. neues gesunkenes r)
+df_upper_old <- data.frame(y0 = y0_seq) %>% mutate(yd = get_c0(y0, y1, r_eq0, sigma, beta))
+df_upper_new <- data.frame(y0 = y0_seq) %>% mutate(yd = get_c0(y0, y1, r_eq1, sigma, beta))
+
+# IS-Kurve unten
+r_seq <- seq(0.0, 0.35, length.out = 200)
+df_lower <- data.frame(r = r_seq) %>% mutate(y0 = get_y0_from_r(r, y1, sigma, beta))
+
+# ==========================================
+# 3. Plots erstellen (Figure 11.6: Supply Shock)
+# ==========================================
+
+# Oberer Plot: Gütermarktgleichgewicht
+p1 <- ggplot() +
+  # 45-Grad-Linie
+  geom_abline(slope = 1, intercept = 0, linetype = "solid", color = "gray40", linewidth = 0.8) +
+  # Alte Nachfragekurve (C(..., r_{0,t}))
+  geom_line(data = df_upper_old, aes(x = y0, y = yd), color = "gray60", linewidth = 1) +
+  # Neue Nachfragekurve nach oben verschoben (C(..., r_{1,t}))
+  geom_line(data = df_upper_new, aes(x = y0, y = yd), color = "#2B8CBE", linewidth = 1.1) +
+
+  # Hilfslinien altes Gleichgewicht
+  geom_vline(xintercept = y0_eq0, linetype = "dotted", color = "gray50", linewidth = 0.6) +
+  geom_hline(yintercept = yd_eq0, linetype = "dotted", color = "gray50", linewidth = 0.6) +
+
+  # Hilfslinien neues Gleichgewicht
+  geom_vline(xintercept = y0_eq1, linetype = "dotted", color = "gray50", linewidth = 0.6) +
+  geom_hline(yintercept = yd_eq1, linetype = "dotted", color = "gray50", linewidth = 0.6) +
+
+  # Punkte
+  geom_point(aes(x = y0_eq0, y = yd_eq0), color = "black", size = 2.5) +
+  geom_point(aes(x = y0_eq1, y = yd_eq1), color = "#2B8CBE", size = 2.5) +
+
+  # Verschiebungspfeil nach oben
+  geom_segment(aes(x = 110, y = get_c0(110, y1, r_eq0, sigma, beta),
+                   xend = 110, yend = get_c0(110, y1, r_eq1, sigma, beta)),
+               arrow = arrow(length = unit(0.2, "cm")), color = "#2B8CBE", linewidth = 0.8) +
+
+  # Beschriftungen (KORRIGIERT: Mathematische Ausdrücke geschlossen)
+  annotate("text", x = 120, y = 127, label = expression(Y[t]^d == Y[t]), size = 3.5, color = "gray30") +
+  annotate("text", x = 125, y = 112, label = expression(Y[t]^d == C^d*(Y[t]*","*Y[t+1]*","*r[0*","*t])), size = 3, color = "gray50") +
+  annotate("text", x = 125, y = 119, label = expression(Y[t]^d == C^d*(Y[t]*","*Y[t+1]*","*r[1*","*t])), size = 3, color = "#2B8CBE") +
+
+  coord_cartesian(xlim = c(50, 130), ylim = c(50, 130)) +
+  labs(
+    title = bquote("Angebotsschock: Anstieg von " * Y[t]),
+    y = bquote(Y[t]^d)
+  ) +
+  theme_light() +
+  theme(
+    plot.title = element_text(face = "bold", size = 11),
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank()
+  )
+
+# Unterer Plot: IS-Kurve und Vertikale Angebotsverschiebung (Y^s)
+p2 <- ggplot() +
+  # IS-Kurve
+  geom_line(data = df_lower, aes(x = y0, y = r), color = "gray40", linewidth = 1.1) +
+
+  # Alte Angebotskurve Y^s_0
+  geom_vline(xintercept = y0_eq0, color = "black", linewidth = 0.8) +
+  # Neue Angebotskurve Y^s_1 (nach rechts verschoben)
+  geom_vline(xintercept = y0_eq1, color = "#2B8CBE", linewidth = 0.8) +
+
+  # Pfeil für Verschiebung nach rechts
+  geom_segment(aes(x = y0_eq0 + 1, y = 0.22, xend = y0_eq1 - 1, yend = 0.22),
+               arrow = arrow(length = unit(0.2, "cm")), color = "#2B8CBE", linewidth = 0.8) +
+
+  # Horizontale Zinslinien
+  geom_hline(yintercept = r_eq0, linetype = "dotted", color = "gray50", linewidth = 0.6) +
+  geom_hline(yintercept = r_eq1, linetype = "dotted", color = "gray50", linewidth = 0.6) +
+
+  # Gleichgewichtspunkte
+  geom_point(aes(x = y0_eq0, y = r_eq0), color = "black", size = 2.5) +
+  geom_point(aes(x = y0_eq1, y = r_eq1), color = "#2B8CBE", size = 2.5) +
+
+  # Beschriftungen
+  annotate("text", x = y0_eq0, y = 0.32, label = expression(Y^s), fontface = "bold", size = 3.8) +
+  annotate("text", x = y0_eq1, y = 0.32, label = expression(Y*"'s"), fontface = "bold", size = 3.8, color = "#2B8CBE") +
+  annotate("text", x = 118, y = 0.05, label = "IS", fontface = "bold", size = 4, color = "gray30") +
+
+  coord_cartesian(xlim = c(50, 130), ylim = c(0, 0.35)) +
+  scale_y_continuous(
+    breaks = c(r_eq1, r_eq0),
+    labels = c(expression(r[1*","*t]), expression(r[0*","*t]))
+  ) +
+  scale_x_continuous(
+    breaks = c(y0_eq0, y0_eq1),
+    labels = c(expression(Y[0*","*t]), expression(Y[1*","*t]))
+  ) +
+  labs(
+    x = bquote(Y[t]),
+    y = bquote(r[t])
+  ) +
+  theme_light() +
+  theme(
+    panel.grid.minor = element_blank()
+  )
+
+# ==========================================
+# 4. Zusammenfügen mit Patchwork
+# ==========================================
+kombinierter_plot <- p1 / p2 + plot_layout(heights = c(2, 1.2))
+
+# Plot ausgeben
+print(kombinierter_plot)
+
 ```
 
