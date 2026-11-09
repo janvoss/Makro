@@ -1539,6 +1539,8 @@ print(kombinierter_plot)
 
 ## Produktion
 
+[Teaser](Produktion-Teaser.html#/title-slide)
+
 ### Grundstruktur
 
 - Firmen produzieren ein Allzweckgut. Dieses Gut wird für Konsum ($C$) und für Investitionen ($I$) verwendet. 
@@ -1638,8 +1640,158 @@ $$K_{t+1} = I_t + (1 - \delta) K_t$$
 
 ### Der Unternehmenswert
 
-### Die Investitionsnachfrage
+#### Dividende in Periode $t$
+
+$$D_t = Y_t - w_t N_t$$
+
+#### Dividende plus Restwert in Periode t+1
+
+$$D_{t+1} = Y_{t+1} + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I$$
+#### Gesamtwert des Unternehmens
+
+$$V_t = D_t + \frac{1}{1 + r_t} D_{t+1}$$
+
+bzw.
+
+$$\begin{aligned}
+V_t = &\ A_t F(K_t, N_t) - w_t N_t + \\
+      &\ \frac{1}{1 + r_t} \left[ A_{t+1} F(K_{t+1}, N_{t+1}) + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I \right]
+\end{aligned}$$
+
+
+#### Maximierung des Unternehmenswertes
+
+$$\begin{align*}
+\max_{N_t, I_t} \quad V_t &= A_t F(K_t, N_t) - w_t N_t + \\
+&\quad \frac{1}{1 + r_t} \left[ A_{t+1} F(K_{t+1}, N_{t+1}) + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I \right] 
+\end{align*}$$
+
+u.d.N.
+
+$$\begin{align*}
+K_{t+1} &= I_t + (1 - \delta) K_t \\
+I_t &= B_t^I
+\end{align*}$$
+
+bzw.
+
+$$B_t^I = K_{t+1} - (1 - \delta) K_t$$
+
+Wir können also ein Maximierungsproblem ohne Nebenbedingung formulieren
+
+$$\begin{aligned}
+\max_{N_t, K_{t+1}} \quad V_t = &\ A_t F(K_t, N_t) - w_t N_t + \\
+&\ \frac{1}{1 + r_t} \left[ A_{t+1} F(K_{t+1}, N_{t+1}) + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t)\left(K_{t+1} - (1 - \delta) K_t\right) \right]
+\end{aligned}$$
+
+Partielle Ableitungen bilden und gleich Null setzen
+
+$$\frac{\partial V_t}{\partial N_t} = A_t F_N(K_t, N_t) - w_t \stackrel{!}{=}0$$
+$$\iff w_t = A_t F_N(K_t, N_t)$$
+
+$$\frac{\partial V_t}{\partial K_{t+1}} = \frac{1}{1 + r_t} \left[ A_{t+1} F_K(K_{t+1}, N_{t+1}) + (1 - \delta) - (1 + r_t) \right] \stackrel{!}{=}0$$
+
+$$\iff 1 + r_t = A_{t+1} F_K(K_{t+1}, N_{t+1}) + (1 - \delta)$$
+
 
 ### Die Arbeitsnachfrage
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Die Arbeitsnachfrage"
+
+library(ggplot2)
+library(dplyr)
+
+# Parameter festlegen
+alpha <- 0.33        # Kapitaleinkommensquote (z. B. 1/3)
+K_fixed <- 100       # Fester Kapitalstock K_t
+A_low <- 1.0         # Technologietrend 1
+A_high <- 1.5        # Technologietrend 2 (höhere Produktivität)
+
+# Datenraster erstellen
+df <- expand.grid(
+  N_t = seq(10, 200, length.out = 300),
+  A_t = c(A_low, A_high)
+) %>%
+  mutate(
+    A_label = factor(paste0("A_t = ", A_t), levels = c(paste0("A_t = ", A_low), paste0("A_t = ", A_high))),
+    # Grenzproduktivität der Arbeit (dY/dN)
+    MPN = (1 - alpha) * A_t * (K_fixed^alpha) * (N_t^(-alpha))
+  )
+
+# Diagramm erstellen
+ggplot(df, aes(x = N_t, y = MPN, color = A_label, linetype = A_label)) +
+  geom_line(linewidth = 1.2) +
+  scale_color_manual(values = c("A_t = 1" = "#2b5c8f", "A_t = 1.5" = "#d95f02")) +
+  scale_linetype_manual(values = c("solid", "dashed")) +
+  labs(
+    title = "Die Arbeitsnachfrage",
+    subtitle = expression(paste("Grenzproduktivität: ", frac(partialdiff*Y[t], partialdiff*N[t]) == (1-alpha)*A[t]*K[t]^alpha*N[t]^-alpha)),
+    x = expression(Arbeitseinsatz~N[t]),
+    y = expression(Grenzproduktivität~~frac(partialdiff*Y[t], partialdiff*N[t])),
+    color = "Technologieniveau",
+    linetype = "Technologieniveau"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold")
+  )
+```
+
+
+### Die Investitionsnachfrage
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Die Investitionsnachfrage und Grenzproduktivität des Kapitals"
+
+library(ggplot2)
+library(dplyr)
+
+# Parameter festlegen
+alpha <- 0.33        # Kapitaleinkommensquote
+N_fixed <- 100       # Fester Arbeitseinsatz N_{t+1}
+delta <- 0.05        # Abschreibungsrate
+A_low <- 1.0         # Technologietrend (Periode t+1)
+A_high <- 1.5        # Technologietrend (höhere Produktivität)
+
+# Datenraster erstellen (zukünftiger Kapitalstock K_{t+1})
+df_inv <- expand.grid(
+  K_next = seq(10, 200, length.out = 300),
+  A_t1 = c(A_low, A_high)
+) %>%
+  mutate(
+    A_label = factor(paste0("A_{t+1} = ", A_t1), levels = c(paste0("A_{t+1} = ", A_low), paste0("A_{t+1} = ", A_high))),
+    # Grenzproduktivität des Kapitals (dY / dK) aus Cobb-Douglas Y = A * K^alpha * N^(1-alpha)
+    MPK = alpha * A_t1 * (K_next^(alpha - 1)) * (N_fixed^(1 - alpha))
+  )
+
+# Diagramm erstellen
+ggplot(df_inv, aes(x = K_next, y = MPK, color = A_label, linetype = A_label)) +
+  geom_line(linewidth = 1.2) +
+  scale_color_manual(values = c("A_{t+1} = 1" = "#2b5c8f", "A_{t+1} = 1.5" = "#d95f02")) +
+  scale_linetype_manual(values = c("solid", "dashed")) +
+  labs(
+    title = "Die Investitionsnachfrage (Kapitalnachfrage)",
+    subtitle = expression(paste("Grenzproduktivität: ", MPK == alpha * A[t+1] * K[t+1]^(alpha-1) * N[t+1]^(1-alpha))),
+    x = expression(Zukünftiger~Kapitalstock),
+    y = expression(Grenzproduktivität~~frac(partialdiff*Y[t+1], partialdiff*K[t+1])),
+    color = "Technologieniveau",
+    linetype = "Technologieniveau"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold")
+  )
+```
+
+
 
 ### Das Arbeitsangebot

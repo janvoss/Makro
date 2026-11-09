@@ -1,0 +1,16 @@
+---
+title: "Was erwartet uns heute?"
+format: revealjs
+---
+
+## 
+
+[Produktion]{.r-fit-text}
+
+. . .
+
+[ist anstrengend]{.r-fit-text}
+
+. . .
+
+[aber lohnt sich.]{.r-fit-text}
