@@ -1539,7 +1539,7 @@ print(kombinierter_plot)
 
 ## Produktion
 
-[Teaser](Produktion-Teaser.html#/title-slide)
+[Teaser](Produktion-Teaser.html#/title-slide){target="_blank"}
 
 ### Grundstruktur
 
