@@ -1,6 +1,8 @@
 ---
 title: "Was erwartet uns heute?"
-format: revealjs
+format: 
+  revealjs:
+    self-contained: true
 ---
 
 ## 
