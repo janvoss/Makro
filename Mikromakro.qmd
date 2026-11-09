@@ -1537,3 +1537,109 @@ print(kombinierter_plot)
 
 ```
 
+## Produktion
+
+### Grundstruktur
+
+- Firmen produzieren ein Allzweckgut. Dieses Gut wird für Konsum ($C$) und für Investitionen ($I$) verwendet. 
+
+- Für die Produktion verwenden Firmen Arbeit und Kapital
+
+- **Zeitlicher Ablauf**:  
+  - Periode $t$:  
+    - Firmen entscheiden über die Menge an Arbeit, die sie nachfragen. Aus der gegebenen Menge an Kapital und der nachgefragten Menge an Arbeit produzieren sie das Outputgut. Dabei verschleißt ein Teil des Kapitalstocks.
+    - Firmen entscheiden über die Höhe der Investitionen, die sie für die Erhöhung des Kapitalstocks in der nächsten Periode einsetzen.
+    - Haushalte entscheiden über die Menge an Arbeit, die sie anbieten, um daraus Arbeitseinkommen zu erzielen.
+    - Haushalte erhalten Kapitaleinkommen (Dividenden) von den Firmen
+    - (Haushalte entscheiden, welche Teile ihres Einkommens sie konsumieren bzw. sparen wollen.)
+    
+  - Periode $t+1$:  
+    - Firmen entscheiden über die Menge an Arbeit, die sie nachfragen. Aus der gegebenen Menge an Kapital und der nachgefragten Menge an Arbeit produzieren sie das Outputgut. Dabei verschleißt ein Teil des Kapitalstocks.  
+    - Firmen lösen den bestehenden Kapitalstock auf und zahlen ihn zusammen mit den Dividenden an die Eigentümer aus.  
+    - Haushalte entscheiden über die Menge an Arbeit, die sie anbieten, um daraus Arbeitseinkommen zu erzielen.
+    - Haushalte erhalten Kapitaleinkommen (Dividenden) von den Firmen
+    - (Haushalte entscheiden, welche Teile ihres Einkommens sie konsumieren bzw. sparen wollen.)
+    
+
+### Die Produktionsfunktion
+
+$$Y_t = A_t F(K_t, N_t)$$
+
+
+$$
+\begin{align*}
+1. & \quad F(0, N_t) = 0 \text{ und } F(K_t, 0) = 0 \\[6pt]
+2. & \quad \text{Die Produktionsfunktion ist streng monoton steigend in } K_t \text{ und } N_t: \\
+   & \quad \frac{\partial F}{\partial K_t} > 0 \quad \text{und} \quad \frac{\partial F}{\partial N_t} > 0 \\[6pt]
+3. & \quad \text{Die Produktionsfunktion ist streng konkav bezüglich } K_t \text{ und } N_t: \\
+   & \quad \frac{\partial^2 F}{\partial K_t^2} < 0 \quad \text{und} \quad \frac{\partial^2 F}{\partial N_t^2} < 0 \\[6pt]
+4. & \quad \text{Die Grenzprodukte streben gegen unendlich, wenn der Einsatzfaktor gegen null geht:} \\
+   & \quad \lim_{K_t \to 0} \frac{\partial F}{\partial K_t} = +\infty \quad \text{und} \quad \lim_{N_t \to 0} \frac{\partial F}{\partial N_t} = +\infty \\[6pt]
+5. & \quad \text{Die Grenzprodukte streben gegen null, wenn der Einsatzfaktor gegen unendlich geht:} \\
+   & \quad \lim_{K_t \to \infty} \frac{\partial F}{\partial K_t} = 0 \quad \text{und} \quad \lim_{N_t \to \infty} \frac{\partial F}{\partial N_t} = 0
+\end{align*}
+$$
+
+
+Eine Produktionsfunktion, die diese Bedingungen erfüllt: $$F(K_t, N_t) = K_t^{\alpha} N_t^{1-\alpha}, \quad 0 < \alpha < 1$$
+
+```{r}
+#| warning: false
+#| message: false
+#| fig-cap: "Eine Produktionsfunktion"
+
+library(ggplot2)
+library(dplyr)
+
+# Parameter festlegen
+alpha <- 0.33        # Kapitaleinkommensquote
+K_fixed <- 100       # Fester Kapitalstock K_t
+A_low <- 1.0         # Technologietrend 1
+A_high <- 1.5        # Technologietrend 2
+
+# Datenraster erstellen
+df_Y <- expand.grid(
+  N_t = seq(0, 200, length.out = 300),
+  A_t = c(A_low, A_high)
+) %>%
+  mutate(
+    A_label = factor(paste0("A_t = ", A_t), levels = c(paste0("A_t = ", A_low), paste0("A_t = ", A_high))),
+    # Gesamtertrag / Produktion Y_t
+    Y_t = A_t * (K_fixed^alpha) * (N_t^(1 - alpha))
+  )
+
+# Diagramm erstellen
+ggplot(df_Y, aes(x = N_t, y = Y_t, color = A_label, linetype = A_label)) +
+  geom_line(linewidth = 1.2) +
+  scale_color_manual(values = c("A_t = 1" = "#2b5c8f", "A_t = 1.5" = "#d95f02")) +
+  scale_linetype_manual(values = c("solid", "dashed")) +
+  labs(
+    title = "Produktionsfunktion",
+    subtitle = expression(paste("Cobb-Douglas-Produktionsfunktion: ", Y[t] == A[t]*K[t]^alpha*N[t]^(1-alpha))),
+    x = expression(Arbeitseinsatz~N[t]),
+    y = expression(Gesamtertrag~Y[t]),
+    color = "Technologieniveau",
+    linetype = "Technologieniveau"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold")
+  )
+
+```
+
+
+### Der Kapitalstock
+
+
+$$K_{t+1} = I_t + (1 - \delta) K_t$$
+
+### Der Unternehmenswert
+
+### Die Investitionsnachfrage
+
+### Die Arbeitsnachfrage
+
+### Das Arbeitsangebot

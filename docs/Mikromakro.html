@@ -266,6 +266,16 @@ window.Quarto = {
   <li><a href="#die-intertemporale-nutzenfunktion" id="toc-die-intertemporale-nutzenfunktion" class="nav-link" data-scroll-target="#die-intertemporale-nutzenfunktion"><span class="header-section-number">4.1.2</span> Die intertemporale Nutzenfunktion</a></li>
   <li><a href="#intertemporale-konsumoptimierung" id="toc-intertemporale-konsumoptimierung" class="nav-link" data-scroll-target="#intertemporale-konsumoptimierung"><span class="header-section-number">4.1.3</span> Intertemporale Konsumoptimierung</a></li>
   </ul></li>
+  <li><a href="#produktion" id="toc-produktion" class="nav-link" data-scroll-target="#produktion"><span class="header-section-number">4.2</span> Produktion</a>
+  <ul class="collapse">
+  <li><a href="#grundstruktur" id="toc-grundstruktur" class="nav-link" data-scroll-target="#grundstruktur"><span class="header-section-number">4.2.1</span> Grundstruktur</a></li>
+  <li><a href="#die-produktionsfunktion" id="toc-die-produktionsfunktion" class="nav-link" data-scroll-target="#die-produktionsfunktion"><span class="header-section-number">4.2.2</span> Die Produktionsfunktion</a></li>
+  <li><a href="#der-kapitalstock" id="toc-der-kapitalstock" class="nav-link" data-scroll-target="#der-kapitalstock"><span class="header-section-number">4.2.3</span> Der Kapitalstock</a></li>
+  <li><a href="#der-unternehmenswert" id="toc-der-unternehmenswert" class="nav-link" data-scroll-target="#der-unternehmenswert"><span class="header-section-number">4.2.4</span> Der Unternehmenswert</a></li>
+  <li><a href="#die-investitionsnachfrage" id="toc-die-investitionsnachfrage" class="nav-link" data-scroll-target="#die-investitionsnachfrage"><span class="header-section-number">4.2.5</span> Die Investitionsnachfrage</a></li>
+  <li><a href="#die-arbeitsnachfrage" id="toc-die-arbeitsnachfrage" class="nav-link" data-scroll-target="#die-arbeitsnachfrage"><span class="header-section-number">4.2.6</span> Die Arbeitsnachfrage</a></li>
+  <li><a href="#das-arbeitsangebot" id="toc-das-arbeitsangebot" class="nav-link" data-scroll-target="#das-arbeitsangebot"><span class="header-section-number">4.2.7</span> Das Arbeitsangebot</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -1856,10 +1866,127 @@ Luckily, you can teach everything in 2 time periods with graphs, and I did the r
 </div>
 </div>
 </div>
-
-
 </section>
 </section>
+</section>
+</section>
+<section id="produktion" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="produktion"><span class="header-section-number">4.2</span> Produktion</h2>
+<section id="grundstruktur" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="grundstruktur"><span class="header-section-number">4.2.1</span> Grundstruktur</h3>
+<ul>
+<li><p>Firmen produzieren ein Allzweckgut. Dieses Gut wird für Konsum (<span class="math inline">\(C\)</span>) und für Investitionen (<span class="math inline">\(I\)</span>) verwendet.</p></li>
+<li><p>Für die Produktion verwenden Firmen Arbeit und Kapital</p></li>
+<li><p><strong>Zeitlicher Ablauf</strong>:</p>
+<ul>
+<li>Periode <span class="math inline">\(t\)</span>:
+<ul>
+<li>Firmen entscheiden über die Menge an Arbeit, die sie nachfragen. Aus der gegebenen Menge an Kapital und der nachgefragten Menge an Arbeit produzieren sie das Outputgut. Dabei verschleißt ein Teil des Kapitalstocks.</li>
+<li>Firmen entscheiden über die Höhe der Investitionen, die sie für die Erhöhung des Kapitalstocks in der nächsten Periode einsetzen.</li>
+<li>Haushalte entscheiden über die Menge an Arbeit, die sie anbieten, um daraus Arbeitseinkommen zu erzielen.</li>
+<li>Haushalte erhalten Kapitaleinkommen (Dividenden) von den Firmen</li>
+<li>(Haushalte entscheiden, welche Teile ihres Einkommens sie konsumieren bzw. sparen wollen.)</li>
+</ul></li>
+<li>Periode <span class="math inline">\(t+1\)</span>:
+<ul>
+<li>Firmen entscheiden über die Menge an Arbeit, die sie nachfragen. Aus der gegebenen Menge an Kapital und der nachgefragten Menge an Arbeit produzieren sie das Outputgut. Dabei verschleißt ein Teil des Kapitalstocks.<br>
+</li>
+<li>Firmen lösen den bestehenden Kapitalstock auf und zahlen ihn zusammen mit den Dividenden an die Eigentümer aus.<br>
+</li>
+<li>Haushalte entscheiden über die Menge an Arbeit, die sie anbieten, um daraus Arbeitseinkommen zu erzielen.</li>
+<li>Haushalte erhalten Kapitaleinkommen (Dividenden) von den Firmen</li>
+<li>(Haushalte entscheiden, welche Teile ihres Einkommens sie konsumieren bzw. sparen wollen.)</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="die-produktionsfunktion" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="die-produktionsfunktion"><span class="header-section-number">4.2.2</span> Die Produktionsfunktion</h3>
+<p><span class="math display">\[Y_t = A_t F(K_t, N_t)\]</span></p>
+<p><span class="math display">\[
+\begin{align*}
+1. &amp; \quad F(0, N_t) = 0 \text{ und } F(K_t, 0) = 0 \\[6pt]
+2. &amp; \quad \text{Die Produktionsfunktion ist streng monoton steigend in } K_t \text{ und } N_t: \\
+   &amp; \quad \frac{\partial F}{\partial K_t} &gt; 0 \quad \text{und} \quad \frac{\partial F}{\partial N_t} &gt; 0 \\[6pt]
+3. &amp; \quad \text{Die Produktionsfunktion ist streng konkav bezüglich } K_t \text{ und } N_t: \\
+   &amp; \quad \frac{\partial^2 F}{\partial K_t^2} &lt; 0 \quad \text{und} \quad \frac{\partial^2 F}{\partial N_t^2} &lt; 0 \\[6pt]
+4. &amp; \quad \text{Die Grenzprodukte streben gegen unendlich, wenn der Einsatzfaktor gegen null geht:} \\
+   &amp; \quad \lim_{K_t \to 0} \frac{\partial F}{\partial K_t} = +\infty \quad \text{und} \quad \lim_{N_t \to 0} \frac{\partial F}{\partial N_t} = +\infty \\[6pt]
+5. &amp; \quad \text{Die Grenzprodukte streben gegen null, wenn der Einsatzfaktor gegen unendlich geht:} \\
+   &amp; \quad \lim_{K_t \to \infty} \frac{\partial F}{\partial K_t} = 0 \quad \text{und} \quad \lim_{N_t \to \infty} \frac{\partial F}{\partial N_t} = 0
+\end{align*}
+\]</span></p>
+<p>Eine Produktionsfunktion, die diese Bedingungen erfüllt: <span class="math display">\[F(K_t, N_t) = K_t^{\alpha} N_t^{1-\alpha}, \quad 0 &lt; \alpha &lt; 1\]</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameter festlegen</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.33</span>        <span class="co"># Kapitaleinkommensquote</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>K_fixed <span class="ot">&lt;-</span> <span class="dv">100</span>       <span class="co"># Fester Kapitalstock K_t</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>A_low <span class="ot">&lt;-</span> <span class="fl">1.0</span>         <span class="co"># Technologietrend 1</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>A_high <span class="ot">&lt;-</span> <span class="fl">1.5</span>        <span class="co"># Technologietrend 2</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Datenraster erstellen</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>df_Y <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">N_t =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">200</span>, <span class="at">length.out =</span> <span class="dv">300</span>),</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">A_t =</span> <span class="fu">c</span>(A_low, A_high)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">A_label =</span> <span class="fu">factor</span>(<span class="fu">paste0</span>(<span class="st">"A_t = "</span>, A_t), <span class="at">levels =</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">"A_t = "</span>, A_low), <span class="fu">paste0</span>(<span class="st">"A_t = "</span>, A_high))),</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Gesamtertrag / Produktion Y_t</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">Y_t =</span> A_t <span class="sc">*</span> (K_fixed<span class="sc">^</span>alpha) <span class="sc">*</span> (N_t<span class="sc">^</span>(<span class="dv">1</span> <span class="sc">-</span> alpha))</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagramm erstellen</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_Y, <span class="fu">aes</span>(<span class="at">x =</span> N_t, <span class="at">y =</span> Y_t, <span class="at">color =</span> A_label, <span class="at">linetype =</span> A_label)) <span class="sc">+</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"A_t = 1"</span> <span class="ot">=</span> <span class="st">"#2b5c8f"</span>, <span class="st">"A_t = 1.5"</span> <span class="ot">=</span> <span class="st">"#d95f02"</span>)) <span class="sc">+</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"solid"</span>, <span class="st">"dashed"</span>)) <span class="sc">+</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Produktionsfunktion"</span>,</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"Cobb-Douglas-Produktionsfunktion: "</span>, Y[t] <span class="sc">==</span> A[t]<span class="sc">*</span>K[t]<span class="sc">^</span>alpha<span class="sc">*</span>N[t]<span class="sc">^</span>(<span class="dv">1</span><span class="sc">-</span>alpha))),</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">expression</span>(Arbeitseinsatz<span class="sc">~</span>N[t]),</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">expression</span>(Gesamtertrag<span class="sc">~</span>Y[t]),</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Technologieniveau"</span>,</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">linetype =</span> <span class="st">"Technologieniveau"</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>)</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Mikromakro_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Eine Produktionsfunktion</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="der-kapitalstock" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="der-kapitalstock"><span class="header-section-number">4.2.3</span> Der Kapitalstock</h3>
+<p><span class="math display">\[K_{t+1} = I_t + (1 - \delta) K_t\]</span></p>
+</section>
+<section id="der-unternehmenswert" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="der-unternehmenswert"><span class="header-section-number">4.2.4</span> Der Unternehmenswert</h3>
+</section>
+<section id="die-investitionsnachfrage" class="level3" data-number="4.2.5">
+<h3 data-number="4.2.5" class="anchored" data-anchor-id="die-investitionsnachfrage"><span class="header-section-number">4.2.5</span> Die Investitionsnachfrage</h3>
+</section>
+<section id="die-arbeitsnachfrage" class="level3" data-number="4.2.6">
+<h3 data-number="4.2.6" class="anchored" data-anchor-id="die-arbeitsnachfrage"><span class="header-section-number">4.2.6</span> Die Arbeitsnachfrage</h3>
+</section>
+<section id="das-arbeitsangebot" class="level3" data-number="4.2.7">
+<h3 data-number="4.2.7" class="anchored" data-anchor-id="das-arbeitsangebot"><span class="header-section-number">4.2.7</span> Das Arbeitsangebot</h3>
+
+
 </section>
 </section>
 
