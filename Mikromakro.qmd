@@ -1378,7 +1378,7 @@ print(kombinierter_plot)
 ```{r}
 #| message: false
 #| warning: false
-#| fig-cap: "Verschiebung der Angebotskurve"
+#| fig-cap: "Angebotsschock"
 
 # Notwendige Bibliotheken laden
 library(ggplot2)
@@ -1535,6 +1535,167 @@ kombinierter_plot <- p1 / p2 + plot_layout(heights = c(2, 1.2))
 # Plot ausgeben
 print(kombinierter_plot)
 
+```
+
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Nachfrageschock"
+
+
+# Notwendige Bibliotheken laden
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+# Notwendige Bibliotheken laden
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+
+# ==========================================
+# 1. Modellparameter & Gleichgewichte
+# ==========================================
+beta <- 0.95
+sigma <- 1
+y1_old <- 100         # Initiales zukünftiges Einkommen
+r_eq0 <- 0.12         # Initialer Gleichgewichtszins
+
+# Hilfsfunktion für die Konsumnachfrage / Aggregierte Nachfrage
+get_c0 <- function(y0, y1, r, sigma, beta) {
+  W <- y0 + y1 / (1 + r)
+  c0 <- W / (1 + beta^(1/sigma) * (1 + r)^((1-sigma)/sigma))
+  return(c0)
+}
+
+# Inverse IS-Kurve: y0 als Funktion von r und y1
+get_y0_from_r <- function(r, y1, sigma, beta) {
+  y1 / (beta * (1 + r))^(1 / sigma)
+}
+
+# 1. Initiales Gleichgewicht (mit y1_old)
+y0_eq <- get_y0_from_r(r_eq0, y1_old, sigma, beta)
+yd_eq0 <- get_c0(y0_eq, y1_old, r_eq0, sigma, beta)
+
+# 2. Nachfrageschock: Erhöhung des zukünftigen Einkommens von y1_old auf y1_new
+y1_new <- y1_old + 15 
+
+# Da sich das aktuelle Angebot Y^s nicht ändert, bleibt y0_eq fix.
+# Der neue, höhere Gleichgewichtszins r_eq1 muss die IS-Kurve bei fixem y0_eq schneiden:
+r_eq1 <- (y1_new / (beta * y0_eq))^(sigma) - 1
+
+# Nachfragekurven-Werte für das obere Diagramm im neuen Gleichgewicht
+y0_seq <- seq(40, 140, length.out = 200)
+
+df_upper_old_y1 <- data.frame(y0 = y0_seq) %>% mutate(yd = get_c0(y0, y1_new, r_eq0, sigma, beta))
+df_upper_new_r  <- data.frame(y0 = y0_seq) %>% mutate(yd = get_c0(y0, y1_new, r_eq1, sigma, beta))
+
+# IS-Kurven unten (altes y1 vs. neues y1)
+r_seq <- seq(0.0, 0.35, length.out = 200)
+df_lower_old <- data.frame(r = r_seq) %>% mutate(y0 = get_y0_from_r(r, y1_old, sigma, beta))
+df_lower_new <- data.frame(r = r_seq) %>% mutate(y0 = get_y0_from_r(r, y1_new, sigma, beta))
+
+# ==========================================
+# 3. Plots erstellen (Figure 11.7: Demand Shock)
+# ==========================================
+
+# Oberer Plot: Gütermarktgleichgewicht
+p1 <- ggplot() +
+  # 45-Grad-Linie
+  geom_abline(slope = 1, intercept = 0, linetype = "solid", color = "gray40", linewidth = 0.8) +
+  
+  # Nachfragekurve mit neuem y1_new bei altem r_eq0 (nach oben verschoben)
+  geom_line(data = df_upper_old_y1, aes(x = y0, y = yd), color = "#2B8CBE", linewidth = 1) +
+  
+  # Nachfragekurve nach Zinserhöhung (wieder zurückverschoben / korrigiert)
+  geom_line(data = df_upper_new_r, aes(x = y0, y = yd), color = "gray60", linewidth = 1) +
+  
+  # Hilfslinien zum festen Gleichgewichtspunkt
+  geom_vline(xintercept = y0_eq, linetype = "dotted", color = "gray50", linewidth = 0.6) +
+  geom_hline(yintercept = yd_eq0, linetype = "dotted", color = "gray50", linewidth = 0.6) +
+  
+  # Gleichgewichtspunkt (bleibt bei y0_eq)
+  geom_point(aes(x = y0_eq, y = yd_eq0), color = "black", size = 2.5) +
+  
+  # Verschiebungspfeile nach oben im oberen Plot
+  geom_segment(aes(x = 100, y = get_c0(100, y1_old, r_eq0, sigma, beta), 
+                   xend = 100, yend = get_c0(100, y1_new, r_eq0, sigma, beta)),
+               arrow = arrow(length = unit(0.2, "cm")), color = "#2B8CBE", linewidth = 0.8) +
+  geom_segment(aes(x = 115, y = get_c0(115, y1_new, r_eq1, sigma, beta), 
+                   xend = 115, yend = get_c0(115, y1_new, r_eq0, sigma, beta)),
+               arrow = arrow(length = unit(0.2, "cm")), color = "gray50", linewidth = 0.8) +
+  
+  # Beschriftungen (Korrektur: "old" und "new" als Textstrings in Anführungszeichen)
+  annotate("text", x = 120, y = 127, label = expression(Y[t]^d == Y[t]), size = 3.5, color = "gray30") +
+#  annotate("text", x = 122, y = 104, label = expression(Y[t]^d == C^d*(Y[t], Y[t+1]^"old"*", "*r[0*","*t])), size = 2.8, color = "gray50") +
+#  annotate("text", x = 122, y = 114, label = expression(Y[t]^d == C^d*(Y[t], Y[t+1]^"new"*", "*r[0*","*t])), size = 2.8, color = "#2B8CBE") +
+  
+  coord_cartesian(xlim = c(50, 130), ylim = c(50, 130)) +
+  labs(
+    title = "Nachfrageschock. Anstieg des künftigen Einkommens",
+    y = bquote(Y[t]^d)
+  ) +
+  theme_light() +
+  theme(
+    plot.title = element_text(face = "bold", size = 11),
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank()
+  )
+
+# Unterer Plot: IS-Kurven-Verschiebung nach rechts
+p2 <- ggplot() +
+  # Alte IS-Kurve
+  geom_line(data = df_lower_old, aes(x = y0, y = r), color = "gray40", linewidth = 1) +
+  # Neue IS-Kurve (nach rechts verschoben in Blau)
+  geom_line(data = df_lower_new, aes(x = y0, y = r), color = "#2B8CBE", linewidth = 1.1) +
+  
+  # Vertikale Angebotskurve Y^s (bleibt unverändert)
+  geom_vline(xintercept = y0_eq, color = "black", linewidth = 0.9) +
+  
+  # Pfeil für IS-Verschiebung nach rechts
+  geom_segment(aes(x = get_y0_from_r(0.15, y1_old, sigma, beta), y = 0.15,
+                   xend = get_y0_from_r(0.15, y1_new, sigma, beta), yend = 0.15),
+               arrow = arrow(length = unit(0.2, "cm")), color = "#2B8CBE", linewidth = 0.8) +
+  
+  # Horizontale Zinslinien (r_eq0 und das gestiegene r_eq1)
+  geom_hline(yintercept = r_eq0, linetype = "dotted", color = "gray50", linewidth = 0.6) +
+  geom_hline(yintercept = r_eq1, linetype = "dotted", color = "gray50", linewidth = 0.6) +
+  
+  # Gleichgewichtspunkte (auf derselben vertikalen Linie Y^s)
+  geom_point(aes(x = y0_eq, y = r_eq0), color = "black", size = 2.5) +
+  geom_point(aes(x = y0_eq, y = r_eq1), color = "#2B8CBE", size = 2.5) +
+  
+  # Beschriftungen
+  annotate("text", x = y0_eq + 3, y = 0.32, label = expression(Y^s), fontface = "bold", size = 3.8) +
+  annotate("text", x = 100, y = 0.05, label = "IS", fontface = "bold", size = 3.5, color = "gray40") +
+  annotate("text", x = 118, y = 0.05, label = "IS'", fontface = "bold", size = 3.5, color = "#2B8CBE") +
+  
+  coord_cartesian(xlim = c(50, 130), ylim = c(0, 0.35)) +
+  scale_y_continuous(
+    breaks = c(r_eq0, r_eq1),
+    labels = c(expression(r[0*","*t]), expression(r[1*","*t]))
+  ) +
+  scale_x_continuous(
+    breaks = c(y0_eq),
+    labels = c(expression(Y[t]))
+  ) +
+  labs(
+    x = bquote(Y[t]),
+    y = bquote(r[t])
+  ) +
+  theme_light() +
+  theme(
+    panel.grid.minor = element_blank()
+  )
+
+# ==========================================
+# 4. Zusammenfügen mit Patchwork
+# ==========================================
+kombinierter_plot <- p1 / p2 + plot_layout(heights = c(2, 1.2))
+
+# Plot ausgeben
+print(kombinierter_plot)
 ```
 
 ## Produktion
