@@ -1644,6 +1644,7 @@ $$K_{t+1} = I_t + (1 - \delta) K_t$$
 
 $$D_t = Y_t - w_t N_t$$
 
+
 #### Dividende plus Restwert in Periode t+1
 
 $$D_{t+1} = Y_{t+1} + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I$$
@@ -1693,8 +1694,20 @@ $$\frac{\partial V_t}{\partial K_{t+1}} = \frac{1}{1 + r_t} \left[ A_{t+1} F_K(K
 
 $$\iff 1 + r_t = A_{t+1} F_K(K_{t+1}, N_{t+1}) + (1 - \delta)$$
 
+$$\iff r_t = A_{t+1} F_K(K_{t+1}, N_{t+1}) - \delta$$
+bzw
+
+$$\iff r_t + \delta = A_{t+1} F_K(K_{t+1}, N_{t+1})$$
 
 ### Die Arbeitsnachfrage
+
+- Der Faktor Arbeit wird nachgefragt, solang die Grenzproduktivität der Arbeit gößer oder gleich dem Lohnsatz $w_t$ ist. 
+
+- Damit ist die Grenzproduktiviätsfunktion die Nachfragefunktion nach Arbeit.
+
+- Für eine Cobb Douglas Produktionsfunktion $F(K_t, N_t) = K_t^{\alpha} N_t^{1-\alpha}$ heißt das 
+$$\frac{\partial Y_t}{\partial N_t} = A_t (1 - \alpha) K_t^{\alpha} N_t^{-\alpha} = (1 - \alpha) A_t \left(\frac{K_t}{N_t}\right)^{\alpha} \stackrel{!}{=}w_t$$
+
 
 ```{r}
 #| message: false
@@ -1745,6 +1758,10 @@ ggplot(df, aes(x = N_t, y = MPN, color = A_label, linetype = A_label)) +
 
 ### Die Investitionsnachfrage
 
+- Es wird solange investiert, bis die Grenzproduktivität des (zusätzlichen) Kapitals ausreicht, um die Zinsen zu zahlen und die Abschreibungen auszugleichen.
+
+- Für eine Cobb-Douglas Produktionsfunktion heißt das $$\frac{\partial Y_t}{\partial K_t} = A_t \alpha K_t^{\alpha - 1} N_t^{1 - \alpha} = \alpha A_t \left(\frac{N_t}{K_t}\right)^{1 - \alpha} \stackrel{!}{=}r+\delta$$
+
 ```{r}
 #| message: false
 #| warning: false
@@ -1777,10 +1794,10 @@ ggplot(df_inv, aes(x = K_next, y = MPK, color = A_label, linetype = A_label)) +
   scale_color_manual(values = c("A_{t+1} = 1" = "#2b5c8f", "A_{t+1} = 1.5" = "#d95f02")) +
   scale_linetype_manual(values = c("solid", "dashed")) +
   labs(
-    title = "Die Investitionsnachfrage (Kapitalnachfrage)",
-    subtitle = expression(paste("Grenzproduktivität: ", MPK == alpha * A[t+1] * K[t+1]^(alpha-1) * N[t+1]^(1-alpha))),
-    x = expression(Zukünftiger~Kapitalstock),
-    y = expression(Grenzproduktivität~~frac(partialdiff*Y[t+1], partialdiff*K[t+1])),
+    title = "Die Investitionsnachfrage",
+#    subtitle = expression(paste("Grenzproduktivität: ", MPK == alpha * A[t+1] * K[t+1]^(alpha-1) * N[t+1]^(1-alpha))),
+    x = expression(I[t]),
+    y = expression(r[t]),
     color = "Technologieniveau",
     linetype = "Technologieniveau"
   ) +
