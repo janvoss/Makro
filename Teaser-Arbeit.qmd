@@ -1,23 +1,20 @@
 ---
-title: "Arbeit"
-format: revealjs
+title: "Worum geht es heute?"
+project:
+  output-dir: docs
+format:
+  revealjs:
+    self-contained: true
 ---
 
 ##
 
-[ Arbeit ]{.r-fit-text}
+[Arbeiten]{.r-fit-text}
 
 . . .
 
-[ist Scheiße]{.r-fit-text}
+[und nicht verzweifeln]{.r-fit-text}
 
-##
+. . .
 
-$U(L)=23$
-
-```{r}
-x <- 1+2
-
-x
-```
-
+(Heiner Müller)
