@@ -30,6 +30,7 @@ lang: de
 
 format:
   html:
+    css: custom.css
     theme: cosmo
     code-fold: true
     code-overflow: wrap

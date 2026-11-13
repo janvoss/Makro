@@ -1,0 +1,23 @@
+---
+title: "Arbeit"
+format: revealjs
+---
+
+##
+
+[ Arbeit ]{.r-fit-text}
+
+. . .
+
+[ist Scheiße]{.r-fit-text}
+
+##
+
+$U(L)=23$
+
+```{r}
+x <- 1+2
+
+x
+```
+

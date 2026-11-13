@@ -1,13 +1,9 @@
 # Die Mikroökonomik der Makroökonomik
 
-:::{.callout-note 
-    icon=false 
-    collapse=true }
+::: {.callout-note icon="false" collapse="true"}
+# Mikrofundierung der Makro und der aktuelle Nobelpreis {.unnumbered}
 
-# Mikrofundierung der Makro und der aktuelle Nobelpreis {-}
-
-
-Der Wirtschaftsnobelpreis 2026 geht an die beiden US-Ökonomen Robert E. Hall und Michael Woodford für ihre bahnbrechenden Arbeiten zu den „mikroökonomischen Grundlagen der makroökonomischen Stabilisierung“. 
+Der Wirtschaftsnobelpreis 2026 geht an die beiden US-Ökonomen Robert E. Hall und Michael Woodford für ihre bahnbrechenden Arbeiten zu den „mikroökonomischen Grundlagen der makroökonomischen Stabilisierung“.
 
 Die Auszeichnung würdigt die wissenschaftliche Leistung, makroökonomische Modelle und geldpolitische Konzepte konsequent auf dem optimierenden Verhalten einzelner wirtschaftlicher Akteure – also auf einer soliden Mikrofundierung – aufzubauen.
 
@@ -17,19 +13,29 @@ Historisch basierte die makroökonomische Krisensteuerung (wie der klassische Ke
 
 Hall und Woodford leiteten gesamtwirtschaftliche Phänomene strikt aus den Entscheidungen rationaler Individuen:
 
-  - Das Mikro-Fundament: Anstatt den Konsum als feste makroökonomische Quote zu betrachten, analysierten sie detailliert, wann einzelne Haushalte sparen oder konsumieren und wann Firmen ihre Preise anpassen.
-  
-  - Die mikroökonomische Stabilisierung: Weil Märkte aufgrund von verzögerten Preis- und Lohnanpassungen (Nominelle Rigiditäten) nicht sofort ins Gleichgewicht finden, können staatliche Eingriffe angebracht sein.
+- Das Mikro-Fundament: Anstatt den Konsum als feste makroökonomische Quote zu betrachten, analysierten sie detailliert, wann einzelne Haushalte sparen oder konsumieren und wann Firmen ihre Preise anpassen.
 
+- Die mikroökonomische Stabilisierung: Weil Märkte aufgrund von verzögerten Preis- und Lohnanpassungen (Nominelle Rigiditäten) nicht sofort ins Gleichgewicht finden, können staatliche Eingriffe angebracht sein.
 
+<blockquote class="twitter-tweet">
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">My first job was teaching principles of macro. The textbook opened with an old Keynesian consumption function.
+<p lang="en" dir="ltr">
+
+My first job was teaching principles of macro. The textbook opened with an old Keynesian consumption function.
 
 Absolutely horrible.
 
-Luckily, you can teach everything in 2 time periods with graphs, and I did the rest of my time.</p>&mdash; Brian Albrecht (@BrianCAlbrecht) <a href="https://x.com/BrianCAlbrecht/status/2109960677301321921?ref_src=twsrc%5Etfw">October 13, 2026</a></blockquote>
-<script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+Luckily, you can teach everything in 2 time periods with graphs, and I did the rest of my time.
 
+</p>
+
+— Brian Albrecht (@BrianCAlbrecht) <a href="https://x.com/BrianCAlbrecht/status/2109960677301321921?ref_src=twsrc%5Etfw">October 13, 2026</a>
+
+</blockquote>
+
+```{=html}
+<script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+```
 :::
 
 ## Konsumtheorie
@@ -37,36 +43,37 @@ Luckily, you can teach everything in 2 time periods with graphs, and I did the r
 ::: {.callout-tip icon="false" collapse="true"}
 # Der Podcast zur Vorlesung: Konsumtheorie {.unnumbered}
 
+```{=html}
 <script class="podigee-podcast-player" src="https://player.podigee-cdn.net/podcast-player/javascripts/podigee-podcast-player.js" data-configuration="https://wirtschaftskunde.podigee.io/47-makro-am-mikro-05-konsumtheorie/embed?context=external"></script>
-
+```
 :::
 
-:::{.callout-note 
-    icon=false 
-    collapse=true }
+::: {.callout-note icon="false" collapse="true"}
+# Aufwärmfragen {.unnumbered}
 
-# Aufwärmfragen {-}
+1.  Was ist eine Nutzenfunktion?
 
-1. Was ist eine Nutzenfunktion?
+2.  Was heißt Grenznutzen?
 
-1. Was heißt Grenznutzen?
+<!-- -->
 
-  a. Was passiert, wenn ich weniger von einer Aktivität durchführe, die  mir einen geringen Grenznutzen verschafft?
-  
-  b. Was passiert, wenn ich dafür mehr von einer AKtivität durchführe, die mir einen höheren Grenzutzen verschafft? 
-  
-  c. Wenn ich eine Nutzenfunktion mit abnehmendem Grenznutzen habe, was passiert mit meinem Grenznutzen, wenn ich eine AKtivität einschränke/ ausweite?
+a.  Was passiert, wenn ich weniger von einer Aktivität durchführe, die mir einen geringen Grenznutzen verschafft?
 
-1. Was heißt diskontieren? Wofür nutzt man es?
+b.  Was passiert, wenn ich dafür mehr von einer AKtivität durchführe, die mir einen höheren Grenzutzen verschafft?
 
-1. Was ist ein Zins?
+c.  Wenn ich eine Nutzenfunktion mit abnehmendem Grenznutzen habe, was passiert mit meinem Grenznutzen, wenn ich eine AKtivität einschränke/ ausweite?
 
-1. Was ist eine Indifferenzkurve?
+<!-- -->
 
-1. Was ist eine Budgetrestriktion?
+1.  Was heißt diskontieren? Wofür nutzt man es?
 
-1. Woran erkennt man ein optimales Güterbündel im 2-Güter-Fall?
-    
+2.  Was ist ein Zins?
+
+3.  Was ist eine Indifferenzkurve?
+
+4.  Was ist eine Budgetrestriktion?
+
+5.  Woran erkennt man ein optimales Güterbündel im 2-Güter-Fall?
 :::
 
 - Haushalte/Individuen entscheiden über ihren Konsum in mehreren Zeitperioden, zunächst bei exogenem Einkommen in jeder Periode
@@ -83,12 +90,11 @@ Luckily, you can teach everything in 2 time periods with graphs, and I did the r
 
 - Zum Zinssatz $r$ kann Einkommen zwischen beiden Perioden verschoben werden (durch Sparen oder Kreditaufnahme). Es gibt keine exogene Begrenzung der Kreditaufnahme oder der Ersparnis
 
-  - In Periode $t+1$ endet jedoch der Planungshorizont für alle und in dieser Periode müssen alle Kredite zurückgezahlt sein. 
-  
+  - In Periode $t+1$ endet jedoch der Planungshorizont für alle und in dieser Periode müssen alle Kredite zurückgezahlt sein.
+
   - Niemand hat einen Anreiz in Periode $t+1$ zu sparen.
 
-- Budgetrestriktion:  $$\text{Periode }t\text{: }C_t + S_t \le Y_t$$,
-$$\text{Periode }t+1\text{: }C_{t+1} + S_{t+1} \le Y_{t+1} + (1 + r_t) S_t$$
+- Budgetrestriktion: $$\text{Periode }t\text{: }C_t + S_t \le Y_t$$, $$\text{Periode }t+1\text{: }C_{t+1} + S_{t+1} \le Y_{t+1} + (1 + r_t) S_t$$
 
 - Nach den zwei Perioden endet annahmegemäß der Planungshorizont. Niemand wird dem Haushalt in Periode $t+1$ einen Kredit geben. Es gilt daher $S_{t+1}=0$
 
@@ -96,7 +102,7 @@ $$\text{Periode }t+1\text{: }C_{t+1} + S_{t+1} \le Y_{t+1} + (1 + r_t) S_t$$
 
 $$C_t + S_t = Y_t$$
 
-  und
+und
 
 $$C_{t+1} = Y_{t+1} + (1 + r_t) S_t$$
 
@@ -104,13 +110,11 @@ $$ \iff S_t = \frac{C_{t+1}}{1 + r_t} - \frac{Y_{t+1}}{1 + r_t} $$
 
 - Daher
 
-$$\boxed{C_t + \frac{C_{t+1}}{1 + r_t} = Y_t + \frac{Y_{t+1}}{1 + r_t} }$$
-$\Rightarrow$ Der Barwert des Konsums muss also dem Barwert des Einkommens entsprechen
+$$\boxed{C_t + \frac{C_{t+1}}{1 + r_t} = Y_t + \frac{Y_{t+1}}{1 + r_t} }$$ $\Rightarrow$ Der Barwert des Konsums muss also dem Barwert des Einkommens entsprechen
 
 $\Rightarrow$ Das Timing des Konsums lässt sich also (zumindest teilweise) vom Timing der Einkommenszuflüsse entkoppeln
 
-Die **Budgetgerade** lautet also:
-$$\boxed{C_{t+1} = (1 + r_t)(Y_t - C_t) + Y_{t+1}}$$
+Die **Budgetgerade** lautet also: $$\boxed{C_{t+1} = (1 + r_t)(Y_t - C_t) + Y_{t+1}}$$
 
 ```{r}
 #| message: false
@@ -177,17 +181,15 @@ p <- ggplot(budget_data, aes(x = C_t, y = C_tp1)) +
 p
 ```
 
-
 [Interaktive intertemporale Budgetgerade](https://shinylive.io/r/app/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAYgB9cACAZ1KggBMoAbEuRB0gCcArnAA6EOowBuASzgB3OIIAScWQHMAFqX4A2AAwGJErrIBGgqIICeACiZbZEGwEoTEYbIYAeALQMAGZcXuwAClAacHYSDAKypFxwERBwXDFgAJJkyuQwqERWSQwAQsLsUaRRVuziYK64sQxNTLK15tYAMlA2RMKkMRBxca3t1ilpg8PDTGa1gtmo-RkAmgD6pGJ4zWAAos4A1kQw8EPODGHKskS1AohbjE3Tzy8MMOcAvAwGjDBQAB4ML4AJiMMm4oiBDAAjGDmORUFCAKwNJ4zObKRbLLbrUioaEPHb7CBHE4UBjnS6Ca63UgAamh922aNer3eQy+PzeAKhoK50ghcChsK5LDgiK+KMaQ2eszamIgSwGW0EhK2AC1nEwmFBSAAvBh2QSuJmPGWs1nsqEGDBcv6AzkYJHgkJCx0GZ3w8XW23Q9zmhiogNov7OCbpFkMVA8UgAeX6Soy5nKlTCMcJWnU2lIUK2ABYkQZUP8tkGXpmuKgACpwf7KsAAEXkpRTcCqyigtz+ggO8kEOfYzekykCAB+NB1BOT7bI-kkhgBpEhMYRkiBRM5DczqWpDKk0iiltH+uL+-0SJjKYeCXwBQLCCAEUjXCB2ZxKxh9PH9RiX7Uv1wGBAJomi-JUABJkwqNs0yIHN-AYKcOGUWCBmAgNcWGBD336cDcTRXF8VvClFVwwiCQDG9pmw0jSHA1VgwDe01gAYXggJMLpBhyIYAB6Q1oQYLjjTRNEWI2NYBS4JgsICS8AEc7DtAFWNIRh5w0UgtAwL9hULE9hnEvFoUk7gZIQuxBOEwCACpDUwgIjNM6TAK48jRIDVBrDsbsoQIOw8ydRhAs9ABmRhgVcAy4jRagLhjBhpEKbcpwSck7CILRUgYKB+mOXVZCYAhMwYABBYrLyGB92AYABlVgOGsdg-CwAAT5CRM8mM7CcqSmEYIz8Wc-qBBsVA3R2CA1QDZ5-jMGA-KU4L9LNC0bHmxauULAwy1Zf4ARkr4tlkQkbAO3MwBOvBI2GAE4EOhgADFSs6WrdmlC05qgcwoVrVAp3-EgeuAUgAF0GmaGbpnW77fv+f77taIGWJBhlwY+y0oE+HZsnIfs4HyQpuCFMpoPbGo6gx14CFrDBQw5GEMGBRgaf+DAuFhr5oQwaFGECEhSHZzmGFC6LIemOKAHEEjxswIHkM4FpUZw8Y0EQODRNW2jsYguAusxszVnpCS4UgbAu9g4PIdgj0YiWyoq8laygA4c23bwDCjIhWmfEg+0PAMAUKyzGAKB6uV1KEFKWhgCy5cxzclHb1KgB6-TRIOmDsZmvfDxhI6+aOtrhBPkWThgObTsXYpbMnqk7IV1AgPV1GK1IpoDOX7p6iS+oGjYhr7hhdYu6hoUCAB2AAOcw8xNhQapBJ1q4DOLSuEbVWFIUgHw0JglhJHMm5b2Q24D6YChVrPcUYciWaIPWjpoOBQuhKBoQIQlUGK4UAE4WdrMKDAU8V72xKPdYq1JAg73XAwWoMl16b11DAveB9XZMDROQOsdgb7cQHrzCu300gPS2GVDeLBkG7xIgwd2u4LhXBuIebYYcoR5nvo-HY1AX5vw-oSfmZBeQGQAL7+iER4RwzgbClXQHYLwv4rzKFcGAIRoMgA)
 
+------------------------------------------------------------------------
 
-
-***
-Die Annahme, dass die Zukunft mit Sicherheit eintritt und bekannt ist, ist natürlich völlig unrealisitisch. Aber von diesem Ausgangspunkt kann man eine Zukunftsorientierung auch bei nicht-perfekter Voraussicht und Erwartungsbildung modellieren. 
+Die Annahme, dass die Zukunft mit Sicherheit eintritt und bekannt ist, ist natürlich völlig unrealisitisch. Aber von diesem Ausgangspunkt kann man eine Zukunftsorientierung auch bei nicht-perfekter Voraussicht und Erwartungsbildung modellieren.
 
 Die gegenteilige Annahme, dass Individuen die Zukunft *gar nicht* berücksichtigen, ist ebenso stark, erlaubt aber nicht (so ohne weiteres) die Erweiterung hin zu einer nicht-perfekten Berücksichtigung.
 
-***
+------------------------------------------------------------------------
 
 ### Die intertemporale Nutzenfunktion
 
@@ -195,8 +197,7 @@ Individuen/Haushalte erhalten in jeder Periode Nutzen $u$ aus Konsum $C_t$ bzw. 
 
 Der intertemporale Gesamtnutzen $U$ ist die gewichtete Summe des Nutzens in den Perioden. Der Konsum in $t+1$ wird mit $\beta \in[0;1]$ gewichtet.
 
-$\beta = \frac{1}{1+\rho}$ und $\rho$, $\rho$ ist der subjektive Diskontfaktor  
-
+$\beta = \frac{1}{1+\rho}$ und $\rho$, $\rho$ ist der subjektive Diskontfaktor
 
 $$ U = u(C_t) + \beta u(C_{t+1}) $$
 
@@ -204,12 +205,11 @@ $U$: Gesamtnutzen über beide Perioden.
 
 $C_t, C_{t+1}$: Konsum in der heutigen ($t$) und zukünftigen Periode ($t+1$).
 
-$u(\cdot)$: Periodennutzenfunktion. 
+$u(\cdot)$: Periodennutzenfunktion.
 
 Annahme: $u'(C) > 0$ (positiver Grenznutzen) und $u''(C) < 0$ (abnehmender Grenznutzen).
 
 $\beta$: Subjektiver Diskontfaktor ($0 < \beta < 1$, wobei $\beta = \frac{1}{1+\rho}$ und $\rho$ die Zeitpräferenzrate ist). Misst die Ungeduld der Haushalte.
-
 
 ```{r}
 #| message: false
@@ -298,7 +298,6 @@ combined_plot <- p1 + p2
 print(combined_plot)
 ```
 
-
 [Interaktive Nutzenfunktion und Indifferenzkurve](https://shinylive.io/r/app/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IIoqlK0SnLgVqoKAXgCcq4aIgBiAAQBVAJLaAInABmfWpJLb2Aa2pROnWpwLdtMS9tPUArrQATAAUoAHM4dX9tAB4AWm8-QJDw9hFtbUlSajgQiDhqVLAgxgAT0zhGCgAvCkRtADlfUhqIU18IWysIbQAybX0IANpTcsqIKttfRgA3OCEwAVw07WXnALh6FgAZKFYiJtTu9O01jZZc-MPj4+4AFkKQ5nhyRnnF5evOOnXGAdQD+bOUIwKDzXArMAAZV89E4mSaUggnHyjkkVUsJVINkAw8ACRBglZHa7EkkePjaRTaAAM4JBAA8KdoAKzg6ZQPxwRkARnBcLgqEZVIwXPeROOX0CFT+ALA9DgpFBeAhRhcthIpFMUE6REYNkATcB4gkfUkmzzdSlCqk8jxQBmU61sjmCjDKFkncgCi0YK2ikncfKoAAqcDppEK2O52gopE4qEYtDcWJ+2i2RFCsUazQobQ6XQwbyWYvS3EY7F9xP91CDIbD8xVnIGQxGFWqkxmnIA7rRGAFvAAf3VwcnlPmcBpNFoQWizKC+bRyypuPKkcEBRzzofaADCWMpTKp2navZ3AGouYz91HGJUE9wsV2e-mFsby+ljSC+BcCsb0qhqERSAAeSaf5azAOMzBbCACByf9SAJf1aFCO9GXmAB2fdUDpN4X2WdR1BEHRIQqWZdVTUJaFsERkXbXU4m8doCC6dg+FA8F9lIUCBG0EBlmWHQAAlaGoUxOBzTpEX7XV1m6TMWkPdgCHUdJfAAfRzAgYniDTmIIXluN4sVhhsKBYS4bR4hFGJtC5OBYiZbjKlIKYIHYf9QkUgRlOOJyXPYRSAD12HPeJOC87QAHobBCk4vOWABfPijkE4TRPEropO0IYG0GYZRlbKZZhsBc4CXeVt1UkBSDPeLvPCUhVIIdSmimTl6J0xFFNUlcMhYerVN0XlwTlBVVMdAzjR0XRGV8dgt267iTw3BVtAAKgU+aqpq7z0h0WbNuqrlasZdhpvifaFu4qKRtBMU1KatpnMqMb2S0mwFUYfqzsPZroK6nqwqu5aoBe6hjWNYz2FMmQx0s7johsuyHJ4n9tF8xhXJDVB2Hu5qnrgUG4rFeKo2oZEUaLbQppgWw4BLdLETqTTKWAOd1uC2IwoAXSCrkIo5wHUZeGA3txx7WtBtboos2LUfR1zhnyZF2GF7QAD5qXBYXeci6XQq88F6gAQSJ65EqOc23yODjQIAEgg-LoNggC3rGH4gjg9hDM+N7WKaW2gRBY0bsl+i-dIW2bvBsUdB2PYmjqAAmbQPYAsd2heIdoEGCobGTgAtIdsggcFz0hVB2XIHbtAr0sYFMRgiA7RkCHYRPS8WG1dUpVvbgwN0+7dABmcFE9N45Ju0LBILGKoMwnCgpxnOcRyyOBwm6dgjY6Cp-lzbdd2ZGkD7PC8qWrprKlMN792NXRur68r6LUjSuqv-TtCWkPHSll-GLfsw+lo7XB0EYKA5BugbwqLQKCxomqOjHPRZEABHdgbouT7nBMXUIpBuAYA4mfc+wDjg6C5BgFOcFtBEDlBAOoclsztAktYC6pBq4ImoKDRB51fqt3geyTgQCxR-gAl1BB4J2GcK1qwBQqEaAEmINQWRa5GC2FCJUCgBJqAdl7JSRO-dCwmm0HSBw9BGRY0qE4TqFc+SFAANLSF8CLf0TROSFHBFuYApAubghwgsV8JJWAmNkfQiAHYKjwTwKjY4H5zQ11RHAQoISGbMLmqwgkwwoZmU4LEKyCNLTI3mPEci88syiDAKTcmhTtxYCwEbEpLQ3jVzUYEMsxDdraD0RQl2Gdaj9Fys2WebZZhwLxhLBBb1OBoD-BwPhZNwQdRIJ5bQ-UHotUqIpcE98Pr1SGsDQm1djTCLDLMgR2hVn40kRkaRnJKTzDBkqBRsjNBUipGhROAAhROmjtGMj0SyKJ6RjG0BFj3dgx8MHn3BIE4FLcwWl33P44kxjTJmLpBBSxizrHkDsQ4pxcAXE2AJB4rxPjnx+IMSaQJKLKTmLgBi1yWKEnzHsUiRxHgdQb0JUqYlZ5vEQmEOSgFNpyS3LAI2PKUEJiFVcfYmA9A+DgMRBQTKoRsi3jpXoAVTT4wBFaRbdQ5tCLaCNugd0LAIHUV4PwE12MoiUn8LyEiudKQ0VIuoMA8UuZAA)
 
 ### Intertemporale Konsumoptimierung
@@ -307,11 +306,9 @@ print(combined_plot)
 
 Der Haushalt muss folgendes Problem lösen:
 
-$$\max_{C_t, C_{t+1}} \quad U = u(C_t) + \beta u(C_{t+1})$$
-u.d.N.
+$$\max_{C_t, C_{t+1}} \quad U = u(C_t) + \beta u(C_{t+1})$$ u.d.N.
 
-$$C_t + \frac{C_{t+1}}{1 + r_t} = Y_t + \frac{Y_{t+1}}{1 + r_t}$$
-$C_{t+1}$ ergibt sich aber aus der Entscheidung über $C_t$.
+$$C_t + \frac{C_{t+1}}{1 + r_t} = Y_t + \frac{Y_{t+1}}{1 + r_t}$$ $C_{t+1}$ ergibt sich aber aus der Entscheidung über $C_t$.
 
 Umformulieren und einsetzen
 
@@ -331,18 +328,17 @@ $$\boxed{u'(C_t) = \beta (1 + r_t) u'(C_{t+1})}$$
 
 Korrigiert um
 
-  - den Diskontfaktor $\beta$. $\beta$ misst die Geduld. Je niedriger zukünftiger Nutzen gewichtet wird (je geringer die Geduld ist), desto höher muss der zukünftige Grenznutzen sein;
-  
-  - den Zinssatz $r$. $r$ ist der Preis der Ungeduld und die Belohnung für Geduld. Je höher der Preis der Ungeduld ist, desto mehr Konsum in die Zukunf geschoben und desto niedriger muss der zukünftige Grenznutzen sein. 
-  
-  - wenn gilt: $\beta= \frac{1}{1+r}$, gleichen sich die Grenznutzen genau aus.
-  
-  
+- den Diskontfaktor $\beta$. $\beta$ misst die Geduld. Je niedriger zukünftiger Nutzen gewichtet wird (je geringer die Geduld ist), desto höher muss der zukünftige Grenznutzen sein;
+
+- den Zinssatz $r$. $r$ ist der Preis der Ungeduld und die Belohnung für Geduld. Je höher der Preis der Ungeduld ist, desto mehr Konsum in die Zukunf geschoben und desto niedriger muss der zukünftige Grenznutzen sein.
+
+- wenn gilt: $\beta= \frac{1}{1+r}$, gleichen sich die Grenznutzen genau aus.
+
 #### Grafische Herleitung für zwei Perioden
 
 Aus der Euler-Gleichung lässt sich schreiben
 
-$$u'(C_t) = \beta (1 + r_t) u'(C_{t+1})$$ 
+$$u'(C_t) = \beta (1 + r_t) u'(C_{t+1})$$
 
 $$\iff -\frac{u'(C_t)}{\beta u'(C_{t+1})}=-(1+r)$$
 
@@ -463,20 +459,15 @@ p <- ggplot() +
 print(p)
 ```
 
-
 [Interaktive Grafik zur Konsumoptimierung](https://shinylive.io/r/app/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IIgMQACALQyJAVQCS0mSICutCQB4pEgGbV1AEwAKUAOZx2IiRNK1S1OKYhxqVsArJxG5GKiLMjhIA0iScqvBknATccLSGqhBmQmACuNYSGZzxcPQsADJQrESqpFYQNjbZhrkszq7llZWcdDWMnqil7qwADCm4mWAAonwA1kQwkRKxpXAS7KQCiP0SMHwSALwSPQMwUAAemxIATD07EgBuUAZzWwCMZwOc5KhHAKxpGU0tOe0QnWUUqw7isUiMIONJhRVgELBUFgBqO5LFZrCpbc57Q5bU7nK43I4Pc7POCvLYfdIVJoSH5tDpdFKMUFgABafE4nCgpAAXvNGCi8Kt1lspD0MMddgdCRg8ddVLdtjK3k8XkcxT0KV9KtxGOxPlTvq1vPTAWB6HBSFBmQARWiccZkWjeRJmTi6KCjUgBeZCISqHoAZnoxwFu2FirukuxEjuMoG+PlaowAHYVaSkxr9dSaUa-gD3NkzHtmVg7bRxlALt5siQfX7AwQA6GheiI1H3nHLnKFWLlTTVRiMMitVnKlq9nx6m4tTZUNQiKQAPKlfMpB3hGDGeekFaxWhmbikI4pAAsbx6qH2KVHTR1esp2f0RiwRAA7o1sxJiAYYBB2AA2AYZ0-bUT3cRdUDsPYglCCAN0iOFllSB8QOzKtGDyKCABU4H2JcVwZMAiEggBlCI9jYa9gJsG9qW-CI-0AzIDVQ0D3GCCgIG5KBuEcCAkNo1jLm8TDaBgHC8OXUhVzAOBiAgMjJhYVgqJYpphDUiQNPUjINI08RlB0EjvHQwyRE4EzvC0HRdESAg7BIdg+ABAYSmk0oBAkEAMgySQAAlaGoXQ3UST1aBICgMgsUgAH0AHVrL0OyHL-RgBl6dLkS8rVGAtVRGD-XoJARCRgQkAB6eY7mKiR+W0iQAF8fKpaKYoIHpEtsiB7PC1Knn3PZ0vOYEBnNS1PO8liEu0CRWri9g0tK4bhxY9rEoSyr2GqkqxqgAA9LbysLPZPIAKiqmr+QOrapGOqABCOgb7vqmxctIfK-3a+qmqpKKLTa6qZq6nrHMWu6Bna0aLXu7LVsBnR2F2iRzq2y6BAEA67keosYfO9qcrygr2AIFabB+mw-tiuROuS3rifOEn+pxqHxthppaF0eY7s2e4JuAt6PvYeczHpzyduh5GJGF4nkRexqJFcCy2epAWifpzHbqe9Hypuu6xYkJGUZJjW9Ye3Wtbl8nGuamxWoUABhGnupS+mYosgBHAY5CZwaDehvmWI5rmnp5mMA+zEnEtw1B2HYamdGl9q3bgd30Yqv3xq1BqFeoJXJrQ65ErjyXUZ0PXpC-Hpk-dzGK9N9PduAyOZtymOADkAEEBj4sxSG4V2PfR4D8XiRL8QkAA+bYm7uYAR8MABdMfrjn654gX2vNuqsuLazgn3qJknvptiRJC3BdZoobwnVy0QqTcgEABJ1wic+jxbig2jf9h88qIqZucqUR+vQtRlQAf8IBwIcqJUAaQR+TIWJI3AU-RuLFubIKAXdLUWppo6DmgtIamU5ZJ2Iu-PB-12oEJpE9QhpVIwZ3ulqEmMVSGJVaiTKh4NK4sMgizRhLE5A8LIZfKmrtSEQzuEIn2UA+Fy3HAcGKhwZpYnYMcc8AwErnVjKTSoWIYqsESiotR5xNEXRKvySW2i5GrSrh7RKHt2CYgUfsbuFBe7cAwG5I4AYzjEMkfQVQhhopF22rVM68wEo6CToPbBNiYq0AINXexKdHFDijIo1xSQ+6eNKN43xTDJEJLYf9B2rsEnVy9lI6hzMGHWKaJIGQOgABCUAlZYAkG-MyLE5wLi2gMUgrBUAKhSKIQU1EbD7DoDAI4BBHHpP2GkUqUyZlzNWAowQKFPz7AOJwY8YBaArFYDsvZBy8DjIkJMqA9AjjR1yhyOmKRYIbgkOsI87hJb22AKQJe50qLIWYqhVg1Ark3P2KgO5NY-yPLCBEF5FRSBIh9GAD5XykQ-MGMIZC5yJytlQK08g7hPDkB8HAPwARrhwF2RBKCEQkIDEYCUCAhh2BxQGLLTZEdcIYGBdc+44oIZcpxdKEMsSmhmEYPEYmRBqB7LoAeUg4qigrGoAMvZhgFzkEMMq18hhCR1MqHQFwnAB4pwkTFAJQSLQQ2lXskkrh6A3G1bqnEctDWUrKYkj2ZqEnWplVsFIuhaC5SYAk0YTqjgipYlqfwfBSDGoynQgYqAYiEgAJy+r2Yq1gPiVgEFwtKD4WpyB4XYAmkagwJBDHmB3VQHJLSkHekkTFSaiC7K2CeDN-qwBZpzYKXQJAjwutFZUGNUQxG8K-JI8REhk3cDTZ2wYDqoAEDDYKPN0ZYyFpYsWsoJCJ3MOnSkCQHd5jUrEhEZtM7W3eIXSkJdK6Vj9rIBG-VVQ4BFgoHG9g+wOpbD3aQIaaoBj7Gqn+qu06yp-qnfum1Xb72ru7qqodaD32RC-T+oDS0ZnQYAxc0D3CIP4YPTBv1i7gUPsFCqgxyGyb1V8hICSlpa1mCuXMXQAAfxgEhSFiQpSEGFUIkiRXvgROBpDFIUQMR-Jl3hGM-yYeByCxTYqUNgfAgYamuFqYTdp+handp+KEcpgGTkIFwMWppmhBGJ36f9sO2c+K4A9A-E0FIgAiAn43BWFrz5j21IKdJY2YVgMsSMy-9AwQxATAL6UZHKKZgA8087z8LEXsD80iALiB4v0sZWFnDEW5bfTo1SSQjGoDMdY3oTjEhXxBrjTEKAugHAJNiCETi3FeLQkqkMRgnA8UFTtBkB+QC5IkAk8pRKt82hyd-jYf9xnVNmfU3Cp+Wmls6fW3ppbBmtQkQ6hguBRUomKZ3FGtB9ba0wN0OwK5xq9ueU0IqHoWVZtjjABxPgcwet9ZYBAO01bSgsFGE6TFWcc5Kw5uwPbWhtjh2pHikkznHm5UMPYcruhoDcHgPMEiMRVDUEMC4Ra0Ou05dC1D84kWMWqSaNnRWcxXsOcR+4b7-W-ucHoIFBISR5gAHFqAABPVCc4sMT39xVgu5YpwVqLmLLb2ZnY5pHml3OVt62z-7PmoeLCy29snTLpcnEWSkGL-RgKq5IhdzguuhKucFM8LktaRwZAahpH65leD8A7ugdg6gniWX5CIMADUF5AA)
 
 #### Lösung für CRRA-Nutzenfunktion
 
-Hier wird häufig die folgende Nutzenfunktion verwendet: 
+Hier wird häufig die folgende Nutzenfunktion verwendet:
 
 $$u(C_t) = \begin{cases} \dfrac{C_t^{1-\sigma}}{1-\sigma} &\text{für } \sigma \neq 1 \\[15pt]\ln(C_t) & \text{für } \sigma= 1 \end{cases}$$
 
-
-
 Der Grenznutzen ist dann $$u'(C_t)=C^{-\sigma}$$
-
-[Lösung für Ct und C t+1]::
 
 Die intertemporale Nutzenfunktion lautet: $$U(C_t, C_{t+1}) = \frac{C_t^{1-\sigma}}{1-\sigma} + \beta \frac{C_{t+1}^{1-\sigma}}{1-\sigma}$$
 
@@ -490,10 +481,7 @@ Für $\sigma=1$ vereinfacht sich das zu $$C_t(r, W) = \frac{W}{1 + \beta}$$
 
 Für $\beta=1$ bedeutet dies eine hälftige Aufteilung, für $\beta < 1$ bedeutet dies eine Bevorzugung heutigen Konsums.
 
-
 #### Veränderung des heutigen Einkommens
-
-[Grafik]::
 
 ```{r}
 #| message: false
@@ -651,10 +639,7 @@ p_y0
 
 $\Rightarrow$ Ein Anstieg des *heutigen* Einkommens erhöht den Konsum *heute und morgen*
 
-
 #### Veränderung des zukünftigen Einkommens
-
-[Grafik]::
 
 ```{r}
 #| message: false
@@ -779,9 +764,7 @@ p_combined <- ggplot() +
 print(p_combined)
 ```
 
-
 $\Rightarrow$ Ein Anstieg des *heutigen und morgigen* Einkommens erhöht den Konsum *heute und morgen* stärker als nur ein Einkommenseinstieg heute oder morgen.
-
 
 #### Veränderung des Zinssatzes
 
@@ -977,18 +960,15 @@ Für das Folgende wird i.d.R. unterstellt, dass im Zweifel der Substitutionseffe
 
 $C_t = C^d(\underbrace{Y_t}_{+}, \underbrace{Y_{t+1}}_{+}, \underbrace{r_t}_{-})$
 
-
 **Totales Differenzial**:
 
-Das totale Differenzial beschreibt die **Gesamtänderung der abhängigen Variablen ($dC_t$), die dadurch entsteht, dass sich mehrere oder alle unabhängigen Einflussfaktoren gleichzeitig verändern** (jeweils um infinitesimale Beträge wie $dY_t, dY_{t+1}, dr_t$).
+Das totale Differenzial beschreibt die **Gesamtänderung der abhängigen Variablen (**$dC_t$), die dadurch entsteht, dass sich mehrere oder alle unabhängigen Einflussfaktoren gleichzeitig verändern (jeweils um infinitesimale Beträge wie $dY_t, dY_{t+1}, dr_t$).
 
 Es ist die **Summe aller gewichteten partiellen Effekte**:
 
 $dC_t = \frac{\partial C^d(\cdot)}{\partial Y_t} dY_t + \frac{\partial C^d(\cdot)}{\partial Y_{t+1}} dY_{t+1} + \frac{\partial C^d(\cdot)}{\partial r_t} dr_t$
 
-
 Da sowohl $\frac{\partial C^d(\cdot)}{\partial Y_t}$ als auch $\frac{\partial C^d(\cdot)}{\partial Y_{t+1}}$ positiv sind, ist der Effekt einer Einkommensänderung in allen Perioden auf den gegenwärtigen Konsum größer als der Effekt einer Einkommensänderung nur in einer der Perioden.
-
 
 ##### Für die CRRA-Nutzenfunktion
 
@@ -997,7 +977,7 @@ $$C_t(r, W) = \frac{W}{1 + \beta^{\frac{1}{\sigma}} (1+r)^{\frac{1-\sigma}{\sigm
 $$\frac{\partial C_t}{\partial Y_t} = \frac{1}{1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}}>0$$
 
 $$\frac{\partial C_t}{\partial Y_{t+1}} = \frac{\frac{1}{1+r}}{1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}} = \frac{1}{(1+r) \left(1 + \beta^{\frac{1}{\sigma}}(1+r)^{\frac{1-\sigma}{\sigma}}\right)}$$ bzw.
-  
+
 $$\frac{\partial C_t}{\partial Y_{t+1}} = \frac{1}{1+r} \cdot \frac{\partial C_t}{\partial Y_t}>0$$
 
 $$\frac{\partial C_t}{\partial r} = - \frac{W \cdot \beta^{\frac{1}{\sigma}} \left( \frac{1-\sigma}{\sigma} \right) (1+r)^{\frac{1-\sigma}{\sigma}-1}}{\left( 1 + \beta^{\frac{1}{\sigma}} (1+r)^{\frac{1-\sigma}{\sigma}} \right)^2} \lessgtr 0$$
@@ -1008,7 +988,6 @@ $\frac{\partial C_t}{\partial Y_t} = \frac{1}{1 + \beta} \\[6pt]$
 
 $\frac{\partial C_t}{\partial Y_{t+1}} = \frac{1}{1 + \beta} \frac{1}{1 + r_t}$
 
-
 $$\frac{\partial C_t}{\partial r} = 0$$
 
 #### Das wettbewerbliche Gleichgewicht
@@ -1017,7 +996,7 @@ $$\frac{\partial C_t}{\partial r} = 0$$
 
 - Annahme: Niemand kann allein das Gleichgewicht beeinflussen (alle sind Preisnehmer (hier: Zinsnehmer))
 
--  Bislang gibt es noch keine Unternehmen, die investieren
+- Bislang gibt es noch keine Unternehmen, die investieren
 
 - Es gibt auch keinen Staat, der Einkommen umverteilen kann
 
@@ -1133,7 +1112,6 @@ kombinierter_plot
 ```
 
 ##### Verschiebung der IS-Kurve
-
 
 ```{r}
 #| message: false
@@ -1267,7 +1245,6 @@ kombinierter_plot <- p1 / p2 + plot_layout(heights = c(2, 1.2))
 # Plot ausgeben
 print(kombinierter_plot)
 ```
-
 
 ##### Die Angebotsseite
 
@@ -1537,7 +1514,6 @@ print(kombinierter_plot)
 
 ```
 
-
 ```{r}
 #| message: false
 #| warning: false
@@ -1704,30 +1680,28 @@ print(kombinierter_plot)
 
 ### Grundstruktur
 
-- Firmen produzieren ein Allzweckgut. Dieses Gut wird für Konsum ($C$) und für Investitionen ($I$) verwendet. 
+- Firmen produzieren ein Allzweckgut. Dieses Gut wird für Konsum ($C$) und für Investitionen ($I$) verwendet.
 
 - Für die Produktion verwenden Firmen Arbeit und Kapital
 
-- **Zeitlicher Ablauf**:  
-  - Periode $t$:  
+- **Zeitlicher Ablauf**:
+
+  - Periode $t$:
     - Firmen entscheiden über die Menge an Arbeit, die sie nachfragen. Aus der gegebenen Menge an Kapital und der nachgefragten Menge an Arbeit produzieren sie das Outputgut. Dabei verschleißt ein Teil des Kapitalstocks.
     - Firmen entscheiden über die Höhe der Investitionen, die sie für die Erhöhung des Kapitalstocks in der nächsten Periode einsetzen.
     - Haushalte entscheiden über die Menge an Arbeit, die sie anbieten, um daraus Arbeitseinkommen zu erzielen.
     - Haushalte erhalten Kapitaleinkommen (Dividenden) von den Firmen
     - (Haushalte entscheiden, welche Teile ihres Einkommens sie konsumieren bzw. sparen wollen.)
-    
-  - Periode $t+1$:  
-    - Firmen entscheiden über die Menge an Arbeit, die sie nachfragen. Aus der gegebenen Menge an Kapital und der nachgefragten Menge an Arbeit produzieren sie das Outputgut. Dabei verschleißt ein Teil des Kapitalstocks.  
-    - Firmen lösen den bestehenden Kapitalstock auf und zahlen ihn zusammen mit den Dividenden an die Eigentümer aus.  
+  - Periode $t+1$:
+    - Firmen entscheiden über die Menge an Arbeit, die sie nachfragen. Aus der gegebenen Menge an Kapital und der nachgefragten Menge an Arbeit produzieren sie das Outputgut. Dabei verschleißt ein Teil des Kapitalstocks.\
+    - Firmen lösen den bestehenden Kapitalstock auf und zahlen ihn zusammen mit den Dividenden an die Eigentümer aus.\
     - Haushalte entscheiden über die Menge an Arbeit, die sie anbieten, um daraus Arbeitseinkommen zu erzielen.
     - Haushalte erhalten Kapitaleinkommen (Dividenden) von den Firmen
     - (Haushalte entscheiden, welche Teile ihres Einkommens sie konsumieren bzw. sparen wollen.)
-    
 
 ### Die Produktionsfunktion
 
 $$Y_t = A_t F(K_t, N_t)$$
-
 
 $$
 \begin{align*}
@@ -1742,7 +1716,6 @@ $$
    & \quad \lim_{K_t \to \infty} \frac{\partial F}{\partial K_t} = 0 \quad \text{und} \quad \lim_{N_t \to \infty} \frac{\partial F}{\partial N_t} = 0
 \end{align*}
 $$
-
 
 Eine Produktionsfunktion, die diese Bedingungen erfüllt: $$F(K_t, N_t) = K_t^{\alpha} N_t^{1-\alpha}, \quad 0 < \alpha < 1$$
 
@@ -1793,9 +1766,7 @@ ggplot(df_Y, aes(x = N_t, y = Y_t, color = A_label, linetype = A_label)) +
 
 ```
 
-
 ### Der Kapitalstock
-
 
 $$K_{t+1} = I_t + (1 - \delta) K_t$$
 
@@ -1805,11 +1776,9 @@ $$K_{t+1} = I_t + (1 - \delta) K_t$$
 
 $$D_t = Y_t - w_t N_t$$
 
-
 #### Dividende plus Restwert in Periode t+1
 
-$$D_{t+1} = Y_{t+1} + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I$$
-#### Gesamtwert des Unternehmens
+$$D_{t+1} = Y_{t+1} + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I$$ \#### Gesamtwert des Unternehmens
 
 $$V_t = D_t + \frac{1}{1 + r_t} D_{t+1}$$
 
@@ -1819,7 +1788,6 @@ $$\begin{aligned}
 V_t = &\ A_t F(K_t, N_t) - w_t N_t + \\
       &\ \frac{1}{1 + r_t} \left[ A_{t+1} F(K_{t+1}, N_{t+1}) + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I \right]
 \end{aligned}$$
-
 
 #### Maximierung des Unternehmenswertes
 
@@ -1848,27 +1816,23 @@ $$\begin{aligned}
 
 Partielle Ableitungen bilden und gleich Null setzen
 
-$$\frac{\partial V_t}{\partial N_t} = A_t F_N(K_t, N_t) - w_t \stackrel{!}{=}0$$
-$$\iff w_t = A_t F_N(K_t, N_t)$$
+$$\frac{\partial V_t}{\partial N_t} = A_t F_N(K_t, N_t) - w_t \stackrel{!}{=}0$$ $$\iff w_t = A_t F_N(K_t, N_t)$$
 
 $$\frac{\partial V_t}{\partial K_{t+1}} = \frac{1}{1 + r_t} \left[ A_{t+1} F_K(K_{t+1}, N_{t+1}) + (1 - \delta) - (1 + r_t) \right] \stackrel{!}{=}0$$
 
 $$\iff 1 + r_t = A_{t+1} F_K(K_{t+1}, N_{t+1}) + (1 - \delta)$$
 
-$$\iff r_t = A_{t+1} F_K(K_{t+1}, N_{t+1}) - \delta$$
-bzw
+$$\iff r_t = A_{t+1} F_K(K_{t+1}, N_{t+1}) - \delta$$ bzw
 
 $$\iff r_t + \delta = A_{t+1} F_K(K_{t+1}, N_{t+1})$$
 
 ### Die Arbeitsnachfrage
 
-- Der Faktor Arbeit wird nachgefragt, solang die Grenzproduktivität der Arbeit gößer oder gleich dem Lohnsatz $w_t$ ist. 
+- Der Faktor Arbeit wird nachgefragt, solang die Grenzproduktivität der Arbeit gößer oder gleich dem Lohnsatz $w_t$ ist.
 
 - Damit ist die Grenzproduktiviätsfunktion die Nachfragefunktion nach Arbeit.
 
-- Für eine Cobb Douglas Produktionsfunktion $F(K_t, N_t) = K_t^{\alpha} N_t^{1-\alpha}$ heißt das 
-$$\frac{\partial Y_t}{\partial N_t} = A_t (1 - \alpha) K_t^{\alpha} N_t^{-\alpha} = (1 - \alpha) A_t \left(\frac{K_t}{N_t}\right)^{\alpha} \stackrel{!}{=}w_t$$
-
+- Für eine Cobb Douglas Produktionsfunktion $F(K_t, N_t) = K_t^{\alpha} N_t^{1-\alpha}$ heißt das $$\frac{\partial Y_t}{\partial N_t} = A_t (1 - \alpha) K_t^{\alpha} N_t^{-\alpha} = (1 - \alpha) A_t \left(\frac{K_t}{N_t}\right)^{\alpha} \stackrel{!}{=}w_t$$
 
 ```{r}
 #| message: false
@@ -1915,7 +1879,6 @@ ggplot(df, aes(x = N_t, y = MPN, color = A_label, linetype = A_label)) +
     plot.title = element_text(face = "bold")
   )
 ```
-
 
 ### Die Investitionsnachfrage
 
@@ -1970,6 +1933,94 @@ ggplot(df_inv, aes(x = K_next, y = MPK, color = A_label, linetype = A_label)) +
   )
 ```
 
-
-
 ### Das Arbeitsangebot
+
+#### Die Nutzenfunktion
+
+- Bislang zogen Haushalte Nutzen nur aus Konsum $C$\
+
+- Jetzt nehmen wir an, dass Haushalte Nutzen aus Freizeit ($L_t=1-N_t$) ziehen.\
+
+- $N_t$ ist der Anteil der zur Verfügung stehenden Zeit, in der Haushalte arbeiten.\
+
+- Wir nehmen an, dass der Nutzen sowohl von Freizeit als auch von Konsum abhängt ($u(C_t, 1-N_t )$) (Arbeit ($N_t$) ist hier reiner Verzicht auf Freizeit, aber sie ermöglicht Einkommen, also Konsum).
+
+- Annahmen: $u_C>0$ und $u_{cc}<0$, $U_L>0$, $U_{LL}<0$
+
+$$U = u(C_t, 1 - N_t) + \beta u(C_{t+1}, 1 - N_{t+1})$$
+
+Eine mögliche Form der Nutzenfunktion:
+
+$$u(C_t, 1 - N_t) = \ln C_t + \theta_t \ln(1 - N_t)$$[^mikromakro-1]
+
+[^mikromakro-1]: Als CRRA-Funktion sähe das dann so aus: $$u(C_t, 1 - N_t) = \frac{C_t^{1-\sigma}}{1-\sigma} + \theta_t \frac{(1 - N_t)^{1-\gamma}}{1-\gamma}$$.
+
+Dann gilt
+
+$$
+1\begin{aligned}
+u_C &= \frac{1}{C_t} > 0 \\[0.5em]
+u_L &= \theta_t \frac{1}{1 - N_t} > 0 \\[0.5em]
+u_{CC} &= -\frac{1}{C_t^2} < 0 \\[0.5em]
+u_{LL} &= -\theta_t \frac{1}{(1 - N_t)^2} < 0 \\[0.5em]
+u_{CL} &= 0
+\end{aligned}
+$$
+
+Insbesondere die Kreuzableitung könnte man sich auch anders vorstellen. Vielleicht steigt ja der Wert des Konsums, wenn man wenig Freizeit hat. Dann müsste gelten $u_{CL}<0$ (Vgl. @garin_intermediate_2021, S. 281).
+
+#### Die Optimierung
+
+Es gelten die üblichen Beschränkungen
+
+$$
+\begin{aligned}
+C_t + S_t &\leq w_t N_t + D_t \\
+C_{t+1} + \underbrace{S_{t+1}}_{=0} &\leq w_{t+1} N_{t+1} + D_{t+1} + D_{t+1}^I + (1 + r_t) S_t
+\end{aligned}
+$$
+
+Wenn man davon ausgeht, dass diese Bedingungen als Gleichugnen erfüllt werden (es bleiben also keine Güter ungenutzt), kann man umformulieren:
+
+$$C_t + \frac{C_{t+1}}{1 + r_t} = w_t N_t + D_t + \frac{w_{t+1} N_{t+1} + D_{t+1} + D_{t+1}^I}{1 + r_t}$$
+
+Der Gegenwartswert des Konsums muss also (wieder einmal) dem Gegenwartswert des Einkommens (aus den Quellen Arbeit und Kapital) entsprechen.
+
+$$
+\max_{C_t, C_{t+1}, N_t, N_{t+1}} U = u(C_t, 1 - N_t) + \beta u(C_{t+1}, 1 - N_{t+1})
+$$
+u.d.N
+
+
+$$C_t + \frac{C_{t+1}}{1 + r_t} = w_t N_t + D_t + \frac{w_{t+1} N_{t+1} + D_{t+1} + D_{t+1}^I}{1 + r_t}$$
+
+Nebenbedingung umformulieren ...
+
+$$C_{t+1} = (1 + r_t) \left[ w_t N_t + D_t - C_t \right] + w_{t+1} N_{t+1} + D_{t+1} + D_{t+1}^I$$
+
+... und einsetzen
+
+$$
+\max_{C_t, N_t, N_{t+1}} U = u(C_t, 1 - N_t) + \beta u\left((1 + r_t)\left[w_t N_t + D_t - C_t\right] + w_{t+1} N_{t+1} + D_{t+1} + D_{t+1}^I, 1 - N_{t+1}\right)
+$$
+Es muss also gelten:
+
+$$
+\begin{aligned}
+\frac{\partial U}{\partial C_t} &= u_C(C_t, 1 - N_t) - (1 + r_t)\beta u_C(C_{t+1}, 1 - N_{t+1})\stackrel{!}{=}0 \\[0.5em]
+\frac{\partial U}{\partial N_t} &= -u_L(C_t, 1 - N_t) + \beta(1 + r_t)w_t u_C(C_{t+1}, 1 - N_{t+1})\stackrel{!}{=}0 \\[0.5em]
+\frac{\partial U}{\partial N_{t+1}} &= -\beta u_L(C_t, 1 - N_t) + \beta w_{t+1} u_C(C_{t+1}, 1 - N_{t+1})\stackrel{!}{=}0
+\end{aligned}
+$$
+
+Und daher
+
+$$
+\begin{aligned}
+u_C(C_t, 1 - N_t) &= \beta (1 + r_t) u_C(C_{t+1}, 1 - N_{t+1}) \\[0.5em]
+u_L(C_t, 1 - N_t) &= \beta (1 + r_t) w_t u_C(C_{t+1}, 1 - N_{t+1}) \\[0.5em]
+u_L(C_{t+1}, 1 - N_{t+1}) &= w_{t+1} u_C(C_{t+1}, 1 - N_{t+1})
+\end{aligned}
+$$
+
+Die ersten beiden Gleichungen lassen sich zusammenfassen zu $$u_L(C_t, 1 - N_t) = w_t u_C(C_t, 1 - N_t)$$

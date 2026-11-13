@@ -1,0 +1,26 @@
+/* Standard-Nummerierung (1., 2., ...) im Fußnotenbereich ausblenden */
+section.footnotes ol {
+  list-style-type: none;
+  padding-left: 0;
+  counter-reset: footnote-counter;
+}
+
+/* Zähler für jeden Fußnoteneintrag hochzählen */
+section.footnotes li {
+  counter-increment: footnote-counter;
+  margin-bottom: 0.5em;
+}
+
+/* Hochgestellte Zahl ohne Punkt vor den Text setzen */
+section.footnotes li::before {
+  content: counter(footnote-counter);
+  vertical-align: super;
+  font-size: 0.75em;
+  margin-right: 0.4em;
+/*  font-weight: bold;*/ /* Optional: Zahl leicht hervorheben */
+}
+
+/* Falls der erste Absatz in der Fußnote ein <p>-Tag ist, Umbruch verhindern */
+section.footnotes li p:first-child {
+  display: inline;
+}

@@ -61,7 +61,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -145,6 +165,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="custom.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -326,9 +347,9 @@ window.Quarto = {
 <p lang="en" dir="ltr">
 </p><p>My first job was teaching principles of macro. The textbook opened with an old Keynesian consumption function.</p>
 <p>Absolutely horrible.</p>
-Luckily, you can teach everything in 2 time periods with graphs, and I did the rest of my time.
+<p>Luckily, you can teach everything in 2 time periods with graphs, and I did the rest of my time.</p>
 <p></p>
-— Brian Albrecht (<span class="citation" data-cites="BrianCAlbrecht">(<a href="#ref-BrianCAlbrecht" role="doc-biblioref"><strong>BrianCAlbrecht?</strong></a>)</span>) <a href="https://x.com/BrianCAlbrecht/status/2109960677301321921?ref_src=twsrc%5Etfw">October 13, 2026</a>
+<p>— Brian Albrecht (<span class="citation" data-cites="BrianCAlbrecht">(<a href="#ref-BrianCAlbrecht" role="doc-biblioref"><strong>BrianCAlbrecht?</strong></a>)</span>) <a href="https://x.com/BrianCAlbrecht/status/2109960677301321921?ref_src=twsrc%5Etfw">October 13, 2026</a></p>
 </blockquote>
 <script async="" src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 </div>
@@ -368,11 +389,13 @@ Luckily, you can teach everything in 2 time periods with graphs, and I did the r
 <li><p>Was ist eine Nutzenfunktion?</p></li>
 <li><p>Was heißt Grenznutzen?</p></li>
 </ol>
+<!-- -->
 <ol type="a">
 <li><p>Was passiert, wenn ich weniger von einer Aktivität durchführe, die mir einen geringen Grenznutzen verschafft?</p></li>
 <li><p>Was passiert, wenn ich dafür mehr von einer AKtivität durchführe, die mir einen höheren Grenzutzen verschafft?</p></li>
 <li><p>Wenn ich eine Nutzenfunktion mit abnehmendem Grenznutzen habe, was passiert mit meinem Grenznutzen, wenn ich eine AKtivität einschränke/ ausweite?</p></li>
 </ol>
+<!-- -->
 <ol type="1">
 <li><p>Was heißt diskontieren? Wofür nutzt man es?</p></li>
 <li><p>Was ist ein Zins?</p></li>
@@ -1306,7 +1329,7 @@ Luckily, you can teach everything in 2 time periods with graphs, and I did the r
 <h5 data-number="4.1.3.8.1" class="anchored" data-anchor-id="totales-differenzial-und-partielle-ableitungen"><span class="header-section-number">4.1.3.8.1</span> Totales Differenzial und partielle Ableitungen</h5>
 <p><span class="math inline">\(C_t = C^d(\underbrace{Y_t}_{+}, \underbrace{Y_{t+1}}_{+}, \underbrace{r_t}_{-})\)</span></p>
 <p><strong>Totales Differenzial</strong>:</p>
-<p>Das totale Differenzial beschreibt die <strong>Gesamtänderung der abhängigen Variablen (<span class="math inline">\(dC_t\)</span>), die dadurch entsteht, dass sich mehrere oder alle unabhängigen Einflussfaktoren gleichzeitig verändern</strong> (jeweils um infinitesimale Beträge wie <span class="math inline">\(dY_t, dY_{t+1}, dr_t\)</span>).</p>
+<p>Das totale Differenzial beschreibt die <strong>Gesamtänderung der abhängigen Variablen (</strong><span class="math inline">\(dC_t\)</span>), die dadurch entsteht, dass sich mehrere oder alle unabhängigen Einflussfaktoren gleichzeitig verändern (jeweils um infinitesimale Beträge wie <span class="math inline">\(dY_t, dY_{t+1}, dr_t\)</span>).</p>
 <p>Es ist die <strong>Summe aller gewichteten partiellen Effekte</strong>:</p>
 <p><span class="math inline">\(dC_t = \frac{\partial C^d(\cdot)}{\partial Y_t} dY_t + \frac{\partial C^d(\cdot)}{\partial Y_{t+1}} dY_{t+1} + \frac{\partial C^d(\cdot)}{\partial r_t} dr_t\)</span></p>
 <p>Da sowohl <span class="math inline">\(\frac{\partial C^d(\cdot)}{\partial Y_t}\)</span> als auch <span class="math inline">\(\frac{\partial C^d(\cdot)}{\partial Y_{t+1}}\)</span> positiv sind, ist der Effekt einer Einkommensänderung in allen Perioden auf den gegenwärtigen Konsum größer als der Effekt einer Einkommensänderung nur in einer der Perioden.</p>
@@ -2304,9 +2327,86 @@ I_t &amp;= B_t^I
 </section>
 <section id="das-arbeitsangebot" class="level3" data-number="4.2.7">
 <h3 data-number="4.2.7" class="anchored" data-anchor-id="das-arbeitsangebot"><span class="header-section-number">4.2.7</span> Das Arbeitsangebot</h3>
-
-
+<section id="die-nutzenfunktion" class="level4" data-number="4.2.7.1">
+<h4 data-number="4.2.7.1" class="anchored" data-anchor-id="die-nutzenfunktion"><span class="header-section-number">4.2.7.1</span> Die Nutzenfunktion</h4>
+<ul>
+<li><p>Bislang zogen Haushalte Nutzen nur aus Konsum <span class="math inline">\(C\)</span><br>
+</p></li>
+<li><p>Jetzt nehmen wir an, dass Haushalte Nutzen aus Freizeit (<span class="math inline">\(L_t=1-N_t\)</span>) ziehen.<br>
+</p></li>
+<li><p><span class="math inline">\(N_t\)</span> ist der Anteil der zur Verfügung stehenden Zeit, in der Haushalte arbeiten.<br>
+</p></li>
+<li><p>Wir nehmen an, dass der Nutzen sowohl von Freizeit als auch von Konsum abhängt (<span class="math inline">\(u(C_t, 1-N_t )\)</span>) (Arbeit (<span class="math inline">\(N_t\)</span>) ist hier reiner Verzicht auf Freizeit, aber sie ermöglicht Einkommen, also Konsum).</p></li>
+<li><p>Annahmen: <span class="math inline">\(u_C&gt;0\)</span> und <span class="math inline">\(u_{cc}&lt;0\)</span>, <span class="math inline">\(U_L&gt;0\)</span>, <span class="math inline">\(U_{LL}&lt;0\)</span></p></li>
+</ul>
+<p><span class="math display">\[U = u(C_t, 1 - N_t) + \beta u(C_{t+1}, 1 - N_{t+1})\]</span></p>
+<p>Eine mögliche Form der Nutzenfunktion:</p>
+<p><span class="math display">\[u(C_t, 1 - N_t) = \ln C_t + \theta_t \ln(1 - N_t)\]</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Dann gilt</p>
+<p><span class="math display">\[
+1\begin{aligned}
+u_C &amp;= \frac{1}{C_t} &gt; 0 \\[0.5em]
+u_L &amp;= \theta_t \frac{1}{1 - N_t} &gt; 0 \\[0.5em]
+u_{CC} &amp;= -\frac{1}{C_t^2} &lt; 0 \\[0.5em]
+u_{LL} &amp;= -\theta_t \frac{1}{(1 - N_t)^2} &lt; 0 \\[0.5em]
+u_{CL} &amp;= 0
+\end{aligned}
+\]</span></p>
+<p>Insbesondere die Kreuzableitung könnte man sich auch anders vorstellen. Vielleicht steigt ja der Wert des Konsums, wenn man wenig Freizeit hat. Dann müsste gelten <span class="math inline">\(u_{CL}&lt;0\)</span> (Vgl. <span class="citation" data-cites="garin_intermediate_2021">Garın et al. (<a href="#ref-garin_intermediate_2021" role="doc-biblioref">2021</a>)</span>, S. 281).</p>
 </section>
+<section id="die-optimierung" class="level4" data-number="4.2.7.2">
+<h4 data-number="4.2.7.2" class="anchored" data-anchor-id="die-optimierung"><span class="header-section-number">4.2.7.2</span> Die Optimierung</h4>
+<p>Es gelten die üblichen Beschränkungen</p>
+<p><span class="math display">\[
+\begin{aligned}
+C_t + S_t &amp;\leq w_t N_t + D_t \\
+C_{t+1} + \underbrace{S_{t+1}}_{=0} &amp;\leq w_{t+1} N_{t+1} + D_{t+1} + D_{t+1}^I + (1 + r_t) S_t
+\end{aligned}
+\]</span></p>
+<p>Wenn man davon ausgeht, dass diese Bedingungen als Gleichugnen erfüllt werden (es bleiben also keine Güter ungenutzt), kann man umformulieren:</p>
+<p><span class="math display">\[C_t + \frac{C_{t+1}}{1 + r_t} = w_t N_t + D_t + \frac{w_{t+1} N_{t+1} + D_{t+1} + D_{t+1}^I}{1 + r_t}\]</span></p>
+<p>Der Gegenwartswert des Konsums muss also (wieder einmal) dem Gegenwartswert des Einkommens (aus den Quellen Arbeit und Kapital) entsprechen.</p>
+<p><span class="math display">\[
+\max_{C_t, C_{t+1}, N_t, N_{t+1}} U = u(C_t, 1 - N_t) + \beta u(C_{t+1}, 1 - N_{t+1})
+\]</span> u.d.N</p>
+<p><span class="math display">\[C_t + \frac{C_{t+1}}{1 + r_t} = w_t N_t + D_t + \frac{w_{t+1} N_{t+1} + D_{t+1} + D_{t+1}^I}{1 + r_t}\]</span></p>
+<p>Nebenbedingung umformulieren …</p>
+<p><span class="math display">\[C_{t+1} = (1 + r_t) \left[ w_t N_t + D_t - C_t \right] + w_{t+1} N_{t+1} + D_{t+1} + D_{t+1}^I\]</span></p>
+<p>… und einsetzen</p>
+<p><span class="math display">\[
+\max_{C_t, N_t, N_{t+1}} U = u(C_t, 1 - N_t) + \beta u\left((1 + r_t)\left[w_t N_t + D_t - C_t\right] + w_{t+1} N_{t+1} + D_{t+1} + D_{t+1}^I, 1 - N_{t+1}\right)
+\]</span> Es muss also gelten:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\partial U}{\partial C_t} &amp;= u_C(C_t, 1 - N_t) - (1 + r_t)\beta u_C(C_{t+1}, 1 - N_{t+1})\stackrel{!}{=}0 \\[0.5em]
+\frac{\partial U}{\partial N_t} &amp;= -u_L(C_t, 1 - N_t) + \beta(1 + r_t)w_t u_C(C_{t+1}, 1 - N_{t+1})\stackrel{!}{=}0 \\[0.5em]
+\frac{\partial U}{\partial N_{t+1}} &amp;= -\beta u_L(C_t, 1 - N_t) + \beta w_{t+1} u_C(C_{t+1}, 1 - N_{t+1})\stackrel{!}{=}0
+\end{aligned}
+\]</span></p>
+<p>Und daher</p>
+<p><span class="math display">\[
+\begin{aligned}
+u_C(C_t, 1 - N_t) &amp;= \beta (1 + r_t) u_C(C_{t+1}, 1 - N_{t+1}) \\[0.5em]
+u_L(C_t, 1 - N_t) &amp;= \beta (1 + r_t) w_t u_C(C_{t+1}, 1 - N_{t+1}) \\[0.5em]
+u_L(C_{t+1}, 1 - N_{t+1}) &amp;= w_{t+1} u_C(C_{t+1}, 1 - N_{t+1})
+\end{aligned}
+\]</span></p>
+<p>Die ersten beiden Gleichungen lassen sich zusammenfassen zu <span class="math display">\[u_L(C_t, 1 - N_t) = w_t u_C(C_t, 1 - N_t)\]</span></p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-garin_intermediate_2021" class="csl-entry" role="listitem">
+Garın, J., Lester, R., &amp; Sims, E. (2021). <em><a href="https://juliogarin.com/files/textbook/GLS_Intermediate_Macro.pdf">Intermediate Macroeconomics</a></em>.
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Als CRRA-Funktion sähe das dann so aus: <span class="math display">\[u(C_t, 1 - N_t) = \frac{C_t^{1-\sigma}}{1-\sigma} + \theta_t \frac{(1 - N_t)^{1-\gamma}}{1-\gamma}\]</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
