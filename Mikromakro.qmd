@@ -1971,6 +1971,18 @@ $$
 
 Insbesondere die Kreuzableitung könnte man sich auch anders vorstellen. Vielleicht steigt ja der Wert des Konsums, wenn man wenig Freizeit hat. Dann müsste gelten $u_{CL}<0$ (Vgl. @garin_intermediate_2021, S. 281).
 
+Eine Möglichkeit, das darzustellen, ist die folgende (Form der) Nutzenfunktion: $$u(C_t, 1 - N_t) = \ln(C_t + \theta_t \ln(1 - N_t))$$
+
+$$\begin{align*}
+u_C &= \frac{1}{C_t + \theta_t \ln(1 - N_t)} > 0 \\
+u_L &= \frac{\theta_t}{1 - N_t} \frac{1}{C_t + \theta_t \ln(1 - N_t)} > 0 \\
+u_{CC} &= -\frac{1}{(C_t + \theta_t \ln(1 - N_t))^2} < 0 \\
+u_{LL} &= -\theta_t \frac{1}{(1 - N_t)^2} \frac{1}{C_t + \theta_t \ln(1 - N_t)} \left[ \frac{\theta_t}{C_t + \theta_t \ln(1 - N_t)} + 1 \right] < 0 \\
+u_{CL} &= -\frac{\theta_t}{1 - N_t} \frac{1}{(C_t + \theta_t \ln(1 - N_t))^2} < 0
+\end{align*}$$
+
+Das siehr auf den ersten Blick etwas unahndlich aus. Aber für bestimmte ZWecke (s.u.) ergibt sich daraus eine recht einfache Form der Arbeitsangebotsfunktion.
+
 #### Die Optimierung
 
 Es gelten die üblichen Beschränkungen
@@ -1982,7 +1994,7 @@ C_{t+1} + \underbrace{S_{t+1}}_{=0} &\leq w_{t+1} N_{t+1} + D_{t+1} + D_{t+1}^I 
 \end{aligned}
 $$
 
-Wenn man davon ausgeht, dass diese Bedingungen als Gleichugnen erfüllt werden (es bleiben also keine Güter ungenutzt), kann man umformulieren:
+Wenn man davon ausgeht, dass diese Bedingungen als Gleichungen erfüllt werden (es bleiben also keine Güter ungenutzt), kann man umformulieren:
 
 $$C_t + \frac{C_{t+1}}{1 + r_t} = w_t N_t + D_t + \frac{w_{t+1} N_{t+1} + D_{t+1} + D_{t+1}^I}{1 + r_t}$$
 
@@ -2026,3 +2038,158 @@ u_L(C_{t+1}, 1 - N_{t+1}) &= w_{t+1} u_C(C_{t+1}, 1 - N_{t+1})
 $$
 
 Die ersten beiden Gleichungen lassen sich zusammenfassen zu $$u_L(C_t, 1 - N_t) = w_t u_C(C_t, 1 - N_t)$$
+
+
+
+
+
+#### Die Arbeitsangebotsfunktion
+
+Der Ausdruck $u_L(C_t, 1 - N_t) = w_t u_C(C_t, 1 - N_t)$ lässt sich umformulieren zu $$w_t=\frac{u_L(C_t, 1 - N_t)}{u_C(C_t, 1 - N_t)}$$
+
+
+Die Wahl zwischen (Arbeits-)Einkommen und Freizeit lässt sich grafisch darstellen.
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Der Raum des Möglichen in der Wahl zwischen Einkommen und Freizeit"
+
+library(ggplot2)
+
+# Beispieldaten für den machbaren Bereich (Feasible)
+feasible_data <- data.frame(
+  x = c(0, 0, 1, 1),
+  y = c(0, 3, 2, 0)
+)
+
+# Daten für die Budgetgerade
+budget_line <- data.frame(
+  x = c(0, 1),
+  y = c(3, 2)
+)
+
+ggplot() +
+  # Machbarer Bereich (helle Füllung)
+  geom_polygon(data = feasible_data, aes(x = x, y = y), fill = "gray90", alpha = 0.5) +
+
+  # Budgetgerade
+  geom_line(data = budget_line, aes(x = x, y = y), color = "black", linewidth = 1) +
+
+  # Gestrichelte Linien für Achsenbeschriftungen
+  geom_segment(aes(x = 1, y = 0, xend = 1, yend = 2), linetype = "solid", color = "black", lwd=1) +
+  geom_segment(aes(x = 0, y = 2, xend = 1, yend = 2), linetype = "dashed", color = "gray50") +
+
+  # Beschriftungen im Plot
+  annotate("text", x = 0.4, y = 1.5, label = "erreichbar", color = "black", size = 4) +
+  annotate("text", x = .9, y = 2.5, label = "nicht erreichbar", color = "black", size = 4) +
+
+  # Achsenanpassung mit expand = c(0, 0)
+  scale_x_continuous(limits = c(0, 1.5), breaks = c(1), labels = expression(L_t), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, 4), breaks = c(2, 3), labels = c("w_t", "w_t + D_t"), expand = c(0, 0)) +
+
+  # Titel und Achsenbeschriftungen auf Deutsch (ohne Nummerierung)
+  labs(
+    title = "Die Konsum-Freizeit-Budgetgerade",
+    x = "Freizeit (L)",
+    y = "Konsum (C)"
+  ) +
+
+  # Klassisches Schwarz-Weiß-Theme (sauberer, heller Look)
+  theme_light(base_size = 14)
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Die Optimierung"
+
+library(ggplot2)
+
+# Ökonomische Parameter definieren
+w <- 2.0       # Lohnsatz (w_t)
+D <- 0.5       # Zusatzeinkommen / Dividende / Gewinn (D_t)
+theta <- 0.8   # Präferenzparameter für Freizeit (\theta_t)
+
+# 1. Berechnung des optimalen Arbeitspunkte (Tangentialpunkt)
+# Aus der Optimierung folgt: L_opt = theta / w
+L_opt <- theta / w
+C_opt <- w * (1 - L_opt) + D
+
+# Nutzenlevel im Optimum für die Indifferenzkurve berechnen
+utility_level <- C_opt + theta * log(L_opt)
+
+# 2. Daten für den machbaren Bereich (Feasible Region)
+feasible_data <- data.frame(
+  x = c(0, 0, 1, 1),
+  y = c(0, w + D, D, 0)
+)
+
+# Daten für die Budgetgerade
+budget_line <- data.frame(
+  x = c(0, 1),
+  y = c(w + D, D)
+)
+
+# 3. Daten für die Indifferenzkurven generieren: C = utility_level - theta * ln(L)
+L_vals <- seq(0.15, 1.3, length.out = 150)
+indiff_curve_opt <- data.frame(
+  x = L_vals,
+  y = utility_level - theta * log(L_vals)
+)
+
+indiff_curve_higher <- data.frame(
+  x = L_vals,
+  y = (utility_level + 0.4) - theta * log(L_vals)
+)
+
+# 4. Erstellung des Plots
+ggplot() +
+  # Machbarer Bereich (helle Füllung)
+  geom_polygon(data = feasible_data, aes(x = x, y = y), fill = "gray95", alpha = 0.5) +
+
+  # Indifferenzkurven
+  geom_line(data = indiff_curve_higher, aes(x = x, y = y), color = "gray60", linetype = "dashed", linewidth = 0.6) +
+  geom_line(data = indiff_curve_opt, aes(x = x, y = y), color = "black", linewidth = 0.8) +
+
+  # Budgetgerade
+  geom_line(data = budget_line, aes(x = x, y = y), color = "black", linewidth = 1) +
+
+  # Gestrichelte Linien vom Optimum zu den Achsen (l_opt und C_opt)
+  geom_segment(aes(x = L_opt, y = 0, xend = L_opt, yend = C_opt), linetype = "dashed", color = "gray40", linewidth = 0.7) +
+  geom_segment(aes(x = 0, y = C_opt, xend = L_opt, yend = C_opt), linetype = "dashed", color = "gray40", linewidth = 0.7) +
+
+  # Äußere vertikale Begrenzung bei L = 1
+  geom_segment(aes(x = 1, y = 0, xend = 1, yend = D), linetype = "solid", color = "black", linewidth = 1) +
+
+  # Beschriftung der Tangentialbedingung (u_L / u_C = w_t) mit Pfeil
+  annotate("text", x = L_opt + 0.28, y = C_opt + 0.35,
+           label = expression(frac(u[L], u[C]) == w[t]), parse = TRUE, size = 4) +
+  annotate("segment", x = L_opt + 0.13, y = C_opt + 0.22, xend = L_opt, yend = C_opt,
+           arrow = arrow(length = unit(0.18, "cm")), color = "black", linewidth = 0.6) +
+
+  # Beschriftung der Indifferenzkurve (u_0)
+  annotate("text", x = 1.35, y = indiff_curve_opt$y[which.min(abs(indiff_curve_opt$x - 1.15))],
+           label = expression(u[0]), parse = TRUE, size = 4) +
+
+  # Achsenanpassung mit expand = c(0, 0)
+  scale_x_continuous(limits = c(0, 1.4), breaks = c(L_opt, 1),
+                     labels = c(expression(L[opt]), "1"), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, 3.2), breaks = c(D, C_opt, w + D),
+                     labels = c(expression(D[t]), expression(C[opt]), expression(w[t] + D[t])), expand = c(0, 0)) +
+
+  # Titel und Achsenbeschriftungen auf Deutsch (ohne Nummerierung)
+  labs(
+    title = "Konsum-Freizeit-Entscheidung",
+    x = "Freizeit (L)",
+    y = "Konsum (C)"
+  ) +
+
+  # Klassisches Schwarz-Weiß-Theme im sauberen Look
+  theme_light(base_size = 14) +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_line(color = "gray90")
+  )
+```
+
