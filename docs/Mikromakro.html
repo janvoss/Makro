@@ -297,6 +297,9 @@ window.Quarto = {
   <li><a href="#die-investitionsnachfrage" id="toc-die-investitionsnachfrage" class="nav-link" data-scroll-target="#die-investitionsnachfrage"><span class="header-section-number">4.2.6</span> Die Investitionsnachfrage</a></li>
   <li><a href="#das-arbeitsangebot" id="toc-das-arbeitsangebot" class="nav-link" data-scroll-target="#das-arbeitsangebot"><span class="header-section-number">4.2.7</span> Das Arbeitsangebot</a></li>
   </ul></li>
+  <li><a href="#der-intermediär-am-kapitalmarkt" id="toc-der-intermediär-am-kapitalmarkt" class="nav-link" data-scroll-target="#der-intermediär-am-kapitalmarkt"><span class="header-section-number">4.3</span> Der Intermediär am Kapitalmarkt</a></li>
+  <li><a href="#das-gleichgewicht-bislang" id="toc-das-gleichgewicht-bislang" class="nav-link" data-scroll-target="#das-gleichgewicht-bislang"><span class="header-section-number">4.4</span> Das Gleichgewicht (bislang)</a></li>
+  <li><a href="#fiskalpolitik" id="toc-fiskalpolitik" class="nav-link" data-scroll-target="#fiskalpolitik"><span class="header-section-number">4.5</span> Fiskalpolitik</a></li>
   </ul>
 </nav>
     </div>
@@ -2171,7 +2174,11 @@ window.Quarto = {
 </section>
 <section id="dividende-plus-restwert-in-periode-t1" class="level4" data-number="4.2.4.2">
 <h4 data-number="4.2.4.2" class="anchored" data-anchor-id="dividende-plus-restwert-in-periode-t1"><span class="header-section-number">4.2.4.2</span> Dividende plus Restwert in Periode t+1</h4>
-<p><span class="math display">\[D_{t+1} = Y_{t+1} + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I\]</span> #### Gesamtwert des Unternehmens</p>
+<p><span class="math display">\[D_{t+1} = Y_{t+1} + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I\]</span><br>
+</p>
+</section>
+<section id="gesamtwert-des-unternehmens" class="level4" data-number="4.2.4.3">
+<h4 data-number="4.2.4.3" class="anchored" data-anchor-id="gesamtwert-des-unternehmens"><span class="header-section-number">4.2.4.3</span> Gesamtwert des Unternehmens</h4>
 <p><span class="math display">\[V_t = D_t + \frac{1}{1 + r_t} D_{t+1}\]</span></p>
 <p>bzw.</p>
 <p><span class="math display">\[\begin{aligned}
@@ -2179,8 +2186,8 @@ V_t = &amp;\ A_t F(K_t, N_t) - w_t N_t + \\
       &amp;\ \frac{1}{1 + r_t} \left[ A_{t+1} F(K_{t+1}, N_{t+1}) + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I \right]
 \end{aligned}\]</span></p>
 </section>
-<section id="maximierung-des-unternehmenswertes" class="level4" data-number="4.2.4.3">
-<h4 data-number="4.2.4.3" class="anchored" data-anchor-id="maximierung-des-unternehmenswertes"><span class="header-section-number">4.2.4.3</span> Maximierung des Unternehmenswertes</h4>
+<section id="maximierung-des-unternehmenswertes" class="level4" data-number="4.2.4.4">
+<h4 data-number="4.2.4.4" class="anchored" data-anchor-id="maximierung-des-unternehmenswertes"><span class="header-section-number">4.2.4.4</span> Maximierung des Unternehmenswertes</h4>
 <p><span class="math display">\[\begin{align*}
 \max_{N_t, I_t} \quad V_t &amp;= A_t F(K_t, N_t) - w_t N_t + \\
 &amp;\quad \frac{1}{1 + r_t} \left[ A_{t+1} F(K_{t+1}, N_{t+1}) + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I \right]
@@ -2833,6 +2840,28 @@ u_L(C_{t+1}, 1 - N_{t+1}) &amp;= w_{t+1} u_C(C_{t+1}, 1 - N_{t+1})
 </div>
 </div>
 </div>
+</section>
+</section>
+</section>
+<section id="der-intermediär-am-kapitalmarkt" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="der-intermediär-am-kapitalmarkt"><span class="header-section-number">4.3</span> Der Intermediär am Kapitalmarkt</h2>
+<ul>
+<li>Ein (hypothetischer) Intermediär am Kapitalmarkt</li>
+</ul>
+<p><span class="math display">\[D_{t+1}^I = r_t B_t^I - r_t S_t\]</span></p>
+<p>Im Folgenden gilt, dass <span class="math inline">\(D_{t+1}^I=0\)</span>.</p>
+</section>
+<section id="das-gleichgewicht-bislang" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="das-gleichgewicht-bislang"><span class="header-section-number">4.4</span> Das Gleichgewicht (bislang)</h2>
+<p><span class="math display">\[S_t = B_t^I = I_t\]</span></p>
+<p><span class="math display">\[Y_t = C_t + I_t\]</span></p>
+<p><span class="math display">\[C_{t+1} = w_{t+1} N_{t+1} + (1 + r_t) S_t + D_{t+1} + D_{t+1}^I\]</span></p>
+<p><span class="math display">\[C_{t+1} = w_{t+1} N_{t+1} + (1 + r_t) S_t + Y_{t+1} + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I + r_t B_t^I - r_t S_t\]</span></p>
+<p><span class="math display">\[C_{t+1} - (1 - \delta) K_{t+1} = Y_{t+1}\]</span></p>
+<p>$$$$</p>
+</section>
+<section id="fiskalpolitik" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="fiskalpolitik"><span class="header-section-number">4.5</span> Fiskalpolitik</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
@@ -2840,8 +2869,6 @@ u_L(C_{t+1}, 1 - N_{t+1}) &amp;= w_{t+1} u_C(C_{t+1}, 1 - N_{t+1})
 Garın, J., Lester, R., &amp; Sims, E. (2021). <em><a href="https://juliogarin.com/files/textbook/GLS_Intermediate_Macro.pdf">Intermediate Macroeconomics</a></em>.
 </div>
 </div>
-</section>
-</section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>

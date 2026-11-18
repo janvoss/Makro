@@ -1778,7 +1778,10 @@ $$D_t = Y_t - w_t N_t$$
 
 #### Dividende plus Restwert in Periode t+1
 
-$$D_{t+1} = Y_{t+1} + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I$$ \#### Gesamtwert des Unternehmens
+$$D_{t+1} = Y_{t+1} + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I$$ \
+
+
+#### Gesamtwert des Unternehmens
 
 $$V_t = D_t + \frac{1}{1 + r_t} D_{t+1}$$
 
@@ -2455,3 +2458,27 @@ ggplot(df, aes(x = N, y = w)) +
   )
 ```
 
+## Der Intermediär am Kapitalmarkt
+
+- Ein (hypothetischer) Intermediär am Kapitalmarkt    
+
+$$D_{t+1}^I = r_t B_t^I - r_t S_t$$
+
+Im Folgenden gilt, dass $D_{t+1}^I=0$.
+
+
+## Das Gleichgewicht (bislang)
+
+$$S_t = B_t^I = I_t$$
+
+$$Y_t = C_t + I_t$$
+
+$$C_{t+1} = w_{t+1} N_{t+1} + (1 + r_t) S_t + D_{t+1} + D_{t+1}^I$$
+
+$$C_{t+1} = w_{t+1} N_{t+1} + (1 + r_t) S_t + Y_{t+1} + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I + r_t B_t^I - r_t S_t$$
+
+$$C_{t+1} - (1 - \delta) K_{t+1} = Y_{t+1}$$
+
+$$$$
+
+## Fiskalpolitik
