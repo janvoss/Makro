@@ -2479,6 +2479,265 @@ $$C_{t+1} = w_{t+1} N_{t+1} + (1 + r_t) S_t + Y_{t+1} + (1 - \delta) K_{t+1} - w
 
 $$C_{t+1} - (1 - \delta) K_{t+1} = Y_{t+1}$$
 
-$$$$
+$$Y_{t+1} = C_{t+1} + I_{t+1}$$
+
+Zusammengefasst: $$\begin{align*}
+C_t &= C^d(Y_t, Y_{t+1}, r_t) \\
+N_t &= N^s(w_t, \theta_t) \\
+N_t &= N^d(w_t, A_t, K_t) \\
+I_t &= I^d(r_t, A_{t+1}, K_t) \\
+Y_t &= A_t F(K_t, N_t) \\
+Y_t &= C_t + I_t
+\end{align*}$$
 
 ## Fiskalpolitik
+
+[Teaser Staat]()
+
+Bislang keine Betrachtung des Staates
+
+### Budgetrestriktion
+
+$$\begin{align*}
+G_t &\leq T_t + B_t^G \\
+G_{t+1} + r_t B_t^G &\leq T_{t+1} + B_{t+1}^G - B_t^G
+\end{align*}$$
+
+Wenn man das als Gleichung formuliert und etwas umstellt resultiert: $$G_t + \frac{G_{t+1}}{1 + r_t} = T_t + \frac{T_{t+1}}{1 + r_t}$$
+
+Der Barwert der Staatsausgaben muss dem Barwert der Steuereinnahmen entsprechen.
+
+### Fiskalpolitik bei exogenem Einkommen
+
+$$\begin{align*}
+C_t + S_t &\leq Y_t - T_t \\
+C_{t+1} + S_{t+1} &\leq Y_{t+1} - T_{t+1} + (1 + r_t) S_t
+\end{align*}$$
+
+bzw. 
+
+$$C_t + \frac{C_{t+1}}{1 + r_t} = Y_t - T_t + \frac{Y_{t+1} - T_{t+1}}{1 + r_t}$$
+Da der Barwert der Staatsausgaben dem Barwert der Steuereinnahmen gelten muss, lässt sich schreiben: $$C_t + \frac{C_{t+1}}{1 + r_t} = Y_t + \frac{Y_{t+1}}{1 + r_t} - \left[ G_t + \frac{G_{t+1}}{1 + r_t} \right]$$ bzw.
+
+$$C_t + \frac{C_{t+1}}{1 + r_t} = Y_t - G_t + \frac{Y_{t+1} - G_{t+1}}{1 + r_t}$$
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Die Budgetbegrenzung mit Staatsausgaben"
+
+library(ggplot2)
+
+# Beispielwerte für die Achsenabschnitte
+# x-Achsenabschnitt: (Y_t - G_t) + (Y_{t+1} - G_{t+1}) / (1 + r_t)
+# y-Achsenabschnitt: (1 + r_t)(Y_t - G_t) + Y_{t+1} - G_{t+1}
+x_max <- 3.0
+y_max <- 3.5
+
+# Daten für den machbaren Bereich (Feasible)
+feasible_data <- data.frame(
+  x = c(0, 0, x_max),
+  y = c(0, y_max, 0)
+)
+
+# Daten für die Budgetgerade
+budget_line <- data.frame(
+  x = c(0, x_max),
+  y = c(y_max, 0)
+)
+
+# Mittelpunkt der Budgetgeraden für den Steigungspfeil berechnen
+x_mid <- x_max * 0.58
+y_mid <- y_max * (1 - 0.58)
+
+ggplot() +
+  # Machbarer Bereich (dezente graue Füllung)
+  geom_polygon(data = feasible_data, aes(x = x, y = y), fill = "gray95", alpha = 0.6) +
+
+  # Budgetgerade
+  geom_line(data = budget_line, aes(x = x, y = y), color = "black", linewidth = 1) +
+
+  # Beschriftungen im Plot ("Feasible" und "Infeasible")
+  annotate("text", x = x_max * 0.25, y = y_max * 0.25, label = "erreichbar", color = "black", size = 4.5) +
+  annotate("text", x = x_max * 0.78, y = y_max * 0.85, label = "nicht erreichbar", color = "black", size = 4.5) +
+
+  # Pfeil und Beschriftung für die Steigung: Slope: -(1 + r_t)
+  annotate("segment", x = x_mid + 0.55, y = y_mid, xend = x_mid + 0.03, yend = y_mid,
+           arrow = arrow(length = unit(0.2, "cm")), color = "black", linewidth = 0.7) +
+  annotate("text", x = x_mid + 0.62, y = y_mid, hjust = 0,
+           label = expression(paste("Steigung: ", -(1 + r[t]))), parse = TRUE, size = 4) +
+
+  # Achsenanpassung mit den exakten Ausdrücken aus dem Bild
+  scale_x_continuous(
+    limits = c(0, 4.5),
+    breaks = c(x_max),
+    labels = expression(Y[t] - G[t] + frac(Y[t+1] - G[t+1], 1 + r[t])),
+    expand = c(0, 0)
+  ) +
+  scale_y_continuous(
+    limits = c(0, 4.5),
+    breaks = c(y_max),
+    labels = expression((1 + r[t])(Y[t] - G[t]) + Y[t+1] - G[t+1]),
+    expand = c(0, 0)
+  ) +
+
+  # Titel und Achsenbeschriftungen auf Deutsch (ohne Nummerierung)
+  labs(
+    title = "Intertemporale Budgetgerade",
+    x = expression(C[t]),
+    y = expression(C[t+1])
+  ) +
+
+  # Klassisches Schwarz-Weiß-Theme
+  theme_light(base_size = 13) +
+  theme(
+    panel.grid = element_blank(),
+    panel.border = element_blank(),
+    axis.line = element_line(color = "black", arrow = arrow(length = unit(0.2, "cm"), type = "closed")),
+    axis.text = element_text(color = "black"),
+    plot.margin = margin(t = 15, r = 25, b = 15, l = 15)
+  )
+```
+Der Konsum in $t$ lässt sich also als Funktion schreiben: 
+
+$$C_t = C\left(\underset{+}{Y_t - G_t}, \underset{+}{Y_{t+1} - G_{t+1}}, \underset{-}{r_t}\right)$$
+
+Das gesamte Einkommen teilt sich in privaten und staatlichen Konsum auf: $$Y_t = C_t + G_t$$
+
+Sei $E_0$ ein Ausdruck für die autonomen Ausgaben (unabhängig von $Y_t$): $$E_0 = C^d(-G_t, Y_{t+1} - G_{t+1}, r_t) + G_t$$
+
+$$\frac{\partial E_0}{\partial G_t} = -\frac{\partial C^d}{\partial G_t} + 1=1-\underbrace{MPC}_{<1}>0$$
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Effekt einer Staatsausgabenerhöhung"
+
+library(ggplot2)
+library(patchwork)
+
+# Parameter für konsistente Koordinaten in beiden Panels
+Y0 <- 2.0
+Y1 <- 3.4
+r0 <- 1.5
+r1 <- 3.2
+
+mpc <- 0.5  # Steigung der Nachfragekurve (Marginale Konsumneigung)
+a0 <- Y0 * (1 - mpc)
+a1 <- Y1 * (1 - mpc)
+
+# --- OBERES PANEL: Keynesianisches Kreuz (Güternachfrage Y^d) ---
+df_top <- data.frame(
+  Y = seq(0, 4.8, length.out = 100)
+)
+df_top$Yd0 <- a0 + mpc * df_top$Y
+df_top$Yd1 <- a1 + mpc * df_top$Y
+
+p1 <- ggplot() +
+  # 45-Grad-Linie (Y^d = Y)
+  geom_segment(aes(x = 0, y = 0, xend = 4.2, yend = 4.2), color = "black", linewidth = 0.9) +
+  
+  # Nachfragekurven (alt in schwarz, neu in blau)
+  geom_line(data = df_top, aes(x = Y, y = Yd0), color = "black", linewidth = 0.9) +
+  geom_line(data = df_top, aes(x = Y, y = Yd1), color = "#5B9BD5", linewidth = 0.9) +
+  
+  # Gestrichelte Hilfslinien zu den Achsen (nach unten durchgehend bis y = 0 für optische Verbindung)
+  geom_segment(aes(x = 0, y = Y0, xend = Y0, yend = Y0), linetype = "dashed", color = "black", linewidth = 0.5) +
+  geom_segment(aes(x = Y0, y = 0, xend = Y0, yend = Y0), linetype = "dashed", color = "black", linewidth = 0.5) +
+  geom_segment(aes(x = Y1, y = 0, xend = Y1, yend = Y1), linetype = "dashed", color = "black", linewidth = 0.5) +
+  
+  # Verschiebungspfeile (Blau nach oben, Grün nach unten)
+  annotate("segment", x = 4.3, y = a0 + mpc * 4.3 + 0.08, xend = 4.3, yend = a1 + mpc * 4.3 - 0.08,
+           arrow = arrow(length = unit(0.18, "cm"), type = "closed"), color = "#5B9BD5", linewidth = 0.8) +
+  annotate("segment", x = 3.75, y = a1 + mpc * 3.75 - 0.08, xend = 3.75, yend = a0 + mpc * 3.75 + 0.08,
+           arrow = arrow(length = unit(0.18, "cm"), type = "closed"), color = "#70AD47", linewidth = 0.8) +
+  
+  # Kurvenbeschriftungen
+  annotate("text", x = 3.95, y = 4.32, label = expression(Y[t]^d == Y[t]), parse = TRUE, size = 3.8) +
+  
+  # Blaue Beschriftung (oben)
+  annotate("text", x = 4.45, y = 3.98, hjust = 0, color = "#2E75B6", size = 3.5,
+           label = expression(Y[t]^d == C^d * "(" * Y[t] - G["1,t"] * ", " * Y["0,t+1"])) +
+  annotate("text", x = 5.3, y = 3.68, hjust = 0, color = "#2E75B6", size = 3.5,
+           label = expression(- G["0,t+1"] * ", " * r["0,t"] * ")" + G["1,t"])) +
+  
+  # Schwarze & Grüne Beschriftung (unten)
+  annotate("text", x = 4.45, y = 2.75, hjust = 0, color = "black", size = 3.5,
+           label = expression(Y[t]^d == C^d * "(" * Y[t] - G["0,t"] * ", " * Y[t+1] - G["0,t+1"] * ", " * r["0,t"] * ")" + G["0,t"])) +
+  annotate("text", x = 4.72, y = 2.45, hjust = 0, color = "#70AD47", size = 3.5,
+           label = expression("" == C^d * "(" * Y[t] - G["1,t"] * ", " * Y[t+1] - G["0,t+1"] * ", " * r["1,t"] * ")" + G["1,t"])) +
+  
+  # Achsenanpassung
+  scale_x_continuous(limits = c(0, 7.2), breaks = NULL, expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, 4.6), breaks = c(Y0), labels = expression(Y["0,t"]^d), expand = c(0, 0)) +
+  
+  labs(
+    title = "Wirkung einer temporären Staatsausgabenerhöhung",
+    x = expression(Y[t]),
+    y = expression(Y[t]^d)
+  ) +
+  
+  theme_light(base_size = 13) +
+  theme(
+    panel.grid = element_blank(),
+    panel.border = element_blank(),
+    axis.line = element_line(color = "black", arrow = arrow(length = unit(0.2, "cm"), type = "closed")),
+    axis.text = element_text(color = "black"),
+    axis.title.x = element_text(hjust = 0.85),
+    axis.title.y = element_text(angle = 0, vjust = 0.95),
+    plot.margin = margin(t = 10, r = 15, b = 5, l = 15)
+  )
+
+
+# --- UNTERES PANEL: IS-Kurve und vertikales Güterangebot Y^s ---
+slope_IS <- (r1 - r0) / (Y0 - Y1) # Steigung der IS-Kurve
+
+p2 <- ggplot() +
+  # Vertikales Güterangebot Y^s bei Y0
+  geom_segment(aes(x = Y0, y = 0, xend = Y0, yend = 4.1), color = "black", linewidth = 1.3) +
+  
+  # IS-Kurve (alt in schwarz, neu in blau)
+  geom_segment(aes(x = 0.5, y = r0 - slope_IS * (Y0 - 0.5), xend = 3.5, yend = r0 + slope_IS * (3.5 - Y0)),
+               color = "black", linewidth = 0.9) +
+  geom_segment(aes(x = 1.5, y = r1 - slope_IS * (Y0 - 1.5), xend = 4.5, yend = r1 + slope_IS * (4.5 - Y0)),
+               color = "#5B9BD5", linewidth = 0.9) +
+  
+  # Gestrichelte Hilfslinien (nach oben durchgehend bis zur Panelkante für nahtlosen Übergang)
+  geom_segment(aes(x = 0, y = r0, xend = Y1, yend = r0), linetype = "dashed", color = "black", linewidth = 0.5) +
+  geom_segment(aes(x = 0, y = r1, xend = Y0, yend = r1), linetype = "dashed", color = "black", linewidth = 0.5) +
+  geom_segment(aes(x = Y1, y = r0, xend = Y1, yend = 4.4), linetype = "dashed", color = "black", linewidth = 0.5) +
+  
+  # Verschiebungspfeil der IS-Kurve nach rechts
+  annotate("segment", x = 2.85, y = 0.75, xend = 3.65, yend = 0.75,
+           arrow = arrow(length = unit(0.18, "cm"), type = "closed"), color = "#5B9BD5", linewidth = 0.8) +
+  
+  # Kurvenbeschriftungen
+  annotate("text", x = Y0 + 0.18, y = 3.95, label = expression(Y^s), parse = TRUE, size = 3.8) +
+  annotate("text", x = 3.65, y = 0.3, label = expression(IS), parse = TRUE, size = 3.8) +
+  annotate("text", x = 4.65, y = 0.5, label = expression(IS * "'"), parse = TRUE, size = 3.8, color = "#2E75B6") +
+  
+  # Achsenanpassung (identische x-Limits wie p1 für exakte vertikale Ausrichtung!)
+  scale_x_continuous(limits = c(0, 7.2), breaks = c(Y0), labels = expression(Y["0,t"]), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, 4.4), breaks = c(r0, r1), labels = c(expression(r["0,t"]), expression(r["1,t"])), expand = c(0, 0)) +
+  
+  labs(
+    x = expression(Y[t]),
+    y = expression(r[t])
+  ) +
+  
+  theme_light(base_size = 13) +
+  theme(
+    panel.grid = element_blank(),
+    panel.border = element_blank(),
+    axis.line = element_line(color = "black", arrow = arrow(length = unit(0.2, "cm"), type = "closed")),
+    axis.text = element_text(color = "black"),
+    axis.title.x = element_text(hjust = 0.85),
+    axis.title.y = element_text(angle = 0, vjust = 0.95),
+    plot.margin = margin(t = 5, r = 15, b = 10, l = 15)
+  )
+
+# --- KOMBINATION MIT PATCHWORK ---
+p1 / p2 + plot_layout(heights = c(1.05, 1))
+```
+
+
+### Fiskalpolitik bei endogenem Einkommen
