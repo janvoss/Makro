@@ -2911,3 +2911,44 @@ p1 / p2 + plot_layout(heights = c(1.05, 1))
 Die Zinssenkung muss den Anreiz zu höherer Ersparnis heute (und mehr Konsum morgen) ausgleichen.
 
 ### Fiskalpolitik bei endogenem Einkommen
+
+$$\begin{align*}
+C_t + S_t &\leq w_t N_t - T_t + D_t \\
+C_{t+1} + S_{t+1} &\leq w_{t+1} N_{t+1} - T_{t+1} + D_{t+1} + D_{t+1}^I + (1 + r_t) S_t
+\end{align*}$$
+
+$$C_t + \frac{C_{t+1}}{1 + r_t} = w_t N_t - T_t + D_t + \frac{w_{t+1} N_{t+1} - T_{t+1} + D_{t+1} + D_{t+1}^I}{1 + r_t}$$
+
+$$C_t + \frac{C_{t+1}}{1 + r_t} = w_t N_t - G_t + D_t + \frac{w_{t+1} N_{t+1} - G_{t+1} + D_{t+1} + D_{t+1}^I}{1 + r_t}$$
+
+$$\begin{align*}
+u_C(C_t, 1 - N_t) &= \beta(1 + r_t) u_C(C_{t+1}, 1 - N_{t+1}) \\
+u_L(C_t, 1 - N_t) &= w_t u_C(C_t, 1 - N_t) \\
+u_L(C_{t+1}, 1 - N_{t+1}) &= w_{t+1} u_C(C_{t+1}, 1 - N_{t+1})
+\end{align*}$$
+
+$$\begin{align*}
+C_t &= C^d\Big(\underset{+}{Y_t - G_t},\, \underset{+}{Y_{t+1} - G_{t+1}},\, \underset{-}{r_t}\Big) \\[6pt]
+N_t &= N^s\Big(\underset{+}{w_t},\, \underset{-}{\theta_t}\Big)
+\end{align*}$$
+
+$$\begin{align*}
+N_t &= N^d(w_t, A_t, K_t) \\
+I_t &= I^d(r_t, A_{t+1}, K_t)
+\end{align*}$$
+
+
+
+$$C_t + I_t + G_t - T_t = w_t N_t - T_t + D_t$$
+
+$$Y_t = C_t + I_t + G_t$$
+
+$$\begin{align*}
+C_t &= C^d(Y_t - G_t, Y_{t+1} - G_{t+1}, r_t) \\
+N_t &= N^s(w_t, \theta_t) \\
+N_t &= N^d(w_t, A_t, K_t) \\
+I_t &= I^d(r_t, A_{t+1}, K_t) \\
+Y_t &= A_t F(K_t, N_t) \\
+Y_t &= C_t + I_t + G_t
+\end{align*}$$
+
