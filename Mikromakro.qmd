@@ -2670,18 +2670,18 @@ p1 <- ggplot() +
            arrow = arrow(length = unit(0.18, "cm"), type = "closed"), color = "#70AD47", linewidth = 0.8) +
   
   # Kurvenbeschriftungen
-  annotate("text", x = 3.95, y = 4.32, label = expression(Y[t]^d == Y[t]), parse = TRUE, size = 3.8) +
+  annotate("text", x = 3.95, y = 4.32, label = expression(Y[t]^d == Y[t]), parse = TRUE, size = 3.8, hjust="right") +
   
   # Blaue Beschriftung (oben)
   annotate("text", x = 4.45, y = 3.98, hjust = 0, color = "#2E75B6", size = 3.5,
            label = expression(Y[t]^d == C^d * "(" * Y[t] - G["1,t"] * ", " * Y["0,t+1"])) +
-  annotate("text", x = 5.3, y = 3.68, hjust = 0, color = "#2E75B6", size = 3.5,
+  annotate("text", x = 5.3, y = 3.58, hjust = 0, color = "#2E75B6", size = 3.5,
            label = expression(- G["0,t+1"] * ", " * r["0,t"] * ")" + G["1,t"])) +
   
   # Schwarze & Grüne Beschriftung (unten)
-  annotate("text", x = 4.45, y = 2.75, hjust = 0, color = "black", size = 3.5,
+  annotate("text", x = 4.45, y = 2.75, hjust = .5, color = "black", size = 3.5,
            label = expression(Y[t]^d == C^d * "(" * Y[t] - G["0,t"] * ", " * Y[t+1] - G["0,t+1"] * ", " * r["0,t"] * ")" + G["0,t"])) +
-  annotate("text", x = 4.72, y = 2.45, hjust = 0, color = "#70AD47", size = 3.5,
+  annotate("text", x = 4.72, y = 2.45, hjust = .5, color = "#70AD47", size = 3.5,
            label = expression("" == C^d * "(" * Y[t] - G["1,t"] * ", " * Y[t+1] - G["0,t+1"] * ", " * r["1,t"] * ")" + G["1,t"])) +
   
   # Achsenanpassung
