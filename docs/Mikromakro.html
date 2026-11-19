@@ -2881,20 +2881,24 @@ Y_t &amp;= C_t + I_t
 <h3 data-number="4.5.1" class="anchored" data-anchor-id="budgetrestriktion"><span class="header-section-number">4.5.1</span> Budgetrestriktion</h3>
 <p><span class="math display">\[\begin{align*}
 G_t &amp;\leq T_t + B_t^G \\
-G_{t+1} + r_t B_t^G &amp;\leq T_{t+1} + B_{t+1}^G - B_t^G
+G_{t+1} + r_t B_t^G &amp;\leq T_{t+1} + \underbrace{B_{t+1}^G}_{=0} - B_t^G
 \end{align*}\]</span></p>
 <p>Wenn man das als Gleichung formuliert und etwas umstellt resultiert: <span class="math display">\[G_t + \frac{G_{t+1}}{1 + r_t} = T_t + \frac{T_{t+1}}{1 + r_t}\]</span></p>
 <p>Der Barwert der Staatsausgaben muss dem Barwert der Steuereinnahmen entsprechen.</p>
+<p><strong>Das Timing der Steuereinnahmen oder der Staatsausgaben ist für die Budgetrestriktion irrelevant</strong>.</p>
 </section>
 <section id="fiskalpolitik-bei-exogenem-einkommen" class="level3" data-number="4.5.2">
 <h3 data-number="4.5.2" class="anchored" data-anchor-id="fiskalpolitik-bei-exogenem-einkommen"><span class="header-section-number">4.5.2</span> Fiskalpolitik bei exogenem Einkommen</h3>
+<p>Für die Haushalte gilt die folgende Budgetbeschränkung</p>
 <p><span class="math display">\[\begin{align*}
 C_t + S_t &amp;\leq Y_t - T_t \\
 C_{t+1} + S_{t+1} &amp;\leq Y_{t+1} - T_{t+1} + (1 + r_t) S_t
 \end{align*}\]</span></p>
 <p>bzw.</p>
 <p><span class="math display">\[C_t + \frac{C_{t+1}}{1 + r_t} = Y_t - T_t + \frac{Y_{t+1} - T_{t+1}}{1 + r_t}\]</span> Da der Barwert der Staatsausgaben dem Barwert der Steuereinnahmen gelten muss, lässt sich schreiben: <span class="math display">\[C_t + \frac{C_{t+1}}{1 + r_t} = Y_t + \frac{Y_{t+1}}{1 + r_t} - \left[ G_t + \frac{G_{t+1}}{1 + r_t} \right]\]</span> bzw.</p>
+<p>bzw.</p>
 <p><span class="math display">\[C_t + \frac{C_{t+1}}{1 + r_t} = Y_t - G_t + \frac{Y_{t+1} - G_{t+1}}{1 + r_t}\]</span></p>
+<p>Grafisch lässt sich das veranschaulichen:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -2979,9 +2983,12 @@ C_{t+1} + S_{t+1} &amp;\leq Y_{t+1} - T_{t+1} + (1 + r_t) S_t
 </div>
 </div>
 </div>
-<p>Der Konsum in <span class="math inline">\(t\)</span> lässt sich also als Funktion schreiben:</p>
+<p>Der Konsum in <span class="math inline">\(t\)</span> lässt sich also als Funktion schreiben: Als Lösung ergibt sich wieder die Bedingung der <strong>Euler-Gleichung</strong>. Daher lässt sich formulieren:</p>
 <p><span class="math display">\[C_t = C\left(\underset{+}{Y_t - G_t}, \underset{+}{Y_{t+1} - G_{t+1}}, \underset{-}{r_t}\right)\]</span></p>
-<p>Das gesamte Einkommen teilt sich in privaten und staatlichen Konsum auf: <span class="math display">\[Y_t = C_t + G_t\]</span></p>
+<p>Das gesamte Einkommen teilt sich in privaten und staatlichen Konsum auf: <span class="math display">\[Y_t = C_t + G_t\]</span> bzw.</p>
+<p><span class="math display">\[C_t=Y_t-G_t\]</span></p>
+<p>Die Gesamtersparnis beträgt 0, sodass die private Ersparnis gleich der öffentlichen Verschuldung sein muss. Sowohl für die Haushalte als auch den Staat spielt das Timing der Mittelzu- und abflüsse keine Rolle. Daher ist auch die Frage der Schuldenfinanzierung oder Steuerfinanzierung der Staatsausgaben irrelevant für das Gleichgewicht.</p>
+<p>Diese Aussage ist bekannt als die <strong>Ricardiansiche Äquivalenz</strong> von Schulden- und Steuerfinanzierung der Staatsausgaben.</p>
 <p>Sei <span class="math inline">\(E_0\)</span> ein Ausdruck für die autonomen Ausgaben (unabhängig von <span class="math inline">\(Y_t\)</span>): <span class="math display">\[E_0 = C^d(-G_t, Y_{t+1} - G_{t+1}, r_t) + G_t\]</span></p>
 <p><span class="math display">\[\frac{\partial E_0}{\partial G_t} = -\frac{\partial C^d}{\partial G_t} + 1=1-\underbrace{MPC}_{&lt;1}&gt;0\]</span></p>
 <div class="cell">

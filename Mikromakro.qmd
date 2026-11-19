@@ -2500,14 +2500,18 @@ Bislang keine Betrachtung des Staates
 
 $$\begin{align*}
 G_t &\leq T_t + B_t^G \\
-G_{t+1} + r_t B_t^G &\leq T_{t+1} + B_{t+1}^G - B_t^G
+G_{t+1} + r_t B_t^G &\leq T_{t+1} + \underbrace{B_{t+1}^G}_{=0} - B_t^G
 \end{align*}$$
 
 Wenn man das als Gleichung formuliert und etwas umstellt resultiert: $$G_t + \frac{G_{t+1}}{1 + r_t} = T_t + \frac{T_{t+1}}{1 + r_t}$$
 
 Der Barwert der Staatsausgaben muss dem Barwert der Steuereinnahmen entsprechen.
 
+**Das Timing der Steuereinnahmen oder der Staatsausgaben ist für die Budgetrestriktion irrelevant**.
+
 ### Fiskalpolitik bei exogenem Einkommen
+
+Für die Haushalte gilt die folgende Budgetbeschränkung
 
 $$\begin{align*}
 C_t + S_t &\leq Y_t - T_t \\
@@ -2519,7 +2523,13 @@ bzw.
 $$C_t + \frac{C_{t+1}}{1 + r_t} = Y_t - T_t + \frac{Y_{t+1} - T_{t+1}}{1 + r_t}$$
 Da der Barwert der Staatsausgaben dem Barwert der Steuereinnahmen gelten muss, lässt sich schreiben: $$C_t + \frac{C_{t+1}}{1 + r_t} = Y_t + \frac{Y_{t+1}}{1 + r_t} - \left[ G_t + \frac{G_{t+1}}{1 + r_t} \right]$$ bzw.
 
+bzw. 
+
 $$C_t + \frac{C_{t+1}}{1 + r_t} = Y_t - G_t + \frac{Y_{t+1} - G_{t+1}}{1 + r_t}$$
+
+Grafisch lässt sich das veranschaulichen: 
+
+
 ```{r}
 #| message: false
 #| warning: false
@@ -2598,10 +2608,18 @@ ggplot() +
   )
 ```
 Der Konsum in $t$ lässt sich also als Funktion schreiben: 
+Als Lösung ergibt sich wieder die Bedingung der **Euler-Gleichung**. Daher lässt sich formulieren: 
 
 $$C_t = C\left(\underset{+}{Y_t - G_t}, \underset{+}{Y_{t+1} - G_{t+1}}, \underset{-}{r_t}\right)$$
 
-Das gesamte Einkommen teilt sich in privaten und staatlichen Konsum auf: $$Y_t = C_t + G_t$$
+Das gesamte Einkommen teilt sich in privaten und staatlichen Konsum auf: $$Y_t = C_t + G_t$$ bzw.
+
+$$C_t=Y_t-G_t$$
+
+Die Gesamtersparnis beträgt 0, sodass die private Ersparnis gleich der öffentlichen Verschuldung sein muss. 
+Sowohl für die Haushalte als auch den Staat spielt das Timing der Mittelzu- und abflüsse keine Rolle. Daher ist auch die Frage der Schuldenfinanzierung oder Steuerfinanzierung der Staatsausgaben irrelevant für das Gleichgewicht. 
+
+Diese Aussage ist bekannt als die **Ricardiansiche Äquivalenz** von Schulden- und Steuerfinanzierung der Staatsausgaben.
 
 Sei $E_0$ ein Ausdruck für die autonomen Ausgaben (unabhängig von $Y_t$): $$E_0 = C^d(-G_t, Y_{t+1} - G_{t+1}, r_t) + G_t$$
 
