@@ -614,3 +614,257 @@ p_inv <- ggplot(df_inv, aes(x = r, y = I, color = Szenario)) +
 
 ```
 
+```{r}
+#| message: false
+#| warning: false
+
+library(ggplot2)
+library(patchwork)
+
+# ==============================================================================
+# 1. ZENTRALE PARAMETERDEFINITION (Single Source of Truth)
+# ==============================================================================
+params <- list(
+  K_t      = 10.0,
+  delta    = 0.10,
+  theta_t  = 0.50,
+  theta_t1 = 0.50,
+  G_t      = 0.50,   # Baseline Staatsausgaben in t
+  G_t1     = 0.50,   # Staatsausgaben in t+1
+  sigma    = 1.00,
+  beta     = 0.96,
+  A_t      = 10.0,
+  A_t1     = 10.0,
+  alpha    = 0.33
+)
+
+# Schock-Parameter (leitet sich direkt aus params ab, nur G_t wird geändert)
+params_shock <- modifyList(params, list(G_t = 0.80))
+
+# ==============================================================================
+# 2. MODELL-SOLVER (ohne eigene Parameter-Defaults)
+# ==============================================================================
+solve_macro_model <- function(p) {
+  with(p, {
+    # --- Schritt A: Periode t (Arbeitsmarkt & Produktion) ---
+    labor_eq_t <- function(w) {
+      Nd <- K_t * ((1 - alpha) * A_t / w)^(1 / alpha)
+      Ns <- 1 - theta_t / w
+      return(Nd - Ns)
+    }
+    w_t <- uniroot(labor_eq_t, interval = c(theta_t + 1e-6, 1000))$root
+    N_t <- 1 - theta_t / w_t
+    Y_t <- A_t * K_t^alpha * N_t^(1 - alpha)
+    D_t <- Y_t - w_t * N_t
+
+    # --- Schritt B: Hilfsfunktion für beliebiges r und beliebiges Einkommen Y_hyp ---
+    eval_given_r <- function(r, Y_hyp = Y_t) {
+      k_n_ratio <- (alpha * A_t1 / (r + delta))^(1 / (1 - alpha))
+      w_t1 <- (1 - alpha) * A_t1 * (k_n_ratio)^alpha
+      N_t1 <- 1 - theta_t1 / w_t1
+      if (is.na(N_t1) || N_t1 <= 0) return(list(excess_demand = NA))
+
+      K_t1 <- k_n_ratio * N_t1
+      I_t  <- K_t1 - (1 - delta) * K_t
+      B_I  <- I_t
+      Y_t1 <- A_t1 * K_t1^alpha * N_t1^(1 - alpha)
+      D_t1 <- Y_t1 + (1 - delta) * K_t1 - w_t1 * N_t1 - (1 + r) * B_I
+
+      W <- (Y_hyp - G_t) + (w_t1 * N_t1 + D_t1 - G_t1) / (1 + r)
+      mpc <- 1 / (1 + beta^(1 / sigma) * (1 + r)^((1 - sigma) / sigma))
+      C_t <- mpc * W
+
+      Yd <- C_t + I_t + G_t
+      excess_demand <- Yd - Y_hyp
+
+      PV_t1 <- (w_t1 * N_t1 + D_t1 - G_t1) / (1 + r)
+      Y_IS  <- (mpc * (PV_t1 - G_t) + I_t + G_t) / (1 - mpc)
+
+      S_t  <- Y_hyp - G_t - C_t
+      C_t1 <- (1 + r) * S_t + w_t1 * N_t1 + D_t1 - G_t1
+
+      list(
+        r_t = r, w_t = w_t, N_t = N_t, Y_t = Y_t, D_t = D_t,
+        C_t = C_t, I_t = I_t, S_t = S_t, G_t = G_t, Yd = Yd, Y_IS = Y_IS,
+        w_t1 = w_t1, N_t1 = N_t1, K_t1 = K_t1, Y_t1 = Y_t1,
+        D_t1 = D_t1, C_t1 = C_t1, G_t1 = G_t1, W = W,
+        excess_demand = excess_demand,
+        check_t1 = Y_t1 + (1 - delta) * K_t1 - (C_t1 + G_t1)
+      )
+    }
+
+    r_max <- alpha * A_t1 * ((1 - alpha) * A_t1 / theta_t1)^((1 - alpha) / alpha) - delta
+    r_min <- max(-delta + 1e-5, -0.99)
+    r_star <- uniroot(
+      function(r) eval_given_r(r, Y_hyp = Y_t)$excess_demand,
+      interval = c(r_min, r_max - 1e-6)
+    )$root
+
+    out <- eval_given_r(r_star, Y_hyp = Y_t)
+    out$eval_given_r <- eval_given_r
+    out$r_max <- r_max
+    out$params <- p
+    return(out)
+  })
+}
+
+eq0 <- solve_macro_model(params)
+eq1 <- solve_macro_model(params_shock)
+
+# ==============================================================================
+# 3. GRAFIKEN MIT GGPLOT2 & PATCHWORK
+# ==============================================================================
+theme_macro <- theme_light(base_size = 11) +
+  theme(
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold", size = 11),
+    legend.position = "bottom",
+    legend.title = element_blank()
+  )
+
+# --- LINKE SPALTE: Arbeitsmarkt (oben) & Produktionsfunktion (unten) ---
+n_limits <- c(0, 1.0)
+n_breaks <- seq(0, 1.0, by = 0.2)
+
+w_grid <- seq(params$theta_t + 0.05, max(eq0$w_t * 1.35, 7), length.out = 250)
+df_labor <- data.frame(
+  w  = w_grid,
+  Nd = params$K_t * ((1 - params$alpha) * params$A_t / w_grid)^(1 / params$alpha),
+  Ns = 1 - params$theta_t / w_grid
+)
+
+p_labor <- ggplot(df_labor, aes(y = w)) +
+  geom_line(aes(x = Nd, color = "Arbeitsnachfrage (N^d)"), linewidth = 0.9) +
+  geom_line(aes(x = Ns, color = "Arbeitsangebot (N^s)"), linewidth = 0.9) +
+  geom_hline(yintercept = params$theta_t, linetype = "dashed", color = "grey45") +
+  geom_point(data = data.frame(x = eq0$N_t, y = eq0$w_t), aes(x = x, y = y), color = "black", size = 2.5) +
+  annotate("segment", x = eq0$N_t, xend = eq0$N_t, y = 0, yend = eq0$w_t, linetype = "dotted", color = "grey45") +
+  annotate("segment", x = 0, xend = eq0$N_t, y = eq0$w_t, yend = eq0$w_t, linetype = "dotted", color = "grey45") +
+  scale_x_continuous(limits = n_limits, breaks = n_breaks, expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, max(w_grid)), expand = c(0, 0)) +
+  scale_color_manual(values = c("Arbeitsnachfrage (N^d)" = "black", "Arbeitsangebot (N^s)" = "#2E75B6")) +
+  labs(
+    title = "Arbeitsmarkt in Periode t",
+    x = NULL,
+    y = expression(Reallohn~w[t])
+  ) +
+  theme_macro +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+n_grid <- seq(0.005, 0.995, length.out = 250)
+df_prod <- data.frame(
+  N = n_grid,
+  Y = params$A_t * params$K_t^params$alpha * n_grid^(1 - params$alpha)
+)
+
+p_prod <- ggplot(df_prod, aes(x = N, y = Y)) +
+  geom_line(color = "black", linewidth = 0.9) +
+  geom_point(aes(x = eq0$N_t, y = eq0$Y_t), color = "#2E75B6", size = 2.8) +
+  geom_segment(aes(x = eq0$N_t, xend = eq0$N_t, y = 0, yend = eq0$Y_t), linetype = "dotted", color = "grey45") +
+  geom_segment(aes(x = 0, xend = eq0$N_t, y = eq0$Y_t, yend = eq0$Y_t), linetype = "dotted", color = "grey45") +
+  scale_x_continuous(limits = n_limits, breaks = n_breaks, expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, max(df_prod$Y) * 1.05), expand = c(0, 0)) +
+  labs(
+    title = "Produktionsfunktion in Abhängigkeit von N",
+    x = expression(Arbeit~N[t]),
+    y = expression(Output~Y[t])
+  ) +
+  theme_macro
+
+# --- RECHTE SPALTE: Keynesianisches Kreuz (oben) & IS-Kurve (unten) ---
+Y_eq <- eq0$Y_t
+Y_temp <- eq1$eval_given_r(eq0$r_t)$Y_IS
+y_min_plot <- Y_eq * 0.75
+y_max_plot <- max(Y_eq, Y_temp) * 1.15
+Y_grid <- seq(y_min_plot, y_max_plot, length.out = 200)
+
+Yd_base  <- sapply(Y_grid, function(y) eq0$eval_given_r(eq0$r_t, Y_hyp = y)$Yd)
+Yd_shift <- sapply(Y_grid, function(y) eq1$eval_given_r(eq0$r_t, Y_hyp = y)$Yd)
+Yd_final <- sapply(Y_grid, function(y) eq1$eval_given_r(eq1$r_t, Y_hyp = y)$Yd)
+
+df_keynes <- rbind(
+  data.frame(Y = Y_grid, Yd = Yd_base,  Kurve = "Baseline (G_0, r_0)"),
+  data.frame(Y = Y_grid, Yd = Yd_shift, Kurve = "Impuls (G_1, r_0)"),
+  data.frame(Y = Y_grid, Yd = Yd_final, Kurve = "Neues GG (G_1, r_1)")
+)
+
+p_keynes <- ggplot(df_keynes, aes(x = Y, y = Yd)) +
+  geom_abline(intercept = 0, slope = 1, color = "black", linewidth = 0.8) +
+  geom_line(aes(color = Kurve, linetype = Kurve), linewidth = 0.95) +
+  geom_segment(aes(x = Y_eq, xend = Y_eq, y = y_min_plot, yend = Y_eq), linetype = "dotted", color = "grey35") +
+  geom_segment(aes(x = Y_temp, xend = Y_temp, y = y_min_plot, yend = Y_temp), linetype = "dotted", color = "#2E75B6") +
+  geom_segment(aes(x = y_min_plot, xend = Y_eq, y = Y_eq, yend = Y_eq), linetype = "dotted", color = "grey35") +
+  geom_point(aes(x = Y_eq, y = Y_eq), color = "black", size = 2.6) +
+  geom_point(aes(x = Y_temp, y = Y_temp), color = "#2E75B6", size = 2.6) +
+  annotate("text", x = y_max_plot * 0.97, y = y_max_plot * 0.99, label = expression(Y[t]^d == Y[t]), size = 3.3, hjust = 1) +
+  scale_x_continuous(limits = c(y_min_plot, y_max_plot), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(y_min_plot, y_max_plot), expand = c(0, 0)) +
+  scale_color_manual(values = c(
+    "Baseline (G_0, r_0)" = "black",
+    "Impuls (G_1, r_0)"   = "#2E75B6",
+    "Neues GG (G_1, r_1)" = "#70AD47"
+  )) +
+  scale_linetype_manual(values = c(
+    "Baseline (G_0, r_0)" = "solid",
+    "Impuls (G_1, r_0)"   = "solid",
+    "Neues GG (G_1, r_1)" = "dashed"
+  )) +
+  labs(
+    title = "Güternachfrage (Keynesianisches Kreuz)",
+    x = NULL,
+    y = expression(Güternachfrage~Y[t]^d == C[t] + I[t] + G[t])
+  ) +
+  theme_macro +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+r_span <- max(0.06, abs(eq1$r_t - eq0$r_t) * 2.5)
+r_low  <- max(-params$delta + 0.01, min(eq0$r_t, eq1$r_t) - r_span * 0.7)
+r_high <- min(eq0$r_max * 0.75, max(eq0$r_t, eq1$r_t) + r_span * 0.7)
+r_grid_is <- seq(r_low, r_high, length.out = 200)
+
+df_is <- rbind(
+  data.frame(
+    r = r_grid_is,
+    Y = sapply(r_grid_is, function(r) eq0$eval_given_r(r)$Y_IS),
+    Kurve = "IS (Baseline G_0)"
+  ),
+  data.frame(
+    r = r_grid_is,
+    Y = sapply(r_grid_is, function(r) eq1$eval_given_r(r)$Y_IS),
+    Kurve = "IS' (Schock G_1)"
+  )
+)
+
+p_is <- ggplot(df_is, aes(x = Y, y = r)) +
+  geom_vline(xintercept = Y_eq, color = "black", linewidth = 1.1) +
+  geom_line(aes(color = Kurve), linewidth = 0.95) +
+  geom_segment(aes(x = y_min_plot, xend = Y_temp, y = eq0$r_t, yend = eq0$r_t), linetype = "dotted", color = "grey35") +
+  geom_segment(aes(x = y_min_plot, xend = Y_eq, y = eq1$r_t, yend = eq1$r_t), linetype = "dotted", color = "grey35") +
+  geom_segment(aes(x = Y_temp, xend = Y_temp, y = eq0$r_t, yend = r_high), linetype = "dotted", color = "#2E75B6") +
+  geom_point(aes(x = Y_eq, y = eq0$r_t), color = "black", size = 2.6) +
+  geom_point(aes(x = Y_temp, y = eq0$r_t), color = "#2E75B6", size = 2.6) +
+  geom_point(aes(x = Y_eq, y = eq1$r_t), color = "#70AD47", size = 2.6) +
+  annotate("text", x = Y_eq + (y_max_plot - y_min_plot) * 0.03, y = r_high * 0.96, label = expression(Y[t]^s), size = 3.6, fontface = "bold") +
+  scale_x_continuous(limits = c(y_min_plot, y_max_plot), expand = c(0, 0)) +
+  scale_y_continuous(
+    limits = c(r_low, r_high),
+    labels = function(x) sprintf("%.2f", x),
+    expand = c(0, 0)
+  ) +
+  scale_color_manual(values = c("IS (Baseline G_0)" = "black", "IS' (Schock G_1)" = "#2E75B6")) +
+  labs(
+    title = "IS-Kurve und Güterangebotsgleichgewicht",
+    x = expression(Output~"/"~Einkommen~Y[t]),
+    y = expression(Realzins~r[t])
+  ) +
+  theme_macro
+
+# --- GESAMTKOMBINATION MIT PATCHWORK ---
+(p_labor / p_prod + plot_layout(heights = c(1, 1))) |
+  (p_keynes / p_is + plot_layout(heights = c(1, 1))) +
+  plot_annotation(
+    title = "2-Perioden-Makromodell: Arbeitsmarkt, Produktion, Keynesianisches Kreuz & IS-Kurve",
+    theme = theme(plot.title = element_text(face = "bold", size = 12))
+  )
+```
+
