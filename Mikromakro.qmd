@@ -2670,7 +2670,7 @@ p1 <- ggplot() +
            arrow = arrow(length = unit(0.18, "cm"), type = "closed"), color = "#70AD47", linewidth = 0.8) +
   
   # Kurvenbeschriftungen
-  annotate("text", x = 3.95, y = 4.32, label = expression(Y[t]^d == Y[t]), parse = TRUE, size = 3.8, hjust="right") +
+  annotate("text", x = 3.95, y = 4.32, label = expression(Y[t]^d == Y[t]), parse = TRUE, size = 3.8, hjust = "right") +
   
   # Blaue Beschriftung (oben)
   annotate("text", x = 4.45, y = 3.98, hjust = 0, color = "#2E75B6", size = 3.5,
@@ -2706,17 +2706,30 @@ p1 <- ggplot() +
   )
 
 
-# --- UNTERES PANEL: IS-Kurve und vertikales Güterangebot Y^s ---
-slope_IS <- (r1 - r0) / (Y0 - Y1) # Steigung der IS-Kurve
+# --- UNTERES PANEL: IS-Kurven und vertikales Güterangebot Y^s ---
+# Positive Steigungsgröße; beide IS-Kurven fallen mit steigendem Y
+slope_IS <- (r1 - r0) / (Y1 - Y0)
+
+# Schwarze IS-Kurve durch (Y0, r0)
+is0_x1 <- 0.8
+is0_y1 <- r0 - slope_IS * (is0_x1 - Y0)
+is0_x2 <- 3.1
+is0_y2 <- r0 - slope_IS * (is0_x2 - Y0)
+
+# Blaue IS'-Kurve durch (Y1, r0) und (Y0, r1)
+is1_x1 <- 1.5
+is1_y1 <- r0 - slope_IS * (is1_x1 - Y1)
+is1_x2 <- 4.4
+is1_y2 <- r0 - slope_IS * (is1_x2 - Y1)
 
 p2 <- ggplot() +
   # Vertikales Güterangebot Y^s bei Y0
   geom_segment(aes(x = Y0, y = 0, xend = Y0, yend = 4.1), color = "black", linewidth = 1.3) +
   
-  # IS-Kurve (alt in schwarz, neu in blau)
-  geom_segment(aes(x = 0.5, y = r0 - slope_IS * (Y0 - 0.5), xend = 3.5, yend = r0 + slope_IS * (3.5 - Y0)),
+  # IS-Kurven: alt in schwarz, neu in blau
+  geom_segment(aes(x = is0_x1, y = is0_y1, xend = is0_x2, yend = is0_y2),
                color = "black", linewidth = 0.9) +
-  geom_segment(aes(x = 1.5, y = r1 - slope_IS * (Y0 - 1.5), xend = 4.5, yend = r1 + slope_IS * (4.5 - Y0)),
+  geom_segment(aes(x = is1_x1, y = is1_y1, xend = is1_x2, yend = is1_y2),
                color = "#5B9BD5", linewidth = 0.9) +
   
   # Gestrichelte Hilfslinien (nach oben durchgehend bis zur Panelkante für nahtlosen Übergang)
@@ -2730,8 +2743,8 @@ p2 <- ggplot() +
   
   # Kurvenbeschriftungen
   annotate("text", x = Y0 + 0.18, y = 3.95, label = expression(Y^s), parse = TRUE, size = 3.8) +
-  annotate("text", x = 3.65, y = 0.3, label = expression(IS), parse = TRUE, size = 3.8) +
-  annotate("text", x = 4.65, y = 0.5, label = expression(IS * "'"), parse = TRUE, size = 3.8, color = "#2E75B6") +
+  annotate("text", x = is0_x2 + 0.15, y = is0_y2, label = expression(IS), parse = TRUE, size = 3.8) +
+  annotate("text", x = is1_x2 + 0.18, y = is1_y2, label = expression(IS * "'"), parse = TRUE, size = 3.8, color = "#2E75B6") +
   
   # Achsenanpassung (identische x-Limits wie p1 für exakte vertikale Ausrichtung!)
   scale_x_continuous(limits = c(0, 7.2), breaks = c(Y0), labels = expression(Y["0,t"]), expand = c(0, 0)) +
@@ -2763,6 +2776,7 @@ Die Zinserhöhung muss den Anreiz für heutigen Konsum bremsen, damit Platz für
 #| message: false
 #| warning: false
 #| fig-cap: "Erhöhung der künftigen Staatsausgaben"
+
 
 library(ggplot2)
 library(patchwork)
@@ -2808,17 +2822,17 @@ p1 <- ggplot() +
   annotate("text", x = 3.95, y = 4.32, label = expression(Y[t]^d == Y[t]), parse = TRUE, size = 3.8, hjust = "right") +
   
   # Schwarze & Grüne Beschriftung (oben, an der schwarzen Kurve)
-  annotate("text", x = 4.55, y = 3.85, hjust = 0, color = "black", size = 3.5,
+  annotate("text", x = 4.05, y = 3.85, hjust = 0, color = "black", size = 3.5,
            label = expression(Y[t]^d == C^d * "(" * Y[t] - G["0,t"] * ", " * Y[t+1] - G["0,t+1"] * ", " * r["0,t"] * ")" + G["0,t"])) +
-  annotate("text", x = 4.82, y = 3.52, hjust = 0, color = "#70AD47", size = 3.5,
+  annotate("text", x = 4.32, y = 3.52, hjust = 0, color = "#70AD47", size = 3.5,
            label = expression("" == C^d * "(" * Y[t] - G["0,t"] * ", " * Y[t+1] - G["1,t+1"] * ", " * r["1,t"] * ")" + G["0,t"])) +
   
   # Blaue Beschriftung (unten, an der blauen Kurve)
-  annotate("text", x = 4.55, y = 2.65, hjust = 0, color = "#2E75B6", size = 3.5,
+  annotate("text", x = 4.05, y = 2.65, hjust = 0, color = "#2E75B6", size = 3.5,
            label = expression(Y[t]^d == C^d * "(" * Y[t] - G["0,t"] * ", " * Y[t+1] - G["1,t+1"] * ", " * r["0,t"] * ")" + G["0,t"])) +
   
   # Achsenanpassung
-  scale_x_continuous(limits = c(0, 7.6), breaks = NULL, expand = c(0, 0)) +
+  scale_x_continuous(limits = c(0, 7.8), breaks = NULL, expand = c(0, 0)) +
   scale_y_continuous(limits = c(0, 4.6), breaks = c(Y0), labels = expression(Y["0,t"]^d), expand = c(0, 0)) +
   
   labs(
@@ -2840,19 +2854,19 @@ p1 <- ggplot() +
 
 
 # --- UNTERES PANEL: IS-Kurven und vertikales Güterangebot Y^s ---
-# Steigung der IS-Kurve (negativ): r = r_ank - slope_IS * (Y - Y_ank)
-slope_IS <- 0.9
+# Exakte Steigung der IS-Kurve, sodass IS' sowohl durch (Y1, r0) als auch (Y0, r1) verläuft
+slope_IS <- (r0 - r1) / (Y0 - Y1)
 
 # Schwarze IS-Kurve geht durch (Y0, r0)
-is0_x1 <- 1.0
+is0_x1 <- 1.3
 is0_y1 <- r0 - slope_IS * (is0_x1 - Y0)
 is0_x2 <- 4.2
 is0_y2 <- r0 - slope_IS * (is0_x2 - Y0)
 
-# Blaue IS'-Kurve geht durch (Y1, r0) und (Y0, r1)
+# Blaue IS'-Kurve geht exakt durch (Y1, r0) und (Y0, r1)
 is1_x1 <- 0.3
 is1_y1 <- r0 - slope_IS * (is1_x1 - Y1)
-is1_x2 <- 3.2
+is1_x2 <- 3.0
 is1_y2 <- r0 - slope_IS * (is1_x2 - Y1)
 
 p2 <- ggplot() +
@@ -2867,13 +2881,13 @@ p2 <- ggplot() +
   geom_segment(aes(x = is1_x1, y = is1_y1, xend = is1_x2, yend = is1_y2),
                color = "#5B9BD5", linewidth = 0.9) +
   
-  # Gestrichelte Hilfslinien
+  # Gestrichelte Hilfslinien (treffen jetzt exakt die Schnittpunkte bei (Y0, r0), (Y1, r0) und (Y0, r1))
   geom_segment(aes(x = 0, y = r0, xend = Y0, yend = r0), linetype = "dashed", color = "black", linewidth = 0.5) +
   geom_segment(aes(x = 0, y = r1, xend = Y0, yend = r1), linetype = "dashed", color = "black", linewidth = 0.5) +
   geom_segment(aes(x = Y1, y = r0, xend = Y1, yend = 4.4), linetype = "dashed", color = "black", linewidth = 0.5) +
   
   # Verschiebungspfeil der IS-Kurve nach links
-  annotate("segment", x = 3.55, y = 1.45, xend = 2.65, yend = 1.45,
+  annotate("segment", x = 3.35, y = 1.45, xend = 2.45, yend = 1.45,
            arrow = arrow(length = unit(0.18, "cm"), type = "closed"), color = "#5B9BD5", linewidth = 0.8) +
   
   # Kurvenbeschriftungen
@@ -2882,7 +2896,7 @@ p2 <- ggplot() +
   annotate("text", x = is1_x2 + 0.18, y = is1_y2, label = expression(IS * "'"), parse = TRUE, size = 3.8, color = "#2E75B6") +
   
   # Achsenanpassung (identische x-Limits wie p1 für exakte vertikale Ausrichtung)
-  scale_x_continuous(limits = c(0, 7.6), breaks = c(Y0), labels = expression(Y["0,t"]), expand = c(0, 0)) +
+  scale_x_continuous(limits = c(0, 7.8), breaks = c(Y0), labels = expression(Y["0,t"]), expand = c(0, 0)) +
   scale_y_continuous(limits = c(0, 4.4), breaks = c(r1, r0), labels = c(expression(r["1,t"]), expression(r["0,t"])), expand = c(0, 0)) +
   
   labs(

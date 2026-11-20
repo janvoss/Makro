@@ -1,0 +1,616 @@
+---
+title: "Makromodell"
+format: html
+---
+
+# Konsumfunktion
+
+## Verfügbares Einkommen
+
+$$Y_t = w_t N_t + D_t$$
+
+$$Y_{t+1} = w_{t+1} N_{t+1} + D_{t+1}  + (1 + r_t) S_t$$
+
+$$D_{t+1} = Y_{t+1} + (1 - \delta) K_{t+1} - w_{t+1} N_{t+1} - (1 + r_t) B_t^I$$
+
+$$B_t^I = K_{t+1} - (1 - \delta) K_t=I_t$$
+$$Y_t=C_t+G_t+I_t$$
+
+## Konsum in $t$
+
+$$C_t(r, W) = \frac{W}{1 + \beta^{\frac{1}{\sigma}} (1+r)^{\frac{1-\sigma}{\sigma}}}$$
+
+
+$$C_{t+1} = (1 + r_t) \left[ w_t N_t + D_t - C_t \right] + w_{t+1} N_{t+1} + D_{t+1}$$
+
+
+# Produktion
+
+## Produktionsfunktion
+
+$$\begin{align*}
+Y_t &= A_t K_t^{\alpha} N_t^{1-\alpha}, \quad 0 < \alpha < 1 \\
+Y_{t+1} &= A_{t+1} K_{t+1}^{\alpha} N_{t+1}^{1-\alpha}
+\end{align*}$$
+
+
+## Arbeitsnachfrage
+
+$$(1 - \alpha) A_t \left(\frac{K_t}{N_t}\right)^{\alpha} = w_t$$
+
+::: {.callout-note icon="false" collapse="true"}
+## Umstellen der Arbeitsnachfragefunktion {.unnumbered}
+
+$$
+\begin{aligned}
+(1 - \alpha) A_t \left(\frac{K_t}{N_t}\right)^{\alpha} &= w_t \\
+\left(\frac{K_t}{N_t}\right)^{\alpha} &= \frac{w_t}{(1 - \alpha) A_t} \\
+\frac{K_t}{N_t} &= \left(\frac{w_t}{(1 - \alpha) A_t}\right)^{\frac{1}{\alpha}} \\
+N^d_t &= K_t \left(\frac{(1 - \alpha) A_t}{w_t}\right)^{\frac{1}{\alpha}}
+\end{aligned}
+$$
+:::
+
+
+$$N^D_t = K_t \left(\frac{(1 - \alpha) A_t}{w_t}\right)^{\frac{1}{\alpha}}$$
+
+$$N^D_{t+1} = K_{t+1} \left(\frac{(1 - \alpha) A_{t+1}}{w_{t+1}}\right)^{\frac{1}{\alpha}}$$
+
+## Investitionsnachfrage
+
+$$\alpha A_{t+1} \left(\frac{N_{t+1}}{K_{t+1}}\right)^{1 - \alpha} = r_t +\delta$$
+
+mit: $$K_{t+1} = I_t + (1 - \delta) K_t$$
+
+$$ \alpha A_{t+1} \left(\frac{N_{t+1}}{I_t + (1 - \delta) K_t}\right)^{1 - \alpha} = r_t +\delta$$
+
+::: {.callout-note icon="false" collapse="true"}
+## Umstellen der Investitionsfunktion {.unnumbered}
+
+$$
+\begin{aligned}
+\alpha A_{t+1} \left(\frac{N_{t+1}}{I_t + (1 - \delta) K_t}\right)^{1 - \alpha} &= r_t + \delta \\
+\left(\frac{N_{t+1}}{I_t + (1 - \delta) K_t}\right)^{1 - \alpha} &= \frac{r_t + \delta}{\alpha A_{t+1}} \\
+\frac{N_{t+1}}{I_t + (1 - \delta) K_t} &= \left(\frac{r_t + \delta}{\alpha A_{t+1}}\right)^{\frac{1}{1 - \alpha}} \\
+I_t + (1 - \delta) K_t &= N_{t+1} \left(\frac{\alpha A_{t+1}}{r_t + \delta}\right)^{\frac{1}{1 - \alpha}} \\
+I_t &= N_{t+1} \left(\frac{\alpha A_{t+1}}{r_t + \delta}\right)^{\frac{1}{1 - \alpha}} - (1 - \delta) K_t
+\end{aligned}
+$$
+
+:::
+
+
+$$I_t = N_{t+1} \left(\frac{\alpha A_{t+1}}{r_t + \delta}\right)^{\frac{1}{1 - \alpha}} - (1 - \delta) K_t$$
+
+## Arbeitsangebot
+
+$$\theta_t \frac{1}{1 - N_t} = w_t$$
+
+$$N^S_t = 1 - \frac{\theta_t}{w_t}$$
+
+$$N^S_{t+1} = 1 - \frac{\theta_{t+1}}{w_{t+1}}$$
+[Korrekturen oben noch einpflegen]::
+
+
+# Lösung
+
+```{r}
+solve_macro_model <- function(
+  K_t = 10, delta = 0.1,
+  theta_t = 0.5, theta_t1 = 0.5,
+  G_t = 0.5, G_t1 = 0.5,
+  sigma = 1.0, beta = 0.96,
+  A_t = 10, A_t1 = 10,
+  alpha = 0.33
+) {
+  # --- 1. Periode t: Arbeitsmarkt & Produktion (unabhängig von r_t) ---
+  labor_eq_t <- function(w) {
+    Nd <- K_t * ((1 - alpha) * A_t / w)^(1 / alpha)
+    Ns <- 1 - theta_t / w
+    return(Nd - Ns)
+  }
+  w_t <- uniroot(labor_eq_t, interval = c(theta_t + 1e-6, 100))$root
+  N_t <- 1 - theta_t / w_t
+  Y_t <- A_t * K_t^alpha * N_t^(1 - alpha)
+  D_t <- Y_t - w_t * N_t
+
+  # --- 2. Funktionen in Abhängigkeit vom Realzins r_t ---
+  eval_given_r <- function(r) {
+    k_n_ratio <- (alpha * A_t1 / (r + delta))^(1 / (1 - alpha))
+    w_t1 <- (1 - alpha) * A_t1 * (k_n_ratio)^alpha
+    N_t1 <- 1 - theta_t1 / w_t1
+    
+    if (is.na(N_t1) || N_t1 <= 0) return(list(excess_demand = NA))
+    
+    K_t1 <- k_n_ratio * N_t1
+    I_t  <- K_t1 - (1 - delta) * K_t
+    B_I  <- I_t
+    Y_t1 <- A_t1 * K_t1^alpha * N_t1^(1 - alpha)
+    D_t1 <- Y_t1 + (1 - delta) * K_t1 - w_t1 * N_t1 - (1 + r) * B_I
+    
+    W <- (w_t * N_t + D_t - G_t) + (w_t1 * N_t1 + D_t1 - G_t1) / (1 + r)
+    
+    C_t  <- W / (1 + beta^(1 / sigma) * (1 + r)^((1 - sigma) / sigma))
+    S_t  <- w_t * N_t + D_t - G_t - C_t
+    C_t1 <- (1 + r) * S_t + w_t1 * N_t1 + D_t1 - G_t1
+    
+    excess_demand <- C_t + I_t + G_t - Y_t
+    
+    list(
+      r_t = r, w_t = w_t, N_t = N_t, Y_t = Y_t, D_t = D_t,
+      C_t = C_t, I_t = I_t, S_t = S_t, G_t = G_t,
+      w_t1 = w_t1, N_t1 = N_t1, K_t1 = K_t1, Y_t1 = Y_t1,
+      D_t1 = D_t1, C_t1 = C_t1, G_t1 = G_t1, W = W,
+      excess_demand = excess_demand,
+      check_t1 = Y_t1 + (1 - delta) * K_t1 - (C_t1 + G_t1)
+    )
+  }
+
+  # Analytische Obergrenze r_max für N_{t+1} > 0
+  r_max <- alpha * A_t1 * ((1 - alpha) * A_t1 / theta_t1)^((1 - alpha) / alpha) - delta
+  r_min <- max(-delta + 1e-5, -0.99)
+  
+  if (r_max <= r_min) {
+    stop("Kein positives Arbeitsangebot in t+1 möglich (theta_{t+1} zu hoch oder A_{t+1} zu niedrig).")
+  }
+
+  # Gleichgewichtszins r_t suchen
+  r_star <- uniroot(
+    function(r) eval_given_r(r)$excess_demand,
+    interval = c(r_min, r_max - 1e-6)
+  )$root
+  
+  return(eval_given_r(r_star))
+}
+
+# Testlauf
+base  <- solve_macro_model(G_t = 0.5, G_t1 = 0.5)
+shock <- solve_macro_model(G_t = 0.8, G_t1 = 0.5)
+
+options(scipen = 999)
+
+library(knitr)
+
+vars <- c("r_t", "Y_t", "C_t", "I_t", "N_t", "w_t", "Y_t1", "C_t1", "K_t1", "check_t1")
+labels <- c(
+  "$r_t$", "$Y_t$", "$C_t$", "$I_t$", "$N_t$",
+  "$w_t$", "$Y_{t+1}$", "$C_{t+1}$", "$K_{t+1}$", "$\\text{Check}_{t+1}$"
+)
+
+out_df <- data.frame(
+  Variable = labels,
+  Baseline = unlist(base[vars]),
+  G_t_Schock = unlist(shock[vars]),
+  row.names = NULL
+)
+
+kable(
+  out_df,
+  digits = 2,
+  col.names = c("Variable", "Baseline", "$G_t$-Schock"),
+  align = c("l", "r", "r"),
+  escape = FALSE,
+  caption = "Modellgleichgewicht: Baseline vs. temporärer Staatsausgabenschock ($G_t$)"
+)
+
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+
+library(ggplot2)
+library(patchwork)
+
+# --- 1. Modellfunktion (mit A = 10 als Standard für positive Investitionen) ---
+solve_macro_model <- function(
+  K_t = 10, delta = 0.1,
+  theta_t = 0.5, theta_t1 = 0.5,
+  G_t = 0.5, G_t1 = 0.5,
+  sigma = 1.0, beta = 0.96,
+  A_t = 10.0, A_t1 = 10.0,
+  alpha = 0.33
+) {
+  labor_eq_t <- function(w) {
+    Nd <- K_t * ((1 - alpha) * A_t / w)^(1 / alpha)
+    Ns <- 1 - theta_t / w
+    return(Nd - Ns)
+  }
+  w_t <- uniroot(labor_eq_t, interval = c(theta_t + 1e-6, 100))$root
+  N_t <- 1 - theta_t / w_t
+  Y_t <- A_t * K_t^alpha * N_t^(1 - alpha)
+  D_t <- Y_t - w_t * N_t
+
+  eval_given_r <- function(r) {
+    k_n_ratio <- (alpha * A_t1 / (r + delta))^(1 / (1 - alpha))
+    w_t1 <- (1 - alpha) * A_t1 * (k_n_ratio)^alpha
+    N_t1 <- 1 - theta_t1 / w_t1
+    if (is.na(N_t1) || N_t1 <= 0) return(list(excess_demand = NA))
+
+    K_t1 <- k_n_ratio * N_t1
+    I_t  <- K_t1 - (1 - delta) * K_t
+    B_I  <- I_t
+    Y_t1 <- A_t1 * K_t1^alpha * N_t1^(1 - alpha)
+    D_t1 <- Y_t1 + (1 - delta) * K_t1 - w_t1 * N_t1 - (1 + r) * B_I
+
+    W <- (w_t * N_t + D_t - G_t) + (w_t1 * N_t1 + D_t1 - G_t1) / (1 + r)
+    C_t  <- W / (1 + beta^(1 / sigma) * (1 + r)^((1 - sigma) / sigma))
+    S_t  <- w_t * N_t + D_t - G_t - C_t
+    C_t1 <- (1 + r) * S_t + w_t1 * N_t1 + D_t1 - G_t1
+
+    excess_demand <- C_t + I_t + G_t - Y_t
+
+    list(
+      r_t = r, w_t = w_t, N_t = N_t, Y_t = Y_t, D_t = D_t,
+      C_t = C_t, I_t = I_t, S_t = S_t, G_t = G_t,
+      w_t1 = w_t1, N_t1 = N_t1, K_t1 = K_t1, Y_t1 = Y_t1,
+      D_t1 = D_t1, C_t1 = C_t1, G_t1 = G_t1, W = W,
+      excess_demand = excess_demand,
+      check_t1 = Y_t1 + (1 - delta) * K_t1 - (C_t1 + G_t1)
+    )
+  }
+
+  r_max <- alpha * A_t1 * ((1 - alpha) * A_t1 / theta_t1)^((1 - alpha) / alpha) - delta
+  r_min <- max(-delta + 1e-5, -0.99)
+  r_star <- uniroot(
+    function(r) eval_given_r(r)$excess_demand,
+    interval = c(r_min, r_max - 1e-6)
+  )$root
+
+  out <- eval_given_r(r_star)
+  out$eval_given_r <- eval_given_r
+  out$r_max <- r_max
+  return(out)
+}
+
+# Parameter & Gleichgewichte berechnen
+params <- list(
+  K_t = 10, delta = 0.1, theta_t = 0.5, theta_t1 = 0.5,
+  G_t0 = 0.5, G_t1_shock = 0.8, G_t1 = 0.5,
+  sigma = 1.0, beta = 0.96, A_t = 10.0, A_t1 = 10.0, alpha = 0.33
+)
+
+eq0 <- do.call(solve_macro_model, c(
+  params[c("K_t", "delta", "theta_t", "theta_t1", "G_t1", "sigma", "beta", "A_t", "A_t1", "alpha")],
+  list(G_t = params$G_t0)
+))
+eq1 <- do.call(solve_macro_model, c(
+  params[c("K_t", "delta", "theta_t", "theta_t1", "G_t1", "sigma", "beta", "A_t", "A_t1", "alpha")],
+  list(G_t = params$G_t1_shock)
+))
+
+theme_macro <- theme_light(base_size = 11) +
+  theme(
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold", size = 11.5),
+    legend.position = "bottom",
+    legend.title = element_blank()
+  )
+
+# --- GRAFIK 1: Arbeitsmarkt in Periode t ---
+w_grid <- seq(params$theta_t + 0.05, max(eq0$w_t * 1.4, 8), length.out = 200)
+df_labor <- data.frame(
+  w  = w_grid,
+  Nd = params$K_t * ((1 - params$alpha) * params$A_t / w_grid)^(1 / params$alpha),
+  Ns = 1 - params$theta_t / w_grid
+)
+
+p_labor <- ggplot(df_labor, aes(x = Nd, y = w)) +
+  geom_line(aes(x = Nd, color = "Arbeitsnachfrage (N^d)"), linewidth = 0.9) +
+  geom_line(aes(x = Ns, color = "Arbeitsangebot (N^s)"), linewidth = 0.9) +
+  geom_hline(yintercept = params$theta_t, linetype = "dashed", color = "grey40") +
+  geom_point(aes(x = eq0$N_t, y = eq0$w_t), color = "black", size = 2.5) +
+  annotate("segment", x = eq0$N_t, xend = eq0$N_t, y = 0, yend = eq0$w_t, linetype = "dotted", color = "grey40") +
+  annotate("segment", x = 0, xend = eq0$N_t, y = eq0$w_t, yend = eq0$w_t, linetype = "dotted", color = "grey40") +
+  scale_color_manual(values = c("Arbeitsnachfrage (N^d)" = "black", "Arbeitsangebot (N^s)" = "#2E75B6")) +
+  coord_cartesian(xlim = c(0, 1.05), ylim = c(0, max(w_grid))) +
+  labs(
+    title = "Arbeitsmarkt in Periode t",
+    x = expression(Arbeitsmenge~N[t]),
+    y = expression(Reallohn~w[t])
+  ) +
+  theme_macro
+
+# --- GRAFIK 2: Produktionsfunktion Y_t(N_t) ---
+n_grid <- seq(0.01, 0.99, length.out = 200)
+df_prod <- data.frame(
+  N = n_grid,
+  Y = params$A_t * params$K_t^params$alpha * n_grid^(1 - params$alpha)
+)
+
+p_prod <- ggplot(df_prod, aes(x = N, y = Y)) +
+  geom_line(color = "black", linewidth = 0.9) +
+  geom_point(aes(x = eq0$N_t, y = eq0$Y_t), color = "#2E75B6", size = 2.8) +
+  geom_segment(aes(x = eq0$N_t, xend = eq0$N_t, y = 0, yend = eq0$Y_t), linetype = "dotted", color = "grey40") +
+  geom_segment(aes(x = 0, xend = eq0$N_t, y = eq0$Y_t, yend = eq0$Y_t), linetype = "dotted", color = "grey40") +
+  coord_cartesian(xlim = c(0, 1), ylim = c(0, max(df_prod$Y) * 1.05)) +
+  labs(
+    title = "Produktionsfunktion in Abhängigkeit von N",
+    x = expression(Arbeit~N[t]),
+    y = expression(Output~Y[t])
+  ) +
+  theme_macro
+
+# --- GRAFIK 3: Gleichgewichtszins über Überschussnachfrage Z(r_t) ---
+r_grid <- seq(max(-params$delta + 0.02, -0.05), eq0$r_max * 0.92, length.out = 200)
+z0 <- sapply(r_grid, function(r) eq0$eval_given_r(r)$excess_demand)
+z1 <- sapply(r_grid, function(r) eq1$eval_given_r(r)$excess_demand)
+
+df_r <- rbind(
+  data.frame(r = r_grid, Z = z0, Szenario = "Baseline (G_t = 0.50)"),
+  data.frame(r = r_grid, Z = z1, Szenario = "Schock (G_t = 0.80)")
+)
+
+p_rate <- ggplot(df_r, aes(x = r, y = Z, color = Szenario)) +
+  geom_hline(yintercept = 0, color = "grey30", linewidth = 0.6) +
+  geom_line(linewidth = 0.9) +
+  geom_point(data = data.frame(
+    r = c(eq0$r_t, eq1$r_t),
+    Z = c(0, 0),
+    Szenario = c("Baseline (G_t = 0.50)", "Schock (G_t = 0.80)")
+  ), aes(x = r, y = Z), size = 2.8) +
+  scale_color_manual(values = c("Baseline (G_t = 0.50)" = "black", "Schock (G_t = 0.80)" = "#2E75B6")) +
+  labs(
+    title = "Gleichgewichtiger Realzins (Z(r_t) = 0)",
+    x = expression(Realzins~r[t]),
+    y = expression(Überschussnachfrage~Z(r[t]))
+  ) +
+  theme_macro
+
+# --- GRAFIK 4: Investitionsnachfrage I_t(r_t) ---
+inv0 <- sapply(r_grid, function(r) eq0$eval_given_r(r)$I_t)
+df_inv <- data.frame(r = r_grid, I = inv0)
+
+p_inv <- ggplot(df_inv, aes(x = r, y = I)) +
+  geom_hline(yintercept = 0, color = "grey30", linewidth = 0.6) +
+  geom_line(color = "black", linewidth = 0.9) +
+  geom_point(aes(x = eq0$r_t, y = eq0$I_t), color = "#2E75B6", size = 2.8) +
+  geom_segment(aes(x = eq0$r_t, xend = eq0$r_t, y = min(0, min(inv0)), yend = eq0$I_t), linetype = "dotted", color = "grey40") +
+  geom_segment(aes(x = min(r_grid), xend = eq0$r_t, y = eq0$I_t, yend = eq0$I_t), linetype = "dotted", color = "grey40") +
+  labs(
+    title = "Investitionen in Abhängigkeit vom Realzins",
+    x = expression(Realzins~r[t]),
+    y = expression(Investitionen~I[t])
+  ) +
+  theme_macro
+
+# --- KOMBINATION MIT PATCHWORK ---
+(p_labor | p_prod) / (p_rate | p_inv) +
+  plot_annotation(
+    title = "2-Perioden-Makromodell: Zentrale Gleichgewichtsbeziehungen",
+    theme = theme(plot.title = element_text(face = "bold", size = 13))
+  )
+```
+
+[Achtung. Code noch bereinigen. Parameter werden doppelt eingelesen]::
+
+```{r}
+#| message: false
+#| warning: false
+
+library(ggplot2)
+library(patchwork)
+
+# --- 1. Modellfunktion ---
+solve_macro_model <- function(
+  K_t = 10, delta = 0.1,
+  theta_t = 0.5, theta_t1 = 0.5,
+  G_t = 0.5, G_t1 = 0.5,
+  sigma = 1.0, beta = 0.96,
+  A_t = 10.0, A_t1 = 10.0,
+  alpha = 0.33
+) {
+  labor_eq_t <- function(w) {
+    Nd <- K_t * ((1 - alpha) * A_t / w)^(1 / alpha)
+    Ns <- 1 - theta_t / w
+    return(Nd - Ns)
+  }
+  w_t <- uniroot(labor_eq_t, interval = c(theta_t + 1e-6, 100))$root
+  N_t <- 1 - theta_t / w_t
+  Y_t <- A_t * K_t^alpha * N_t^(1 - alpha)
+  D_t <- Y_t - w_t * N_t
+
+  eval_given_r <- function(r) {
+    k_n_ratio <- (alpha * A_t1 / (r + delta))^(1 / (1 - alpha))
+    w_t1 <- (1 - alpha) * A_t1 * (k_n_ratio)^alpha
+    N_t1 <- 1 - theta_t1 / w_t1
+    if (is.na(N_t1) || N_t1 <= 0) return(list(excess_demand = NA))
+
+    K_t1 <- k_n_ratio * N_t1
+    I_t  <- K_t1 - (1 - delta) * K_t
+    B_I  <- I_t
+    Y_t1 <- A_t1 * K_t1^alpha * N_t1^(1 - alpha)
+    D_t1 <- Y_t1 + (1 - delta) * K_t1 - w_t1 * N_t1 - (1 + r) * B_I
+
+    W <- (w_t * N_t + D_t - G_t) + (w_t1 * N_t1 + D_t1 - G_t1) / (1 + r)
+    C_t  <- W / (1 + beta^(1 / sigma) * (1 + r)^((1 - sigma) / sigma))
+    S_t  <- w_t * N_t + D_t - G_t - C_t
+    C_t1 <- (1 + r) * S_t + w_t1 * N_t1 + D_t1 - G_t1
+
+    excess_demand <- C_t + I_t + G_t - Y_t
+
+    list(
+      r_t = r, w_t = w_t, N_t = N_t, Y_t = Y_t, D_t = D_t,
+      C_t = C_t, I_t = I_t, S_t = S_t, G_t = G_t,
+      w_t1 = w_t1, N_t1 = N_t1, K_t1 = K_t1, Y_t1 = Y_t1,
+      D_t1 = D_t1, C_t1 = C_t1, G_t1 = G_t1, W = W,
+      excess_demand = excess_demand,
+      check_t1 = Y_t1 + (1 - delta) * K_t1 - (C_t1 + G_t1)
+    )
+  }
+
+  r_max <- alpha * A_t1 * ((1 - alpha) * A_t1 / theta_t1)^((1 - alpha) / alpha) - delta
+  r_min <- max(-delta + 1e-5, -0.99)
+  r_star <- uniroot(
+    function(r) eval_given_r(r)$excess_demand,
+    interval = c(r_min, r_max - 1e-6)
+  )$root
+
+  out <- eval_given_r(r_star)
+  out$eval_given_r <- eval_given_r
+  out$r_max <- r_max
+  return(out)
+}
+
+# Parameter & Gleichgewichte berechnen
+params <- list(
+  K_t = 10, delta = 0.1, theta_t = 0.5, theta_t1 = 0.5,
+  G_t0 = 0.5, G_t1_shock = 0.8, G_t1 = 0.5,
+  sigma = 1.0, beta = 0.96, A_t = 10.0, A_t1 = 10.0, alpha = 0.33
+)
+
+eq0 <- do.call(solve_macro_model, c(
+  params[c("K_t", "delta", "theta_t", "theta_t1", "G_t1", "sigma", "beta", "A_t", "A_t1", "alpha")],
+  list(G_t = params$G_t0)
+))
+eq1 <- do.call(solve_macro_model, c(
+  params[c("K_t", "delta", "theta_t", "theta_t1", "G_t1", "sigma", "beta", "A_t", "A_t1", "alpha")],
+  list(G_t = params$G_t1_shock)
+))
+
+theme_macro <- theme_light(base_size = 11) +
+  theme(
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold", size = 11),
+    legend.position = "bottom",
+    legend.title = element_blank()
+  )
+
+# --- LINKE SPALTE: Arbeitsmarkt (oben) und Produktionsfunktion (unten), gleiche N_t-Achse ---
+n_limits <- c(0, 1.0)
+n_breaks <- seq(0, 1.0, by = 0.2)
+
+w_grid <- seq(params$theta_t + 0.05, max(eq0$w_t * 1.35, 7), length.out = 250)
+df_labor <- data.frame(
+  w  = w_grid,
+  Nd = params$K_t * ((1 - params$alpha) * params$A_t / w_grid)^(1 / params$alpha),
+  Ns = 1 - params$theta_t / w_grid
+)
+
+p_labor <- ggplot(df_labor, aes(y = w)) +
+  geom_line(aes(x = Nd, color = "Arbeitsnachfrage (N^d)"), linewidth = 0.9) +
+  geom_line(aes(x = Ns, color = "Arbeitsangebot (N^s)"), linewidth = 0.9) +
+  geom_hline(yintercept = params$theta_t, linetype = "dashed", color = "grey45") +
+  geom_point(data = data.frame(x = eq0$N_t, y = eq0$w_t), aes(x = x, y = y), color = "black", size = 2.5) +
+  annotate("segment", x = eq0$N_t, xend = eq0$N_t, y = 0, yend = eq0$w_t, linetype = "dotted", color = "grey45") +
+  annotate("segment", x = 0, xend = eq0$N_t, y = eq0$w_t, yend = eq0$w_t, linetype = "dotted", color = "grey45") +
+  scale_x_continuous(limits = n_limits, breaks = n_breaks, expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, max(w_grid)), expand = c(0, 0)) +
+  scale_color_manual(values = c("Arbeitsnachfrage (N^d)" = "black", "Arbeitsangebot (N^s)" = "#2E75B6")) +
+  labs(
+    title = "Arbeitsmarkt in Periode t",
+    x = NULL,
+    y = expression(Reallohn~w[t])
+  ) +
+  theme_macro +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+n_grid <- seq(0.005, 0.995, length.out = 250)
+df_prod <- data.frame(
+  N = n_grid,
+  Y = params$A_t * params$K_t^params$alpha * n_grid^(1 - params$alpha)
+)
+
+p_prod <- ggplot(df_prod, aes(x = N, y = Y)) +
+  geom_line(color = "black", linewidth = 0.9) +
+  geom_point(aes(x = eq0$N_t, y = eq0$Y_t), color = "#2E75B6", size = 2.8) +
+  geom_segment(aes(x = eq0$N_t, xend = eq0$N_t, y = 0, yend = eq0$Y_t), linetype = "dotted", color = "grey45") +
+  geom_segment(aes(x = 0, xend = eq0$N_t, y = eq0$Y_t, yend = eq0$Y_t), linetype = "dotted", color = "grey45") +
+  scale_x_continuous(limits = n_limits, breaks = n_breaks, expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, max(df_prod$Y) * 1.05), expand = c(0, 0)) +
+  labs(
+    title = "Produktionsfunktion in Abhängigkeit von N",
+    x = expression(Arbeit~N[t]),
+    y = expression(Output~Y[t])
+  ) +
+  theme_macro
+
+# --- RECHTE SPALTE: Gezielte r_t-Skalierung rund um die Gleichgewichte ---
+r_center <- mean(c(eq0$r_t, eq1$r_t))
+r_span   <- max(0.08, abs(eq1$r_t - eq0$r_t) * 2.2)
+r_low    <- max(-params$delta + 0.01, r_center - r_span)
+r_high   <- min(eq0$r_max * 0.75, r_center + r_span)
+r_grid   <- seq(r_low, r_high, length.out = 250)
+
+z0 <- sapply(r_grid, function(r) eq0$eval_given_r(r)$excess_demand)
+z1 <- sapply(r_grid, function(r) eq1$eval_given_r(r)$excess_demand)
+
+df_r <- rbind(
+  data.frame(r = r_grid, Z = z0, Szenario = "Baseline (G_t = 0.50)"),
+  data.frame(r = r_grid, Z = z1, Szenario = "Schock (G_t = 0.80)")
+)
+
+p_rate <- ggplot(df_r, aes(x = r, y = Z, color = Szenario)) +
+  geom_hline(yintercept = 0, color = "grey35", linewidth = 0.6) +
+  geom_line(linewidth = 0.9) +
+  geom_point(
+    data = data.frame(
+      r = c(eq0$r_t, eq1$r_t),
+      Z = c(0, 0),
+      Szenario = c("Baseline (G_t = 0.50)", "Schock (G_t = 0.80)")
+    ),
+    aes(x = r, y = Z),
+    size = 2.8
+  ) +
+  scale_x_continuous(
+    limits = c(r_low, r_high),
+    labels = function(x) sprintf("%.2f", x),
+    expand = c(0.02, 0.02)
+  ) +
+  scale_color_manual(values = c("Baseline (G_t = 0.50)" = "black", "Schock (G_t = 0.80)" = "#2E75B6")) +
+  labs(
+    title = "Gleichgewichtiger Realzins (Z(r_t) = 0)",
+    x = expression(Realzins~r[t]),
+    y = expression(Überschussnachfrage~Z(r[t]))
+  ) +
+  theme_macro
+
+inv0 <- sapply(r_grid, function(r) eq0$eval_given_r(r)$I_t)
+inv1 <- sapply(r_grid, function(r) eq1$eval_given_r(r)$I_t)
+
+df_inv <- rbind(
+  data.frame(r = r_grid, I = inv0, Szenario = "Baseline (G_t = 0.50)"),
+  data.frame(r = r_grid, I = inv1, Szenario = "Schock (G_t = 0.80)")
+)
+
+p_inv <- ggplot(df_inv, aes(x = r, y = I, color = Szenario)) +
+  geom_hline(yintercept = 0, color = "grey35", linewidth = 0.6) +
+  geom_line(linewidth = 0.9) +
+  geom_point(
+    data = data.frame(
+      r = c(eq0$r_t, eq1$r_t),
+      I = c(eq0$I_t, eq1$I_t),
+      Szenario = c("Baseline (G_t = 0.50)", "Schock (G_t = 0.80)")
+    ),
+    aes(x = r, y = I),
+    size = 2.8
+  ) +
+  geom_segment(
+    data = data.frame(r = eq0$r_t, I = eq0$I_t),
+    aes(x = r, xend = r, y = min(0, min(c(inv0, inv1))), yend = I),
+    linetype = "dotted", color = "grey45", inherit.aes = FALSE
+  ) +
+  scale_x_continuous(
+    limits = c(r_low, r_high),
+    labels = function(x) sprintf("%.2f", x),
+    expand = c(0.02, 0.02)
+  ) +
+  scale_color_manual(values = c("Baseline (G_t = 0.50)" = "black", "Schock (G_t = 0.80)" = "#2E75B6")) +
+  labs(
+    title = "Investitionen in Abhängigkeit vom Realzins",
+    x = expression(Realzins~r[t]),
+    y = expression(Investitionen~I[t])
+  ) +
+  theme_macro
+
+# --- KOMBINATION MIT PATCHWORK (Spaltenweise: links N_t-Achse, rechts r_t-Achse) ---
+(p_labor / p_prod + plot_layout(heights = c(1, 1))) |
+  (p_rate / p_inv + plot_layout(heights = c(1, 1))) +
+  plot_annotation(
+    title = "2-Perioden-Makromodell: Arbeitsmarkt, Produktion, Zins und Investitionen",
+    theme = theme(plot.title = element_text(face = "bold", size = 12.5))
+  )
+
+```
+
