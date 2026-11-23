@@ -1,4 +1,4 @@
-# Die Mikroökonomik der Makroökonomik
+# Die Mikroökonomik der Makroökonomik {#sec-Mikromakro}
 
 ::: {.callout-note icon="false" collapse="true"}
 # Mikrofundierung der Makro und der aktuelle Nobelpreis {.unnumbered}

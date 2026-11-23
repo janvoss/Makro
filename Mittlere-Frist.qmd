@@ -1,4 +1,1361 @@
 # Mittlere Frist
 
-[Hier Neoklassik?]::
+- Wir tragen in diesem Abschnitt die Lösungen aus dem Abschnitt [Die Mikroökonomik der Makroökonomik](https://janvoss.github.io/Makro/Mikromakro.html) zusammen und analysieren das makroökonomische Gleichgewicht
 
+- Dabei gehen wir davon aus, dass alle Märkte/Preise beliebig flexibel sind, sodass sich immer Gleichgewichtspreise (und entsprechende -mengen) bilden können.
+
+- Geld beeinflusst in diesem Modell das Gleichgewicht nicht. Wir zeigen zunächst das Gleichgewicht ohne Geld (@sec-Neoklassik_ohne_Geld) und dann mit Geld (@sec-Neoklassik_mit_Geld)
+
+## Reales neoklassisches Grundmodell (ohne Geld) {#sec-Neoklassik_ohne_Geld}
+
+### Einleitung
+
+- Entscheidungen wie in @sec-Mikromakro
+
+- Flexible Märkte
+
+- Analyse der Gleichgewichte, nicht der Gleichgewichtsbildung
+
+- Darstellung hier: Allgemeine Form der Gleichung und Spezifikation zur Veanschaulichung
+
+### Haushalt
+
+#### Einkommensverwendung
+
+$$C_t = C^d(Y_t - T_t, Y_{t+1} - T_{t+1}, r_t)$$
+
+Für CRRA-Nutzenfunktion:
+
+$$C_t(r, W) = \frac{W}{1 + \beta^{\frac{1}{\sigma}} (1+r)^{\frac{1-\sigma}{\sigma}}}$$
+
+Mit $W=Y_t-G_t+ \frac{Y_{t+1}-G_{t+1}}{1+r}$
+
+
+#### Arbeisangebot
+
+$$N_t = N^s(w_t, \theta_t)$$
+
+Für hier angenommene Nutzenfunktion $$\theta_t \frac{1}{1 - N_t} = w_t$$ bzw. 
+
+$$N^S_t = 1 - \frac{\theta_t}{w_t}$$
+(Entscheidung über $N_{t+1}$ analog)
+
+### Unternehmen
+
+#### Produktion
+
+$$Y_t=A_t F(K_t, N_t)$$
+
+Spezifikation hier: 
+
+$$\begin{align*}
+Y_t &= A_t K_t^{\alpha} N_t^{1-\alpha}, \quad 0 < \alpha < 1 \\
+Y_{t+1} &= A_{t+1} K_{t+1}^{\alpha} N_{t+1}^{1-\alpha}
+\end{align*}$$
+
+#### Investition
+
+Entwicklung des Kapitalstocks
+
+$$K_{t+1}=I_t+(1-\delta)K_t$$
+
+$$I_t=I_t^d(r_t, A_{t+1}, K_t)$$
+
+Spezifikation hier: 
+
+
+$$I_t = N_{t+1} \left(\frac{\alpha A_{t+1}}{r_t + \delta}\right)^{\frac{1}{1 - \alpha}} - (1 - \delta) K_t$$
+
+::: {.callout-note icon="false" collapse="true"}
+## Umstellen der Investitionsfunktion {.unnumbered}
+
+$$
+\begin{aligned}
+\alpha A_{t+1} \left(\frac{N_{t+1}}{I_t + (1 - \delta) K_t}\right)^{1 - \alpha} &= r_t + \delta \\
+\left(\frac{N_{t+1}}{I_t + (1 - \delta) K_t}\right)^{1 - \alpha} &= \frac{r_t + \delta}{\alpha A_{t+1}} \\
+\frac{N_{t+1}}{I_t + (1 - \delta) K_t} &= \left(\frac{r_t + \delta}{\alpha A_{t+1}}\right)^{\frac{1}{1 - \alpha}} \\
+I_t + (1 - \delta) K_t &= N_{t+1} \left(\frac{\alpha A_{t+1}}{r_t + \delta}\right)^{\frac{1}{1 - \alpha}} \\
+I_t &= N_{t+1} \left(\frac{\alpha A_{t+1}}{r_t + \delta}\right)^{\frac{1}{1 - \alpha}} - (1 - \delta) K_t
+\end{aligned}
+$$
+
+:::
+
+#### Arbeitsnachfrage
+
+$$N_t=N^d(w_t, A_t, K_t)$$
+
+Spezifikation hier: $$(1 - \alpha) A_t \left(\frac{K_t}{N_t}\right)^{\alpha} = w_t$$
+
+
+bzw.
+
+$$N^D_t = K_t \left(\frac{(1 - \alpha) A_t}{w_t}\right)^{\frac{1}{\alpha}}$$
+
+::: {.callout-note icon="false" collapse="true"}
+## Umstellen der Arbeitsnachfragefunktion {.unnumbered}
+
+$$
+\begin{aligned}
+(1 - \alpha) A_t \left(\frac{K_t}{N_t}\right)^{\alpha} &= w_t \\
+\left(\frac{K_t}{N_t}\right)^{\alpha} &= \frac{w_t}{(1 - \alpha) A_t} \\
+\frac{K_t}{N_t} &= \left(\frac{w_t}{(1 - \alpha) A_t}\right)^{\frac{1}{\alpha}} \\
+N^d_t &= K_t \left(\frac{(1 - \alpha) A_t}{w_t}\right)^{\frac{1}{\alpha}}
+\end{aligned}
+$$
+:::
+
+### Regierung
+
+$$G_t + \frac{G_{t+1}}{1 + r_t} = T_t + \frac{T_{t+1}}{1 + r_t}$$
+
+$$C_t + \frac{C_{t+1}}{1 + r_t} = Y_t - G_t + \frac{Y_{t+1} - G_{t+1}}{1 + r_t}$$
+
+Ricardianische Äquivalenz: Das Timing der Steuereinnahmen ist für das Gleichgewicht irrelevant. 
+
+### Gleichgewicht
+
+[Interaktives Makromodell](https://shinylive.io/r/app/#code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IIgMQACALwzZc+QsVLlK1WvESAjBgkAtAKIA5ACpYAggBl9EgApnzAWX3H9WACL6AYgElD3494A8oYS7ADKfADm1HASYUQArowEsUQAZhLGjAmk3MIQkmpFxSWlSiIAQmZh+gD6do5hEgA8ALQSdJyk7CISEgDStaR9I9JaAAwY47i9EgAmcNSkUKNSEpOa07O5cMtDfWvaACxbEH07e6SaY9oATKd9AOL7o2OTAKwPEs9Xr2sfX04tEiMBWI0OUy+9F2YPB6wwAE4AGwzM4SMwvVYSJGQ1F9DG-LEADlxsyg1FQ3FhbwwAGZaSJ8hoyizWWy5BpbjoHIEPBYLK0woELAA1VzM9mSqWqEScIjUABucFqoIIjCIKqIC2oLXaaQSEAIpFoJHYqAEEhAswA7rRcmbcJbZn1qFB6ERGLU4ABHfZtCT6w3G03Wi1WtGjQxzXUDfYAKlC7Gu7XJlKgFoTBIkAHoJKGAHpJnMSVNU-KvCSGTgx5MSC5Qfa563OkaMXZJCDsKMSdpV8sjAC+LetfvaBto6qI3Vd7s9PqGjr45EYCvJYwI7Hr+wA1Fo4K0URNxuMBAIACST0gtwyjrQ9uvcGGNvNDFsATVvWYTg1I+dLKwTG9fyLFMKTLFs3FvD9hnaEdhkA19RAjCQ4FXahakiWglQgWpGBjQMjRNTtGEdD9uFYVAxmgsMWz6ABrWocOYYMY3Yf8JEzIZrlzdg8N3bVllPQtuNCWt-1PWiX1+f0QJLMD0w49EuMU9gGKYqBgwEP95MkoDrn9Wst1+JsuMk2gMnYWhOAwaAuy4i0AB8HMrZTmn+CQnIkKybKgVTGNwjSTUc5y1ICli3PWGjkNGNtSA7dhOm6STRjgAAPFJOE4WoFlBCBozWQwzEdbx9gKoqJA-bwmjK0j8srIrkpGaDrhqlzflan8Wvqx04K6wrHUg9r6saiTookIckIrTqY1C5iTUUvTJJK4YY2m9pZIEhTv0QisKlqbw+n9ZbJOamMCWubarm0tMFq44T73EyTBv09pTt3DbFkExS1qki62trItd0YDMJD27wREkmwRVc9betu35d2e+8fk0C0eOuIH+1GAB1V4ZLIijkaGC1dyh0yxpgVACBGAzi0BiRoWWe7cyBEEttEiRMcLWTWdBNGJF59MsZGABhTF-Up6mE2xiGxrfaN-TF4Zd2Wznvh2140oyrKcqgPKY3l+8CdQWWKwWCAiBgGt70lk79qaf1zNCN1OHYc3LYtAA+PdWiJC12EllSyd+dofhJiRVd3MPi3dq3Fk4WJCtN14whef1jaJmCJCVySlZejnMcU1Pld++GMYkJHQ-JyTEp6Ma+k9YY1hIqSxjgx0gLGIDSNKiqFwr3vBrxCts97pXit75bHWLsZi8dH4xh+WqqLmHuqqo+3h4rOG1l6jvlIKrjHWmtZOp7obmq314kbWZ7HTzsY8-ng-1auR1cbWbHHWDrqf6vlL0pwEytlOAuU6payATrUBetV6NQII+AgDEL7KXerWTaIMfrsAflHeyklhYTRbJ6UEqUYzsU4r8BM7BZLiUUudYsRlUbczEvJfmND2ibUISqPgMZiHsFaJtNWmh9zvEdK0SYCIETC09F0FgMZxyXjrhWAiwZiIWlQuSDCWEKC4V4j3cilE1jUTPBA4Bus8r-y8mQOAK41xrA3EQvgjoiFQBIe0IRB5hbnkvMnPoiRhj+nUehTC2EdHSOWC3DOhjiYtj8cYtCmiQl4QCfE4J2jGAxJyBeFULiYzONShk0gZ5UAsFgNWf0JtkKxXin4-sA58gEIKNIaUzSWkyA0LSHQVQaitCwHofQ3gRYAAkjCeAAKqGH6AEYIRhQi3FSrcCQFgoCsD8Y6R81AYgSECKgY0dFHREG4BAWIugEicA0gAL2KXRXYcB8iFFaQ8yUIg5jMBHKqdUtRUDUCnGUvUBpCKmh9NMFC3pUZOjRKgcYMYgVFJKTATgsxUD5x9JoWFzB4WzCpFlHgRBEExgAIRWVMKM-QbENkYB9AkckZpgVItGrMV0KyciKJGKCUgjBaCpXYBuTQjpbgWJHrSR0RwBCOggOqa0Yx+USENPKKVjp6CsAlWMYl+hRXDloHMXI1Y7FJkdKjK+j5gTcFIDqiQPKphEn1VMfs-ZimMHYPQSIYwhBgGtLwcgrrHRpGdWsV19BXSIK9ea+UGAXFWRdWASIbZWD3GDcQagGAZyRoDVAINeBJIpFSmG1KEb-iImlVmpNboaQIj9snHCdArb+g3MC7QJ5Zg4SYHRGMCdvTsDrVMBVrAaS3CZGiSQrQh3fFAXAPgZz4ASFSq0Mw8CE4QEFHRcktBrEGmdWkAAP3hOYK6JBtngeQOIxSlixHYDYb5wwFkADJbAXokCKnsQ7ZgfiBYddoMLoLPq9KCt9ILUWfrRNBUBlEAmgriRo1JTF2AwsbnowmUSUXnkqmEZODicLEBgDAEgPCXF8JgHwGlZ5NqOiRURz6CldyTHGLynsVH3j9jybUDDWGzgSwIzB7JqVHQoqycQkGkwADs4xZiem+ZKnDXK0NMctixx0+HOwcdINxsDjcLTtCo+WtEnpeCRG4DwgjjHmMkDk7hxTynUWqbVhphjGEOVzFqBG-0bbeK1DE042oOnuCOhiBASIuQMB+KlfcftfQPxWShU5tAXyOCemjZqhznBvX-JUbxNR3pxjgaCVoqDwMzzIf7GFzg+cznoGoDF2z8WrJJaDERVLf7MsJLSalvL9sQsSFYLhY1pAuGsfaLw4F8nuXsBfelnuKKe7hYm0V0VMqoAYEYFbNYqr+MYAE-R2YHWOW6e68QiTQ2RvApGzRoDlMpuHYSwa2b83FuZCwCSkG2hNC3A2517btRm0xlQLFUgHANyba6z1x0-23t8bFWMdbaJgcmve4wFt-oofdebcABHMOW2ezWCj+TEgb0o4+xFTHLiAC6ydB3DpsBYQIxg7zsCINCM4dAIB0U4AIRA6JGDQjtJwUEsPhjcJsNYk0Cw6yPtaDaTje2YXt3q3BB7q33hi-kxVhWfXcN0bkwRyFZ4jIkdRUZFbIqxdxeVwLH07A3l8CVz1Tj3mKB+e4AFnIYxaTHja1GCL7RNc-hUrJTXNCEya6zCZI3Wkiy5l9yw2YVZ3cSFQP1-V95NdGWLCOYPke5j51I17yhPvUV+5j6iwPL5g-M3z2eR6aIqwZ7j3eD3uvHyXGT0rtr9qA6yN1e8DA0qjgYCtRIDpnb6N2ovSyvo-Up1VrGJW2gMAgcT91cCt5Lj1XIVSi4puEhXWiDwO1tfkat+OlSsmv1YBg2sCPxvk-GbkKgm4cfsw7Ox2mu53RXnZx+ccq1LEK82+0gkFIBgG-M4NYQtNKAAqAW-LQS1K+egH7SNIgYNVfVKM1V1WgU-FxZAsAVAk-NEfsI3blOVY-aNOAVgIkIkYNJYHtY-OUOgOYcg60OqQTfsEcPHD3b7X7DtK3UHGVMYJEfscNV2GjDSSfVHbzN0eOMYTgL7JcNIHoMAAAUgwE0DSGDSbVh1Gj6H4PYGlSEN3hEI6DEOoDNUkI5TIBkNdQUKUODWYLUNELNVRlmBgHIFSm6DSi+0gVq3vw5yf1tzgAAD9DBgBSBCcZsgQhdDhvM+BYhgCe9HQs1S1eCHCnCXDUo3DMpassA4ByRvlDlfDrRAjgjHRQioiJBpUGdiiOkhVzU0p4i2s3Qyj2A9M1hE968GwlMOhYDgDYiCCL8iDWAjh5cwB+wyjXY3crcjcuidRj9U101vN6CpVFChjIiRjOAF9LcQ1JiL8xBbh9A1sKgkQ6C6ouR7C0QnYGioBsVuBcU6IopRhhiux08xi7MJiU1A06IDibgYj2jKCSjhY7jK9HjNVnjj8tidj3g9j3iIRe8KCpVhYE4QQKBTVoMwNu51hzMzwUSeMpdoS1hKiE1I0xAhMzA3AjgBNXVYS4B4SyBXZgVMT+4eMMSwMsSOi+8gTNjCTiTSTBiWxUAiAlxXZ6S6TGT+4qZGitBDw8TgT2SST41qiIQDc0QJo+g4T4AqSkSMsUSaT0t0TBSMsmTvjcTujXVejaQBj+xlSETqTlNdSdTtS2jJd+5sSWT1jI1jTTTEVeTVSYUGTrS2iRSbhxTDSwBpi3jt84i5S2sYhIgKA5gR8L9SAiApDtsvUWxIzoyxhTisVagcVEEbjXgNxXC2w0jTQAigj8w5gZsCz3Diz8j8xmdHRXUKhzjFhIjg1XUwh4EriySWwBwUJDDYhwwKx8yUjCygRqzSzyzuNhyqzOwSzCdayZsGymyyiuzkIBwr4JSvILJMzszrjwVBzZDgzWywAQTdj9jt9-VXijyCTxgiTpSuTVzeyE49y8yDzLzzzjztjTyjzDz7zRg1yUzmSMzziszLiczzU9UtB9U+U1E+zwKaN4Ll9bi5i1ggKLiriLQNwji+VFDsL4Ke8YKnzMKcKSjiKjjEKRgYDvjN8ZSSF80iR5ccCScRdbAKcqcFkac6c904AD1mdWd+hiCjkgQ9YrJ4EgEBg2wEhzkRcv0jdW1TdMdHF2tXtodiEbdfN-NAtgDgtk55Z3smzf0Stoths1jlFatBAQUMtAlGsoMzM+59ExhBA8tyzn17MeBzJ-F2hDKytjLxiAxkszK0tUUrLIMdFbLIl2skNnLAN7M0g+A1xItSsOAPxfLTLTRzKeNgrstQqVN+5wrHL5Zm8WBW88J29O9HQO9gV+9rVB9EVh9rxypD9p91x2AFKIAgdlKdsl9Z8mrdVWr2qtsVKuqWxED19qLt9WBd9j999x8S1j9T9z9XVkzr9wCgCL9HgN1lxoB4E0hmAozQh+LWBBLaBhLOBRLqx+gJLzlhAf8-8wCICQDs1ACPjxgrUWxKK4CED0DI0sCgcvrj8sDZhcC7N8CNijSY1SDyDmTXVqDNUIT4QBM+Dc0BDHQdClKBrEdYdRDoRDCJCpDTDZCLDlDxqOrUd1CSwkatCUb19cdMb9DsajC8bSAzD5DFCib+qAdm0ZtXQ7D+xHC0pkjUjRzOxAgchUAchfDXVsxXVfD9A+A6IZMKBfC3x8iQjNViiaMyj5je8wz4RkReakjoMpyizOx1rNq01uAdqoAoylaayJyBY1b5UOhIincMAREqjaLdaEjJoSwA1Ii2I3gFUbhWSLy00QzZi6ptAIcXQlifKniKp7N6Amzg6gy3zw6YTZhUKQL0Lnzo7BLY7AT46QL3Lk6TywSzy07gDfiY7kq47dLYroBqAS6pTOSK6SjvNmS+1ZgGklSKSVTESDt2aQdFKB6+4gV279Tk7XSVye7KTES+rR7RsF7zsx6vindJ6Y0TTp6Y8PT+7v1l7F6-TDgAzQaU7Q6aKPiTS2tTjCVrJbITtzRscb1tzQLdyByRhzTVT77B6VLh6hhgNz5-7V6cSS7Pyy6t6+geS+TjLyBTs+4YHUASN4F-SQHQTwTQzZTIDL6u6M6LIb7VUyVE1KVqUR6jtTxcyZ6+7XYjtv6dtf7xsF6NbmSDST7rzbzOThZIHP7v1jtuHEHRTNBj78Tm7z6IQsGFTk5Uy8pYzXV4yvk4A0hv8r5JG6pM6dzyGRgNxXV+iAAG1oCwPgFdI8xshOZc987wSmBIHGlzBtd8wwOABIMSx4R4UIT0ew38wcR8-szNWQnRvRgxuAIxpcls9xvof85CDc1Rl+9RvoTR0+mYi-H8+sj81B8utkm8jk8B8aTxnOjR18s+98n8-BJRwCrc4CtRuCqCyCn47JnlfVcil0ZCzc0IZ+7Oi1N26VDpgi2INp6C6AqGyAER+EIkZ7Ri720ndocnSnPvUIA0cgenOW3i2wdUOYBIF-IiTgQMNZ7DaCOyUgNTJ9NEHCWSpzU3KjcYN28RBEN2nzO3B3dfW4T4ArcYJjJIJUT7DLL8GPDLH8fMcPG6BMI5uze6D3DLcvULTQF5lcWIcpAveMUvH50jMhGVJXYF0vMFpSr7LUcXCWXDN8Z5ggV5uAUiCFglqF2XF65OFvbnZq7vQ8bvXvDpaVSOsmr5KcWMsfRqm7KfGfdrOfcC4FDrTF+zUHYayai-aaia5wvfBAhay-WfWai-Ja0YJ64-GwZZ1ZlRDZg0LZs4bhMwegbgAAE982BGuTtAkAVGw0MGDV-zIDutWoevteeteuQneuP3gO30QIwJ+p3yQO+sWtGb6DwI3LBuIIhu30dOhvlFhojcacYLJApsEPX1UL2TpvELWGMOkIJtZpUNJsRqskpv0J5sSP5sNsFo8IfztH8JVsKIdvCKdqOS1tiIwfES9r6D5ucLLZHNqxFtIDFtIBtqCNVrCLbobfKLpGbY9tbYjJjsBYLrxchaVGTsSY6Eac7pONKbQrArftzqAXYDndXgqhJcJZQa-NjcOPHvTuQg-sRIFLaM1NRQZP-QdKYabvSbvPJNnstPq2gjRKfZazaMdOYaEfffYe5J3v5ORMFOfd9KQaPrfbYcGe0DEdCdmBvcg-VP7k1Mw7tK1N-aAadJDajQ3rdLRHQ44IsoA6tNtOo-w6A-XuIM3vcc4dva1O9Ko5jzg7FNPbAfQY9uQ4h1mHGZYqmaOBmasTOH3RNUWc8CyOjNiCqlaH6EJZLFOQGAEqAWOogBEsfCtguvsaks3TwiVEYFOvtz3WkohSKupd1VpfKq7T7zKsgJqohTquQg5b5b+xJvkxoc4xmzPx6vAtEyIGtHc083qanTFbGt+qlamplYVcWvGtlaVdZRWsjUU+U6hedjU7fDLI3mGCM4tesTM50FUxtdupVdHaLUq-rRddGDdYvw9YPz+ovx9cle9YDb6CBs1RBpdPBrIIjf6ZhtoPPZpARpE1R0+zYKG2C9C73Q82NRm1WqjvJoLaTYcpJubSxvTYFkZuZsJtP027UPzddm0PX09C27TZxozb2+zduDZvm85tsJuH1tLcrONvYF7f7YlrAClrABlrloVogEHYKPtpHY1uduiO1pbcRDbYkA7YFu7dNAyPJHOXHV8MYBrbB+KNKMh8c7dp1uneTjqL9oVA3hXqI+NOE1G4hEPEdOOL6GvqJTu1JSyIpW9CpWoGMpXtIdPByZJ6OXYDJ4Q1BQQ4yZp8gLp47tqQkeroS2BVizswS2XdTtXcOM737Eiezp3bHaoYu3cyN2V+dOBNAbQdbq5FKOl+we9vI-nrCr3uo9gwI+A8IJI63pY715XtssPu4+N4SdV51uOCvs3azu3ZbFt+88Up4yd+ofqyd-o799dVYfF44Yg+59F7j+FK44EbF7vMnY+PlNQ+9uUekbAFkfRpS5dApLTJQpD-KZ15idkPXnYGMebKOWuqSaqgAHJQh2yomjzcvqwW+gn2+B-8wQAEUhAu+ezwgOyczMmez44vGxpYnm-W+yiO+L9B-Qh1-IjrqimWwIm6+omcnG+Q74mk-TfUnQ3WBncrzhGQmsml-T-wLz+w6eiN7qeD-kJHStewLanR2NGPtDUwgoGoUyjTP-ruSIodMnO2gQ8HAK6bgULe1qXgn0yooDM+ONIIkMJlGYNJ7kjyAgWUA0Dd44ggyXwG+AkCjIDoN6GoFgDFBYAJQhApgUUBEAJBaA+EagGwLmA2AracAFlMaFIAxAeBRyLnq6luCtB38guCgK0AcBQA6I6oLDNqGoCs5HgMQWgPAijK2gD008OfkzgkAGhowugcdPAHgQnUYApyMksPCKKJ1GASyJlElGvZq0bBwgxYLGT6C2gtUopIVJJG4BHBZCffK4u0BvQOBP8Gye1LABuTpJBiFiTgDQWsTeAIA-bWQj8CPJhBlgGkM5KckiBiEzgC8Wfv323xY580A2HJDiQc5oQHGYwLpHUAaBmAHAYQM8EvAFjkADE8Ic5hFyVJxDGACQpIa6hRipD0hpqKAFkJyHqwQApAbcJoBn4BD5+hQiAlRhMwe0qqFrckJULWDVD6g9gOoQ0JRiFEWhNIdoTEK6E9DmUrqAkEeTVZagNWWEO0Ia2GBZh8h6FYNEUMc4lD+OXIYFBUOKIbDah9Qs8ASD2FwBWhkwB5h0IFjHDEhpwsAOdAuHqs1mCoW4fcNqDjDJh0w3QZvxeHLDdshwD4Y6C+FVDqgNQrYX8POiAjgRneejEcLVrdDIRSUMvi0VfDvlPAbYWgOckfxfZDWaQaxBQCkqAAO4H2CPDZh6uVaiCMWHzFPhqw74YSM2GNAtcDItol0CBEHDKRkkWIdSJOF0jGYUAI8m4Csjy1TCcg+MnhEABNwM8PmGrY3hpaBEHiMlEEiagMo7YWeC1FkiDhYAsaGqIWA0jehYAQWEeQSHLh4GHockLEDCAJB6AXQO0DkCIgSBAAw8BmiRRFIsUdEU+A2jOBUo+0b8IaGCwXRxQlUWNDTQqIKgOQeMp2FdSFldg72UgNNTOEJAMgu-RtuciSAbpEECcUgGyK3yeIr4gBFwaILGgeDcgYwa0ZJFZakAvuUI95BqBHHBojU22SNAJhOCoB8k0QySMsEiCcAzw3AB1GCN8HJC1BGguAFoOk7XIIAEAc5FAG4A+ZQggyYwA4AFAAAd6EKZ3UEmp9+FiZYAGjgBji6R8AdlOoKyjviYgmTW1IyFlgJwoWSSP5DVlNB8B+2+yUWjkEKLTlcytOMCUqH0DYRugMEzJOWMRxVjHQOvBIKgDmAaQ4AYQCEUkITjG0kmKQ7fPiPWHSjMxjQ6JMhEInETyAZE9UbSK4DTlqJpkWibaPokZjiROw3BCxKIkkSOJnojUdxKokX5zh-EtMXaKJGyiCQwsViRJPInMpKJQtJJjCIUlrDQYDE4Sf8NEmjB1J7EzSd0G0lEQkmRkYNHRMMlCTZReuFsOZNImWSZJOkhJjCHskCTHJykx0VqLUniSLJnEiiTxIvy+j9J6YgKX8MFi1I2s84ROiY2dr+g2wBYrROwB17UElQ2SNUBqEUGuCfhwkhKcnHnA7lckmRQiEqCynclNQxuRQeZFYD6MugLfIyY0AiKtTJIC8LEFhMKRLxupykOEH1KYlvxJIWYXqbSJMlKZxpQ0g4JYn7bTTeUK4+UemSmna5JIWoyaYtOdGqjgQoIYaVNN9HIQyaSpeULlInH1TXBqAeqaVO9p+JFpl0kcZVLyjWJz0bLHXi8igCL58pnyC9JBz0opTBeFZX0DuXYBk06kycB6Zkh-EcoCA-4uotC3aBthXpjAYwIjNqmutoUvoZKW3z4GwlsZofOiODJ8TzANIc2S2vADcHqcTxZ4i8c1UaiuoUe1ANHhACH6Nw4wHfRmWAC-HFhZajOIHqEGgiczK+rwV1P0BICcAEgVsLBEMBFlX4R4F+BIUqAjEqIKAoQZaPLIFQX4KgQCeBJyONCRA10oQICFrO5nMzsiZwM3HLK5n1wL8-QDdBAAUbAhrEAwNAHaHJBdAri+1ZERMKmFmy7Z4sx2c7KjJ4ReZxlFEf7NtmKzxZksqyHM3OStARYCCFtJuEmHXU8EFiescUU0Z2zM2+NcwhgCOAPd6AWSPZtrPzlM07uJcgDmCKVK3dC593YNKXKVh1zduJhKuY3JrnLQ25lc-bnSBrlARe5Dclmk3O3ylyZcFckeQoTHkKozwnUYeR3P7mzyGYAHN0YrL7l3cAm48s8KJUQSmTXgYImYS2l1SNRN5hc4ucGnXGqYp5S86uVfNrm3ys2Xch+a3KfkFzR5D3dcT3PfmdyWatIL+baUXnPzP5D8yeWfOnmd5AFC83+cvMAXNRgFH8medvMKK7yU5B80YGCN1FpAuRKMqSqfLznTztwRcwBY3HvClyb5ECu+eYWIUrz1x0EchY-KoUgK5CtCwBUrEYVvzmFSCthQ-NVjtBS5P87hX-NYUDyH5ncARUAtgUE1eF2+dcXBEYXgLCF1C+QrItQU-RS5MC4RftzUUCw15jChBdIsbkoK9Fe8pBLWFLlmKMFIwMEWYp8jwAzUngSwDUBbC1I9hHKVAHADqiqo1kRAEziqhZ4KoPQnorxQEpJSFFikBAKIJGgRT3kGkblfgGYHQDsA2BYwNgYhPAkSFrEJnAQGAAHCE4gAA)
+
+
+### Produktivitätsschock heute
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Produktivitätsschock heute"
+
+library(ggplot2)
+library(patchwork)
+
+# ==============================================================================
+# 1. ZENTRALE PARAMETERDEFINITION (Single Source of Truth)
+# ==============================================================================
+BASE_PARAMS <- list(
+  K_t      = 10.0,
+  delta    = 0.10,
+  theta_t  = 1.40,
+  theta_t1 = 1.20,
+  G_t      = 0.50,
+  G_t1     = 0.50,
+  sigma    = 1.00,
+  beta     = 0.96,
+  A_t      = 6.00,
+  A_t1     = 8.00,
+  alpha    = 0.33
+)
+
+SHOCK_PARAMS <- modifyList(BASE_PARAMS, list(A_t = 8.00))
+
+# ==============================================================================
+# 2. MODELL-SOLVER
+# ==============================================================================
+solve_macro_model <- function(p) {
+  with(p, {
+    labor_eq_t <- function(w) {
+      Nd <- K_t * ((1 - alpha) * A_t / w)^(1 / alpha)
+      Ns <- 1 - theta_t / w
+      return(Nd - Ns)
+    }
+    w_t <- uniroot(labor_eq_t, interval = c(theta_t + 1e-6, 1000))$root
+    N_t <- 1 - theta_t / w_t
+    Y_t <- A_t * K_t^alpha * N_t^(1 - alpha)
+    D_t <- Y_t - w_t * N_t
+
+    eval_given_r <- function(r, Y_hyp = Y_t) {
+      k_n_ratio <- (alpha * A_t1 / (r + delta))^(1 / (1 - alpha))
+      w_t1 <- (1 - alpha) * A_t1 * (k_n_ratio)^alpha
+      N_t1 <- 1 - theta_t1 / w_t1
+      if (is.na(N_t1) || N_t1 <= 0 || is.na(k_n_ratio) || k_n_ratio <= 0) {
+        return(list(
+          excess_demand = NA, I_t = NA, Y_IS = NA, Yd = NA,
+          Y_t1 = NA, N_t1 = NA, K_t1 = NA, w_t1 = NA, D_t1 = NA
+        ))
+      }
+
+      K_t1 <- k_n_ratio * N_t1
+      I_t  <- K_t1 - (1 - delta) * K_t
+      B_I  <- I_t
+      Y_t1 <- A_t1 * K_t1^alpha * N_t1^(1 - alpha)
+      D_t1 <- Y_t1 + (1 - delta) * K_t1 - w_t1 * N_t1 - (1 + r) * B_I
+
+      PV_t1 <- (w_t1 * N_t1 + D_t1 - G_t1) / (1 + r)
+      W     <- (Y_hyp - G_t) + PV_t1
+      mpc   <- 1 / (1 + beta^(1 / sigma) * (1 + r)^((1 - sigma) / sigma))
+      C_t   <- mpc * W
+
+      Yd <- C_t + I_t + G_t
+      excess_demand <- Yd - Y_hyp
+
+      denom <- 1 - mpc
+      Y_IS <- if (abs(denom) > 1e-8) (mpc * (PV_t1 - G_t) + I_t + G_t) / denom else NA
+
+      S_t  <- Y_hyp - G_t - C_t
+      C_t1 <- (1 + r) * S_t + w_t1 * N_t1 + D_t1 - G_t1
+
+      list(
+        r_t = r, w_t = w_t, N_t = N_t, Y_t = Y_t, D_t = D_t,
+        C_t = C_t, I_t = I_t, S_t = S_t, G_t = G_t, Yd = Yd, Y_IS = Y_IS,
+        w_t1 = w_t1, N_t1 = N_t1, K_t1 = K_t1, Y_t1 = Y_t1,
+        D_t1 = D_t1, C_t1 = C_t1, G_t1 = G_t1, W = W, PV_t1 = PV_t1,
+        excess_demand = excess_demand,
+        check_t1 = Y_t1 + (1 - delta) * K_t1 - (C_t1 + G_t1)
+      )
+    }
+
+    r_max <- alpha * A_t1 * ((1 - alpha) * A_t1 / theta_t1)^((1 - alpha) / alpha) - delta
+    r_min <- max(-delta + 1e-5, -0.99)
+    r_star <- uniroot(
+      function(r) eval_given_r(r, Y_hyp = Y_t)$excess_demand,
+      interval = c(r_min, r_max - 1e-6)
+    )$root
+
+    out <- eval_given_r(r_star, Y_hyp = Y_t)
+    out$eval_given_r <- eval_given_r
+    out$r_max <- r_max
+    out$params <- p
+    return(out)
+  })
+}
+
+eq0 <- solve_macro_model(BASE_PARAMS)
+eq1 <- solve_macro_model(SHOCK_PARAMS)
+
+# ==============================================================================
+# 3. STATISCHE GGPLOT2 + PATCHWORK GRAFIK
+# ==============================================================================
+theme_macro <- theme_light(base_size = 11) +
+  theme(
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.box = "horizontal",
+    legend.margin = margin(t = 0, r = 4, b = 0, l = 4),
+    legend.text = element_text(size = 9.5)
+  )
+
+# Gemeinsame x-Achse für die linke Spalte (N_t)
+n_limits <- c(0, 1.0)
+n_breaks <- seq(0, 1.0, by = 0.2)
+
+# Gemeinsame x-Achse für die rechte Spalte (Y_t)
+Y_eq0 <- eq0$Y_t
+Y_eq1 <- eq1$Y_t
+Y_temp <- eq1$eval_given_r(eq0$r_t, Y_hyp = Y_eq1)$Y_IS
+
+r_min_common <- max(-min(BASE_PARAMS$delta, SHOCK_PARAMS$delta) + 0.01, -0.05)
+r_max_common <- min(eq0$r_max, eq1$r_max) * 0.70
+r_low  <- max(r_min_common, min(eq0$r_t, eq1$r_t) - 0.08)
+r_high <- min(r_max_common, max(eq0$r_t, eq1$r_t) + 0.08)
+r_grid_is <- seq(r_low, r_high, length.out = 220)
+
+Y_is0 <- sapply(r_grid_is, function(r) eq0$eval_given_r(r)$Y_IS)
+Y_is1 <- sapply(r_grid_is, function(r) eq1$eval_given_r(r)$Y_IS)
+
+y_min_plot <- max(0, min(c(Y_eq0, Y_eq1, Y_is0, Y_is1), na.rm = TRUE) * 0.75)
+y_max_plot <- max(c(Y_eq0, Y_eq1, Y_temp, Y_is0, Y_is1), na.rm = TRUE) * 1.12
+y_limits <- c(y_min_plot, y_max_plot)
+y_breaks <- pretty(y_limits, n = 5)
+y_breaks <- y_breaks[y_breaks >= y_min_plot & y_breaks <= y_max_plot]
+
+# --- LINKE SPALTE: Arbeitsmarkt (oben) & Produktionsfunktion (unten) ---
+w_max <- max(eq0$w_t, eq1$w_t) * 1.75
+w_min_grid <- max(0.05, min(BASE_PARAMS$theta_t, SHOCK_PARAMS$theta_t) * 0.4)
+w_grid <- seq(w_min_grid, w_max, length.out = 300)
+
+df_labor_curves <- rbind(
+  data.frame(
+    w = w_grid,
+    N = BASE_PARAMS$K_t * ((1 - BASE_PARAMS$alpha) * BASE_PARAMS$A_t / w_grid)^(1 / BASE_PARAMS$alpha),
+    Kurve = "N^d",
+    Szenario = "Baseline"
+  ),
+  data.frame(
+    w = w_grid,
+    N = pmax(0, 1 - BASE_PARAMS$theta_t / w_grid),
+    Kurve = "N^s",
+    Szenario = "Baseline"
+  ),
+  data.frame(
+    w = w_grid,
+    N = SHOCK_PARAMS$K_t * ((1 - SHOCK_PARAMS$alpha) * SHOCK_PARAMS$A_t / w_grid)^(1 / SHOCK_PARAMS$alpha),
+    Kurve = "N^d",
+    Szenario = "Schock"
+  ),
+  data.frame(
+    w = w_grid,
+    N = pmax(0, 1 - SHOCK_PARAMS$theta_t / w_grid),
+    Kurve = "N^s",
+    Szenario = "Schock"
+  )
+)
+
+p_labor <- ggplot(df_labor_curves, aes(x = N, y = w, color = Kurve, linetype = Szenario)) +
+  geom_hline(yintercept = BASE_PARAMS$theta_t, linetype = "dashed", color = "grey50") +
+  geom_line(linewidth = 0.95) +
+  geom_segment(
+    data = data.frame(x = eq0$N_t, y = eq0$w_t),
+    aes(x = x, xend = x, y = 0, yend = y),
+    linetype = "dotted", color = "grey40", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq0$N_t, y = eq0$w_t),
+    aes(x = 0, xend = x, y = y, yend = y),
+    linetype = "dotted", color = "grey40", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq1$N_t, y = eq1$w_t),
+    aes(x = x, xend = x, y = 0, yend = y),
+    linetype = "dotted", color = "#70AD47", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq1$N_t, y = eq1$w_t),
+    aes(x = 0, xend = x, y = y, yend = y),
+    linetype = "dotted", color = "#70AD47", inherit.aes = FALSE
+  ) +
+  geom_point(
+    data = data.frame(x = eq0$N_t, y = eq0$w_t),
+    aes(x = x, y = y),
+    color = "black", size = 2.6, inherit.aes = FALSE
+  ) +
+  geom_point(
+    data = data.frame(x = eq1$N_t, y = eq1$w_t),
+    aes(x = x, y = y),
+    color = "#70AD47", size = 2.6, inherit.aes = FALSE
+  ) +
+  scale_x_continuous(limits = n_limits, breaks = n_breaks, expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, w_max), expand = c(0, 0)) +
+  scale_color_manual(
+    values = c("N^d" = "black", "N^s" = "#2E75B6"),
+    labels = c("N^d" = expression(N[t]^d), "N^s" = expression(N[t]^s))
+  ) +
+  scale_linetype_manual(
+    values = c("Baseline" = "solid", "Schock" = "dashed"),
+    labels = c("Baseline" = "Baseline", "Schock" = "Schock")
+  ) +
+  guides(
+    color = guide_legend(nrow = 1, override.aes = list(linetype = "solid")),
+    linetype = guide_legend(nrow = 1, override.aes = list(color = "black"))
+  ) +
+  labs(
+    title = "Arbeitsmarkt in Periode t",
+    x = NULL,
+    y = expression(Reallohn~w[t])
+  ) +
+  theme_macro +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+n_grid <- seq(0.005, 0.995, length.out = 250)
+df_prod <- rbind(
+  data.frame(
+    N = n_grid,
+    Y = BASE_PARAMS$A_t * BASE_PARAMS$K_t^BASE_PARAMS$alpha * n_grid^(1 - BASE_PARAMS$alpha),
+    Szenario = "Baseline"
+  ),
+  data.frame(
+    N = n_grid,
+    Y = SHOCK_PARAMS$A_t * SHOCK_PARAMS$K_t^SHOCK_PARAMS$alpha * n_grid^(1 - SHOCK_PARAMS$alpha),
+    Szenario = "Schock (A_t)"
+  )
+)
+
+y_prod_max <- max(df_prod$Y) * 1.08
+
+p_prod <- ggplot(df_prod, aes(x = N, y = Y, color = Szenario, linetype = Szenario)) +
+  geom_line(linewidth = 0.95) +
+  geom_segment(
+    data = data.frame(x = eq0$N_t, y = eq0$Y_t),
+    aes(x = x, xend = x, y = 0, yend = y),
+    linetype = "dotted", color = "grey40", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq0$N_t, y = eq0$Y_t),
+    aes(x = 0, xend = x, y = y, yend = y),
+    linetype = "dotted", color = "grey40", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq1$N_t, y = eq1$Y_t),
+    aes(x = x, xend = x, y = 0, yend = y),
+    linetype = "dotted", color = "#70AD47", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq1$N_t, y = eq1$Y_t),
+    aes(x = 0, xend = x, y = y, yend = y),
+    linetype = "dotted", color = "#70AD47", inherit.aes = FALSE
+  ) +
+  geom_point(
+    data = data.frame(
+      x = c(eq0$N_t, eq1$N_t),
+      y = c(eq0$Y_t, eq1$Y_t),
+      Szenario = c("Baseline", "Schock (A_t)")
+    ),
+    aes(x = x, y = y, color = Szenario),
+    size = 2.8, inherit.aes = FALSE
+  ) +
+  scale_x_continuous(limits = n_limits, breaks = n_breaks, expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, y_prod_max), expand = c(0, 0)) +
+  scale_color_manual(values = c("Baseline" = "black", "Schock (A_t)" = "#2E75B6")) +
+  scale_linetype_manual(values = c("Baseline" = "solid", "Schock (A_t)" = "dashed")) +
+  labs(
+    title = "Produktionsfunktion in Abhängigkeit von N",
+    x = expression(Arbeit~N[t]),
+    y = expression(Output~Y[t])
+  ) +
+  theme_macro
+
+# --- RECHTE SPALTE: Keynesianisches Kreuz (oben) & IS-Kurve (unten) ---
+Y_grid <- seq(y_min_plot, y_max_plot, length.out = 220)
+
+Yd_base  <- sapply(Y_grid, function(y) eq0$eval_given_r(eq0$r_t, Y_hyp = y)$Yd)
+Yd_shift <- sapply(Y_grid, function(y) eq1$eval_given_r(eq0$r_t, Y_hyp = y)$Yd)
+Yd_final <- sapply(Y_grid, function(y) eq1$eval_given_r(eq1$r_t, Y_hyp = y)$Yd)
+
+df_keynes <- rbind(
+  data.frame(Y = Y_grid, Yd = Y_grid,   Kurve = "gg"),
+  data.frame(Y = Y_grid, Yd = Yd_base,  Kurve = "base"),
+  data.frame(Y = Y_grid, Yd = Yd_shift, Kurve = "impuls"),
+  data.frame(Y = Y_grid, Yd = Yd_final, Kurve = "schock")
+)
+
+keynes_breaks <- c("gg", "base", "schock")
+keynes_labels <- c(
+  "gg"     = expression(Y[t]^d == Y[t]),
+  "base"   = expression(Y^d~baseline),
+  "schock" = expression(Y^d~Schock)
+)
+
+p_keynes <- ggplot() +
+  geom_line(
+    data = subset(df_keynes, Kurve == "gg"),
+    aes(x = Y, y = Yd, color = "gg"),
+    linetype = "solid", linewidth = 0.85
+  ) +
+  geom_line(
+    data = subset(df_keynes, Kurve == "base"),
+    aes(x = Y, y = Yd, color = "base"),
+    linetype = "solid", linewidth = 1.0
+  ) +
+  geom_line(
+    data = subset(df_keynes, Kurve == "impuls"),
+    aes(x = Y, y = Yd),
+    color = "grey55", linetype = "dotted", linewidth = 0.85
+  ) +
+  geom_line(
+    data = subset(df_keynes, Kurve == "schock"),
+    aes(x = Y, y = Yd, color = "schock"),
+    linetype = "dashed", linewidth = 1.0
+  ) +
+  geom_segment(aes(x = Y_eq0, xend = Y_eq0, y = y_min_plot, yend = Y_eq0), linetype = "dotted", color = "grey35") +
+  geom_segment(aes(x = y_min_plot, xend = Y_eq0, y = Y_eq0, yend = Y_eq0), linetype = "dotted", color = "grey35") +
+  geom_segment(aes(x = Y_eq1, xend = Y_eq1, y = y_min_plot, yend = Y_eq1), linetype = "dotted", color = "#70AD47") +
+  geom_point(aes(x = Y_eq0, y = Y_eq0), color = "#2E75B6", size = 2.6) +
+  geom_point(aes(x = Y_temp, y = Y_temp), color = "grey55", size = 2.3) +
+  geom_point(aes(x = Y_eq1, y = Y_eq1), color = "#70AD47", size = 2.6) +
+  scale_x_continuous(limits = y_limits, breaks = y_breaks, expand = c(0, 0)) +
+  scale_y_continuous(limits = y_limits, breaks = y_breaks, expand = c(0, 0)) +
+  scale_color_manual(
+    breaks = keynes_breaks,
+    values = c("gg" = "black", "base" = "#2E75B6", "schock" = "#70AD47"),
+    labels = keynes_labels
+  ) +
+  guides(
+    color = guide_legend(
+      nrow = 1,
+      override.aes = list(
+        color = c("black", "#2E75B6", "#70AD47"),
+        linetype = c("solid", "solid", "dashed")
+      )
+    )
+  ) +
+  labs(
+    title = "Güternachfrage (Keynesianisches Kreuz)",
+    x = NULL,
+    y = expression(Güternachfrage~Y[t]^d)
+  ) +
+  theme_macro +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+df_is <- rbind(
+  data.frame(r = r_grid_is, Y = Y_is0, Kurve = "IS (Baseline)"),
+  data.frame(r = r_grid_is, Y = Y_is1, Kurve = "IS' (Schock A_t)")
+)
+
+p_is <- ggplot(df_is, aes(x = Y, y = r)) +
+  geom_vline(xintercept = Y_eq0, color = "grey30", linewidth = 0.9, linetype = "solid") +
+  geom_vline(xintercept = Y_eq1, color = "#70AD47", linewidth = 0.9, linetype = "dashed") +
+  geom_line(aes(color = Kurve, linetype = Kurve), linewidth = 1.0) +
+  geom_segment(aes(x = y_min_plot, xend = Y_eq0, y = eq0$r_t, yend = eq0$r_t), linetype = "dotted", color = "grey35") +
+  geom_segment(aes(x = y_min_plot, xend = Y_eq1, y = eq1$r_t, yend = eq1$r_t), linetype = "dotted", color = "#70AD47") +
+  geom_point(aes(x = Y_eq0, y = eq0$r_t), color = "black", size = 2.7) +
+  geom_point(aes(x = Y_eq1, y = eq1$r_t), color = "#70AD47", size = 2.7) +
+  scale_x_continuous(limits = y_limits, breaks = y_breaks, expand = c(0, 0)) +
+  scale_y_continuous(
+    limits = c(r_low, r_high),
+    labels = function(x) sprintf("%.2f", x),
+    expand = c(0, 0)
+  ) +
+  scale_color_manual(values = c("IS (Baseline)" = "black", "IS' (Schock A_t)" = "#2E75B6")) +
+  scale_linetype_manual(values = c("IS (Baseline)" = "solid", "IS' (Schock A_t)" = "dashed")) +
+  labs(
+    title = "IS-Kurve und Güterangebotsgleichgewicht",
+    x = expression(Output~"/"~Einkommen~Y[t]),
+    y = expression(Realzins~r[t])
+  ) +
+  theme_macro
+
+# --- GESAMTKOMBINATION MIT PATCHWORK ---
+(p_labor / p_prod + plot_layout(heights = c(1, 1))) |
+  (p_keynes / p_is + plot_layout(heights = c(1, 1)))
+```
+
+
+### Produktivitätsschock morgen
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Produktivitätsschock morgen"
+
+library(ggplot2)
+library(patchwork)
+
+# ==============================================================================
+# 1. ZENTRALE PARAMETERDEFINITION (Single Source of Truth)
+# ==============================================================================
+BASE_PARAMS <- list(
+  K_t      = 10.0,
+  delta    = 0.10,
+  theta_t  = 1.40,
+  theta_t1 = 1.20,
+  G_t      = 0.50,
+  G_t1     = 0.50,
+  sigma    = 1.00,
+  beta     = 0.96,
+  A_t      = 6.00,
+  A_t1     = 8.00,
+  alpha    = 0.33
+)
+
+# Schock: Anstieg der künftigen Produktivität A_{t+1} ausgehend von der Baseline
+SHOCK_PARAMS <- modifyList(BASE_PARAMS, list(A_t1 = 10.00))
+
+# ==============================================================================
+# 2. MODELL-SOLVER
+# ==============================================================================
+solve_macro_model <- function(p) {
+  with(p, {
+    labor_eq_t <- function(w) {
+      Nd <- K_t * ((1 - alpha) * A_t / w)^(1 / alpha)
+      Ns <- 1 - theta_t / w
+      return(Nd - Ns)
+    }
+    w_t <- uniroot(labor_eq_t, interval = c(theta_t + 1e-6, 1000))$root
+    N_t <- 1 - theta_t / w_t
+    Y_t <- A_t * K_t^alpha * N_t^(1 - alpha)
+    D_t <- Y_t - w_t * N_t
+
+    eval_given_r <- function(r, Y_hyp = Y_t) {
+      k_n_ratio <- (alpha * A_t1 / (r + delta))^(1 / (1 - alpha))
+      w_t1 <- (1 - alpha) * A_t1 * (k_n_ratio)^alpha
+      N_t1 <- 1 - theta_t1 / w_t1
+      if (is.na(N_t1) || N_t1 <= 0 || is.na(k_n_ratio) || k_n_ratio <= 0) {
+        return(list(
+          excess_demand = NA, I_t = NA, Y_IS = NA, Yd = NA,
+          Y_t1 = NA, N_t1 = NA, K_t1 = NA, w_t1 = NA, D_t1 = NA
+        ))
+      }
+
+      K_t1 <- k_n_ratio * N_t1
+      I_t  <- K_t1 - (1 - delta) * K_t
+      B_I  <- I_t
+      Y_t1 <- A_t1 * K_t1^alpha * N_t1^(1 - alpha)
+      D_t1 <- Y_t1 + (1 - delta) * K_t1 - w_t1 * N_t1 - (1 + r) * B_I
+
+      PV_t1 <- (w_t1 * N_t1 + D_t1 - G_t1) / (1 + r)
+      W     <- (Y_hyp - G_t) + PV_t1
+      mpc   <- 1 / (1 + beta^(1 / sigma) * (1 + r)^((1 - sigma) / sigma))
+      C_t   <- mpc * W
+
+      Yd <- C_t + I_t + G_t
+      excess_demand <- Yd - Y_hyp
+
+      denom <- 1 - mpc
+      Y_IS <- if (abs(denom) > 1e-8) (mpc * (PV_t1 - G_t) + I_t + G_t) / denom else NA
+
+      S_t  <- Y_hyp - G_t - C_t
+      C_t1 <- (1 + r) * S_t + w_t1 * N_t1 + D_t1 - G_t1
+
+      list(
+        r_t = r, w_t = w_t, N_t = N_t, Y_t = Y_t, D_t = D_t,
+        C_t = C_t, I_t = I_t, S_t = S_t, G_t = G_t, Yd = Yd, Y_IS = Y_IS,
+        w_t1 = w_t1, N_t1 = N_t1, K_t1 = K_t1, Y_t1 = Y_t1,
+        D_t1 = D_t1, C_t1 = C_t1, G_t1 = G_t1, W = W, PV_t1 = PV_t1,
+        excess_demand = excess_demand,
+        check_t1 = Y_t1 + (1 - delta) * K_t1 - (C_t1 + G_t1)
+      )
+    }
+
+    r_max <- alpha * A_t1 * ((1 - alpha) * A_t1 / theta_t1)^((1 - alpha) / alpha) - delta
+    r_min <- max(-delta + 1e-5, -0.99)
+    r_star <- uniroot(
+      function(r) eval_given_r(r, Y_hyp = Y_t)$excess_demand,
+      interval = c(r_min, r_max - 1e-6)
+    )$root
+
+    out <- eval_given_r(r_star, Y_hyp = Y_t)
+    out$eval_given_r <- eval_given_r
+    out$r_max <- r_max
+    out$params <- p
+    return(out)
+  })
+}
+
+eq0 <- solve_macro_model(BASE_PARAMS)
+eq1 <- solve_macro_model(SHOCK_PARAMS)
+
+# ==============================================================================
+# 3. STATISCHE GGPLOT2 + PATCHWORK GRAFIK
+# ==============================================================================
+theme_macro <- theme_light(base_size = 11) +
+  theme(
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.box = "horizontal",
+    legend.margin = margin(t = 0, r = 4, b = 0, l = 4),
+    legend.text = element_text(size = 9.5)
+  )
+
+# Gemeinsame x-Achse für die linke Spalte (N_t)
+n_limits <- c(0, 1.0)
+n_breaks <- seq(0, 1.0, by = 0.2)
+
+# Gemeinsame x-Achse für die rechte Spalte (Y_t)
+Y_eq0 <- eq0$Y_t
+Y_eq1 <- eq1$Y_t
+Y_temp <- eq1$eval_given_r(eq0$r_t, Y_hyp = Y_eq1)$Y_IS
+
+r_min_common <- max(-min(BASE_PARAMS$delta, SHOCK_PARAMS$delta) + 0.01, -0.05)
+r_max_common <- min(eq0$r_max, eq1$r_max) * 0.70
+r_low  <- max(r_min_common, min(eq0$r_t, eq1$r_t) - 0.08)
+r_high <- min(r_max_common, max(eq0$r_t, eq1$r_t) + 0.08)
+r_grid_is <- seq(r_low, r_high, length.out = 220)
+
+Y_is0 <- sapply(r_grid_is, function(r) eq0$eval_given_r(r)$Y_IS)
+Y_is1 <- sapply(r_grid_is, function(r) eq1$eval_given_r(r)$Y_IS)
+
+y_min_plot <- max(0, min(c(Y_eq0, Y_eq1, Y_is0, Y_is1), na.rm = TRUE) * 0.75)
+y_max_plot <- max(c(Y_eq0, Y_eq1, Y_temp, Y_is0, Y_is1), na.rm = TRUE) * 1.12
+y_limits <- c(y_min_plot, y_max_plot)
+y_breaks <- pretty(y_limits, n = 5)
+y_breaks <- y_breaks[y_breaks >= y_min_plot & y_breaks <= y_max_plot]
+
+# --- LINKE SPALTE: Arbeitsmarkt (oben) & Produktionsfunktion (unten) ---
+w_max <- max(eq0$w_t, eq1$w_t) * 1.75
+w_min_grid <- max(0.05, min(BASE_PARAMS$theta_t, SHOCK_PARAMS$theta_t) * 0.4)
+w_grid <- seq(w_min_grid, w_max, length.out = 300)
+
+df_labor_curves <- rbind(
+  data.frame(
+    w = w_grid,
+    N = BASE_PARAMS$K_t * ((1 - BASE_PARAMS$alpha) * BASE_PARAMS$A_t / w_grid)^(1 / BASE_PARAMS$alpha),
+    Kurve = "N^d",
+    Szenario = "Baseline"
+  ),
+  data.frame(
+    w = w_grid,
+    N = pmax(0, 1 - BASE_PARAMS$theta_t / w_grid),
+    Kurve = "N^s",
+    Szenario = "Baseline"
+  ),
+  data.frame(
+    w = w_grid,
+    N = SHOCK_PARAMS$K_t * ((1 - SHOCK_PARAMS$alpha) * SHOCK_PARAMS$A_t / w_grid)^(1 / SHOCK_PARAMS$alpha),
+    Kurve = "N^d",
+    Szenario = "Schock"
+  ),
+  data.frame(
+    w = w_grid,
+    N = pmax(0, 1 - SHOCK_PARAMS$theta_t / w_grid),
+    Kurve = "N^s",
+    Szenario = "Schock"
+  )
+)
+
+p_labor <- ggplot(df_labor_curves, aes(x = N, y = w, color = Kurve, linetype = Szenario)) +
+  geom_hline(yintercept = BASE_PARAMS$theta_t, linetype = "dashed", color = "grey50") +
+  geom_line(linewidth = 0.95) +
+  geom_segment(
+    data = data.frame(x = eq0$N_t, y = eq0$w_t),
+    aes(x = x, xend = x, y = 0, yend = y),
+    linetype = "dotted", color = "grey40", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq0$N_t, y = eq0$w_t),
+    aes(x = 0, xend = x, y = y, yend = y),
+    linetype = "dotted", color = "grey40", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq1$N_t, y = eq1$w_t),
+    aes(x = x, xend = x, y = 0, yend = y),
+    linetype = "dotted", color = "#70AD47", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq1$N_t, y = eq1$w_t),
+    aes(x = 0, xend = x, y = y, yend = y),
+    linetype = "dotted", color = "#70AD47", inherit.aes = FALSE
+  ) +
+  geom_point(
+    data = data.frame(x = eq0$N_t, y = eq0$w_t),
+    aes(x = x, y = y),
+    color = "black", size = 2.6, inherit.aes = FALSE
+  ) +
+  geom_point(
+    data = data.frame(x = eq1$N_t, y = eq1$w_t),
+    aes(x = x, y = y),
+    color = "#70AD47", size = 2.6, inherit.aes = FALSE
+  ) +
+  scale_x_continuous(limits = n_limits, breaks = n_breaks, expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, w_max), expand = c(0, 0)) +
+  scale_color_manual(
+    values = c("N^d" = "black", "N^s" = "#2E75B6"),
+    labels = list(
+      "N^d" = bquote(N[t]^d),
+      "N^s" = bquote(N[t]^s)
+    )
+  ) +
+  scale_linetype_manual(
+    values = c("Baseline" = "solid", "Schock" = "dashed"),
+    labels = list(
+      "Baseline" = bquote(Baseline),
+      "Schock"   = bquote(Schock~(A[t+1]))
+    )
+  ) +
+  guides(
+    color = guide_legend(nrow = 1, override.aes = list(linetype = "solid")),
+    linetype = guide_legend(nrow = 1, override.aes = list(color = "black"))
+  ) +
+  labs(
+    title = "Arbeitsmarkt in Periode t",
+    x = NULL,
+    y = expression(Reallohn~w[t])
+  ) +
+  theme_macro +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+n_grid <- seq(0.005, 0.995, length.out = 250)
+df_prod <- rbind(
+  data.frame(
+    N = n_grid,
+    Y = BASE_PARAMS$A_t * BASE_PARAMS$K_t^BASE_PARAMS$alpha * n_grid^(1 - BASE_PARAMS$alpha),
+    Szenario = "base"
+  ),
+  data.frame(
+    N = n_grid,
+    Y = SHOCK_PARAMS$A_t * SHOCK_PARAMS$K_t^SHOCK_PARAMS$alpha * n_grid^(1 - SHOCK_PARAMS$alpha),
+    Szenario = "shock"
+  )
+)
+
+y_prod_max <- max(df_prod$Y) * 1.08
+
+p_prod <- ggplot(df_prod, aes(x = N, y = Y, color = Szenario, linetype = Szenario)) +
+  geom_line(linewidth = 0.95) +
+  geom_segment(
+    data = data.frame(x = eq0$N_t, y = eq0$Y_t),
+    aes(x = x, xend = x, y = 0, yend = y),
+    linetype = "dotted", color = "grey40", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq0$N_t, y = eq0$Y_t),
+    aes(x = 0, xend = x, y = y, yend = y),
+    linetype = "dotted", color = "grey40", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq1$N_t, y = eq1$Y_t),
+    aes(x = x, xend = x, y = 0, yend = y),
+    linetype = "dotted", color = "#70AD47", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq1$N_t, y = eq1$Y_t),
+    aes(x = 0, xend = x, y = y, yend = y),
+    linetype = "dotted", color = "#70AD47", inherit.aes = FALSE
+  ) +
+  geom_point(
+    data = data.frame(
+      x = c(eq0$N_t, eq1$N_t),
+      y = c(eq0$Y_t, eq1$Y_t),
+      Szenario = c("base", "shock")
+    ),
+    aes(x = x, y = y, color = Szenario),
+    size = 2.8, inherit.aes = FALSE
+  ) +
+  scale_x_continuous(limits = n_limits, breaks = n_breaks, expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, y_prod_max), expand = c(0, 0)) +
+  scale_color_manual(
+    values = c("base" = "black", "shock" = "#2E75B6"),
+    labels = list(
+      "base"  = bquote(Baseline),
+      "shock" = bquote(Schock~(A[t+1]))
+    )
+  ) +
+  scale_linetype_manual(
+    values = c("base" = "solid", "shock" = "dashed"),
+    labels = list(
+      "base"  = bquote(Baseline),
+      "shock" = bquote(Schock~(A[t+1]))
+    )
+  ) +
+  labs(
+    title = "Produktionsfunktion in Abhängigkeit von N",
+    x = expression(Arbeit~N[t]),
+    y = expression(Output~Y[t])
+  ) +
+  theme_macro
+
+# --- RECHTE SPALTE: Keynesianisches Kreuz (oben) & IS-Kurve (unten) ---
+Y_grid <- seq(y_min_plot, y_max_plot, length.out = 220)
+
+Yd_base  <- sapply(Y_grid, function(y) eq0$eval_given_r(eq0$r_t, Y_hyp = y)$Yd)
+Yd_shift <- sapply(Y_grid, function(y) eq1$eval_given_r(eq0$r_t, Y_hyp = y)$Yd)
+Yd_final <- sapply(Y_grid, function(y) eq1$eval_given_r(eq1$r_t, Y_hyp = y)$Yd)
+
+df_keynes <- rbind(
+  data.frame(Y = Y_grid, Yd = Y_grid,   Kurve = "gg"),
+  data.frame(Y = Y_grid, Yd = Yd_base,  Kurve = "base"),
+  data.frame(Y = Y_grid, Yd = Yd_shift, Kurve = "impuls"),
+  data.frame(Y = Y_grid, Yd = Yd_final, Kurve = "schock")
+)
+
+keynes_breaks <- c("gg", "base", "schock")
+keynes_labels <- list(
+  "gg"     = bquote(Y[t]^d == Y[t]),
+  "base"   = bquote(Y^d~baseline),
+  "schock" = bquote(Y^d~Schock~(A[t+1]))
+)
+
+p_keynes <- ggplot() +
+  geom_line(
+    data = subset(df_keynes, Kurve == "gg"),
+    aes(x = Y, y = Yd, color = "gg"),
+    linetype = "solid", linewidth = 0.85
+  ) +
+  geom_line(
+    data = subset(df_keynes, Kurve == "base"),
+    aes(x = Y, y = Yd, color = "base"),
+    linetype = "solid", linewidth = 1.0
+  ) +
+  geom_line(
+    data = subset(df_keynes, Kurve == "impuls"),
+    aes(x = Y, y = Yd),
+    color = "grey55", linetype = "dotted", linewidth = 0.85
+  ) +
+  geom_line(
+    data = subset(df_keynes, Kurve == "schock"),
+    aes(x = Y, y = Yd, color = "schock"),
+    linetype = "dashed", linewidth = 1.0
+  ) +
+  geom_segment(aes(x = Y_eq0, xend = Y_eq0, y = y_min_plot, yend = Y_eq0), linetype = "dotted", color = "grey35") +
+  geom_segment(aes(x = y_min_plot, xend = Y_eq0, y = Y_eq0, yend = Y_eq0), linetype = "dotted", color = "grey35") +
+  geom_segment(aes(x = Y_eq1, xend = Y_eq1, y = y_min_plot, yend = Y_eq1), linetype = "dotted", color = "#70AD47") +
+  geom_point(aes(x = Y_eq0, y = Y_eq0), color = "#2E75B6", size = 2.6) +
+  geom_point(aes(x = Y_temp, y = Y_temp), color = "grey55", size = 2.3) +
+  geom_point(aes(x = Y_eq1, y = Y_eq1), color = "#70AD47", size = 2.6) +
+  scale_x_continuous(limits = y_limits, breaks = y_breaks, expand = c(0, 0)) +
+  scale_y_continuous(limits = y_limits, breaks = y_breaks, expand = c(0, 0)) +
+  scale_color_manual(
+    breaks = keynes_breaks,
+    values = c("gg" = "black", "base" = "#2E75B6", "schock" = "#70AD47"),
+    labels = keynes_labels
+  ) +
+  guides(
+    color = guide_legend(
+      nrow = 1,
+      override.aes = list(
+        color = c("black", "#2E75B6", "#70AD47"),
+        linetype = c("solid", "solid", "dashed")
+      )
+    )
+  ) +
+  labs(
+    title = "Güternachfrage (Keynesianisches Kreuz)",
+    x = NULL,
+    y = expression(Güternachfrage~Y[t]^d)
+  ) +
+  theme_macro +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+df_is <- rbind(
+  data.frame(r = r_grid_is, Y = Y_is0, Kurve = "base"),
+  data.frame(r = r_grid_is, Y = Y_is1, Kurve = "shock")
+)
+
+p_is <- ggplot(df_is, aes(x = Y, y = r, color = Kurve, linetype = Kurve)) +
+  geom_vline(xintercept = Y_eq0, color = "grey30", linewidth = 0.9, linetype = "solid") +
+  geom_vline(xintercept = Y_eq1, color = "#70AD47", linewidth = 0.9, linetype = "dashed") +
+  geom_line(linewidth = 1.0) +
+  geom_segment(aes(x = y_min_plot, xend = Y_eq0, y = eq0$r_t, yend = eq0$r_t), linetype = "dotted", color = "grey35") +
+  geom_segment(aes(x = y_min_plot, xend = Y_eq1, y = eq1$r_t, yend = eq1$r_t), linetype = "dotted", color = "#70AD47") +
+  geom_point(aes(x = Y_eq0, y = eq0$r_t), color = "black", size = 2.7) +
+  geom_point(aes(x = Y_eq1, y = eq1$r_t), color = "#70AD47", size = 2.7) +
+  scale_x_continuous(limits = y_limits, breaks = y_breaks, expand = c(0, 0)) +
+  scale_y_continuous(
+    limits = c(r_low, r_high),
+    labels = function(x) sprintf("%.2f", x),
+    expand = c(0, 0)
+  ) +
+  scale_color_manual(
+    values = c("base" = "black", "shock" = "#2E75B6"),
+    labels = list(
+      "base"  = bquote(IS),
+      "shock" = bquote(IS^"'"~(A[t+1]))
+    )
+  ) +
+  scale_linetype_manual(
+    values = c("base" = "solid", "shock" = "dashed"),
+    labels = list(
+      "base"  = bquote(IS),
+      "shock" = bquote(IS^"'"~(A[t+1]))
+    )
+  ) +
+  labs(
+    title = "IS-Kurve und Güterangebotsgleichgewicht",
+    x = expression(Output~"/"~Einkommen~Y[t]),
+    y = expression(Realzins~r[t])
+  ) +
+  theme_macro
+
+# --- GESAMTKOMBINATION MIT PATCHWORK ---
+(p_labor / p_prod + plot_layout(heights = c(1, 1))) |
+  (p_keynes / p_is + plot_layout(heights = c(1, 1)))
+```
+
+
+### Erhöhung der Staatsausgaben heute
+
+```{r}
+#| message: false
+#| warning: false
+#| fig-cap: "Erhöhung der Staatsausgaben heute"
+
+
+library(ggplot2)
+library(patchwork)
+
+# ==============================================================================
+# 1. ZENTRALE PARAMETERDEFINITION (Single Source of Truth)
+# ==============================================================================
+BASE_PARAMS <- list(
+  K_t      = 10.0,
+  delta    = 0.10,
+  theta_t  = 1.40,
+  theta_t1 = 1.20,
+  G_t      = 0.50,
+  G_t1     = 0.50,
+  sigma    = 1.00,
+  beta     = 0.96,
+  A_t      = 6.00,
+  A_t1     = 8.00,
+  alpha    = 0.33
+)
+
+# Schock: Erhöhung der laufenden Staatsausgaben G_t ausgehend von der Baseline
+SHOCK_PARAMS <- modifyList(BASE_PARAMS, list(G_t = 1.50))
+
+# ==============================================================================
+# 2. MODELL-SOLVER
+# ==============================================================================
+solve_macro_model <- function(p) {
+  with(p, {
+    labor_eq_t <- function(w) {
+      Nd <- K_t * ((1 - alpha) * A_t / w)^(1 / alpha)
+      Ns <- 1 - theta_t / w
+      return(Nd - Ns)
+    }
+    w_t <- uniroot(labor_eq_t, interval = c(theta_t + 1e-6, 1000))$root
+    N_t <- 1 - theta_t / w_t
+    Y_t <- A_t * K_t^alpha * N_t^(1 - alpha)
+    D_t <- Y_t - w_t * N_t
+
+    eval_given_r <- function(r, Y_hyp = Y_t) {
+      k_n_ratio <- (alpha * A_t1 / (r + delta))^(1 / (1 - alpha))
+      w_t1 <- (1 - alpha) * A_t1 * (k_n_ratio)^alpha
+      N_t1 <- 1 - theta_t1 / w_t1
+      if (is.na(N_t1) || N_t1 <= 0 || is.na(k_n_ratio) || k_n_ratio <= 0) {
+        return(list(
+          excess_demand = NA, I_t = NA, Y_IS = NA, Yd = NA,
+          Y_t1 = NA, N_t1 = NA, K_t1 = NA, w_t1 = NA, D_t1 = NA
+        ))
+      }
+
+      K_t1 <- k_n_ratio * N_t1
+      I_t  <- K_t1 - (1 - delta) * K_t
+      B_I  <- I_t
+      Y_t1 <- A_t1 * K_t1^alpha * N_t1^(1 - alpha)
+      D_t1 <- Y_t1 + (1 - delta) * K_t1 - w_t1 * N_t1 - (1 + r) * B_I
+
+      PV_t1 <- (w_t1 * N_t1 + D_t1 - G_t1) / (1 + r)
+      W     <- (Y_hyp - G_t) + PV_t1
+      mpc   <- 1 / (1 + beta^(1 / sigma) * (1 + r)^((1 - sigma) / sigma))
+      C_t   <- mpc * W
+
+      Yd <- C_t + I_t + G_t
+      excess_demand <- Yd - Y_hyp
+
+      denom <- 1 - mpc
+      Y_IS <- if (abs(denom) > 1e-8) (mpc * (PV_t1 - G_t) + I_t + G_t) / denom else NA
+
+      S_t  <- Y_hyp - G_t - C_t
+      C_t1 <- (1 + r) * S_t + w_t1 * N_t1 + D_t1 - G_t1
+
+      list(
+        r_t = r, w_t = w_t, N_t = N_t, Y_t = Y_t, D_t = D_t,
+        C_t = C_t, I_t = I_t, S_t = S_t, G_t = G_t, Yd = Yd, Y_IS = Y_IS,
+        w_t1 = w_t1, N_t1 = N_t1, K_t1 = K_t1, Y_t1 = Y_t1,
+        D_t1 = D_t1, C_t1 = C_t1, G_t1 = G_t1, W = W, PV_t1 = PV_t1,
+        excess_demand = excess_demand,
+        check_t1 = Y_t1 + (1 - delta) * K_t1 - (C_t1 + G_t1)
+      )
+    }
+
+    r_max <- alpha * A_t1 * ((1 - alpha) * A_t1 / theta_t1)^((1 - alpha) / alpha) - delta
+    r_min <- max(-delta + 1e-5, -0.99)
+    r_star <- uniroot(
+      function(r) eval_given_r(r, Y_hyp = Y_t)$excess_demand,
+      interval = c(r_min, r_max - 1e-6)
+    )$root
+
+    out <- eval_given_r(r_star, Y_hyp = Y_t)
+    out$eval_given_r <- eval_given_r
+    out$r_max <- r_max
+    out$params <- p
+    return(out)
+  })
+}
+
+eq0 <- solve_macro_model(BASE_PARAMS)
+eq1 <- solve_macro_model(SHOCK_PARAMS)
+
+# ==============================================================================
+# 3. STATISCHE GGPLOT2 + PATCHWORK GRAFIK
+# ==============================================================================
+theme_macro <- theme_light(base_size = 11) +
+  theme(
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.box = "horizontal",
+    legend.margin = margin(t = 0, r = 4, b = 0, l = 4),
+    legend.text = element_text(size = 9.5)
+  )
+
+# Gemeinsame x-Achse für die linke Spalte (N_t)
+n_limits <- c(0, 1.0)
+n_breaks <- seq(0, 1.0, by = 0.2)
+
+# Gemeinsame x-Achse für die rechte Spalte (Y_t)
+Y_eq0 <- eq0$Y_t
+Y_eq1 <- eq1$Y_t
+Y_temp <- eq1$eval_given_r(eq0$r_t, Y_hyp = Y_eq1)$Y_IS
+
+r_min_common <- max(-min(BASE_PARAMS$delta, SHOCK_PARAMS$delta) + 0.01, -0.05)
+r_max_common <- min(eq0$r_max, eq1$r_max) * 0.70
+r_low  <- max(r_min_common, min(eq0$r_t, eq1$r_t) - 0.08)
+r_high <- min(r_max_common, max(eq0$r_t, eq1$r_t) + 0.08)
+r_grid_is <- seq(r_low, r_high, length.out = 220)
+
+Y_is0 <- sapply(r_grid_is, function(r) eq0$eval_given_r(r)$Y_IS)
+Y_is1 <- sapply(r_grid_is, function(r) eq1$eval_given_r(r)$Y_IS)
+
+y_min_plot <- max(0, min(c(Y_eq0, Y_eq1, Y_is0, Y_is1), na.rm = TRUE) * 0.75)
+y_max_plot <- max(c(Y_eq0, Y_eq1, Y_temp, Y_is0, Y_is1), na.rm = TRUE) * 1.12
+y_limits <- c(y_min_plot, y_max_plot)
+y_breaks <- pretty(y_limits, n = 5)
+y_breaks <- y_breaks[y_breaks >= y_min_plot & y_breaks <= y_max_plot]
+
+# --- LINKE SPALTE: Arbeitsmarkt (oben) & Produktionsfunktion (unten) ---
+w_max <- max(eq0$w_t, eq1$w_t) * 1.75
+w_min_grid <- max(0.05, min(BASE_PARAMS$theta_t, SHOCK_PARAMS$theta_t) * 0.4)
+w_grid <- seq(w_min_grid, w_max, length.out = 300)
+
+df_labor_curves <- rbind(
+  data.frame(
+    w = w_grid,
+    N = BASE_PARAMS$K_t * ((1 - BASE_PARAMS$alpha) * BASE_PARAMS$A_t / w_grid)^(1 / BASE_PARAMS$alpha),
+    Kurve = "N^d",
+    Szenario = "Baseline"
+  ),
+  data.frame(
+    w = w_grid,
+    N = pmax(0, 1 - BASE_PARAMS$theta_t / w_grid),
+    Kurve = "N^s",
+    Szenario = "Baseline"
+  ),
+  data.frame(
+    w = w_grid,
+    N = SHOCK_PARAMS$K_t * ((1 - SHOCK_PARAMS$alpha) * SHOCK_PARAMS$A_t / w_grid)^(1 / SHOCK_PARAMS$alpha),
+    Kurve = "N^d",
+    Szenario = "Schock"
+  ),
+  data.frame(
+    w = w_grid,
+    N = pmax(0, 1 - SHOCK_PARAMS$theta_t / w_grid),
+    Kurve = "N^s",
+    Szenario = "Schock"
+  )
+)
+
+p_labor <- ggplot(df_labor_curves, aes(x = N, y = w, color = Kurve, linetype = Szenario)) +
+  geom_hline(yintercept = BASE_PARAMS$theta_t, linetype = "dashed", color = "grey50") +
+  geom_line(linewidth = 0.95) +
+  geom_segment(
+    data = data.frame(x = eq0$N_t, y = eq0$w_t),
+    aes(x = x, xend = x, y = 0, yend = y),
+    linetype = "dotted", color = "grey40", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq0$N_t, y = eq0$w_t),
+    aes(x = 0, xend = x, y = y, yend = y),
+    linetype = "dotted", color = "grey40", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq1$N_t, y = eq1$w_t),
+    aes(x = x, xend = x, y = 0, yend = y),
+    linetype = "dotted", color = "#70AD47", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq1$N_t, y = eq1$w_t),
+    aes(x = 0, xend = x, y = y, yend = y),
+    linetype = "dotted", color = "#70AD47", inherit.aes = FALSE
+  ) +
+  geom_point(
+    data = data.frame(x = eq0$N_t, y = eq0$w_t),
+    aes(x = x, y = y),
+    color = "black", size = 2.6, inherit.aes = FALSE
+  ) +
+  geom_point(
+    data = data.frame(x = eq1$N_t, y = eq1$w_t),
+    aes(x = x, y = y),
+    color = "#70AD47", size = 2.6, inherit.aes = FALSE
+  ) +
+  scale_x_continuous(limits = n_limits, breaks = n_breaks, expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, w_max), expand = c(0, 0)) +
+  scale_color_manual(
+    values = c("N^d" = "black", "N^s" = "#2E75B6"),
+    labels = list(
+      "N^d" = bquote(N[t]^d),
+      "N^s" = bquote(N[t]^s)
+    )
+  ) +
+  scale_linetype_manual(
+    values = c("Baseline" = "solid", "Schock" = "dashed"),
+    labels = list(
+      "Baseline" = bquote(Baseline),
+      "Schock"   = bquote(Schock~(G[t]))
+    )
+  ) +
+  guides(
+    color = guide_legend(nrow = 1, override.aes = list(linetype = "solid")),
+    linetype = guide_legend(nrow = 1, override.aes = list(color = "black"))
+  ) +
+  labs(
+    title = "Arbeitsmarkt in Periode t",
+    x = NULL,
+    y = expression(Reallohn~w[t])
+  ) +
+  theme_macro +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+n_grid <- seq(0.005, 0.995, length.out = 250)
+df_prod <- rbind(
+  data.frame(
+    N = n_grid,
+    Y = BASE_PARAMS$A_t * BASE_PARAMS$K_t^BASE_PARAMS$alpha * n_grid^(1 - BASE_PARAMS$alpha),
+    Szenario = "base"
+  ),
+  data.frame(
+    N = n_grid,
+    Y = SHOCK_PARAMS$A_t * SHOCK_PARAMS$K_t^SHOCK_PARAMS$alpha * n_grid^(1 - SHOCK_PARAMS$alpha),
+    Szenario = "shock"
+  )
+)
+
+y_prod_max <- max(df_prod$Y) * 1.08
+
+p_prod <- ggplot(df_prod, aes(x = N, y = Y, color = Szenario, linetype = Szenario)) +
+  geom_line(linewidth = 0.95) +
+  geom_segment(
+    data = data.frame(x = eq0$N_t, y = eq0$Y_t),
+    aes(x = x, xend = x, y = 0, yend = y),
+    linetype = "dotted", color = "grey40", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq0$N_t, y = eq0$Y_t),
+    aes(x = 0, xend = x, y = y, yend = y),
+    linetype = "dotted", color = "grey40", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq1$N_t, y = eq1$Y_t),
+    aes(x = x, xend = x, y = 0, yend = y),
+    linetype = "dotted", color = "#70AD47", inherit.aes = FALSE
+  ) +
+  geom_segment(
+    data = data.frame(x = eq1$N_t, y = eq1$Y_t),
+    aes(x = 0, xend = x, y = y, yend = y),
+    linetype = "dotted", color = "#70AD47", inherit.aes = FALSE
+  ) +
+  geom_point(
+    data = data.frame(
+      x = c(eq0$N_t, eq1$N_t),
+      y = c(eq0$Y_t, eq1$Y_t),
+      Szenario = c("base", "shock")
+    ),
+    aes(x = x, y = y, color = Szenario),
+    size = 2.8, inherit.aes = FALSE
+  ) +
+  scale_x_continuous(limits = n_limits, breaks = n_breaks, expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, y_prod_max), expand = c(0, 0)) +
+  scale_color_manual(
+    values = c("base" = "black", "shock" = "#2E75B6"),
+    labels = list(
+      "base"  = bquote(Baseline),
+      "shock" = bquote(Schock~(G[t]))
+    )
+  ) +
+  scale_linetype_manual(
+    values = c("base" = "solid", "shock" = "dashed"),
+    labels = list(
+      "base"  = bquote(Baseline),
+      "shock" = bquote(Schock~(G[t]))
+    )
+  ) +
+  labs(
+    title = "Produktionsfunktion in Abhängigkeit von N",
+    x = expression(Arbeit~N[t]),
+    y = expression(Output~Y[t])
+  ) +
+  theme_macro
+
+# --- RECHTE SPALTE: Keynesianisches Kreuz (oben) & IS-Kurve (unten) ---
+Y_grid <- seq(y_min_plot, y_max_plot, length.out = 220)
+
+Yd_base  <- sapply(Y_grid, function(y) eq0$eval_given_r(eq0$r_t, Y_hyp = y)$Yd)
+Yd_shift <- sapply(Y_grid, function(y) eq1$eval_given_r(eq0$r_t, Y_hyp = y)$Yd)
+Yd_final <- sapply(Y_grid, function(y) eq1$eval_given_r(eq1$r_t, Y_hyp = y)$Yd)
+
+df_keynes <- rbind(
+  data.frame(Y = Y_grid, Yd = Y_grid,   Kurve = "gg"),
+  data.frame(Y = Y_grid, Yd = Yd_base,  Kurve = "base"),
+  data.frame(Y = Y_grid, Yd = Yd_shift, Kurve = "impuls"),
+  data.frame(Y = Y_grid, Yd = Yd_final, Kurve = "schock")
+)
+
+keynes_breaks <- c("gg", "base", "schock")
+keynes_labels <- list(
+  "gg"     = bquote(Y[t]^d == Y[t]),
+  "base"   = bquote(Y^d~baseline),
+  "schock" = bquote(Y^d~Schock~(G[t]))
+)
+
+p_keynes <- ggplot() +
+  geom_line(
+    data = subset(df_keynes, Kurve == "gg"),
+    aes(x = Y, y = Yd, color = "gg"),
+    linetype = "solid", linewidth = 0.85
+  ) +
+  geom_line(
+    data = subset(df_keynes, Kurve == "base"),
+    aes(x = Y, y = Yd, color = "base"),
+    linetype = "solid", linewidth = 1.0
+  ) +
+  geom_line(
+    data = subset(df_keynes, Kurve == "impuls"),
+    aes(x = Y, y = Yd),
+    color = "grey55", linetype = "dotted", linewidth = 0.85
+  ) +
+  geom_line(
+    data = subset(df_keynes, Kurve == "schock"),
+    aes(x = Y, y = Yd, color = "schock"),
+    linetype = "dashed", linewidth = 1.0
+  ) +
+  geom_segment(aes(x = Y_eq0, xend = Y_eq0, y = y_min_plot, yend = Y_eq0), linetype = "dotted", color = "grey35") +
+  geom_segment(aes(x = y_min_plot, xend = Y_eq0, y = Y_eq0, yend = Y_eq0), linetype = "dotted", color = "grey35") +
+  geom_segment(aes(x = Y_eq1, xend = Y_eq1, y = y_min_plot, yend = Y_eq1), linetype = "dotted", color = "#70AD47") +
+  geom_point(aes(x = Y_eq0, y = Y_eq0), color = "#2E75B6", size = 2.6) +
+  geom_point(aes(x = Y_temp, y = Y_temp), color = "grey55", size = 2.3) +
+  geom_point(aes(x = Y_eq1, y = Y_eq1), color = "#70AD47", size = 2.6) +
+  scale_x_continuous(limits = y_limits, breaks = y_breaks, expand = c(0, 0)) +
+  scale_y_continuous(limits = y_limits, breaks = y_breaks, expand = c(0, 0)) +
+  scale_color_manual(
+    breaks = keynes_breaks,
+    values = c("gg" = "black", "base" = "#2E75B6", "schock" = "#70AD47"),
+    labels = keynes_labels
+  ) +
+  guides(
+    color = guide_legend(
+      nrow = 1,
+      override.aes = list(
+        color = c("black", "#2E75B6", "#70AD47"),
+        linetype = c("solid", "solid", "dashed")
+      )
+    )
+  ) +
+  labs(
+    title = "Güternachfrage (Keynesianisches Kreuz)",
+    x = NULL,
+    y = expression(Güternachfrage~Y[t]^d)
+  ) +
+  theme_macro +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+
+df_is <- rbind(
+  data.frame(r = r_grid_is, Y = Y_is0, Kurve = "base"),
+  data.frame(r = r_grid_is, Y = Y_is1, Kurve = "shock")
+)
+
+p_is <- ggplot(df_is, aes(x = Y, y = r, color = Kurve, linetype = Kurve)) +
+  geom_vline(xintercept = Y_eq0, color = "grey30", linewidth = 0.9, linetype = "solid") +
+  geom_vline(xintercept = Y_eq1, color = "#70AD47", linewidth = 0.9, linetype = "dashed") +
+  geom_line(linewidth = 1.0) +
+  geom_segment(aes(x = y_min_plot, xend = Y_eq0, y = eq0$r_t, yend = eq0$r_t), linetype = "dotted", color = "grey35") +
+  geom_segment(aes(x = y_min_plot, xend = Y_eq1, y = eq1$r_t, yend = eq1$r_t), linetype = "dotted", color = "#70AD47") +
+  geom_point(aes(x = Y_eq0, y = eq0$r_t), color = "black", size = 2.7) +
+  geom_point(aes(x = Y_eq1, y = eq1$r_t), color = "#70AD47", size = 2.7) +
+  scale_x_continuous(limits = y_limits, breaks = y_breaks, expand = c(0, 0)) +
+  scale_y_continuous(
+    limits = c(r_low, r_high),
+    labels = function(x) sprintf("%.2f", x),
+    expand = c(0, 0)
+  ) +
+  scale_color_manual(
+    values = c("base" = "black", "shock" = "#2E75B6"),
+    labels = list(
+      "base"  = bquote(IS),
+      "shock" = bquote(IS^"'"~(G[t]))
+    )
+  ) +
+  scale_linetype_manual(
+    values = c("base" = "solid", "shock" = "dashed"),
+    labels = list(
+      "base"  = bquote(IS),
+      "shock" = bquote(IS^"'"~(G[t]))
+    )
+  ) +
+  labs(
+    title = "IS-Kurve und Güterangebotsgleichgewicht",
+    x = expression(Output~"/"~Einkommen~Y[t]),
+    y = expression(Realzins~r[t])
+  ) +
+  theme_macro
+
+# --- GESAMTKOMBINATION MIT PATCHWORK ---
+(p_labor / p_prod + plot_layout(heights = c(1, 1))) |
+  (p_keynes / p_is + plot_layout(heights = c(1, 1)))
+```
+
+
+### Erhöhung der Staatsausgaben morgen
+
+### Reflektion
+
+## Neoklassisches Grundmodell mit Geld {#sec-Neoklassik_mit_Geld}
