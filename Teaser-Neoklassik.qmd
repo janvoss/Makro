@@ -1,0 +1,20 @@
+---
+title: "Worum geht es heute?"
+project:
+  output-dir: docs
+format:
+  revealjs:
+    self-contained: true
+---
+
+##
+
+[Makro]{.r-fit-text}
+
+. . .
+
+[Endlich!]
+
+---
+
+Wir puzzeln die Teile zusammen
